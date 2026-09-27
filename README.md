@@ -9,7 +9,7 @@ web-perkuliahan/
 ├── index.html      # Hub — pintu masuk semua pertemuan
 ├── vercel.json     # Konfigurasi deploy (static, cleanUrls)
 ├── P01/
-│   ├── index.html  # Deck pertemuan 01 (22 slide interaktif)
+│   ├── index.html  # Deck pertemuan 01 (23 slide interaktif)
 │   └── img/        # Screenshot modul per step
 ├── P02/            # Pertemuan berikutnya — copy pola P01
 └── ...

@@ -592,6 +592,7 @@ h2{
   cursor:pointer;border-left:3px solid transparent;transition:.14s;
 }
 .cl .ln{color:#63748C;text-align:right;user-select:none}
+.cl code{white-space:pre}
 .cl:hover{background:rgba(255,255,255,.06)}
 .cl.act{background:rgba(92,169,255,.14);border-left-color:#5CA9FF;box-shadow:inset 0 0 20px rgba(92,169,255,.1)}
 .cl .kw{color:#C9B4FF}.cl .st{color:#5BE39A}.cl .fn{color:#FFD37A}.cl .de{color:#7FC1FF}.cl .hi{color:#7FC1FF}
@@ -937,7 +938,7 @@ h2{
   <!-- 01 · TITLE -->
   <section class="slide title-slide on" data-sec="Pembuka" id="s1">
     <div class="sticker s1">flask 3.1.3</div>
-    <div class="sticker s2">(prakpemweb)</div>
+    <div class="sticker s2">(PrakPemWeb)</div>
     <div class="content">
       <span class="kick"><span class="kd"></span>Praktikum Pemrograman Web — Pertemuan 01</span>
       <h1 class="h1">Bikin web app<br>pertama lo</h1>
@@ -952,7 +953,7 @@ h2{
     <div class="content">
       <span class="kick"><span class="kd"></span>Run of show</span>
       <h2>Alur pertemuan hari ini</h2>
-      <p class="sub">105 menit total, dari nol sampai web app pertama lo nyala.</p>
+      <p class="sub">100 menit total, dari nol sampai web app pertama lo nyala.</p>
       <div class="slide-body steps">
         <div class="step">
           <span class="no">01</span>
@@ -1195,11 +1196,11 @@ h2{
           </div>
         </div>
         <figure class="shotcard">
-          <div class="imgwrap"><img src="img/step-01-download-python.png" alt="Halaman download python.org dengan tombol unduh installer terbaru" width="1213" height="519" loading="lazy"></div>
+          <div class="imgwrap"><img src="img/step-01-download-python.png" alt="Halaman python.org dengan tombol Download Python 3.14.7 disorot" width="1213" height="519" loading="lazy"></div>
           <span class="zoomtag"><i data-lucide="zoom-in"></i></span>
           <figcaption class="shotcap">
             <span class="stepchip c-blue">step 01</span>
-            <span><span class="shottitle">Halaman download python.org</span><span class="shotnote">pilih installer sesuai OS lo</span></span>
+            <span><span class="shottitle">Halaman download python.org</span><span class="shotnote">klik tombol unduh versi terbaru</span></span>
           </figcaption>
         </figure>
       </div>
@@ -1213,8 +1214,8 @@ h2{
       <h2>Bikin folder khusus buat proyek</h2>
       <div class="slide-body cols c2">
         <div>
-          <p class="sub" style="margin-bottom:16px">Satu proyek, satu folder — semuanya tinggal di dalamnya: kode, venv, dan file pendukung. Nama foldernya bebas, modul pakai <b>web-perkuliahan</b>.</p>
-          <div class="ftree">web-perkuliahan/<br>&#8627; <span class="fil">app.py</span> — nanti<br>&#8627; <span class="dir">.venv/</span> — step berikutnya</div>
+          <p class="sub" style="margin-bottom:16px">Satu proyek, satu folder — semuanya tinggal di dalamnya: kode, venv, dan file pendukung. Nama foldernya bebas — di contoh ini <b>PrakPemWeb</b>.</p>
+          <div class="ftree">PrakPemWeb/<br>&#8627; <span class="fil">app.py</span> — nanti<br>&#8627; <span class="dir">.venv/</span> — step berikutnya</div>
         </div>
         <figure class="shotcard">
           <div class="imgwrap"><img src="img/step-02-buat-folder.png" alt="File explorer pembuatan folder proyek baru" width="538" height="257" loading="lazy"></div>
@@ -1235,18 +1236,18 @@ h2{
       <h2>Virtual environment: kamar kos tiap proyek</h2>
       <div class="slide-body cols c2-1">
         <div class="term">
-          <div class="termbar"><span class="tdot r"></span><span class="tdot y"></span><span class="tdot g"></span><span class="termtitle">web-perkuliahan — bikin venv</span></div>
+          <div class="termbar"><span class="tdot r"></span><span class="tdot y"></span><span class="tdot g"></span><span class="termtitle">PrakPemWeb — bikin venv</span></div>
           <div class="termbody" id="t10"></div>
           <div class="termfoot"><button class="minibtn" data-replay="t10"><i data-lucide="rotate-ccw"></i>ulangi</button></div>
         </div>
         <div>
           <p class="sub" style="margin-bottom:14px">Tanpa venv, semua proyek berbagi package Python yang sama — kayak satu kosan buat semua anak rumah. Dengan venv, tiap proyek punya kamar sendiri.</p>
           <figure class="shotcard">
-            <div class="imgwrap"><img src="img/step-03-venv.png" alt="Terminal menjalankan perintah python -m venv .venv" width="538" height="257" loading="lazy"></div>
+            <div class="imgwrap"><img src="img/step-03-venv.png" alt="Terminal menjalankan perintah python3 -m venv .venv" width="538" height="257" loading="lazy"></div>
             <span class="zoomtag"><i data-lucide="zoom-in"></i></span>
             <figcaption class="shotcap">
               <span class="stepchip c-blue">step 03</span>
-              <span><span class="shottitle">python -m venv .venv</span><span class="shotnote">dijalankan di dalam folder proyek</span></span>
+              <span><span class="shottitle">python3 -m venv .venv</span><span class="shotnote">dijalankan di dalam folder proyek</span></span>
             </figcaption>
           </figure>
         </div>
@@ -1266,18 +1267,18 @@ h2{
             <button class="ostab" data-os="win">Windows</button>
           </div>
           <div class="term">
-            <div class="termbar"><span class="tdot r"></span><span class="tdot y"></span><span class="tdot g"></span><span class="termtitle">web-perkuliahan — aktifkan venv</span></div>
+            <div class="termbar"><span class="tdot r"></span><span class="tdot y"></span><span class="tdot g"></span><span class="termtitle">PrakPemWeb — aktifkan venv</span></div>
             <div class="termbody" id="t11" style="min-height:150px;max-height:170px"></div>
             <div class="termfoot"><button class="minibtn" data-replay="t11"><i data-lucide="rotate-ccw"></i>ulangi</button></div>
           </div>
-          <p class="sub" style="margin-top:14px">Tanda venv aktif: prompt berubah — muncul <code style="font-family:var(--mono);color:var(--green-t)">(prakpemweb)</code> di depannya. Matiin kapan pun dengan <code style="font-family:var(--mono);color:var(--amber-t)">deactivate</code>.</p>
+          <p class="sub" style="margin-top:14px">Tanda venv aktif: Warp menampilkan nama environment di indikator Python-nya (di screenshot: <code style="font-family:var(--mono);color:var(--green-t)">PrakPemWeb 3.12.3</code>). Di shell biasa, prompt berubah jadi <code style="font-family:var(--mono);color:var(--green-t)">(.venv)</code> di depannya. Matiin kapan pun dengan <code style="font-family:var(--mono);color:var(--amber-t)">deactivate</code>.</p>
         </div>
         <figure class="shotcard">
-          <div class="imgwrap"><img src="img/step-04-activate.png" alt="Terminal menjalankan source .venv/bin/activate dan prompt berubah menandakan venv aktif" width="1125" height="257" loading="lazy"></div>
+          <div class="imgwrap"><img src="img/step-04-activate.png" alt="Terminal menjalankan source .venv/bin/activate, indikator environment PrakPemWeb 3.12.3" width="1125" height="257" loading="lazy"></div>
           <span class="zoomtag"><i data-lucide="zoom-in"></i></span>
           <figcaption class="shotcap">
             <span class="stepchip c-blue">step 04</span>
-            <span><span class="shottitle">source .venv/bin/activate</span><span class="shotnote">prompt berubah = venv aktif</span></span>
+            <span><span class="shottitle">source .venv/bin/activate</span><span class="shotnote">environment PrakPemWeb aktif</span></span>
           </figcaption>
         </figure>
       </div>
@@ -1292,7 +1293,7 @@ h2{
       <p class="sub">Flask kecil, tapi dia nggak jalan sendirian — teman-temannya ikut terpasang ke venv kita, bukan ke sistem.</p>
       <div class="slide-body cols c2">
         <div class="term">
-          <div class="termbar"><span class="tdot r"></span><span class="tdot y"></span><span class="tdot g"></span><span class="termtitle">(prakpemweb) — pasang flask</span></div>
+          <div class="termbar"><span class="tdot r"></span><span class="tdot y"></span><span class="tdot g"></span><span class="termtitle">PrakPemWeb — pasang flask</span></div>
           <div class="termbody" id="t12" style="max-height:250px"></div>
           <div class="termfoot"><button class="minibtn" data-replay="t12"><i data-lucide="rotate-ccw"></i>ulangi</button></div>
         </div>
@@ -1315,7 +1316,7 @@ h2{
       <h2>Jangan percaya — verifikasi</h2>
       <div class="slide-body cols c2">
         <div class="term">
-          <div class="termbar"><span class="tdot r"></span><span class="tdot y"></span><span class="tdot g"></span><span class="termtitle">(prakpemweb) — verifikasi flask</span></div>
+          <div class="termbar"><span class="tdot r"></span><span class="tdot y"></span><span class="tdot g"></span><span class="termtitle">PrakPemWeb — verifikasi flask</span></div>
           <div class="termbody" id="t13"></div>
           <div class="termfoot"><button class="minibtn" data-replay="t13"><i data-lucide="rotate-ccw"></i>ulangi</button></div>
         </div>
@@ -1373,7 +1374,7 @@ h2{
       <h2>Jalankan: python app.py</h2>
       <div class="slide-body cols c2">
         <div class="term">
-          <div class="termbar"><span class="tdot r"></span><span class="tdot y"></span><span class="tdot g"></span><span class="termtitle">(prakpemweb) — jalankan</span></div>
+          <div class="termbar"><span class="tdot r"></span><span class="tdot y"></span><span class="tdot g"></span><span class="termtitle">PrakPemWeb — jalankan</span></div>
           <div class="termbody" id="t15" style="max-height:250px"></div>
           <div class="termfoot"><button class="minibtn" data-replay="t15"><i data-lucide="rotate-ccw"></i>ulangi</button></div>
         </div>
@@ -1398,7 +1399,7 @@ h2{
         <div>
           <p class="sub" style="margin-bottom:16px"><b>127.0.0.1</b> itu localhost — komputer lo sendiri. Default Flask jalan di port <b>5000</b>, jadi URL-nya <b>127.0.0.1:5000</b>. Kalau port 5000 sudah kepakai, Flask otomatis pindah — di screenshot ini dia jalan di <b>5001</b>, dan terminal selalu kasih tau lewat baris <b>Running on</b>. Ketik alamat yang muncul di browser, dan:</p>
           <div class="browser" id="mockbrowser">
-            <div class="btab"><span class="burl"><i data-lucide="lock"></i>127.0.0.1:5001</span><span>prakpemweb</span></div>
+            <div class="btab"><span class="burl"><i data-lucide="lock"></i>127.0.0.1:5001</span><span>PrakPemWeb</span></div>
             <div class="bbody">
               <div>
                 <div class="hw">Hello, World!</div>
@@ -1448,8 +1449,39 @@ h2{
     </div>
   </section>
 
-  <!-- 19 · TUGAS -->
-  <section class="slide" data-sec="Tugas" id="s19">
+  <!-- 19 · TROUBLESHOOTING -->
+  <section class="slide" data-sec="Bantuan" id="s19">
+    <div class="content">
+      <span class="kick"><span class="kd"></span>Bantuan cepat</span>
+      <h2>Kalau macet, cek ini dulu</h2>
+      <p class="sub">Empat gangguan paling sering muncul di praktikum hari ini.</p>
+      <div class="slide-body cols c4">
+        <div class="tool">
+          <div class="tic"><i data-lucide="terminal"></i></div>
+          <h3>python nggak dikenali</h3>
+          <p>Coba <code>python3</code>. Di Windows, pasang ulang Python + centang "Add Python to PATH".</p>
+        </div>
+        <div class="tool">
+          <div class="tic"><i data-lucide="alert-triangle"></i></div>
+          <h3>Port 5000 sudah dipakai</h3>
+          <p>Flask pindah ke port lain (mis. <code>5001</code>) — buka alamat di baris <code>Running on</code>.</p>
+        </div>
+        <div class="tool">
+          <div class="tic"><i data-lucide="package"></i></div>
+          <h3>No module named 'flask'</h3>
+          <p>Venv belum aktif — jalankan ulang <code>activate</code>, lalu <code>pip install flask</code>.</p>
+        </div>
+        <div class="tool">
+          <div class="tic"><i data-lucide="refresh-cw"></i></div>
+          <h3>Kode diubah, nggak berubah</h3>
+          <p>Pastikan <code>debug=True</code> biar auto-reload; kalau perlu restart server (Ctrl+C, jalan lagi).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 20 · TUGAS -->
+  <section class="slide" data-sec="Tugas" id="s20">
     <div class="content">
       <span class="kick"><span class="kd"></span>Tugas praktikum — 30 menit</span>
       <h2>Sekarang giliran lo</h2>
@@ -1484,8 +1516,8 @@ h2{
     </div>
   </section>
 
-  <!-- 20 · KETENTUAN -->
-  <section class="slide" data-sec="Tugas" id="s20">
+  <!-- 21 · KETENTUAN -->
+  <section class="slide" data-sec="Tugas" id="s21">
     <div class="content">
       <span class="kick"><span class="kd"></span>Aturan main</span>
       <h2>Ketentuan &amp; pengumpulan</h2>
@@ -1512,8 +1544,8 @@ h2{
     </div>
   </section>
 
-  <!-- 21 · QUIZ -->
-  <section class="slide" data-sec="Penutup" id="s21">
+  <!-- 22 · QUIZ -->
+  <section class="slide" data-sec="Penutup" id="s22">
     <div class="content">
       <span class="kick"><span class="kd"></span>Cek pemahaman</span>
       <h2>Kuis kilat — lima soal</h2>
@@ -1531,8 +1563,8 @@ h2{
     </div>
   </section>
 
-  <!-- 22 · RECAP -->
-  <section class="slide" data-sec="Penutup" id="s22">
+  <!-- 23 · RECAP -->
+  <section class="slide" data-sec="Penutup" id="s23">
     <div class="content" style="max-width:840px">
       <span class="kick"><span class="kd"></span>Recap — pertemuan 01 selesai</span>
       <h2>Hari ini, dari nol, lo sudah</h2>
@@ -1550,7 +1582,7 @@ h2{
 
 <div class="dock">
   <button class="navbtn" id="btnPrev" aria-label="Slide sebelumnya"><i data-lucide="chevron-left"></i></button>
-  <div class="count"><span id="cur">1</span> / <span id="tot">22</span><span class="seclabel" id="seclabel">Pembuka</span></div>
+  <div class="count"><span id="cur">1</span> / <span id="tot">23</span><span class="seclabel" id="seclabel">Pembuka</span></div>
   <button class="navbtn" id="btnNext" aria-label="Slide berikutnya"><i data-lucide="chevron-right"></i></button>
 </div>
 
@@ -1578,7 +1610,7 @@ $('#tot').textContent = total;
 
 const HOOKS = {
   s1(){ typeInto($('#titleCmd'), 'python app.py'); },
-  s22(){ typeInto($('#logoutCmd'), 'exit'); },
+  s23(){ typeInto($('#logoutCmd'), 'exit'); },
   s4(){ $$('#rubric .rfill').forEach(f => f.style.width = (f.dataset.w / 35 * 100) + '%'); },
   s9(){ runTerm('t9'); },
   s11(){ runTerm('t10'); },
@@ -1588,7 +1620,7 @@ const HOOKS = {
   s15(){ if(!codeInit){ codeInit = true; selectLine($$('#s15 .cl')[0]); } },
   s16(){ runTerm('t15'); },
   s17(){ if(!brInit){ brInit = true; showBrowser(); } },
-  s21(){ if(!quizInit){ quizInit = true; renderQ(); } }
+  s22(){ if(!quizInit){ quizInit = true; renderQ(); } }
 };
 
 function show(n){
@@ -1644,24 +1676,24 @@ T.t9 = [
   {c:'',    t:'# versi 3.10 ke atas = siap praktikum'}
 ];
 T.t10 = [
-  {c:'cmd', t:'python -m venv .venv'},
+  {c:'cmd', t:'python3 -m venv .venv'},
   {c:'',    t:'# tanpa output — dan itu tanda sukses'},
   {c:'ok',  t:'.venv/ berhasil dibikin'}
 ];
 T.t11nix = [
   {c:'cmd', t:'source .venv/bin/activate'},
-  {c:'ok',  t:'(prakpemweb) web-perkuliahan $'}
+  {c:'ok',  t:'(.venv) PrakPemWeb $'}
 ];
 T.t11win = [
   {c:'cmd', t:'.venv\\Scripts\\activate'},
-  {c:'ok',  t:'(prakpemweb) C:\\web-perkuliahan>'}
+  {c:'ok',  t:'(.venv) C:\\PrakPemWeb>'}
 ];
 T.t12 = [
   {c:'cmd', t:'pip install flask'},
   {c:'hi',  t:'Collecting flask'},
   {c:'',    t:'Collecting blinker, click, itsdangerous,'},
   {c:'',    t:'  jinja2, markupsafe, werkzeug (from flask)'},
-  {c:'',    t:'Downloading flask-3.1.3 (103 kB)'},
+  {c:'',    t:'Using cached flask-3.1.3-py3-none-any.whl (103 kB)'},
   {c:'',    t:'Installing collected packages ...'},
   {c:'ok',  t:'Successfully installed blinker-1.9.0'},
   {c:'ok',  t:'  click-8.5.0 flask-3.1.3 itsdangerous-2.2.0'},
@@ -1684,6 +1716,7 @@ T.t15 = [
   {c:'',    t:' WARNING: This is a development server.'},
   {c:'',    t:' Use a production WSGI server instead.'},
   {c:'ok',  t:' * Running on http://127.0.0.1:5001'},
+  {c:'',    t:' * Press CTRL+C to quit'},
   {c:'',    t:' * Restarting with stat'},
   {c:'ok',  t:' * Debugger is active!'},
   {c:'ok',  t:' * Debugger PIN: 142-626-400'}
