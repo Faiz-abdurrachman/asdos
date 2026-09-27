@@ -1,0 +1,1969 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>P01 · Pengenalan Pemrograman Web & Python — Deck Interaktif</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<style>
+:root{
+  --bg-body:#C9D8EE;
+  --ink:#1C2A3E;
+  --dim:#43566F;
+  --faint:#6F829B;
+  --ink-line:rgba(31,45,68,.14);
+  --glass-bd:rgba(255,255,255,.78);
+  --blur:blur(24px) saturate(180%);
+  --inner-light:inset 0 1px 0 rgba(255,255,255,.95),inset 0 -1px 0 rgba(255,255,255,.22);
+  --out-sh:0 16px 40px rgba(31,45,68,.16);
+  --out-sh-lg:0 26px 60px rgba(31,45,68,.22);
+  --green:#2BC46F;--green-t:#0B7A43;
+  --blue:#5CA9FF;--blue-t:#1D5FC9;
+  --amber:#FFC24D;--amber-t:#8F5E00;
+  --coral:#FF6257;--coral-t:#C73328;
+  --violet:#B79CFF;--violet-t:#6E4BD1;
+  --pink:#FF8FBF;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+  --sans:'IBM Plex Sans',system-ui,sans-serif;
+  --disp:'Unbounded',var(--sans);
+  --rad:22px;
+  --grad-glass:linear-gradient(160deg,rgba(255,255,255,.82) 0%,rgba(255,255,255,.44) 100%);
+  --spec-top:linear-gradient(180deg,rgba(255,255,255,.55),rgba(255,255,255,0) 36%);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{
+  background:var(--bg-body);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-size:16px;
+  line-height:1.55;
+  overflow:hidden;
+  display:grid;
+  place-items:center;
+}
+::selection{background:rgba(110,75,209,.28)}
+
+/* ===== STAGE ===== */
+.stage{
+  position:relative;
+  width:min(100vw,calc(100vh * 16 / 9));
+  height:min(100vh,calc(100vw * 9 / 16));
+  overflow:hidden;
+  background:#E4EDFB;
+}
+.blobs{position:absolute;inset:-26%;z-index:0;pointer-events:none}
+.blobs::before,.blobs::after{content:"";position:absolute;inset:0;filter:blur(46px)}
+.blobs::before{
+  background:
+    radial-gradient(36% 44% at 18% 22%,rgba(92,169,255,.62) 0%,transparent 70%),
+    radial-gradient(32% 40% at 82% 16%,rgba(183,156,255,.58) 0%,transparent 70%),
+    radial-gradient(34% 42% at 68% 76%,rgba(255,143,191,.5) 0%,transparent 72%);
+  animation:blobA 34s ease-in-out infinite alternate;
+}
+.blobs::after{
+  background:
+    radial-gradient(38% 46% at 24% 78%,rgba(62,224,140,.5) 0%,transparent 72%),
+    radial-gradient(30% 38% at 84% 72%,rgba(255,194,77,.52) 0%,transparent 70%),
+    radial-gradient(26% 34% at 52% 40%,rgba(255,98,87,.34) 0%,transparent 72%);
+  animation:blobB 46s ease-in-out infinite alternate-reverse;
+}
+@keyframes blobA{
+  from{transform:translate(-2.5%,-2%) scale(1) rotate(0deg)}
+  to{transform:translate(2.5%,2.5%) scale(1.07) rotate(4deg)}
+}
+@keyframes blobB{
+  from{transform:translate(2%,1.5%) scale(1.05) rotate(2deg)}
+  to{transform:translate(-2%,-2%) scale(1) rotate(-3deg)}
+}
+.stage::after{
+  content:"";position:absolute;inset:0;z-index:0;
+  background-image:radial-gradient(rgba(31,45,68,.05) 1px,transparent 1px);
+  background-size:26px 26px;
+}
+@media (max-aspect-ratio:16/10){
+  .stage{width:100vw;height:100vh}
+}
+
+/* ===== CHROME ===== */
+.bar{
+  position:absolute;top:0;left:0;height:4px;width:0;z-index:60;
+  background:linear-gradient(90deg,var(--blue),var(--violet),var(--pink));
+  box-shadow:0 0 16px rgba(92,169,255,.6);
+  transition:width .35s cubic-bezier(.2,.7,.3,1);
+}
+.corner{
+  position:absolute;top:18px;left:24px;z-index:50;
+  display:flex;align-items:center;gap:8px;
+  font:600 12px/1 var(--sans);color:var(--dim);
+  background:var(--spec-top),var(--grad-glass);
+  backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
+  border:1px solid var(--glass-bd);border-radius:999px;padding:8px 14px;
+  box-shadow:var(--out-sh),var(--inner-light);
+}
+.corner .dotmark{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 10px rgba(43,196,111,.7)}
+.corner b{color:var(--ink);font-weight:600}
+.fsbtn{
+  position:absolute;top:14px;right:20px;z-index:50;
+  width:38px;height:38px;border-radius:12px;
+  border:1px solid var(--glass-bd);
+  background:var(--spec-top),var(--grad-glass);
+  backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
+  color:var(--dim);display:grid;place-items:center;cursor:pointer;transition:.2s;
+  box-shadow:var(--out-sh),var(--inner-light);
+}
+.fsbtn:hover{color:var(--ink);transform:translateY(-2px);box-shadow:0 20px 44px rgba(31,45,68,.2),var(--inner-light)}
+.fsbtn:active{transform:scale(.95)}
+.fsbtn svg{width:16px;height:16px}
+.dock{
+  position:absolute;bottom:16px;left:50%;transform:translateX(-50%);
+  z-index:50;display:flex;align-items:center;gap:10px;
+  background:var(--spec-top),var(--grad-glass);
+  backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
+  border:1px solid var(--glass-bd);border-radius:16px;
+  padding:8px 10px;box-shadow:var(--out-sh-lg),var(--inner-light);
+}
+.navbtn{
+  width:36px;height:36px;border-radius:11px;border:1px solid rgba(255,255,255,.6);cursor:pointer;
+  background:rgba(255,255,255,.55);color:var(--ink);display:grid;place-items:center;transition:.18s;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.9);
+}
+.navbtn:hover{background:rgba(255,255,255,.95);transform:translateY(-2px);box-shadow:0 10px 22px rgba(31,45,68,.2),inset 0 1px 0 rgba(255,255,255,.9)}
+.navbtn:active{transform:scale(.93)}
+.navbtn svg{width:17px;height:17px}
+.count{
+  font:600 13px/1 var(--mono);color:var(--ink);min-width:64px;text-align:center;
+  letter-spacing:.04em;
+}
+.count .seclabel{
+  display:block;margin-top:4px;
+  font:600 10.5px/1 var(--sans);color:var(--faint);letter-spacing:.02em;
+}
+.hintchip{
+  position:absolute;bottom:22px;right:22px;z-index:50;
+  font:500 11.5px/1 var(--mono);color:var(--dim);
+  border:1px solid var(--glass-bd);border-radius:10px;padding:7px 10px;
+  background:var(--spec-top),var(--grad-glass);
+  backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
+  box-shadow:var(--out-sh),var(--inner-light);
+  transition:opacity .6s;opacity:1;
+}
+.hintchip.gone{opacity:0}
+
+/* ===== SLIDES — fokus kaca ===== */
+.slide{
+  position:absolute;inset:0;z-index:1;
+  display:flex;align-items:center;justify-content:center;
+  padding:56px 68px 74px;
+  opacity:0;visibility:hidden;
+  transform:scale(1.014);
+  filter:blur(14px);
+  transition:opacity .38s ease,transform .38s ease,filter .38s ease,visibility .38s;
+  overflow:hidden;
+}
+.slide.on{opacity:1;visibility:visible;transform:none;filter:none}
+.content{width:100%;max-width:1160px}
+
+.kick{
+  display:inline-flex;align-items:center;gap:8px;
+  font:600 12.5px/1 var(--sans);color:var(--dim);
+  background:var(--spec-top),var(--grad-glass);
+  backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
+  border:1px solid var(--glass-bd);
+  border-radius:999px;padding:7px 14px;margin-bottom:18px;
+  box-shadow:var(--out-sh),var(--inner-light);
+}
+.kick .kd{width:7px;height:7px;border-radius:2px;background:var(--amber);box-shadow:0 0 9px rgba(255,194,77,.8)}
+h2{
+  font:600 clamp(24px,3.4vw,42px)/1.08 var(--disp);
+  letter-spacing:-.01em;margin-bottom:10px;color:var(--ink);
+}
+.sub{color:var(--dim);font-size:clamp(14px,1.5vw,17.5px);max-width:64ch}
+.slide-body{margin-top:26px}
+
+.cols{display:grid;gap:22px}
+.cols.c2{grid-template-columns:1fr 1fr}
+.cols.c2-1{grid-template-columns:1.35fr 1fr}
+.cols.c1-2{grid-template-columns:1fr 1.35fr}
+.cols.c3{grid-template-columns:repeat(3,1fr)}
+.cols.c4{grid-template-columns:repeat(4,1fr)}
+
+/* ===== TITLE ===== */
+.title-slide .content{max-width:900px}
+.h1{
+  font:700 clamp(38px,6.4vw,86px)/1.02 var(--disp);
+  letter-spacing:-.015em;margin:14px 0 22px;color:var(--ink);
+}
+.typeline{
+  font:500 clamp(13px,1.6vw,17px)/1.5 var(--mono);color:var(--dim);
+  min-height:1.5em;
+}
+.typeline .pr{color:var(--amber-t)}
+.typeline .cur{
+  display:inline-block;width:.55em;height:1.15em;vertical-align:-.18em;
+  background:var(--green-t);margin-left:2px;
+  animation:blink 1s steps(1) infinite;
+}
+@keyframes blink{50%{opacity:0}}
+.t-sub{margin-top:18px;color:var(--dim);font-size:clamp(13.5px,1.5vw,17px);max-width:58ch}
+.credit{margin-top:34px;font:400 12.5px/1 var(--sans);color:var(--faint)}
+.sticker{
+  position:absolute;font:600 12px/1 var(--mono);
+  padding:9px 13px;border-radius:12px;border:1.5px solid;
+  background:var(--spec-top),var(--grad-glass);
+  backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
+  box-shadow:var(--out-sh),var(--inner-light);z-index:5;
+  animation:float 7s ease-in-out infinite alternate;
+}
+.sticker.s1{top:17%;right:13%;color:var(--green-t);border-color:var(--green);transform:rotate(5deg)}
+.sticker.s2{bottom:20%;right:22%;color:var(--amber-t);border-color:var(--amber);transform:rotate(-7deg);animation-delay:-3.5s}
+@keyframes float{
+  from{translate:0 -4px}
+  to{translate:0 6px}
+}
+
+/* ===== AGENDA ===== */
+.steps{display:flex;flex-direction:column;gap:12px;margin-top:8px}
+.step{
+  display:grid;grid-template-columns:56px 1fr auto;gap:16px;align-items:center;
+  background:var(--spec-top),var(--grad-glass);
+  backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
+  border:1px solid var(--glass-bd);border-radius:var(--rad);
+  padding:16px 20px;text-align:left;
+  box-shadow:var(--out-sh),var(--inner-light);
+  transition:transform .2s,box-shadow .2s;
+}
+.step:hover{transform:translateY(-2px);box-shadow:var(--out-sh-lg),var(--inner-light)}
+.step .no{
+  font:700 17px/1 var(--mono);color:#fff;
+  width:44px;height:44px;border-radius:14px;display:grid;place-items:center;
+  border:1px solid rgba(255,255,255,.6);
+}
+.step:nth-child(1) .no{background:radial-gradient(circle at 32% 26%,rgba(255,255,255,.55),var(--green-t) 62%);box-shadow:0 8px 20px rgba(11,122,67,.35)}
+.step:nth-child(2) .no{background:radial-gradient(circle at 32% 26%,rgba(255,255,255,.55),var(--blue-t) 62%);box-shadow:0 8px 20px rgba(29,95,201,.35)}
+.step:nth-child(3) .no{background:radial-gradient(circle at 32% 26%,rgba(255,255,255,.55),var(--amber-t) 62%);box-shadow:0 8px 20px rgba(143,94,0,.35)}
+.step:nth-child(4) .no{background:radial-gradient(circle at 32% 26%,rgba(255,255,255,.55),var(--violet-t) 62%);box-shadow:0 8px 20px rgba(110,75,209,.35)}
+.step h3{font:600 17px/1.2 var(--sans);color:var(--ink)}
+.step p{color:var(--dim);font-size:13.5px;margin-top:3px}
+.step p code{font:500 12.5px var(--mono);color:var(--green-t)}
+.dur{
+  font:600 12px/1 var(--mono);color:var(--dim);
+  border:1px solid rgba(255,255,255,.7);border-radius:999px;padding:7px 12px;white-space:nowrap;
+  background:rgba(255,255,255,.5);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.9);
+}
+
+/* ===== GLASS CARDS + SHEEN ===== */
+.pcard,.tool,.shotcard,.qopt{position:relative;overflow:hidden}
+.pcard::before,.tool::before,.shotcard::before,.qopt::before{
+  content:"";position:absolute;inset:-40% -75%;pointer-events:none;
+  background:linear-gradient(105deg,transparent 44%,rgba(255,255,255,.55) 50%,transparent 56%);
+  transform:translateX(-75%) skewX(-8deg);
+  transition:transform .85s cubic-bezier(.2,.7,.3,1);
+}
+.pcard:hover::before,.tool:hover::before,.shotcard:hover::before,.qopt:hover::before{
+  transform:translateX(75%) skewX(-8deg);
+}
+.pcard{
+  background:var(--spec-top),var(--grad-glass);
+  backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
+  color:var(--ink);border:1px solid var(--glass-bd);
+  border-radius:var(--rad);padding:22px;
+  box-shadow:var(--out-sh),var(--inner-light);
+  transition:transform .22s,box-shadow .22s;
+}
+.pcard:hover{transform:translateY(-4px);box-shadow:var(--out-sh-lg),var(--inner-light)}
+.pcard .ic{
+  width:46px;height:46px;border-radius:14px;
+  display:grid;place-items:center;margin-bottom:14px;
+  border:1px solid rgba(255,255,255,.8);
+  box-shadow:inset 0 1px 1px rgba(255,255,255,.95),inset 0 -2px 4px rgba(31,45,68,.08);
+}
+.pcard .ic svg{width:21px;height:21px}
+.pcard h3{font:600 16.5px/1.25 var(--sans);color:var(--ink);margin-bottom:6px}
+.pcard p{color:var(--dim);font-size:13.5px}
+.pcard .tag{
+  display:inline-block;margin-top:12px;
+  font:600 11px/1 var(--mono);color:var(--dim);
+  border:1.5px solid rgba(255,255,255,.85);border-radius:999px;padding:5px 10px;
+  background:rgba(255,255,255,.55);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.95);
+}
+.capaian .pcard:nth-child(1){transform:rotate(-1.1deg)}
+.capaian .pcard:nth-child(2){transform:rotate(.7deg)}
+.capaian .pcard:nth-child(3){transform:rotate(-.5deg)}
+.capaian .pcard:nth-child(1) .ic{background:radial-gradient(circle at 32% 26%,rgba(255,255,255,.95),rgba(92,169,255,.4) 58%,rgba(92,169,255,.22));color:var(--blue-t);box-shadow:inset 0 1px 1px rgba(255,255,255,.95),0 8px 20px rgba(29,95,201,.22)}
+.capaian .pcard:nth-child(2) .ic{background:radial-gradient(circle at 32% 26%,rgba(255,255,255,.95),rgba(255,194,77,.45) 58%,rgba(255,194,77,.25));color:var(--amber-t);box-shadow:inset 0 1px 1px rgba(255,255,255,.95),0 8px 20px rgba(143,94,0,.2)}
+.capaian .pcard:nth-child(3) .ic{background:radial-gradient(circle at 32% 26%,rgba(255,255,255,.95),rgba(62,224,140,.42) 58%,rgba(62,224,140,.22));color:var(--green-t);box-shadow:inset 0 1px 1px rgba(255,255,255,.95),0 8px 20px rgba(11,122,67,.22)}
+.capaian .pcard:nth-child(1):hover,.capaian .pcard:nth-child(2):hover,.capaian .pcard:nth-child(3):hover{transform:translateY(-4px)}
+
+/* ===== TOOLS ===== */
+.tool{
+  background:var(--spec-top),var(--grad-glass);
+  backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
+  border:1px solid var(--glass-bd);border-radius:var(--rad);
+  padding:20px;text-align:left;
+  box-shadow:var(--out-sh),var(--inner-light);
+  transition:transform .22s,box-shadow .22s;
+}
+.tool:hover{transform:translateY(-3px);box-shadow:var(--out-sh-lg),var(--inner-light)}
+.tool .tic{
+  width:44px;height:44px;border-radius:13px;display:grid;place-items:center;margin-bottom:13px;
+  border:1px solid rgba(255,255,255,.8);
+  box-shadow:inset 0 1px 1px rgba(255,255,255,.95);
+}
+.tool:nth-child(1) .tic{background:radial-gradient(circle at 32% 26%,rgba(255,255,255,.95),rgba(92,169,255,.4) 58%,rgba(92,169,255,.2));color:var(--blue-t);box-shadow:inset 0 1px 1px rgba(255,255,255,.95),0 8px 20px rgba(29,95,201,.2)}
+.tool:nth-child(2) .tic{background:radial-gradient(circle at 32% 26%,rgba(255,255,255,.95),rgba(62,224,140,.42) 58%,rgba(62,224,140,.2));color:var(--green-t);box-shadow:inset 0 1px 1px rgba(255,255,255,.95),0 8px 20px rgba(11,122,67,.2)}
+.tool:nth-child(3) .tic{background:radial-gradient(circle at 32% 26%,rgba(255,255,255,.95),rgba(255,194,77,.45) 58%,rgba(255,194,77,.25));color:var(--amber-t);box-shadow:inset 0 1px 1px rgba(255,255,255,.95),0 8px 20px rgba(143,94,0,.2)}
+.tool:nth-child(4) .tic{background:radial-gradient(circle at 32% 26%,rgba(255,255,255,.95),rgba(183,156,255,.45) 58%,rgba(183,156,255,.25));color:var(--violet-t);box-shadow:inset 0 1px 1px rgba(255,255,255,.95),0 8px 20px rgba(110,75,209,.2)}
+.tool .tic svg{width:20px;height:20px}
+.tool h3{font:600 15.5px/1.2 var(--sans);color:var(--ink);margin-bottom:4px}
+.tool p{color:var(--dim);font-size:12.5px}
+
+/* ===== RUBRIK ===== */
+.rubric{display:flex;flex-direction:column;gap:10px}
+.rrow{
+  background:var(--spec-top),var(--grad-glass);
+  backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
+  border:1px solid var(--glass-bd);border-radius:var(--rad);
+  padding:16px 20px;cursor:pointer;
+  text-align:left;width:100%;
+  box-shadow:var(--out-sh),var(--inner-light);
+  transition:transform .2s,box-shadow .2s;
+}
+.rrow:hover{transform:translateY(-2px);box-shadow:var(--out-sh-lg),var(--inner-light)}
+.rrow .rhead{display:grid;grid-template-columns:1fr 220px 64px;gap:16px;align-items:center}
+.rrow h3{font:600 16px/1.2 var(--sans);color:var(--ink)}
+.rrow .rwhat{color:var(--dim);font-size:12.5px;margin-top:2px}
+.rtrack{
+  height:12px;border-radius:99px;background:rgba(31,45,68,.09);overflow:hidden;
+  box-shadow:inset 0 1px 3px rgba(31,45,68,.18);
+}
+.rfill{height:100%;border-radius:99px;width:0;transition:width .9s cubic-bezier(.2,.7,.2,1)}
+.rrow[data-k="inst"] .rfill{background:linear-gradient(90deg,rgba(92,169,255,.65),var(--blue));box-shadow:0 0 12px rgba(92,169,255,.55)}
+.rrow[data-k="kode"] .rfill{background:linear-gradient(90deg,rgba(62,224,140,.65),var(--green));box-shadow:0 0 12px rgba(62,224,140,.55)}
+.rrow[data-k="uji"] .rfill{background:linear-gradient(90deg,rgba(255,194,77,.65),var(--amber));box-shadow:0 0 12px rgba(255,194,77,.55)}
+.rrow[data-k="dok"] .rfill{background:linear-gradient(90deg,rgba(183,156,255,.65),var(--violet));box-shadow:0 0 12px rgba(183,156,255,.55)}
+.rw{font:700 17px/1 var(--mono);text-align:right}
+.rrow[data-k="inst"] .rw{color:var(--blue-t)}
+.rrow[data-k="kode"] .rw{color:var(--green-t)}
+.rrow[data-k="uji"] .rw{color:var(--amber-t)}
+.rrow[data-k="dok"] .rw{color:var(--violet-t)}
+.rchev{color:var(--faint);justify-self:end;display:flex}
+.rchev svg{width:16px;height:16px;transition:transform .2s}
+.rrow.open .rchev svg{transform:rotate(180deg)}
+.rdetail{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:8px;
+  max-height:0;overflow:hidden;transition:max-height .3s ease,margin .3s ease;margin-top:0;
+}
+.rrow.open .rdetail{max-height:180px;margin-top:14px}
+.lv{
+  border-radius:12px;padding:10px 12px;border:1px solid rgba(255,255,255,.8);
+  background:rgba(255,255,255,.55);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.95);
+}
+.lv b{display:block;font:700 12px/1 var(--mono);margin-bottom:6px}
+.lv span{font-size:11.5px;color:var(--dim);line-height:1.4;display:block}
+.lv.ex b{color:var(--green-t)}.lv.gd b{color:var(--blue-t)}
+.lv.fr b{color:var(--amber-t)}.lv.pr b{color:var(--coral-t)}
+.rnote{margin-top:14px;color:var(--faint);font-size:12.5px}
+
+/* ===== CLIENT-SERVER ===== */
+.cs{display:grid;grid-template-columns:230px 1fr 230px;gap:0;align-items:center;margin-top:6px}
+.node{border-radius:var(--rad);padding:20px;text-align:center;transition:transform .2s,box-shadow .2s}
+.node.client{
+  background:var(--spec-top),var(--grad-glass);
+  backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
+  color:var(--ink);border:1px solid var(--glass-bd);
+  box-shadow:var(--out-sh),var(--inner-light);
+}
+.node.server{
+  background:linear-gradient(180deg,rgba(255,255,255,.09),transparent 14%),rgba(15,20,29,.8);
+  backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
+  color:#E9EFF6;border:1px solid rgba(255,255,255,.18);
+  box-shadow:0 26px 60px rgba(15,23,40,.4),inset 0 1px 0 rgba(255,255,255,.14);
+}
+.node:hover{transform:translateY(-3px)}
+.node .nic{display:grid;place-items:center;margin-bottom:10px}
+.node .nic svg{width:34px;height:34px}
+.node.client .nic svg{stroke:var(--blue-t)}
+.node.server .nic svg{stroke:#3EE08C;filter:drop-shadow(0 0 8px rgba(62,224,140,.6))}
+.node h3{font:600 18px/1.1 var(--disp)}
+.node p{font-size:12.5px;margin-top:6px;color:var(--dim)}
+.node.server p{color:#A9B7C9}
+.wirezone{position:relative;height:120px;margin:0 18px}
+.wire{
+  position:absolute;top:50%;left:0;right:0;height:3px;transform:translateY(-50%);
+  background:repeating-linear-gradient(90deg,rgba(31,45,68,.38) 0 10px,transparent 10px 20px);
+  border-radius:2px;
+}
+.packet{
+  position:absolute;top:50%;left:0;transform:translateY(-50%);
+  font:600 11.5px/1 var(--mono);padding:6px 11px;border-radius:999px;
+  border:1.5px solid var(--amber);color:var(--amber-t);
+  background:var(--spec-top),var(--grad-glass);
+  backdrop-filter:blur(10px) saturate(160%);-webkit-backdrop-filter:blur(10px) saturate(160%);
+  white-space:nowrap;opacity:0;transition:left .85s cubic-bezier(.3,.7,.3,1),opacity .25s;
+  box-shadow:0 10px 26px rgba(143,94,0,.28),var(--inner-light);
+}
+.packet.back{border-color:var(--green);color:var(--green-t);box-shadow:0 10px 26px rgba(11,122,67,.3),var(--inner-light)}
+.packet.show{opacity:1}
+.csbtnrow{display:flex;justify-content:center;margin-top:20px}
+.csbtn{
+  font:600 14px/1 var(--sans);color:var(--amber-t);
+  background:linear-gradient(180deg,rgba(255,255,255,.6),transparent 46%),rgba(255,194,77,.36);
+  backdrop-filter:blur(12px) saturate(160%);-webkit-backdrop-filter:blur(12px) saturate(160%);
+  border:1.5px solid rgba(255,194,77,.95);border-radius:14px;padding:13px 22px;cursor:pointer;
+  transition:.2s;display:inline-flex;align-items:center;gap:9px;
+  box-shadow:0 14px 34px rgba(143,94,0,.26),var(--inner-light);
+}
+.csbtn svg{width:16px;height:16px}
+.csbtn:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 20px 44px rgba(143,94,0,.34),var(--inner-light)}
+.csbtn:active{transform:scale(.97)}
+.csstat{text-align:center;margin-top:16px;color:var(--dim);font-size:13.5px;min-height:1.4em}
+
+/* ===== HTTP SIM ===== */
+.pads{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px}
+.pad{
+  font:700 clamp(14px,1.7vw,19px)/1 var(--mono);letter-spacing:.02em;
+  padding:20px 10px;border-radius:16px;cursor:pointer;
+  border:1.5px solid;transition:.2s;
+  backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
+  box-shadow:var(--out-sh),var(--inner-light);
+}
+.pad span{display:block;font:500 11px/1.3 var(--sans);letter-spacing:0;margin-top:8px;color:var(--dim)}
+.pad.get{color:var(--green-t);border-color:rgba(43,196,111,.9);background:linear-gradient(180deg,rgba(255,255,255,.55),transparent 44%),rgba(62,224,140,.18)}
+.pad.post{color:var(--blue-t);border-color:rgba(92,169,255,.9);background:linear-gradient(180deg,rgba(255,255,255,.55),transparent 44%),rgba(92,169,255,.18)}
+.pad.put{color:var(--amber-t);border-color:rgba(255,194,77,.95);background:linear-gradient(180deg,rgba(255,255,255,.55),transparent 44%),rgba(255,194,77,.24)}
+.pad.del{color:var(--coral-t);border-color:rgba(255,98,87,.9);background:linear-gradient(180deg,rgba(255,255,255,.55),transparent 44%),rgba(255,98,87,.16)}
+.pad:hover{transform:translateY(-3px)}
+.pad:active{transform:scale(.97)}
+.pad.hot.get{background:linear-gradient(180deg,rgba(255,255,255,.5),transparent 44%),rgba(62,224,140,.4);box-shadow:0 16px 38px rgba(11,122,67,.3),var(--inner-light)}
+.pad.hot.post{background:linear-gradient(180deg,rgba(255,255,255,.5),transparent 44%),rgba(92,169,255,.4);box-shadow:0 16px 38px rgba(29,95,201,.3),var(--inner-light)}
+.pad.hot.put{background:linear-gradient(180deg,rgba(255,255,255,.5),transparent 44%),rgba(255,194,77,.5);box-shadow:0 16px 38px rgba(143,94,0,.3),var(--inner-light)}
+.pad.hot.del{background:linear-gradient(180deg,rgba(255,255,255,.5),transparent 44%),rgba(255,98,87,.36);box-shadow:0 16px 38px rgba(199,51,40,.3),var(--inner-light)}
+.httplog{
+  background:linear-gradient(180deg,rgba(255,255,255,.08),transparent 12%),rgba(15,20,29,.8);
+  backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
+  border:1px solid rgba(255,255,255,.17);border-radius:var(--rad);
+  font:400 13px/1.75 var(--mono);color:#A9B7C9;
+  padding:18px 22px;min-height:150px;max-height:150px;overflow:hidden;
+  box-shadow:0 26px 60px rgba(15,23,40,.4),inset 0 1px 0 rgba(255,255,255,.14);
+}
+.httplog:empty::before{content:"// pilih salah satu method di atas";color:#63748C}
+.httplog .m{font-weight:700}
+.httplog .m.get{color:#3EE08C;text-shadow:0 0 12px rgba(62,224,140,.4)}
+.httplog .m.post{color:#5CA9FF;text-shadow:0 0 12px rgba(92,169,255,.4)}
+.httplog .m.put{color:#FFC24D;text-shadow:0 0 12px rgba(255,194,77,.4)}
+.httplog .m.del{color:#FF6257;text-shadow:0 0 12px rgba(255,98,87,.4)}
+.httplog .st{color:#3EE08C;font-weight:600}
+.httplog .arrow{color:#63748C}
+.httpcap{margin-top:14px;font-size:14px;color:var(--ink);min-height:1.5em}
+.httpcap b{font-family:var(--mono);color:var(--ink)}
+
+/* ===== DARK GLASS (terminal & konsol) ===== */
+.term,.httplog,.ftree,.codepane{
+  background:linear-gradient(180deg,rgba(255,255,255,.08),transparent 12%),rgba(15,20,29,.8);
+  backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
+  border:1px solid rgba(255,255,255,.17);
+  box-shadow:0 26px 60px rgba(15,23,40,.4),inset 0 1px 0 rgba(255,255,255,.14);
+}
+.term{
+  border-radius:var(--rad);
+  overflow:hidden;text-align:left;
+}
+.termbar{
+  display:flex;align-items:center;gap:8px;padding:11px 16px;
+  background:rgba(255,255,255,.055);border-bottom:1px solid rgba(255,255,255,.12);
+}
+.tdot{width:11px;height:11px;border-radius:50%}
+.tdot.r{background:#FF5F56}.tdot.y{background:#FFBD2E}.tdot.g{background:#27C93F}
+.termtitle{
+  font:500 11.5px/1 var(--mono);color:#8FA3BC;margin-left:6px;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.termfoot{
+  display:flex;justify-content:flex-end;gap:8px;
+  padding:10px 14px;border-top:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.035);
+}
+.termbody{
+  padding:16px 20px;font:400 clamp(11.5px,1.35vw,14px)/1.72 var(--mono);
+  color:#A9B7C9;min-height:190px;max-height:230px;overflow:hidden;
+  white-space:pre-wrap;word-break:break-word;
+}
+.termbody .pr{color:#FFC24D}
+.termbody .cmd{color:#E9EFF6}
+.termbody .ok{color:#3EE08C;text-shadow:0 0 10px rgba(62,224,140,.35)}
+.termbody .warn{color:#FF6257}
+.termbody .hi{color:#5CA9FF}
+.termbody .cur{
+  display:inline-block;width:.55em;height:1.1em;vertical-align:-.15em;
+  background:#3EE08C;margin-left:1px;animation:blink 1s steps(1) infinite;
+}
+.minibtn{
+  font:600 12px/1 var(--sans);color:#A9B7C9;
+  background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.22);border-radius:9px;
+  padding:8px 13px;cursor:pointer;display:inline-flex;align-items:center;gap:7px;transition:.18s;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.14);
+}
+.minibtn svg{width:13px;height:13px}
+.minibtn:hover{color:#E9EFF6;background:rgba(255,255,255,.16);transform:translateY(-1px)}
+.minibtn:active{transform:scale(.96)}
+
+/* ===== OS TABS ===== */
+.ostabs{display:flex;gap:8px;margin-bottom:14px}
+.ostab{
+  font:600 13px/1 var(--sans);color:var(--dim);
+  background:var(--grad-glass);
+  backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
+  border:1px solid var(--glass-bd);border-radius:11px;
+  padding:10px 16px;cursor:pointer;transition:.18s;
+  box-shadow:var(--out-sh),var(--inner-light);
+}
+.ostab.on{
+  color:var(--ink);background:linear-gradient(180deg,rgba(255,255,255,.95),rgba(255,255,255,.7));
+  box-shadow:0 14px 32px rgba(31,45,68,.2),var(--inner-light);
+  transform:translateY(-1px);
+}
+.ostab:active{transform:scale(.97)}
+
+/* ===== FILE TREE ===== */
+.ftree{
+  border-radius:var(--rad);
+  padding:18px 22px;font:400 13.5px/2 var(--mono);color:#A9B7C9;text-align:left;
+}
+.ftree .dir{color:#FFC24D}
+.ftree .fil{color:#5CA9FF}
+.ftree .new{color:#3EE08C;font-weight:600}
+.ftree .hi{color:#5CA9FF}
+
+/* ===== SHOT CARDS ===== */
+.shotcard{
+  background:var(--spec-top),var(--grad-glass);
+  backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
+  border:1px solid var(--glass-bd);border-radius:var(--rad);
+  padding:10px 10px 9px;cursor:zoom-in;text-align:left;
+  box-shadow:var(--out-sh),var(--inner-light);
+  transition:transform .22s,box-shadow .22s;position:relative;
+}
+.shotcard:hover{transform:translateY(-4px);box-shadow:var(--out-sh-lg),var(--inner-light)}
+.shotcard .imgwrap{border-radius:13px;overflow:hidden;border:1px solid rgba(31,45,68,.16);background:#0B1017;box-shadow:inset 0 1px 3px rgba(31,45,68,.2)}
+.shotcard img{display:block;width:100%;height:auto;transition:transform .4s ease}
+.shotcard:hover img{transform:scale(1.025)}
+.shotcap{display:flex;align-items:center;gap:8px;margin-top:9px;padding:0 3px}
+.stepchip{
+  font:700 10.5px/1 var(--mono);border-radius:999px;padding:4px 9px;white-space:nowrap;
+  border:1.5px solid;
+  background:rgba(255,255,255,.6);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.95);
+}
+.stepchip.c-blue{color:var(--blue-t);border-color:rgba(92,169,255,.9)}
+.stepchip.c-green{color:var(--green-t);border-color:rgba(43,196,111,.9)}
+.stepchip.c-amber{color:var(--amber-t);border-color:rgba(255,194,77,.95)}
+.stepchip.c-coral{color:var(--coral-t);border-color:rgba(255,98,87,.9)}
+.stepchip.c-violet{color:var(--violet-t);border-color:rgba(183,156,255,.9)}
+.shottitle{font:600 12.5px/1.3 var(--sans);color:var(--ink)}
+.shotnote{font:400 11px/1.35 var(--mono);color:var(--faint);margin-top:3px}
+.zoomtag{
+  position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:9px;
+  display:grid;place-items:center;color:#fff;
+  background:rgba(17,23,33,.6);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,.3);pointer-events:none;opacity:0;transition:.2s;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.2);
+}
+.zoomtag svg{width:14px;height:14px}
+.shotcard:hover .zoomtag{opacity:1}
+
+/* ===== CODE EXPLORER ===== */
+.codex{display:grid;grid-template-columns:1.15fr 1fr;gap:18px;align-items:start}
+.codepane{
+  border-radius:var(--rad);
+  overflow:hidden;text-align:left;
+}
+.codebar{
+  display:flex;align-items:center;gap:9px;padding:10px 16px;
+  background:rgba(255,255,255,.055);border-bottom:1px solid rgba(255,255,255,.12);
+  font:500 12px/1 var(--mono);color:#8FA3BC;
+}
+.codebar .fname{color:#FFC24D}
+.cl{
+  display:grid;grid-template-columns:34px 1fr;gap:12px;
+  padding:7px 16px 7px 8px;font:400 13px/1.5 var(--mono);color:#E9EFF6;
+  cursor:pointer;border-left:3px solid transparent;transition:.14s;
+}
+.cl .ln{color:#63748C;text-align:right;user-select:none}
+.cl:hover{background:rgba(255,255,255,.06)}
+.cl.act{background:rgba(92,169,255,.14);border-left-color:#5CA9FF;box-shadow:inset 0 0 20px rgba(92,169,255,.1)}
+.cl .kw{color:#C9B4FF}.cl .st{color:#5BE39A}.cl .fn{color:#FFD37A}.cl .de{color:#7FC1FF}.cl .hi{color:#7FC1FF}
+.xplain{
+  background:var(--spec-top),var(--grad-glass);
+  backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
+  color:var(--ink);border:1px solid var(--glass-bd);border-radius:var(--rad);
+  padding:20px 22px;position:sticky;top:0;min-height:170px;
+  box-shadow:var(--out-sh),var(--inner-light);
+}
+.xplain h3{font:700 14px/1 var(--mono);margin-bottom:10px;display:flex;align-items:center;gap:8px;color:var(--ink)}
+.xplain h3 .thecode{
+  font:600 12.5px/1 var(--mono);
+  background:linear-gradient(180deg,rgba(255,255,255,.09),transparent 12%),rgba(15,20,29,.85);
+  color:#FFD37A;border:1px solid rgba(255,255,255,.2);
+  padding:5px 9px;border-radius:8px;word-break:break-all;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.14);
+}
+.xplain p{font-size:13.5px;color:var(--dim);line-height:1.6}
+.xplain p b{color:var(--ink)}
+
+/* ===== BROWSER MOCK ===== */
+.browser{
+  background:linear-gradient(180deg,rgba(255,255,255,.6),transparent 20%),rgba(255,255,255,.86);
+  backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
+  border:1px solid var(--glass-bd);border-radius:var(--rad);
+  overflow:hidden;text-align:center;
+  box-shadow:var(--out-sh-lg),var(--inner-light);
+  opacity:0;transform:translateY(10px) scale(.97);transition:.45s cubic-bezier(.2,.7,.3,1.2);
+}
+.browser.show{opacity:1;transform:none}
+.btab{
+  background:linear-gradient(180deg,rgba(255,255,255,.09),transparent 12%),rgba(15,20,29,.84);
+  color:#E9EFF6;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 14px;font:500 11px/1 var(--mono);
+}
+.burl{
+  background:rgba(255,255,255,.15);border-radius:99px;padding:6px 12px;
+  display:flex;align-items:center;gap:7px;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.2);
+}
+.burl svg{width:11px;height:11px}
+.bbody{
+  padding:44px 20px;min-height:170px;
+  display:grid;place-items:center;
+  background:rgba(255,255,255,.92);
+}
+.bbody .hw{font:700 clamp(22px,2.6vw,34px)/1 var(--disp);color:var(--ink);text-shadow:0 2px 0 rgba(255,255,255,.8)}
+.bbody .bstate{font:500 12px/1 var(--mono);color:var(--dim);margin-top:14px}
+
+/* ===== TUGAS + TIMER ===== */
+.tugas{display:grid;grid-template-columns:1.3fr 1fr;gap:22px;margin-top:6px}
+.checks{display:flex;flex-direction:column;gap:10px}
+.chk{
+  display:grid;grid-template-columns:26px 1fr;gap:14px;align-items:flex-start;
+  background:var(--spec-top),var(--grad-glass);
+  backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
+  border:1px solid var(--glass-bd);border-radius:14px;
+  padding:15px 17px;cursor:pointer;text-align:left;
+  box-shadow:var(--out-sh),var(--inner-light);
+  transition:transform .18s,box-shadow .18s,border-color .18s;
+}
+.chk:hover{transform:translateY(-2px);box-shadow:var(--out-sh-lg),var(--inner-light)}
+.chk:active{transform:scale(.99)}
+.chk .box{
+  width:24px;height:24px;border-radius:8px;border:2px solid rgba(31,45,68,.3);
+  display:grid;place-items:center;color:transparent;transition:.18s;margin-top:1px;
+  background:rgba(255,255,255,.65);
+  box-shadow:inset 0 1px 2px rgba(31,45,68,.12);
+}
+.chk .box svg{width:14px;height:14px}
+.chk h4{font:600 15px/1.3 var(--sans);color:var(--ink)}
+.chk p{color:var(--dim);font-size:12.5px;margin-top:3px}
+.chk p code{font:500 12px var(--mono);color:var(--green-t)}
+.chk.done{border-color:rgba(43,196,111,.65)}
+.chk.done .box{
+  background:radial-gradient(circle at 32% 26%,rgba(255,255,255,.6),var(--green-t) 62%);
+  border-color:var(--green);color:#fff;
+  box-shadow:0 6px 16px rgba(11,122,67,.35);
+}
+.chk.done h4{color:var(--green-t);text-decoration:line-through;text-decoration-thickness:1.5px;opacity:.75}
+.chprogress{font:600 12.5px/1 var(--mono);color:var(--dim);margin-top:12px}
+.timerbox{
+  background:var(--spec-top),var(--grad-glass);
+  backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
+  border:1px solid var(--glass-bd);border-radius:var(--rad);
+  padding:24px;text-align:center;
+  box-shadow:var(--out-sh),var(--inner-light);
+}
+.timerbox .tlab{font:600 11.5px/1 var(--sans);color:var(--faint);letter-spacing:.02em}
+.tdigits{
+  font:700 clamp(44px,5.4vw,68px)/1.1 var(--mono);color:var(--ink);
+  margin:10px 0 14px;font-variant-numeric:tabular-nums;
+  transition:.3s;
+}
+.tdigits.run{color:var(--amber-t);text-shadow:0 0 26px rgba(255,194,77,.55)}
+.tdigits.end{color:var(--coral-t);text-shadow:0 0 26px rgba(255,98,87,.5)}
+.tctrl{display:flex;justify-content:center;gap:10px}
+.tbtn{
+  border:1px solid var(--glass-bd);
+  background:var(--spec-top),var(--grad-glass);
+  backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
+  color:var(--ink);border-radius:12px;padding:10px 16px;cursor:pointer;
+  font:600 13px/1 var(--sans);display:inline-flex;align-items:center;gap:8px;
+  transition:.18s;box-shadow:var(--out-sh),var(--inner-light);
+}
+.tbtn svg{width:14px;height:14px}
+.tbtn:hover{transform:translateY(-2px);box-shadow:var(--out-sh-lg),var(--inner-light)}
+.tbtn:active{transform:scale(.96)}
+.tbtn.go{
+  color:var(--amber-t);border-color:rgba(255,194,77,.95);
+  background:linear-gradient(180deg,rgba(255,255,255,.6),transparent 46%),rgba(255,194,77,.4);
+  box-shadow:0 12px 30px rgba(143,94,0,.28),var(--inner-light);
+}
+.tnote{margin-top:16px;font:500 12px/1.5 var(--mono);color:var(--faint)}
+
+/* ===== KETENTUAN ===== */
+.spec{
+  background:var(--spec-top),var(--grad-glass);
+  backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
+  border:1px solid var(--glass-bd);border-radius:var(--rad);
+  padding:22px;text-align:left;
+  box-shadow:var(--out-sh),var(--inner-light);
+  transition:transform .2s,box-shadow .2s;
+}
+.spec:hover{transform:translateY(-2px);box-shadow:var(--out-sh-lg),var(--inner-light)}
+.spec .sic{
+  width:42px;height:42px;border-radius:13px;display:grid;place-items:center;margin-bottom:14px;
+  border:1px solid rgba(255,255,255,.8);
+}
+.spec .sic{background:radial-gradient(circle at 32% 26%,rgba(255,255,255,.95),rgba(92,169,255,.4) 58%,rgba(92,169,255,.2));color:var(--blue-t);box-shadow:inset 0 1px 1px rgba(255,255,255,.95),0 8px 20px rgba(29,95,201,.2)}
+.spec.warm .sic{background:radial-gradient(circle at 32% 26%,rgba(255,255,255,.95),rgba(255,194,77,.45) 58%,rgba(255,194,77,.25));color:var(--amber-t);box-shadow:inset 0 1px 1px rgba(255,255,255,.95),0 8px 20px rgba(143,94,0,.2)}
+.spec .sic svg{width:19px;height:19px}
+.spec h3{font:600 16.5px/1.2 var(--sans);color:var(--ink);margin-bottom:10px}
+.spec ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+.spec li{color:var(--dim);font-size:13.5px;padding-left:22px;position:relative}
+.spec li::before{
+  content:"";position:absolute;left:0;top:7px;
+  width:8px;height:8px;border-radius:3px;
+  background:radial-gradient(circle at 32% 26%,rgba(255,255,255,.9),rgba(92,169,255,.85) 62%);
+  box-shadow:0 2px 6px rgba(29,95,201,.3);
+}
+.spec.warm li::before{
+  background:radial-gradient(circle at 32% 26%,rgba(255,255,255,.9),rgba(255,194,77,.9) 62%);
+  box-shadow:0 2px 6px rgba(143,94,0,.3);
+}
+.spec li b{color:var(--ink)}
+.spec li code{font:500 12.5px var(--mono);color:var(--green-t)}
+
+/* ===== QUIZ ===== */
+.quizbox{
+  background:var(--spec-top),var(--grad-glass);
+  backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
+  border:1px solid var(--glass-bd);border-radius:var(--rad);
+  padding:28px 30px;margin-top:4px;
+  box-shadow:var(--out-sh),var(--inner-light);
+}
+.qmeta{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.qno{font:600 12.5px/1 var(--mono);color:var(--faint)}
+.qdots{display:flex;gap:6px}
+.qdots i{width:8px;height:8px;border-radius:50%;background:rgba(31,45,68,.18);transition:.2s}
+.qdots i.cur{background:var(--amber);box-shadow:0 0 8px rgba(255,194,77,.7)}
+.qdots i.ok{background:var(--green);box-shadow:0 0 8px rgba(43,196,111,.6)}
+.qdots i.bad{background:var(--coral);box-shadow:0 0 8px rgba(255,98,87,.6)}
+.qq{font:600 clamp(17px,2vw,23px)/1.3 var(--disp);margin-bottom:20px;min-height:2.6em;color:var(--ink)}
+.qopts{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.qopt{
+  font:500 14.5px/1.4 var(--mono);color:var(--ink);text-align:left;
+  background:var(--spec-top),var(--grad-glass);
+  backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
+  border:1.5px solid rgba(255,255,255,.8);border-radius:14px;
+  padding:15px 18px;cursor:pointer;transition:.18s;
+  box-shadow:var(--out-sh),var(--inner-light);
+}
+.qopt:hover{transform:translateY(-2px);border-color:rgba(255,255,255,1);box-shadow:var(--out-sh-lg),var(--inner-light)}
+.qopt:active{transform:scale(.98)}
+.qopt.right{
+  border-color:rgba(43,196,111,.95);
+  background:linear-gradient(180deg,rgba(255,255,255,.55),transparent 44%),rgba(62,224,140,.32);
+  color:var(--green-t);cursor:default;
+  box-shadow:0 14px 34px rgba(11,122,67,.28),var(--inner-light);
+}
+.qopt.wrong{
+  border-color:rgba(255,98,87,.95);
+  background:linear-gradient(180deg,rgba(255,255,255,.55),transparent 44%),rgba(255,98,87,.26);
+  color:var(--coral-t);cursor:default;
+  box-shadow:0 14px 34px rgba(199,51,40,.26),var(--inner-light);
+}
+.qopt[disabled]{cursor:default;transform:none}
+.qfoot{display:flex;justify-content:flex-end;margin-top:18px;min-height:40px}
+.qresult{text-align:center}
+.qscore{font:700 clamp(52px,7vw,88px)/1 var(--disp)}
+.qmsg{color:var(--dim);margin:14px 0 22px;font-size:15px}
+
+/* ===== RECAP ===== */
+.recaplist{display:flex;flex-direction:column;gap:12px;margin:24px 0}
+.rc{
+  display:flex;gap:14px;align-items:center;
+  background:var(--spec-top),var(--grad-glass);
+  backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
+  border:1px solid var(--glass-bd);border-radius:14px;
+  padding:16px 20px;text-align:left;
+  box-shadow:var(--out-sh),var(--inner-light);
+  transition:transform .2s,box-shadow .2s;
+}
+.rc:hover{transform:translateY(-2px);box-shadow:var(--out-sh-lg),var(--inner-light)}
+.rc .rcic{
+  width:36px;height:36px;border-radius:11px;
+  background:radial-gradient(circle at 32% 26%,rgba(255,255,255,.95),rgba(62,224,140,.42) 58%,rgba(62,224,140,.22));
+  display:grid;place-items:center;color:var(--green-t);flex:none;
+  border:1px solid rgba(255,255,255,.8);
+  box-shadow:inset 0 1px 1px rgba(255,255,255,.95),0 6px 16px rgba(11,122,67,.22);
+}
+.rc .rcic svg{width:16px;height:16px}
+.rc p{font-size:14.5px;color:var(--ink)}
+.rc p code{font:500 13px var(--mono);color:var(--green-t)}
+.bignum{color:var(--green-t)}
+
+/* ===== LIGHTBOX ===== */
+.lb{
+  position:fixed;inset:0;z-index:100;display:none;
+  background:rgba(24,32,48,.45);
+  backdrop-filter:blur(16px) saturate(120%);-webkit-backdrop-filter:blur(16px) saturate(120%);
+  align-items:center;justify-content:center;padding:36px;cursor:zoom-out;
+}
+.lb.on{display:flex}
+.lbpanel{
+  background:linear-gradient(180deg,rgba(255,255,255,.75),transparent 24%),rgba(255,255,255,.92);
+  border:1px solid rgba(255,255,255,.95);
+  border-radius:22px;padding:14px;max-width:min(1100px,90vw);
+  box-shadow:0 40px 100px rgba(15,23,40,.45),inset 0 1px 0 rgba(255,255,255,.95);
+  cursor:default;
+  animation:lbIn .3s cubic-bezier(.2,.7,.3,1.15);
+}
+@keyframes lbIn{from{opacity:0;transform:scale(.92) translateY(14px)}to{opacity:1;transform:none}}
+.lbpanel .lbimgwrap{border-radius:13px;overflow:hidden;border:1px solid rgba(31,45,68,.16);background:#0B1017}
+.lbpanel img{display:block;max-width:100%;max-height:72vh;width:auto;height:auto}
+.lbpanel .lbcap{display:flex;align-items:center;gap:10px;padding:12px 6px 4px}
+.lbclose{
+  margin-left:auto;width:34px;height:34px;border-radius:10px;border:1px solid rgba(255,255,255,.9);
+  background:rgba(255,255,255,.75);color:var(--dim);display:grid;place-items:center;cursor:pointer;
+  box-shadow:var(--out-sh),var(--inner-light);
+  transition:.15s;
+}
+.lbclose svg{width:16px;height:16px}
+.lbclose:hover{color:var(--ink);background:#fff;transform:rotate(90deg)}
+
+/* ===== GENERIC ===== */
+.linkchip{
+  display:inline-flex;align-items:center;gap:8px;
+  font:600 13px/1 var(--mono);color:var(--blue-t);
+  background:linear-gradient(180deg,rgba(255,255,255,.6),transparent 46%),rgba(92,169,255,.2);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border:1.5px solid rgba(92,169,255,.9);border-radius:999px;
+  padding:9px 15px;text-decoration:none;transition:.2s;
+  box-shadow:0 10px 26px rgba(29,95,201,.22),var(--inner-light);
+}
+.linkchip svg{width:13px;height:13px}
+.linkchip:hover{background:linear-gradient(180deg,rgba(255,255,255,.6),transparent 46%),rgba(92,169,255,.34);transform:translateY(-2px);box-shadow:0 16px 36px rgba(29,95,201,.3),var(--inner-light)}
+.hintpill{
+  display:inline-flex;align-items:center;gap:8px;
+  font:500 12.5px/1 var(--sans);color:var(--dim);
+  background:var(--spec-top),var(--grad-glass);
+  backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
+  border:1px dashed rgba(111,130,155,.6);border-radius:999px;padding:8px 14px;
+  box-shadow:var(--out-sh),var(--inner-light);
+}
+.hintpill svg{width:13px;height:13px;color:var(--amber-t)}
+:focus-visible{outline:2.5px solid var(--blue-t);outline-offset:2px;border-radius:8px}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width:900px){
+  .slide{padding:22px 18px 80px}
+  .content{max-width:100%}
+  h2{font-size:clamp(19px,4.6vw,28px)}
+  .sub{font-size:13px}
+  .kick{font-size:11px;padding:6px 11px;margin-bottom:12px}
+  .slide-body{margin-top:14px}
+  .cols{gap:12px}
+  .cols.c2,.cols.c2-1,.cols.c1-2,.cols.c3,.cols.c4{grid-template-columns:1fr}
+  .pcard{padding:14px 16px}
+  .pcard .ic{width:34px;height:34px;margin-bottom:9px;border-radius:10px}
+  .pcard .ic svg{width:16px;height:16px}
+  .pcard h3{font-size:14.5px}
+  .pcard p{font-size:12px}
+  .pcard .tag{margin-top:8px;font-size:10px;padding:4px 9px}
+  .capaian .pcard:nth-child(1),.capaian .pcard:nth-child(2),.capaian .pcard:nth-child(3){transform:none}
+  .capaian .pcard:nth-child(1):hover,.capaian .pcard:nth-child(2):hover,.capaian .pcard:nth-child(3):hover{transform:translateY(-2px)}
+  .tool{padding:13px 14px}
+  .tool .tic{width:34px;height:34px;margin-bottom:8px;border-radius:10px}
+  .tool .tic svg{width:16px;height:16px}
+  .tool h3{font-size:13.5px}
+  .tool p{font-size:11.5px}
+  .pads{grid-template-columns:1fr 1fr}
+  .pad{padding:14px 8px}
+  .cs{grid-template-columns:1fr;gap:10px}
+  .wirezone{height:74px;margin:0}
+  .codex{grid-template-columns:1fr}
+  .tugas{grid-template-columns:1fr}
+  .step{grid-template-columns:44px 1fr;row-gap:8px}
+  .step .dur{grid-column:2}
+  .rrow .rhead{grid-template-columns:1fr 70px}
+  .rtrack{display:none}
+  .rdetail{grid-template-columns:1fr 1fr}
+  .corner{display:none}
+  .hintchip{display:none}
+  .sticker{display:none}
+  .qopts{grid-template-columns:1fr}
+  .qq{font-size:17px;min-height:2em}
+  .termbody{min-height:140px;max-height:175px;font-size:11.5px}
+  .dock{padding:6px 8px;bottom:12px}
+  .count .seclabel{font-size:10px}
+  .xplain{padding:12px 14px;min-height:0}
+  .xplain h3{font-size:12px;margin-bottom:8px}
+  .xplain p{font-size:12px;line-height:1.5}
+  .bbody{padding:26px 16px;min-height:120px}
+  .quizbox{padding:20px 18px}
+  .rc{padding:12px 14px}
+  .rc p{font-size:13px}
+  .shotcard .imgwrap{max-height:165px}
+  .shotcard img{width:100%;height:165px;object-fit:cover;object-position:top}
+  .codex .shotcard .imgwrap{max-height:120px}
+  .codex .shotcard img{height:120px}
+  .codex .shotcard{max-width:100%}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001s!important;transition-duration:.001s!important}
+  .blobs::before,.blobs::after,.sticker{animation:none!important}
+  .slide{filter:none;transform:none}
+}
+
+</style>
+</head>
+<body>
+<main class="stage" id="stage">
+  <div class="blobs" aria-hidden="true"></div>
+  <div class="bar" id="pbar"></div>
+  <div class="corner"><span class="dotmark"></span><span>Praktikum Pemrograman Web · <b>P01</b></span></div>
+  <button class="fsbtn" id="fsbtn" aria-label="Layar penuh"><i data-lucide="maximize-2"></i></button>
+  <div class="hintchip" id="hintchip">panah &#8592; &#8592; pindah slide · klik screenshot buat perbesar · F layar penuh</div>
+
+  <!-- 01 · TITLE -->
+  <section class="slide title-slide on" data-sec="Pembuka" id="s1">
+    <div class="sticker s1">flask 3.1.3</div>
+    <div class="sticker s2">(prakpemweb)</div>
+    <div class="content">
+      <span class="kick"><span class="kd"></span>Praktikum Pemrograman Web — Pertemuan 01</span>
+      <h1 class="h1">Bikin web app<br>pertama lo</h1>
+      <p class="typeline"><span class="pr">$</span> <span id="titleCmd"></span><span class="cur"></span></p>
+      <p class="t-sub">Pengenalan Pemrograman Web &amp; Python: client-server, HTTP, virtual environment, sampai aplikasi Flask pertama lo jalan di browser.</p>
+      <p class="credit">Materi: modul praktikum P01 · Deck versi web interaktif</p>
+    </div>
+  </section>
+
+  <!-- 02 · AGENDA -->
+  <section class="slide" data-sec="Pembuka" id="s2">
+    <div class="content">
+      <span class="kick"><span class="kd"></span>Run of show</span>
+      <h2>Alur pertemuan hari ini</h2>
+      <p class="sub">105 menit total, dari nol sampai web app pertama lo nyala.</p>
+      <div class="slide-body steps">
+        <div class="step">
+          <span class="no">01</span>
+          <div><h3>Dasar teori</h3><p>Client-server, HTTP dan method-nya, kenapa Flask</p></div>
+          <span class="dur">&#177;15 menit</span>
+        </div>
+        <div class="step">
+          <span class="no">02</span>
+          <div><h3>Praktik: setup sampai jalan</h3><p>Python, folder, venv, pip, <code>app.py</code>, server nyala</p></div>
+          <span class="dur">45 menit</span>
+        </div>
+        <div class="step">
+          <span class="no">03</span>
+          <div><h3>Tugas praktikum</h3><p>Route <code>/about</code> dan <code>/profile</code> versi lo sendiri</p></div>
+          <span class="dur">30 menit</span>
+        </div>
+        <div class="step">
+          <span class="no">04</span>
+          <div><h3>Kuis &amp; penutup</h3><p>Cek pemahaman, lalu recap apa yang sudah bisa lo lakukan</p></div>
+          <span class="dur">&#177;10 menit</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 · CAPAIAN -->
+  <section class="slide" data-sec="Kelas" id="s3">
+    <div class="content">
+      <span class="kick"><span class="kd"></span>Capaian pembelajaran</span>
+      <h2>Di akhir praktikum, lo bisa</h2>
+      <div class="slide-body cols c3 capaian">
+        <div class="pcard">
+          <div class="ic"><i data-lucide="globe"></i></div>
+          <h3>Ngejer basisnya</h3>
+          <p>Memahami arsitektur client-server dan gimana HTTP jadi bahasa percakapan keduanya.</p>
+          <span class="tag">teori</span>
+        </div>
+        <div class="pcard">
+          <div class="ic"><i data-lucide="package"></i></div>
+          <h3>Nyiapin dapur</h3>
+          <p>Menginstal dan mengkonfigurasi lingkungan pengembangan Python yang rapi per proyek.</p>
+          <span class="tag">setup</span>
+        </div>
+        <div class="pcard">
+          <div class="ic"><i data-lucide="rocket"></i></div>
+          <h3>Nyalain aplikasi</h3>
+          <p>Membuat aplikasi web pertama pakai Flask dan menjalankannya di browser.</p>
+          <span class="tag">praktik</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 · RUBRIK -->
+  <section class="slide" data-sec="Kelas" id="s4">
+    <div class="content">
+      <span class="kick"><span class="kd"></span>Rubrik penilaian</span>
+      <h2>Nilai lo dihitung dari mana</h2>
+      <p class="sub">Klik tiap kriteria buat lihat level penilaiannya — kode program paling ngemeng.</p>
+      <div class="slide-body rubric" id="rubric">
+        <button class="rrow" data-k="inst">
+          <span class="rhead">
+            <span><h3>Instalasi &amp; Setup</h3><span class="rwhat">Environment Python + Flask terpasang</span></span>
+            <span class="rtrack"><span class="rfill" data-w="25"></span></span>
+            <span class="rw">25%</span>
+          </span>
+          <span class="rdetail">
+            <span class="lv ex"><b>100%</b><span>Environment berhasil, Flask terinstal</span></span>
+            <span class="lv gd"><b>75%</b><span>Environment berhasil</span></span>
+            <span class="lv fr"><b>50%</b><span>Instalasi sebagian</span></span>
+            <span class="lv pr"><b>25%</b><span>Tidak berhasil</span></span>
+          </span>
+        </button>
+        <button class="rrow" data-k="kode">
+          <span class="rhead">
+            <span><h3>Kode Program</h3><span class="rwhat">Route lengkap, kode rapi dan terstruktur</span></span>
+            <span class="rtrack"><span class="rfill" data-w="35"></span></span>
+            <span class="rw">35%</span>
+          </span>
+          <span class="rdetail">
+            <span class="lv ex"><b>100%</b><span>3 route, kode rapi</span></span>
+            <span class="lv gd"><b>75%</b><span>2 route, rapi</span></span>
+            <span class="lv fr"><b>50%</b><span>1 route</span></span>
+            <span class="lv pr"><b>25%</b><span>Tidak berfungsi</span></span>
+          </span>
+        </button>
+        <button class="rrow" data-k="uji">
+          <span class="rhead">
+            <span><h3>Pengujian</h3><span class="rwhat">Semua route terbukti jalan di browser</span></span>
+            <span class="rtrack"><span class="rfill" data-w="25"></span></span>
+            <span class="rw">25%</span>
+          </span>
+          <span class="rdetail">
+            <span class="lv ex"><b>100%</b><span>Semua route berfungsi</span></span>
+            <span class="lv gd"><b>75%</b><span>2 route berfungsi</span></span>
+            <span class="lv fr"><b>50%</b><span>1 route berfungsi</span></span>
+            <span class="lv pr"><b>25%</b><span>Tidak berfungsi</span></span>
+          </span>
+        </button>
+        <button class="rrow" data-k="dok">
+          <span class="rhead">
+            <span><h3>Dokumentasi</h3><span class="rwhat">File .py + screenshot hasil di browser</span></span>
+            <span class="rtrack"><span class="rfill" data-w="15"></span></span>
+            <span class="rw">15%</span>
+          </span>
+          <span class="rdetail">
+            <span class="lv ex"><b>100%</b><span>Lengkap, rapi</span></span>
+            <span class="lv gd"><b>75%</b><span>Cukup lengkap</span></span>
+            <span class="lv fr"><b>50%</b><span>Kurang lengkap</span></span>
+            <span class="lv pr"><b>25%</b><span>Tidak ada</span></span>
+          </span>
+        </button>
+        <p class="rnote">Total 100% — diambil dari rubrik resmi modul P01.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 · CLIENT-SERVER -->
+  <section class="slide" data-sec="Dasar teori" id="s5">
+    <div class="content">
+      <span class="kick"><span class="kd"></span>Dasar teori · 1 dari 3</span>
+      <h2>Client-server: dua peran, satu percakapan</h2>
+      <div class="slide-body">
+        <div class="cs">
+          <div class="node client">
+            <div class="nic"><i data-lucide="app-window"></i></div>
+            <h3>Client</h3>
+            <p>Browser di komputer lo. Tugasnya: minta.</p>
+          </div>
+          <div class="wirezone">
+            <div class="wire"></div>
+            <div class="packet" id="packet">request</div>
+          </div>
+          <div class="node server">
+            <div class="nic"><i data-lucide="server"></i></div>
+            <h3>Server</h3>
+            <p>Komputer lain yang siaga. Tugasnya: layani.</p>
+          </div>
+        </div>
+        <div class="csbtnrow">
+          <button class="csbtn" id="csbtn"><i data-lucide="send"></i>Kirim request</button>
+        </div>
+        <p class="csstat" id="csstat">Client nggak pernah ngasih — server nggak pernah nyerah. Coba kirim.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 · HTTP -->
+  <section class="slide" data-sec="Dasar teori" id="s6">
+    <div class="content">
+      <span class="kick"><span class="kd"></span>Dasar teori · 2 dari 3</span>
+      <h2>HTTP: empat kata kerja</h2>
+      <p class="sub">Percakapan client-server punya aturan. Tekan method-nya, lihat percakapannya.</p>
+      <div class="slide-body">
+        <div class="pads">
+          <button class="pad get" data-m="get">GET<span>mengambil data</span></button>
+          <button class="pad post" data-m="post">POST<span>mengirim data baru</span></button>
+          <button class="pad put" data-m="put">PUT<span>mengupdate data</span></button>
+          <button class="pad del" data-m="del">DELETE<span>menghapus data</span></button>
+        </div>
+        <div class="httplog" id="httplog" aria-live="polite"></div>
+        <p class="httpcap" id="httpcap">Contoh nyatanya: tiap lo buka halaman Instagram, browser ngirim <b>GET</b> ratusan kali.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 · FLASK -->
+  <section class="slide" data-sec="Dasar teori" id="s7">
+    <div class="content">
+      <span class="kick"><span class="kd"></span>Dasar teori · 3 dari 3</span>
+      <h2>Flask: framework kecil yang nggak ikut-ikutan</h2>
+      <p class="sub">Micro-framework web untuk Python — ringan, fleksibel, tinggal tambah sesuai kebutuhan.</p>
+      <div class="slide-body cols c3">
+        <div class="pcard">
+          <div class="ic"><i data-lucide="flask-conical"></i></div>
+          <h3>Flask</h3>
+          <p>Framework-nya sendiri. Nerima request, manggil kode lo, balas response. Satu file Python cukup buat start.</p>
+          <span class="tag">pip install flask</span>
+        </div>
+        <div class="pcard">
+          <div class="ic"><i data-lucide="braces"></i></div>
+          <h3>Jinja2</h3>
+          <p>Template engine bawaan Flask. Bikin HTML yang bisa diisi data dinamis dari Python.</p>
+          <span class="tag">template engine</span>
+        </div>
+        <div class="pcard">
+          <div class="ic"><i data-lucide="git-branch"></i></div>
+          <h3>Micro apa maksudnya</h3>
+          <p>Inti kecil, sisanya pilihan. Nggak dikasih admin panel, ORM, atau aturan struktur folder — lo yang mutusin.</p>
+          <span class="tag">no magic</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 · TOOLS -->
+  <section class="slide" data-sec="Dasar teori" id="s8">
+    <div class="content">
+      <span class="kick"><span class="kd"></span>Perlengkapan</span>
+      <h2>Empat alat buat hari ini</h2>
+      <p class="sub">Semua gratis. Kalau ada yang belum ada, download sebelum praktik dimulai.</p>
+      <div class="slide-body cols c4">
+        <div class="tool">
+          <div class="tic"><i data-lucide="terminal"></i></div>
+          <h3>Python 3.10+</h3>
+          <p>Bahasa pemrograman sekaligus mesin semua yang kita bangun</p>
+        </div>
+        <div class="tool">
+          <div class="tic"><i data-lucide="flask-conical"></i></div>
+          <h3>Flask</h3>
+          <p>Framework web — nanti dipasang lewat pip</p>
+        </div>
+        <div class="tool">
+          <div class="tic"><i data-lucide="code"></i></div>
+          <h3>VS Code</h3>
+          <p>Code editor tempat kita nulis <code>app.py</code></p>
+        </div>
+        <div class="tool">
+          <div class="tic"><i data-lucide="globe"></i></div>
+          <h3>Browser</h3>
+          <p>Untuk menguji aplikasi — client kita sejati</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 09 · P1: DOWNLOAD PYTHON -->
+  <section class="slide" data-sec="Praktik · Part 1" id="s9">
+    <div class="content">
+      <span class="kick"><span class="kd"></span>Praktikum · Part 1 — langkah 1 dari 4</span>
+      <h2>Pasang Python dari situs resminya</h2>
+      <div class="slide-body cols c2">
+        <div>
+          <p class="sub" style="margin-bottom:16px">Unduh installer dari python.org, next-next sampai selesai — lalu jangan percaya, buktikan lewat terminal.</p>
+          <a class="linkchip" href="https://www.python.org/downloads/" target="_blank" rel="noopener"><i data-lucide="external-link"></i>python.org/downloads</a>
+          <div class="term" style="margin-top:18px">
+            <div class="termbar"><span class="tdot r"></span><span class="tdot y"></span><span class="tdot g"></span><span class="termtitle">terminal — cek versi</span></div>
+            <div class="termbody" id="t9" style="min-height:120px;max-height:140px"></div>
+            <div class="termfoot"><button class="minibtn" data-replay="t9"><i data-lucide="rotate-ccw"></i>ulangi</button></div>
+          </div>
+        </div>
+        <figure class="shotcard">
+          <div class="imgwrap"><img src="img/step-01-download-python.png" alt="Halaman download python.org dengan tombol unduh installer terbaru" width="1213" height="519" loading="lazy"></div>
+          <span class="zoomtag"><i data-lucide="zoom-in"></i></span>
+          <figcaption class="shotcap">
+            <span class="stepchip c-blue">step 01</span>
+            <span><span class="shottitle">Halaman download python.org</span><span class="shotnote">pilih installer sesuai OS lo</span></span>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 · P1: FOLDER PROYEK (BARU) -->
+  <section class="slide" data-sec="Praktik · Part 1" id="s10">
+    <div class="content">
+      <span class="kick"><span class="kd"></span>Praktikum · Part 1 — langkah 2 dari 4</span>
+      <h2>Bikin folder khusus buat proyek</h2>
+      <div class="slide-body cols c2">
+        <div>
+          <p class="sub" style="margin-bottom:16px">Satu proyek, satu folder — semuanya tinggal di dalamnya: kode, venv, dan file pendukung. Nama foldernya bebas, modul pakai <b>web-perkuliahan</b>.</p>
+          <div class="ftree">web-perkuliahan/<br>&#8627; <span class="fil">app.py</span> — nanti<br>&#8627; <span class="dir">.venv/</span> — step berikutnya</div>
+        </div>
+        <figure class="shotcard">
+          <div class="imgwrap"><img src="img/step-02-buat-folder.png" alt="File explorer pembuatan folder proyek baru" width="538" height="257" loading="lazy"></div>
+          <span class="zoomtag"><i data-lucide="zoom-in"></i></span>
+          <figcaption class="shotcap">
+            <span class="stepchip c-blue">step 02</span>
+            <span><span class="shottitle">Bikin folder proyek</span><span class="shotnote">tampilan file explorer</span></span>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 · P1: VENV -->
+  <section class="slide" data-sec="Praktik · Part 1" id="s11">
+    <div class="content">
+      <span class="kick"><span class="kd"></span>Praktikum · Part 1 — langkah 3 dari 4</span>
+      <h2>Virtual environment: kamar kos tiap proyek</h2>
+      <div class="slide-body cols c2-1">
+        <div class="term">
+          <div class="termbar"><span class="tdot r"></span><span class="tdot y"></span><span class="tdot g"></span><span class="termtitle">web-perkuliahan — bikin venv</span></div>
+          <div class="termbody" id="t10"></div>
+          <div class="termfoot"><button class="minibtn" data-replay="t10"><i data-lucide="rotate-ccw"></i>ulangi</button></div>
+        </div>
+        <div>
+          <p class="sub" style="margin-bottom:14px">Tanpa venv, semua proyek berbagi package Python yang sama — kayak satu kosan buat semua anak rumah. Dengan venv, tiap proyek punya kamar sendiri.</p>
+          <figure class="shotcard">
+            <div class="imgwrap"><img src="img/step-03-venv.png" alt="Terminal menjalankan perintah python -m venv .venv" width="538" height="257" loading="lazy"></div>
+            <span class="zoomtag"><i data-lucide="zoom-in"></i></span>
+            <figcaption class="shotcap">
+              <span class="stepchip c-blue">step 03</span>
+              <span><span class="shottitle">python -m venv .venv</span><span class="shotnote">dijalankan di dalam folder proyek</span></span>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12 · P1: ACTIVATE -->
+  <section class="slide" data-sec="Praktik · Part 1" id="s12">
+    <div class="content">
+      <span class="kick"><span class="kd"></span>Praktikum · Part 1 — langkah 4 dari 4</span>
+      <h2>Nyalakan venv-nya — sesuai sistem lo</h2>
+      <div class="slide-body cols c2-1">
+        <div>
+          <div class="ostabs" id="ostabs">
+            <button class="ostab on" data-os="nix">Linux / macOS</button>
+            <button class="ostab" data-os="win">Windows</button>
+          </div>
+          <div class="term">
+            <div class="termbar"><span class="tdot r"></span><span class="tdot y"></span><span class="tdot g"></span><span class="termtitle">web-perkuliahan — aktifkan venv</span></div>
+            <div class="termbody" id="t11" style="min-height:150px;max-height:170px"></div>
+            <div class="termfoot"><button class="minibtn" data-replay="t11"><i data-lucide="rotate-ccw"></i>ulangi</button></div>
+          </div>
+          <p class="sub" style="margin-top:14px">Tanda venv aktif: prompt berubah — muncul <code style="font-family:var(--mono);color:var(--green-t)">(prakpemweb)</code> di depannya. Matiin kapan pun dengan <code style="font-family:var(--mono);color:var(--amber-t)">deactivate</code>.</p>
+        </div>
+        <figure class="shotcard">
+          <div class="imgwrap"><img src="img/step-04-activate.png" alt="Terminal menjalankan source .venv/bin/activate dan prompt berubah menandakan venv aktif" width="1125" height="257" loading="lazy"></div>
+          <span class="zoomtag"><i data-lucide="zoom-in"></i></span>
+          <figcaption class="shotcap">
+            <span class="stepchip c-blue">step 04</span>
+            <span><span class="shottitle">source .venv/bin/activate</span><span class="shotnote">prompt berubah = venv aktif</span></span>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 13 · P2: PIP INSTALL -->
+  <section class="slide" data-sec="Praktik · Part 2" id="s13">
+    <div class="content">
+      <span class="kick"><span class="kd"></span>Praktikum · Part 2 — pasang Flask</span>
+      <h2>Satu perintah, tujuh paket</h2>
+      <p class="sub">Flask kecil, tapi dia nggak jalan sendirian — teman-temannya ikut terpasang ke venv kita, bukan ke sistem.</p>
+      <div class="slide-body cols c2">
+        <div class="term">
+          <div class="termbar"><span class="tdot r"></span><span class="tdot y"></span><span class="tdot g"></span><span class="termtitle">(prakpemweb) — pasang flask</span></div>
+          <div class="termbody" id="t12" style="max-height:250px"></div>
+          <div class="termfoot"><button class="minibtn" data-replay="t12"><i data-lucide="rotate-ccw"></i>ulangi</button></div>
+        </div>
+        <figure class="shotcard">
+          <div class="imgwrap"><img src="img/step-05-pip-install.png" alt="Output pip install flask beserta daftar dependensi yang ikut terpasang" width="1127" height="622" loading="lazy"></div>
+          <span class="zoomtag"><i data-lucide="zoom-in"></i></span>
+          <figcaption class="shotcap">
+            <span class="stepchip c-green">step 05</span>
+            <span><span class="shottitle">pip install flask</span><span class="shotnote">flask 3.1.3 + 6 dependensi ikut masuk</span></span>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 14 · P2: PIP SHOW -->
+  <section class="slide" data-sec="Praktik · Part 2" id="s14">
+    <div class="content">
+      <span class="kick"><span class="kd"></span>Praktikum · Part 2 — verifikasi</span>
+      <h2>Jangan percaya — verifikasi</h2>
+      <div class="slide-body cols c2">
+        <div class="term">
+          <div class="termbar"><span class="tdot r"></span><span class="tdot y"></span><span class="tdot g"></span><span class="termtitle">(prakpemweb) — verifikasi flask</span></div>
+          <div class="termbody" id="t13"></div>
+          <div class="termfoot"><button class="minibtn" data-replay="t13"><i data-lucide="rotate-ccw"></i>ulangi</button></div>
+        </div>
+        <figure class="shotcard">
+          <div class="imgwrap"><img src="img/step-06-pip-show.png" alt="Output pip show flask menampilkan versi, ringkasan, lokasi, dan dependensi Flask" width="1127" height="622" loading="lazy"></div>
+          <span class="zoomtag"><i data-lucide="zoom-in"></i></span>
+          <figcaption class="shotcap">
+            <span class="stepchip c-green">step 06</span>
+            <span><span class="shottitle">pip show flask</span><span class="shotnote">kartu identitas Flask: versi, lokasi, dependensi</span></span>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 15 · P3: CODE EXPLORER -->
+  <section class="slide" data-sec="Praktik · Part 3" id="s15">
+    <div class="content">
+      <span class="kick"><span class="kd"></span>Praktikum · Part 3 — aplikasi pertama</span>
+      <h2>app.py — dua belas baris, klik semua</h2>
+      <div class="slide-body codex">
+        <div class="codepane">
+          <div class="codebar"><i data-lucide="file-code" style="width:13px;height:13px"></i><span class="fname">app.py</span><span style="margin-left:auto;color:#63748C"> klik barisnya</span></div>
+          <div class="cl" data-x="import"><span class="ln">1</span><code><span class="kw">from</span> flask <span class="kw">import</span> Flask</code></div>
+          <div class="cl" data-x="app"><span class="ln">2</span><code></code></div>
+          <div class="cl" data-x="app"><span class="ln">3</span><code>app = <span class="fn">Flask</span>(__name__)</code></div>
+          <div class="cl" data-x="route"><span class="ln">5</span><code><span class="de">@app.route</span>(<span class="st">'/'</span>)</code></div>
+          <div class="cl" data-x="def"><span class="ln">6</span><code><span class="kw">def</span> <span class="fn">hello_world</span>():</code></div>
+          <div class="cl" data-x="ret"><span class="ln">7</span><code>    <span class="kw">return</span> <span class="st">'Hello, World!'</span></code></div>
+          <div class="cl" data-x="main"><span class="ln">9</span><code><span class="kw">if</span> __name__ == <span class="st">'__main__'</span>:</code></div>
+          <div class="cl" data-x="run"><span class="ln">10</span><code>    app.<span class="fn">run</span>(debug=<span class="hi">True</span>)</code></div>
+        </div>
+        <div>
+          <aside class="xplain" id="xplain">
+            <h3>Baris <span id="xlno">1</span> · <span class="thecode" id="xlcode">from flask import Flask</span></h3>
+            <p id="xbody">Ambil class <b>Flask</b> dari package yang barusan lo pasang. Ini gerbangnya — tanpa baris ini, sisanya cuma teks.</p>
+          </aside>
+          <figure class="shotcard" style="margin-top:12px;max-width:82%">
+            <div class="imgwrap"><img src="img/step-07-app-py.png" alt="Tampilan VS Code dengan file app.py berisi kode Flask hello world" width="1517" height="629" loading="lazy"></div>
+            <span class="zoomtag"><i data-lucide="zoom-in"></i></span>
+            <figcaption class="shotcap">
+              <span class="stepchip c-amber">step 07</span>
+              <span><span class="shottitle">Tulis app.py di VS Code</span><span class="shotnote">satu file di dalam folder proyek</span></span>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 16 · P4: RUN -->
+  <section class="slide" data-sec="Praktik · Part 4" id="s16">
+    <div class="content">
+      <span class="kick"><span class="kd"></span>Praktikum · Part 4 — nyalakan</span>
+      <h2>Jalankan: python app.py</h2>
+      <div class="slide-body cols c2">
+        <div class="term">
+          <div class="termbar"><span class="tdot r"></span><span class="tdot y"></span><span class="tdot g"></span><span class="termtitle">(prakpemweb) — jalankan</span></div>
+          <div class="termbody" id="t15"></div>
+          <div class="termfoot"><button class="minibtn" data-replay="t15"><i data-lucide="rotate-ccw"></i>ulangi</button></div>
+        </div>
+        <figure class="shotcard">
+          <div class="imgwrap"><img src="img/step-08-run.png" alt="Terminal menjalankan python app.py dengan output Serving Flask app, Debug mode on, dan Debugger is active" width="1291" height="629" loading="lazy"></div>
+          <span class="zoomtag"><i data-lucide="zoom-in"></i></span>
+          <figcaption class="shotcap">
+            <span class="stepchip c-violet">step 08</span>
+            <span><span class="shottitle">Server nyala di terminal</span><span class="shotnote">debug mode on, debugger aktif, port 5000</span></span>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 17 · P4: BROWSER -->
+  <section class="slide" data-sec="Praktik · Part 4" id="s17">
+    <div class="content">
+      <span class="kick"><span class="kd"></span>Praktikum · Part 4 — buka di browser</span>
+      <h2>127.0.0.1:5000 — ketuk pintunya</h2>
+      <div class="slide-body cols c2">
+        <div>
+          <p class="sub" style="margin-bottom:16px"><b>127.0.0.1</b> itu localhost — komputer lo sendiri. Flask nyala di port <b>5000</b>, jadi URL-nya <b>127.0.0.1:5000</b>. Ketik di browser, dan:</p>
+          <div class="browser" id="mockbrowser">
+            <div class="btab"><span class="burl"><i data-lucide="lock"></i>127.0.0.1:5000</span><span>prakpemweb</span></div>
+            <div class="bbody">
+              <div>
+                <div class="hw">Hello, World!</div>
+                <div class="bstate" id="bstate">menunggu server&#8230;</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <figure class="shotcard">
+          <div class="imgwrap"><img src="img/step-09-browser.png" alt="Browser menampilkan halaman Hello, World di alamat 127.0.0.1:5000" width="599" height="285" loading="lazy"></div>
+          <span class="zoomtag"><i data-lucide="zoom-in"></i></span>
+          <figcaption class="shotcap">
+            <span class="stepchip c-violet">step 09</span>
+            <span><span class="shottitle">Hello, World! di browser</span><span class="shotnote">moment pertama lo jadi web developer</span></span>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 18 · DEBUG MODE -->
+  <section class="slide" data-sec="Praktik · Part 4" id="s18">
+    <div class="content">
+      <span class="kick"><span class="kd"></span>Praktikum · Part 4 — satu parameter penting</span>
+      <h2>debug=True itu ngapain sih</h2>
+      <p class="sub">Satu kata di baris terakhir yang ngubah pengalaman ngoding lo selagi development.</p>
+      <div class="slide-body cols c3">
+        <div class="pcard">
+          <div class="ic"><i data-lucide="refresh-cw"></i></div>
+          <h3>Auto-reload</h3>
+          <p>Kode berubah, server restart sendiri. Nggak perlu Ctrl+C lalu jalanin ulang tiap koma.</p>
+          <span class="tag">hemat hidup</span>
+        </div>
+        <div class="pcard">
+          <div class="ic"><i data-lucide="bug"></i></div>
+          <h3>Debugger aktif</h3>
+          <p>Error muncul langsung di browser lengkap dengan jejaknya — bukan cuma angka 500 misterius.</p>
+          <span class="tag">temukan bug</span>
+        </div>
+        <div class="pcard">
+          <div class="ic"><i data-lucide="alert-triangle"></i></div>
+          <h3>Cuma buat development</h3>
+          <p>Terminal lo sendiri ngingetin: jangan dipakai di production. Gunakan server WSGI saat online.</p>
+          <span class="tag">jangan production</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 19 · TUGAS -->
+  <section class="slide" data-sec="Tugas" id="s19">
+    <div class="content">
+      <span class="kick"><span class="kd"></span>Tugas praktikum — 30 menit</span>
+      <h2>Sekarang giliran lo</h2>
+      <div class="slide-body tugas">
+        <div>
+          <div class="checks" id="checks">
+            <button class="chk" data-i="0">
+              <span class="box"><i data-lucide="check"></i></span>
+              <span><h4>Route /about</h4><p>Halaman "About Me" — tampilkan <code>Nama</code> dan <code>NIM</code> lo</p></span>
+            </button>
+            <button class="chk" data-i="1">
+              <span class="box"><i data-lucide="check"></i></span>
+              <span><h4>Route /profile</h4><p>Halaman profile singkat versi lo sendiri</p></span>
+            </button>
+            <button class="chk" data-i="2">
+              <span class="box"><i data-lucide="check"></i></span>
+              <span><h4>Debug mode nyala</h4><p>Aplikasi otomatis reload saat kode berubah</p></span>
+            </button>
+          </div>
+          <p class="chprogress" id="chprog">0/3 selesai</p>
+        </div>
+        <div class="timerbox">
+          <span class="tlab">SISA WAKTU</span>
+          <div class="tdigits" id="tdigits">30:00</div>
+          <div class="tctrl">
+            <button class="tbtn go" id="tstart"><i data-lucide="play"></i>Mulai</button>
+            <button class="tbtn" id="treset"><i data-lucide="rotate-ccw"></i>Reset</button>
+          </div>
+          <p class="tnote">deadline: sebelum pertemuan berikutnya</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 20 · KETENTUAN -->
+  <section class="slide" data-sec="Tugas" id="s20">
+    <div class="content">
+      <span class="kick"><span class="kd"></span>Aturan main</span>
+      <h2>Ketentuan &amp; pengumpulan</h2>
+      <div class="slide-body cols c2">
+        <div class="spec">
+          <div class="sic"><i data-lucide="list-checks"></i></div>
+          <h3>Ketentuan kode</h3>
+          <ul>
+            <li>Kode <b>rapi dan terstruktur</b> — kebiasaan baik dimulai dari app pertama</li>
+            <li>Setiap route punya <b>fungsinya sendiri</b> yang sesuai</li>
+            <li>Ekspor file dalam format <code>.py</code> + screenshot hasil di browser</li>
+          </ul>
+        </div>
+        <div class="spec warm">
+          <div class="sic"><i data-lucide="upload"></i></div>
+          <h3>Pengumpulan</h3>
+          <ul>
+            <li>Upload file <b>.py dan screenshot</b> ke LMS</li>
+            <li>Deadline: <b>sebelum pertemuan berikutnya</b></li>
+            <li>Uji dulu semua route di browser sebelum upload — yang dinilai: <b>yang jalan</b></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 21 · QUIZ -->
+  <section class="slide" data-sec="Penutup" id="s21">
+    <div class="content">
+      <span class="kick"><span class="kd"></span>Cek pemahaman</span>
+      <h2>Kuis kilat — lima soal</h2>
+      <div class="slide-body">
+        <div class="quizbox" id="quizbox">
+          <div class="qmeta">
+            <span class="qno" id="qno">Soal 1/5</span>
+            <div class="qdots" id="qdots"></div>
+          </div>
+          <div class="qq" id="qq"></div>
+          <div class="qopts" id="qopts"></div>
+          <div class="qfoot" id="qfoot"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 22 · RECAP -->
+  <section class="slide" data-sec="Penutup" id="s22">
+    <div class="content" style="max-width:840px">
+      <span class="kick"><span class="kd"></span>Recap — pertemuan 01 selesai</span>
+      <h2>Hari ini, dari nol, lo sudah</h2>
+      <div class="recaplist">
+        <div class="rc"><span class="rcic"><i data-lucide="check"></i></span><p>Memahami percakapan <code>client &#8596; server</code> dan empat method HTTP</p></div>
+        <div class="rc"><span class="rcic"><i data-lucide="check"></i></span><p>Membikin <code>virtual environment</code> yang rapi dan pasang Flask di dalamnya</p></div>
+        <div class="rc"><span class="rcic"><i data-lucide="check"></i></span><p>Menjalankan <code>app.py</code> — web app pertama lo, live di <code>127.0.0.1:5000</code></p></div>
+      </div>
+      <p class="typeline"><span class="pr">$</span> <span id="logoutCmd"></span><span class="cur"></span></p>
+      <p class="t-sub" style="margin-top:14px">Tugasnya jangan lupa: <b class="bignum">/about</b> dan <b class="bignum">/profile</b>, upload ke LMS sebelum pertemuan berikutnya. Sampai ketemu di P02.</p>
+    </div>
+  </section>
+
+</main>
+
+<div class="dock">
+  <button class="navbtn" id="btnPrev" aria-label="Slide sebelumnya"><i data-lucide="chevron-left"></i></button>
+  <div class="count"><span id="cur">1</span> / <span id="tot">22</span><span class="seclabel" id="seclabel">Pembuka</span></div>
+  <button class="navbtn" id="btnNext" aria-label="Slide berikutnya"><i data-lucide="chevron-right"></i></button>
+</div>
+
+<div class="lb" id="lightbox" aria-hidden="true">
+  <div class="lbpanel">
+    <div class="lbimgwrap"><img id="lbimg" src="" alt=""></div>
+    <div class="lbcap">
+      <span class="stepchip c-blue" id="lbchip">step</span>
+      <span><span class="shottitle" id="lbtitle"></span><span class="shotnote" id="lbnote" style="display:block"></span></span>
+      <button class="lbclose" id="lbclose" aria-label="Tutup"><i data-lucide="x"></i></button>
+    </div>
+  </div>
+</div>
+
+<script>
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+
+/* ===================== NAVIGASI ===================== */
+const slides = $$('.slide');
+const total = slides.length;
+let idx = 0;
+$('#tot').textContent = total;
+
+const HOOKS = {
+  s1(){ typeInto($('#titleCmd'), 'python app.py'); },
+  s22(){ typeInto($('#logoutCmd'), 'exit'); },
+  s4(){ $$('#rubric .rfill').forEach(f => f.style.width = (f.dataset.w / 35 * 100) + '%'); },
+  s9(){ runTerm('t9'); },
+  s11(){ runTerm('t10'); },
+  s12(){ runTerm('t11'); },
+  s13(){ runTerm('t12'); },
+  s14(){ runTerm('t13'); },
+  s15(){ if(!codeInit){ codeInit = true; selectLine($$('#s15 .cl')[0]); } },
+  s16(){ runTerm('t15'); },
+  s17(){ if(!brInit){ brInit = true; showBrowser(); } },
+  s21(){ if(!quizInit){ quizInit = true; renderQ(); } }
+};
+
+function show(n){
+  idx = Math.max(0, Math.min(total - 1, n));
+  slides.forEach((s, i) => s.classList.toggle('on', i === idx));
+  $('#cur').textContent = idx + 1;
+  $('#seclabel').textContent = slides[idx].dataset.sec || '';
+  $('#pbar') && ($('#pbar').style.width = ((idx + 1) / total * 100) + '%');
+  if(!slides[idx].dataset.seen){
+    slides[idx].dataset.seen = 1;
+    const h = HOOKS[slides[idx].id];
+    if(h) h();
+  }
+}
+const next = () => show(idx + 1);
+const prev = () => show(idx - 1);
+$('#btnNext').onclick = next;
+$('#btnPrev').onclick = prev;
+document.addEventListener('keydown', e => {
+  if($('#lightbox').classList.contains('on')){
+    if(e.key === 'Escape') closeLB();
+    return;
+  }
+  if(['ArrowRight',' ','PageDown'].includes(e.key)){ e.preventDefault(); next(); }
+  if(['ArrowLeft','PageUp'].includes(e.key)){ e.preventDefault(); prev(); }
+  if(e.key === 'Home') show(0);
+  if(e.key === 'End') show(total - 1);
+  if(e.key === 'f' || e.key === 'F') toggleFS();
+});
+function toggleFS(){
+  if(document.fullscreenElement) document.exitFullscreen();
+  else document.documentElement.requestFullscreen().catch(()=>{});
+}
+$('#fsbtn').onclick = toggleFS;
+setTimeout(() => $('#hintchip').classList.add('gone'), 7000);
+
+/* ===================== TYPEWRITER ===================== */
+function typeInto(el, text){
+  if(RM){ el.textContent = text; return; }
+  el.textContent = '';
+  let j = 0;
+  (function t(){
+    if(j < text.length){ el.textContent += text[j++]; setTimeout(t, 60); }
+  })();
+}
+
+/* ===================== TERMINAL ===================== */
+const T = {};
+let t11os = 'nix';
+T.t9 = [
+  {c:'cmd', t:'python --version'},
+  {c:'ok',  t:'Python 3.12.3'},
+  {c:'',    t:'# versi 3.10 ke atas = siap praktikum'}
+];
+T.t10 = [
+  {c:'cmd', t:'python -m venv .venv'},
+  {c:'',    t:'# tanpa output — dan itu tanda sukses'},
+  {c:'ok',  t:'.venv/ berhasil dibikin'}
+];
+T.t11nix = [
+  {c:'cmd', t:'source .venv/bin/activate'},
+  {c:'ok',  t:'(prakpemweb) web-perkuliahan $'}
+];
+T.t11win = [
+  {c:'cmd', t:'.venv\\Scripts\\activate'},
+  {c:'ok',  t:'(prakpemweb) C:\\web-perkuliahan>'}
+];
+T.t12 = [
+  {c:'cmd', t:'pip install flask'},
+  {c:'hi',  t:'Collecting flask'},
+  {c:'',    t:'Collecting blinker, click, itsdangerous,'},
+  {c:'',    t:'  jinja2, markupsafe, werkzeug (from flask)'},
+  {c:'',    t:'Downloading flask-3.1.3 (103 kB)'},
+  {c:'',    t:'Installing collected packages ...'},
+  {c:'ok',  t:'Successfully installed blinker-1.9.3'},
+  {c:'ok',  t:'  click-8.5.0 flask-3.1.3 itsdangerous-2.2.0'},
+  {c:'ok',  t:'  jinja2-3.1.6 markupsafe-3.0.3 werkzeug-3.1.8'}
+];
+T.t13 = [
+  {c:'cmd', t:'pip show flask'},
+  {c:'',    t:'Name: flask'},
+  {c:'hi',  t:'Version: 3.1.3'},
+  {c:'',    t:'Summary: A simple framework for'},
+  {c:'',    t:'  building complex web applications.'},
+  {c:'',    t:'Location: .venv/lib/python3.12/site-packages'},
+  {c:'',    t:'Requires: blinker, click, itsdangerous,'},
+  {c:'',    t:'  jinja2, markupsafe, werkzeug'}
+];
+T.t15 = [
+  {c:'cmd', t:'python app.py'},
+  {c:'',    t:" * Serving Flask app 'app'"},
+  {c:'ok',  t:' * Debug mode: on'},
+  {c:'ok',  t:' * Running on http://127.0.0.1:5000'},
+  {c:'',    t:' * Restarting with stat'},
+  {c:'ok',  t:' * Debugger is active!'}
+];
+
+function runTerm(id, onDone){
+  const el = document.getElementById(id);
+  const script = (id === 't11') ? (t11os === 'nix' ? T.t11nix : T.t11win) : T[id];
+  if(!el || !script) return;
+  el.innerHTML = '';
+  if(RM){
+    script.forEach(st => {
+      const d = document.createElement('div');
+      d.className = 'ln ' + (st.c || '');
+      if(st.c === 'cmd'){
+        d.innerHTML = '<span class="pr">$ </span><span class="cmd"></span>';
+        d.querySelector('.cmd').textContent = st.t;
+      } else d.textContent = st.t;
+      el.appendChild(d);
+    });
+    if(onDone) onDone();
+    return;
+  }
+  let i = 0;
+  (function nextLine(){
+    if(i >= script.length){ if(onDone) onDone(); return; }
+    const st = script[i++];
+    if(st.c === 'cmd'){
+      const line = document.createElement('div');
+      line.className = 'ln';
+      const pr = document.createElement('span'); pr.className = 'pr'; pr.textContent = '$ ';
+      const cm = document.createElement('span'); cm.className = 'cmd';
+      const cur = document.createElement('span'); cur.className = 'cur';
+      line.append(pr, cm, cur);
+      el.appendChild(line);
+      let j = 0;
+      (function ch(){
+        if(j < st.t.length){ cm.textContent += st.t[j++]; setTimeout(ch, 42); }
+        else { cur.remove(); setTimeout(nextLine, 150); }
+      })();
+    } else {
+      const line = document.createElement('div');
+      line.className = 'ln ' + (st.c || '');
+      line.textContent = st.t;
+      el.appendChild(line);
+      setTimeout(nextLine, 110);
+    }
+  })();
+}
+$$('[data-replay]').forEach(b => b.onclick = () => runTerm(b.dataset.replay));
+
+/* ===================== OS TABS ===================== */
+$$('#ostabs .ostab').forEach(t => t.onclick = () => {
+  $$('#ostabs .ostab').forEach(x => x.classList.remove('on'));
+  t.classList.add('on');
+  t11os = t.dataset.os;
+  runTerm('t11');
+});
+
+/* ===================== HTTP SIM ===================== */
+const HTTP = {
+  get: { cap: 'Contoh nyatanya: tiap lo buka halaman Instagram, browser ngirim <b>GET</b> ratusan kali.',
+    lines: [
+      '<span class="m get">GET</span> /halaman HTTP/1.1',
+      '<span class="arrow">&#8594;</span> server: nyari halamannya',
+      '<span class="arrow">&#8592;</span> <span class="st">200 OK</span> — halaman dikirim ke browser'
+    ]},
+  post: { cap: 'Submit formulir pendaftaran? Itu <b>POST</b> — ngirim data baru ke server.',
+    lines: [
+      '<span class="m post">POST</span> /daftar HTTP/1.1',
+      '<span class="arrow">&#8594;</span> server: terima data (nama, email)',
+      '<span class="arrow">&#8592;</span> <span class="st">201 Created</span> — akun baru tersimpan'
+    ]},
+  put: { cap: 'Edit profil di media sosial — perubahan lo dikirim lewat <b>PUT</b>.',
+    lines: [
+      '<span class="m put">PUT</span> /profil/123 HTTP/1.1',
+      '<span class="arrow">&#8594;</span> server: update data profil #123',
+      '<span class="arrow">&#8592;</span> <span class="st">200 OK</span> — profil ter-update'
+    ]},
+  del: { cap: 'Hapus postingan — browser ngirim <b>DELETE</b>, data dihapus di server.',
+    lines: [
+      '<span class="m del">DELETE</span> /post/456 HTTP/1.1',
+      '<span class="arrow">&#8594;</span> server: hapus post #456',
+      '<span class="arrow">&#8592;</span> <span class="st">204 No Content</span> — post hilang'
+    ]}
+};
+$$('.pad').forEach(p => p.onclick = () => {
+  const m = HTTP[p.dataset.m];
+  $$('.pad').forEach(x => x.classList.remove('hot'));
+  p.classList.add('hot');
+  const log = $('#httplog');
+  log.innerHTML = '';
+  m.lines.forEach((l, i) => setTimeout(() => {
+    const d = document.createElement('div');
+    d.innerHTML = l;
+    log.appendChild(d);
+  }, RM ? 0 : i * 260));
+  $('#httpcap').innerHTML = m.cap;
+});
+
+/* ===================== CLIENT-SERVER SIM ===================== */
+let csBusy = false, trips = 0;
+$('#csbtn').onclick = () => {
+  if(csBusy) return;
+  csBusy = true; trips++;
+  const wire = $('#s5 .wirezone'), pk = $('#packet'), stat = $('#csstat');
+  pk.textContent = 'request /';
+  pk.classList.remove('back');
+  pk.classList.add('show');
+  pk.style.left = '0px';
+  stat.textContent = 'request berangkat ke server\u2026';
+  setTimeout(() => {
+    pk.style.left = (wire.clientWidth - pk.offsetWidth) + 'px';
+  }, 30);
+  setTimeout(() => { stat.textContent = 'server mikir sebentar\u2026'; }, 1000);
+  setTimeout(() => {
+    pk.textContent = '200 OK';
+    pk.classList.add('back');
+    pk.style.left = '0px';
+    stat.textContent = 'response pulang ke client — halamannya ikut';
+  }, 1600);
+  setTimeout(() => {
+    pk.classList.remove('show');
+    csBusy = false;
+    stat.textContent = 'perjalanan ke-' + trips + ' selesai — kapan pun lo mau lagi';
+  }, 2600);
+};
+
+/* ===================== RUBRIK ===================== */
+$$('#rubric .rrow').forEach(r => r.onclick = () => {
+  const open = r.classList.contains('open');
+  $$('#rubric .rrow').forEach(x => x.classList.remove('open'));
+  if(!open) r.classList.add('open');
+});
+
+/* ===================== CODE EXPLORER ===================== */
+let codeInit = false;
+const EXPL = {
+  import: { n:'1', c:'from flask import Flask', b:'Ambil class <b>Flask</b> dari package yang barusan lo pasang. Ini gerbangnya — tanpa baris ini, sisanya cuma teks.' },
+  app: { n:'3', c:'app = Flask(__name__)', b:'Bikin instance aplikasi Flask. <b>__name__</b> ngasih tau Flask nama modul ini — dia pakai itu buat nyari file template & static nanti.' },
+  route: { n:'5', c:"@app.route('/')", b:'<b>Decorator:</b> daftarin path <b>/</b> ke fungsi di bawahnya. Path <b>/</b> = halaman depan. Ini inti routing Flask.' },
+  def: { n:'6', c:'def hello_world():', b:'Fungsi yang dijalankan pas <b>/</b> dikunjungi. Nama fungsinya bebas — <b>hello_world</b> cuma kebiasaan.' },
+  ret: { n:'7', c:"return 'Hello, World!'", b:'Nilai yang dibalas ke browser. Teks ini yang muncul di layar — coba ganti, refresh, lihat berubah.' },
+  main: { n:'9', c:"if __name__ == '__main__':", b:'Server jalan cuma kalau file ini <b>dieksekusi langsung</b> — kalau di-import dari file lain, blok ini dilewati.' },
+  run: { n:'10', c:'app.run(debug=True)', b:'Nyalain server development bawaan Flask + <b>debug mode</b>: auto-reload & debugger aktif — lihat dua slide berikutnya.' }
+};
+function selectLine(cl){
+  $$('#s15 .cl').forEach(x => x.classList.remove('act'));
+  cl.classList.add('act');
+  const x = EXPL[cl.dataset.x];
+  if(!x) return;
+  $('#xlno').textContent = x.n;
+  $('#xlcode').textContent = x.c;
+  $('#xbody').innerHTML = x.b;
+}
+$$('#s15 .cl').forEach(cl => cl.onclick = () => selectLine(cl));
+
+/* ===================== BROWSER MOCK ===================== */
+let brInit = false;
+function showBrowser(){
+  $('#mockbrowser').classList.add('show');
+  $('#bstate').textContent = '200 OK — localhost merespon';
+}
+
+/* ===================== CHECKLIST + TIMER ===================== */
+$$('.chk').forEach(c => c.onclick = () => {
+  c.classList.toggle('done');
+  const n = $$('.chk.done').length;
+  $('#chprog').textContent = n + '/3 selesai' + (n === 3 ? ' — gas upload ke LMS' : '');
+});
+let tsec = 1800, trunning = false, tint = null;
+function tdraw(){
+  const m = String(Math.floor(tsec / 60)).padStart(2, '0');
+  const s = String(tsec % 60).padStart(2, '0');
+  const el = $('#tdigits');
+  el.textContent = m + ':' + s;
+  el.classList.toggle('run', trunning && tsec > 0);
+  el.classList.toggle('end', tsec === 0);
+  if(tsec === 0) $('.tnote').textContent = 'waktu habis — screenshot hasilnya, upload ke LMS';
+}
+$('#tstart').onclick = () => {
+  if(tsec === 0) return;
+  trunning = !trunning;
+  $('#tstart').innerHTML = trunning
+    ? '<i data-lucide="pause"></i>Jeda'
+    : '<i data-lucide="play"></i>Mulai';
+  lucide.createIcons();
+  if(trunning){
+    tint = setInterval(() => {
+      if(tsec > 0){ tsec--; tdraw(); }
+      if(tsec === 0){ trunning = false; clearInterval(tint); }
+    }, 1000);
+  } else clearInterval(tint);
+};
+$('#treset').onclick = () => {
+  clearInterval(tint);
+  trunning = false; tsec = 1800;
+  $('#tstart').innerHTML = '<i data-lucide="play"></i>Mulai';
+  $('.tnote').textContent = 'deadline: sebelum pertemuan berikutnya';
+  lucide.createIcons();
+  tdraw();
+};
+
+/* ===================== QUIZ ===================== */
+let quizInit = false;
+const QS = [
+  { q: 'Method HTTP yang dipakai buat MENGAMBIL data dari server?', o: ['GET', 'POST', 'PUT', 'DELETE'], a: 0 },
+  { q: 'Lo mau kirim data formulir pendaftaran ke server. Method yang tepat?', o: ['GET', 'POST', 'PUT', 'DELETE'], a: 1 },
+  { q: 'Perintah untuk bikin virtual environment baru bernama .venv?', o: ['pip install .venv', 'python venv --new', 'python -m venv .venv', 'source .venv'], a: 2 },
+  { q: 'Flask jalan di port berapa secara default?', o: ['80', '3000', '8080', '5000'], a: 3 },
+  { q: 'Template engine yang dipakai Flask?', o: ['Jinja2', 'Django', 'Tailwind', 'Laravel'], a: 0 }
+];
+let qi = 0, qscore = 0, qmarks = [];
+function renderQ(reset){
+  if(reset){ qi = 0; qscore = 0; qmarks = []; }
+  if(qi >= QS.length){ renderQEnd(); return; }
+  const q = QS[qi];
+  $('#qno').textContent = 'Soal ' + (qi + 1) + '/' + QS.length;
+  $('#qdots').innerHTML = QS.map((_, i) =>
+    '<i class="' + (i < qmarks.length ? (qmarks[i] ? 'ok' : 'bad') : i === qi ? 'cur' : '') + '"></i>'
+  ).join('');
+  $('#qq').textContent = q.q;
+  $('#qopts').innerHTML = q.o.map(o => '<button class="qopt">' + o + '</button>').join('');
+  $('#qfoot').innerHTML = '';
+  $$('#qopts .qopt').forEach((b, i) => b.onclick = () => {
+    if(qi >= QS.length) return;
+    const right = i === q.a;
+    if(right) qscore++;
+    qmarks.push(right);
+    $$('#qopts .qopt').forEach((x, j) => {
+      x.disabled = true;
+      if(j === q.a) x.classList.add('right');
+    });
+    if(!right) b.classList.add('wrong');
+    $('#qdots').innerHTML = QS.map((_, k) =>
+      '<i class="' + (k < qmarks.length ? (qmarks[k] ? 'ok' : 'bad') : k === qi ? 'cur' : '') + '"></i>'
+    ).join('');
+    $('#qfoot').innerHTML = '<button class="tbtn go" id="qnext">' + (qi === QS.length - 1 ? 'Lihat hasil' : 'Lanjut') + '</button>';
+    $('#qnext').onclick = () => { qi++; renderQ(); };
+  });
+}
+function renderQEnd(){
+  const col = qscore === 5 ? 'var(--green-t)' : qscore === 4 ? 'var(--blue-t)' : qscore === 3 ? 'var(--amber-t)' : 'var(--coral-t)';
+  const msg = qscore === 5 ? 'Sempurna — lo siap nyambung ke P02.'
+    : qscore === 4 ? 'Sikat — satu review kecil dan lo aman.'
+    : qscore === 3 ? 'Lumayan — coba buka lagi slide teorinya.'
+    : 'Buka lagi bagian teori dan praktiknya pelan-pelan, nggak apa-apa.';
+  $('#qno').textContent = 'Hasil';
+  $('#qdots').innerHTML = QS.map((_, i) => '<i class="' + (qmarks[i] ? 'ok' : 'bad') + '"></i>').join('');
+  $('#qq').innerHTML = '<span class="qscore" style="color:' + col + '">' + qscore + '/5</span>';
+  $('#qopts').innerHTML = '<p class="qmsg" style="grid-column:1/-1;margin:0">' + msg + '</p>';
+  $('#qfoot').innerHTML = '<button class="tbtn" id="qretry"><i data-lucide="rotate-ccw"></i>Ulangi kuis</button>';
+  $('#qretry').onclick = () => renderQ(true);
+  lucide.createIcons();
+}
+
+/* ===================== LIGHTBOX ===================== */
+function openLB(card){
+  const img = card.querySelector('img');
+  $('#lbimg').src = img.src;
+  $('#lbimg').alt = img.alt;
+  const chip = card.querySelector('.stepchip');
+  $('#lbchip').className = chip.className;
+  $('#lbchip').textContent = chip.textContent;
+  $('#lbtitle').textContent = card.querySelector('.shottitle').textContent;
+  $('#lbnote').textContent = card.querySelector('.shotnote').textContent;
+  $('#lightbox').classList.add('on');
+  $('#lightbox').setAttribute('aria-hidden', 'false');
+}
+function closeLB(){
+  $('#lightbox').classList.remove('on');
+  $('#lightbox').setAttribute('aria-hidden', 'true');
+}
+$$('.shotcard').forEach(c => c.onclick = () => openLB(c));
+$('#lbclose').onclick = e => { e.stopPropagation(); closeLB(); };
+$('#lightbox').onclick = e => { if(e.target.id === 'lightbox') closeLB(); };
+
+lucide.createIcons();
+tdraw();
+show(0);
+</script>
+</body>
+</html>

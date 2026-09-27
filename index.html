@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Praktikum Pemrograman Web — Deck Interaktif</title>
+<meta name="description" content="Deck presentasi interaktif untuk praktikum Pemrograman Web — Flask, HTTP, dan Python.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<style>
+:root{
+  --bg-body:#C9D8EE;
+  --ink:#1C2A3E;
+  --dim:#43566F;
+  --faint:#6F829B;
+  --glass-bd:rgba(255,255,255,.78);
+  --blur:blur(24px) saturate(180%);
+  --inner-light:inset 0 1px 0 rgba(255,255,255,.95),inset 0 -1px 0 rgba(255,255,255,.22);
+  --out-sh:0 16px 40px rgba(31,45,68,.16);
+  --out-sh-lg:0 26px 60px rgba(31,45,68,.22);
+  --green:#2BC46F;--green-t:#0B7A43;
+  --blue:#5CA9FF;--blue-t:#1D5FC9;
+  --amber:#FFC24D;--amber-t:#8F5E00;
+  --violet:#B79CFF;--violet-t:#6E4BD1;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+  --sans:'IBM Plex Sans',system-ui,sans-serif;
+  --disp:'Unbounded',var(--sans);
+  --spec-top:linear-gradient(180deg,rgba(255,255,255,.55),rgba(255,255,255,0) 36%);
+  --grad-glass:linear-gradient(160deg,rgba(255,255,255,.82) 0%,rgba(255,255,255,.44) 100%);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  min-height:100vh;
+  background:#E4EDFB;
+  color:var(--ink);
+  font-family:var(--sans);
+  display:grid;
+  place-items:center;
+  overflow-x:hidden;
+}
+.blobs{position:fixed;inset:-26%;z-index:0;pointer-events:none}
+.blobs::before,.blobs::after{content:"";position:absolute;inset:0;filter:blur(46px)}
+.blobs::before{
+  background:
+    radial-gradient(36% 44% at 18% 22%,rgba(92,169,255,.62) 0%,transparent 70%),
+    radial-gradient(32% 40% at 82% 16%,rgba(183,156,255,.58) 0%,transparent 70%),
+    radial-gradient(34% 42% at 68% 76%,rgba(255,143,191,.5) 0%,transparent 72%);
+  animation:blobA 34s ease-in-out infinite alternate;
+}
+.blobs::after{
+  background:
+    radial-gradient(38% 46% at 24% 78%,rgba(62,224,140,.5) 0%,transparent 72%),
+    radial-gradient(30% 38% at 84% 72%,rgba(255,194,77,.52) 0%,transparent 70%),
+    radial-gradient(26% 34% at 52% 40%,rgba(255,98,87,.34) 0%,transparent 72%);
+  animation:blobB 46s ease-in-out infinite alternate-reverse;
+}
+@keyframes blobA{
+  from{transform:translate(-2.5%,-2%) scale(1) rotate(0deg)}
+  to{transform:translate(2.5%,2.5%) scale(1.07) rotate(4deg)}
+}
+@keyframes blobB{
+  from{transform:translate(2%,1.5%) scale(1.05) rotate(2deg)}
+  to{transform:translate(-2%,-2%) scale(1) rotate(-3deg)}
+}
+.wrap{position:relative;z-index:1;width:100%;max-width:820px;padding:56px 24px}
+.kick{
+  display:inline-flex;align-items:center;gap:8px;
+  font:600 12.5px/1 var(--sans);color:var(--dim);
+  background:var(--spec-top),var(--grad-glass);
+  backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
+  border:1px solid var(--glass-bd);border-radius:999px;padding:7px 14px;margin-bottom:22px;
+  box-shadow:var(--out-sh),var(--inner-light);
+}
+.kick .kd{width:7px;height:7px;border-radius:2px;background:var(--green);box-shadow:0 0 9px rgba(43,196,111,.8)}
+h1{
+  font:700 clamp(30px,5.4vw,54px)/1.06 var(--disp);
+  letter-spacing:-.015em;margin-bottom:14px;
+}
+.sub{color:var(--dim);font-size:clamp(14px,1.6vw,17px);max-width:56ch;margin-bottom:36px}
+.sub code{font:500 .9em var(--mono);color:var(--green-t)}
+.list{display:grid;gap:14px}
+a.meet{
+  display:grid;grid-template-columns:54px 1fr auto;gap:16px;align-items:center;
+  background:var(--spec-top),var(--grad-glass);
+  backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
+  border:1px solid var(--glass-bd);border-radius:22px;
+  padding:20px 24px;text-decoration:none;color:var(--ink);
+  box-shadow:var(--out-sh),var(--inner-light);
+  transition:transform .22s,box-shadow .22s;
+  position:relative;overflow:hidden;
+}
+a.meet::before{
+  content:"";position:absolute;inset:-40% -75%;pointer-events:none;
+  background:linear-gradient(105deg,transparent 44%,rgba(255,255,255,.55) 50%,transparent 56%);
+  transform:translateX(-75%) skewX(-8deg);
+  transition:transform .85s cubic-bezier(.2,.7,.3,1);
+}
+a.meet:hover{transform:translateY(-4px);box-shadow:var(--out-sh-lg),var(--inner-light)}
+a.meet:hover::before{transform:translateX(75%) skewX(-8deg)}
+.meet .no{
+  font:700 18px/1 var(--mono);color:#fff;
+  width:48px;height:48px;border-radius:14px;display:grid;place-items:center;
+  border:1px solid rgba(255,255,255,.6);
+}
+.meet.p01 .no{
+  background:radial-gradient(circle at 32% 26%,rgba(255,255,255,.55),var(--green-t) 62%);
+  box-shadow:0 8px 20px rgba(11,122,67,.35);
+}
+.meet h2{font:600 18px/1.25 var(--sans);color:var(--ink)}
+.meet p{color:var(--dim);font-size:13.5px;margin-top:4px}
+.go{
+  display:inline-flex;align-items:center;gap:7px;
+  font:600 12px/1 var(--mono);color:var(--green-t);
+  border:1.5px solid rgba(43,196,111,.9);border-radius:999px;padding:8px 14px;
+  background:rgba(62,224,140,.16);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.95);
+  white-space:nowrap;
+}
+.meet.soon{
+  grid-template-columns:54px 1fr;
+  background:var(--spec-top),var(--grad-glass);
+  opacity:.72;cursor:default;
+}
+.meet.soon .no{
+  background:radial-gradient(circle at 32% 26%,rgba(255,255,255,.9),rgba(111,130,155,.55) 62%);
+  color:var(--dim);box-shadow:none;
+}
+.meet.soon .tag{
+  font:600 11px/1 var(--mono);color:var(--faint);
+  border:1px dashed rgba(111,130,155,.6);border-radius:999px;padding:6px 11px;white-space:nowrap;
+}
+.foot{margin-top:40px;font:400 12.5px/1 var(--sans);color:var(--faint)}
+:focus-visible{outline:2.5px solid var(--blue-t);outline-offset:3px;border-radius:10px}
+@media (max-width:600px){
+  .wrap{padding:36px 18px}
+  a.meet{grid-template-columns:44px 1fr}
+  .meet .go,.meet.soon .tag{grid-column:2;justify-self:start;margin-top:2px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001s!important;transition-duration:.001s!important}
+  .blobs::before,.blobs::after{animation:none!important}
+}
+</style>
+</head>
+<body>
+<div class="blobs" aria-hidden="true"></div>
+<main class="wrap">
+  <span class="kick"><span class="kd"></span>Asisten Praktikum · Pemrograman Web</span>
+  <h1>Deck interaktif praktikum</h1>
+  <p class="sub">Materi praktikum Pemrograman Web dalam bentuk deck yang bisa diklik, diketik, dan dijalankan — bukan slide biasa. Navigasi: panah <code>&#8592; &#8592;</code>, fullscreen <code>F</code>.</p>
+  <div class="list">
+    <a class="meet p01" href="/P01/">
+      <span class="no">01</span>
+      <span>
+        <h2>Pengenalan Pemrograman Web &amp; Python</h2>
+        <p>Client-server, HTTP, venv, Flask — sampai app pertama nyala di <b>127.0.0.1:5000</b></p>
+      </span>
+      <span class="go"><i data-lucide="play"></i>buka deck</span>
+    </a>
+    <div class="meet soon">
+      <span class="no">02</span>
+      <span>
+        <h2>Pertemuan 02</h2>
+        <p>Menyusul — nambah otomatis di halaman ini tiap pertemuan baru di-push</p>
+      </span>
+      <span class="tag">segera</span>
+    </div>
+  </div>
+  <p class="foot">Dibuat sebagai pendamping modul praktikum · Materi: tim praktikum · 2026</p>
+</main>
+<script>lucide.createIcons();</script>
+</body>
+</html>
