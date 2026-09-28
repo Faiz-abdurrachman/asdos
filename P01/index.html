@@ -2,7 +2,10 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>P01 · Pengenalan Pemrograman Web & Python — Deck Interaktif</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -52,6 +55,8 @@ body{
   position:relative;
   width:min(100vw,calc(100vh * 16 / 9));
   height:min(100vh,calc(100vw * 9 / 16));
+  width:min(100vw,calc(100dvh * 16 / 9));
+  height:min(100dvh,calc(100vw * 9 / 16));
   overflow:hidden;
   background:#E4EDFB;
 }
@@ -84,8 +89,8 @@ body{
   background-image:radial-gradient(rgba(31,45,68,.05) 1px,transparent 1px);
   background-size:26px 26px;
 }
-@media (max-aspect-ratio:16/10){
-  .stage{width:100vw;height:100vh}
+@media (max-aspect-ratio:16/10),(max-height:560px){
+  .stage{width:100vw;height:100vh;height:100dvh}
 }
 
 /* ===== CHROME ===== */
@@ -119,7 +124,7 @@ body{
 .fsbtn:active{transform:scale(.95)}
 .fsbtn svg{width:16px;height:16px}
 .dock{
-  position:absolute;bottom:16px;left:50%;transform:translateX(-50%);
+  position:absolute;bottom:calc(16px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);
   z-index:50;display:flex;align-items:center;gap:10px;
   background:var(--spec-top),var(--grad-glass);
   backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
@@ -912,7 +917,7 @@ h2{
   .qopts{grid-template-columns:1fr}
   .qq{font-size:17px;min-height:2em}
   .termbody{min-height:0;max-height:175px;font-size:11.5px}
-  .dock{padding:6px 8px;bottom:12px}
+  .dock{padding:6px 8px;bottom:calc(12px + env(safe-area-inset-bottom))}
   .count .seclabel{font-size:10px}
   .xplain{padding:12px 14px;min-height:0}
   .xplain h3{font-size:12px;margin-bottom:8px}
@@ -927,6 +932,36 @@ h2{
   .codex .shotcard img{height:120px}
   .codex .shotcard{max-width:100%}
 }
+@media (min-width:601px) and (max-height:560px){
+  .cols.c2{grid-template-columns:1fr 1fr}
+  .cols.c2-1{grid-template-columns:1.35fr 1fr}
+  .cols.c1-2{grid-template-columns:1fr 1.35fr}
+  .cols.c3{grid-template-columns:repeat(3,1fr)}
+  .cols.c4{grid-template-columns:repeat(4,1fr)}
+  .slide{padding:12px 20px 62px}
+  h2{font-size:clamp(17px,2.7vw,24px);margin-bottom:6px}
+  .h1{font-size:clamp(23px,4.6vw,40px);margin:8px 0 14px}
+  .sub{font-size:12px}
+  .kick{margin-bottom:8px;padding:5px 10px;font-size:10.5px}
+  .slide-body{margin-top:10px}
+  .shotcard .imgwrap{max-height:130px}
+  .shotcard img{height:130px}
+  .codex .shotcard img{height:96px}
+  .termbody{max-height:120px;font-size:11px}
+  .dock{padding:5px 8px}
+}
+@media (max-width:360px){
+  .slide{padding:16px 13px 74px}
+  h2{font-size:clamp(16px,5.4vw,21px)}
+  .h1{font-size:clamp(30px,10vw,44px)}
+  .sub{font-size:12px}
+  .termbody{font-size:10.5px}
+}
+@media (max-width:900px),(max-height:560px){
+  .slide{overflow-y:auto;-webkit-overflow-scrolling:touch;align-items:flex-start}
+  .content{margin-block:auto}
+}
+.fsmode .hintchip,.fsmode .corner{display:none}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.001s!important;transition-duration:.001s!important}
   .blobs::before,.blobs::after,.sticker{animation:none!important}
@@ -951,7 +986,7 @@ h2{
     page-break-after:always;break-after:page;
   }
   .slide:last-child{page-break-after:auto;break-after:auto}
-  .content{max-width:100%!important}
+  .content{max-width:100%!important;zoom:1!important}
   .termbody,.codepane{max-height:none!important;overflow:visible!important}
   .quizbox{display:none!important}
   .printquiz{display:block}
@@ -1663,6 +1698,22 @@ const HOOKS = {
   s22(){ if(!quizInit){ quizInit = true; renderQ(); } }
 };
 
+let fitTimer;
+function fitActive(){
+  const s = document.querySelector('.slide.on');
+  if(!s) return;
+  const c = s.querySelector('.content');
+  if(!c) return;
+  c.style.zoom = '';
+  const cs = getComputedStyle(s);
+  const availH = s.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
+  const availW = s.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+  const r = c.getBoundingClientRect();
+  if(!r.height || !r.width) return;
+  const z = Math.min(1, (availH - 2) / r.height, (availW - 2) / r.width);
+  if(!isFinite(z) || z >= 0.999) return;
+  c.style.zoom = Math.max(0.5, Math.round(z * 1000) / 1000);
+}
 function show(n){
   idx = Math.max(0, Math.min(total - 1, n));
   slides.forEach((s, i) => s.classList.toggle('on', i === idx));
@@ -1674,7 +1725,12 @@ function show(n){
     const h = HOOKS[slides[idx].id];
     if(h) h();
   }
+  fitActive();
+  clearTimeout(fitTimer);
+  fitTimer = setTimeout(fitActive, 1800);
 }
+addEventListener('resize', () => { fitActive(); clearTimeout(fitTimer); fitTimer = setTimeout(fitActive, 300); });
+addEventListener('orientationchange', () => { clearTimeout(fitTimer); fitTimer = setTimeout(fitActive, 400); });
 const next = () => show(idx + 1);
 const prev = () => show(idx - 1);
 $('#btnNext').onclick = next;
@@ -1691,8 +1747,14 @@ document.addEventListener('keydown', e => {
   if(e.key === 'f' || e.key === 'F') toggleFS();
 });
 function toggleFS(){
-  if(document.fullscreenElement) document.exitFullscreen();
-  else document.documentElement.requestFullscreen().catch(()=>{});
+  const el = document.documentElement;
+  if(document.fullscreenElement || document.webkitFullscreenElement){
+    (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+    return;
+  }
+  const req = el.requestFullscreen || el.webkitRequestFullscreen;
+  if(!req){ document.body.classList.toggle('fsmode'); return; }
+  Promise.resolve(req.call(el)).catch(() => document.body.classList.toggle('fsmode'));
 }
 $('#fsbtn').onclick = toggleFS;
 setTimeout(() => $('#hintchip').classList.add('gone'), 7000);
