@@ -101,7 +101,7 @@ body{
   transition:width .35s cubic-bezier(.2,.7,.3,1);
 }
 .corner{
-  position:absolute;top:18px;left:24px;z-index:50;
+  position:absolute;top:calc(18px + env(safe-area-inset-top));left:24px;z-index:50;
   display:flex;align-items:center;gap:8px;
   font:600 12px/1 var(--sans);color:var(--dim);
   background:var(--spec-top),var(--grad-glass);
@@ -112,7 +112,7 @@ body{
 .corner .dotmark{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 10px rgba(43,196,111,.7)}
 .corner b{color:var(--ink);font-weight:600}
 .fsbtn{
-  position:absolute;top:14px;right:20px;z-index:50;
+  position:absolute;top:calc(14px + env(safe-area-inset-top));right:20px;z-index:50;
   width:38px;height:38px;border-radius:12px;
   border:1px solid var(--glass-bd);
   background:var(--spec-top),var(--grad-glass);
@@ -560,7 +560,7 @@ h2{
   border:1px solid var(--glass-bd);border-radius:var(--rad);
   padding:10px 10px 9px;cursor:zoom-in;text-align:left;
   box-shadow:var(--out-sh),var(--inner-light);
-  transition:transform .22s,box-shadow .22s;position:relative;
+  transition:transform .22s,box-shadow .22s;position:relative;align-self:start;
 }
 .shotcard:hover{transform:translateY(-4px);box-shadow:var(--out-sh-lg),var(--inner-light)}
 .shotcard .imgwrap{border-radius:13px;overflow:hidden;border:1px solid rgba(31,45,68,.16);background:#0B1017;box-shadow:inset 0 1px 3px rgba(31,45,68,.2)}
@@ -973,6 +973,22 @@ h2{
 
 /* ===== EXPORT PDF ===== */
 .fsbtn.pdfbtn{right:66px}
+.fstip{
+  position:absolute;left:50%;bottom:calc(88px + env(safe-area-inset-bottom));z-index:70;
+  transform:translateX(-50%) translateY(6px);max-width:min(88vw,420px);text-align:center;
+  font:500 12.5px/1.45 var(--sans);color:var(--dim);
+  background:var(--spec-top),var(--grad-glass);
+  backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
+  border:1px solid var(--glass-bd);border-radius:14px;padding:10px 14px;
+  box-shadow:var(--out-sh),var(--inner-light);
+  opacity:0;transition:opacity .25s,transform .25s;pointer-events:none;
+}
+.fstip.on{opacity:1;transform:translateX(-50%) translateY(0)}
+@media (pointer:coarse){
+  .fsbtn{width:44px;height:44px;right:18px}
+  .fsbtn svg{width:18px;height:18px}
+  .fsbtn.pdfbtn{right:70px}
+}
 .printquiz{display:none}
 @page{size:297mm 167mm;margin:0}
 
@@ -1006,9 +1022,9 @@ h2{
 <main class="stage" id="stage">
   <div class="blobs" aria-hidden="true"></div>
   <div class="bar" id="pbar"></div>
-  <div class="corner"><span class="dotmark"></span><span>Praktikum Pemrograman Web · <b>P01</b></span></div>
   <button class="fsbtn pdfbtn" id="pdfbtn" aria-label="Ekspor ke PDF"><i data-lucide="printer"></i></button>
   <button class="fsbtn" id="fsbtn" aria-label="Layar penuh"><i data-lucide="maximize-2"></i></button>
+  <div class="fstip" id="fstip" role="status" aria-live="polite"></div>
   <div class="hintchip" id="hintchip">panah &#8592; &#8594; pindah slide · klik screenshot untuk memperbesar · F layar penuh</div>
 
   <!-- 01 · TITLE -->
@@ -1749,6 +1765,15 @@ document.addEventListener('keydown', e => {
   if(e.key === 'End') show(total - 1);
   if(e.key === 'f' || e.key === 'F') toggleFS();
 });
+function fauxFS(){
+  document.body.classList.toggle('fsmode');
+  const t = $('#fstip');
+  if(!t) return;
+  t.textContent = 'Layar penuh nggak didukung browser ini. Di iPhone: ketuk ikon Bagikan, lalu “Tambahkan ke Home Screen”, dan buka deck dari situ.';
+  t.classList.add('on');
+  clearTimeout(window.__fstipT);
+  window.__fstipT = setTimeout(() => t.classList.remove('on'), 5000);
+}
 function toggleFS(){
   const el = document.documentElement;
   if(document.fullscreenElement || document.webkitFullscreenElement){
@@ -1756,8 +1781,8 @@ function toggleFS(){
     return;
   }
   const req = el.requestFullscreen || el.webkitRequestFullscreen;
-  if(!req){ document.body.classList.toggle('fsmode'); return; }
-  Promise.resolve(req.call(el)).catch(() => document.body.classList.toggle('fsmode'));
+  if(!req){ fauxFS(); return; }
+  Promise.resolve(req.call(el)).catch(fauxFS);
 }
 $('#fsbtn').onclick = toggleFS;
 setTimeout(() => $('#hintchip').classList.add('gone'), 7000);
