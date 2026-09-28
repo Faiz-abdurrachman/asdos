@@ -965,6 +965,61 @@ h2{
   .content{margin-block:auto}
 }
 .fsmode .hintchip,.fsmode .corner{display:none}
+
+/* ===== JALUR WINDOWS ===== */
+.termbody .winpr{color:#5CA9FF}
+.winstack{display:grid;gap:14px}
+.winstack.two{grid-template-columns:1fr 1fr;align-items:start}
+.winstack .shotcap{align-items:flex-start}
+.winstack .shotcap .shottitle,.winstack .shotcap .shotnote{display:block}
+.winopt{
+  display:flex;align-items:flex-start;gap:12px;width:100%;text-align:left;cursor:pointer;
+  background:var(--spec-top),var(--grad-glass);
+  backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
+  border:1px solid var(--glass-bd);border-radius:16px;padding:14px 16px;
+  box-shadow:var(--out-sh),var(--inner-light);transition:transform .2s,box-shadow .2s;
+}
+.winopt:hover{transform:translateY(-2px);box-shadow:var(--out-sh-lg),var(--inner-light)}
+.winopt:active{transform:scale(.985)}
+.winopt .box{
+  flex:none;width:26px;height:26px;margin-top:1px;border-radius:8px;display:grid;place-items:center;
+  border:1.6px solid rgba(31,45,68,.35);background:rgba(255,255,255,.55);color:transparent;transition:.2s;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.9);
+}
+.winopt .box svg{width:15px;height:15px}
+.winopt.on .box{background:var(--green);border-color:var(--green);color:#fff;box-shadow:0 6px 16px rgba(43,196,111,.42)}
+.winopt b{font:600 14.5px/1.25 var(--sans);color:var(--ink);display:block}
+.winopt small{display:block;font:400 12px/1.45 var(--sans);color:var(--dim);margin-top:3px}
+.winopt.warn .box{border-color:var(--coral);box-shadow:0 0 0 3px rgba(255,98,87,.16)}
+.winwarn{
+  margin-top:12px;font:400 12.5px/1.6 var(--mono);color:var(--coral-t);
+  background:rgba(255,98,87,.1);border:1px solid rgba(255,98,87,.42);border-radius:13px;
+  padding:11px 14px;max-height:0;opacity:0;overflow:hidden;transition:.25s;
+}
+.winwarn.on{max-height:160px;opacity:1}
+.winprog{
+  height:12px;border-radius:99px;background:rgba(31,45,68,.14);overflow:hidden;margin-top:16px;
+  box-shadow:inset 0 1px 3px rgba(31,45,68,.22);
+}
+.winprog span{
+  display:block;height:100%;width:0;border-radius:99px;
+  background:linear-gradient(90deg,var(--green),var(--blue));
+  transition:width .6s cubic-bezier(.2,.7,.3,1);
+}
+.winsub{margin-top:10px;font:400 12.5px/1.5 var(--sans);color:var(--faint)}
+.winstat{margin-top:10px;font:500 12.5px/1.45 var(--mono);color:var(--faint);min-height:1.2em}
+.winstat.ok{color:var(--green-t)}
+#winrun{display:inline-flex;align-items:center;gap:8px}
+#winrun svg{width:15px;height:15px}
+#winrun.on{color:var(--green-t)}
+.winrow{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:16px}
+.winrow .note{font:400 12px/1.4 var(--sans);color:var(--faint)}
+@media (max-width:900px){
+  .winstack{gap:10px}
+  .winopt{padding:12px 14px}
+  .winopt b{font-size:13.5px}
+  .winopt small{font-size:11.5px}
+}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.001s!important;transition-duration:.001s!important}
   .blobs::before,.blobs::after,.sticker{animation:none!important}
@@ -997,7 +1052,10 @@ h2{
   *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
   .stage{width:297mm!important;height:auto!important;background:#fff!important;display:block!important;overflow:visible!important}
   .blobs,.stage::after,.bar,.corner,.fsbtn,.dock,.hintchip,.zoomtag,.lightbox,.cur{display:none!important}
-  .timerbox .tbtn,.termfoot,.ostabs{display:none!important}
+    .timerbox .tbtn,.termfoot,.ostabs,.winrow,.winprog,.winstat,.winwarn,#winrun{display:none!important}
+    #sw4 .cols.c2{grid-template-columns:1fr 1fr}
+    #sw4 .winstack{grid-template-columns:1fr 1fr;align-items:start}
+    #sw4 .shotcard img{height:auto}
   .slide{
     position:static!important;inset:auto!important;opacity:1!important;visibility:visible!important;
     filter:none!important;transform:none!important;transition:none!important;
@@ -1295,6 +1353,144 @@ h2{
             <span><span class="shottitle">Halaman download python.org</span><span class="shotnote">klik tombol unduh versi terbaru</span></span>
           </figcaption>
         </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 09b · WINDOWS 1: UNDUH -->
+  <section class="slide" data-sec="Praktik · Part 1 · Windows" id="sw1">
+    <div class="content">
+      <span class="kick"><span class="kd"></span>Jalur Windows — langkah 1 dari 4</span>
+      <h2>Windows: unduh installer dari python.org</h2>
+      <div class="slide-body cols c2">
+        <div>
+          <p class="sub" style="margin-bottom:14px">Halaman python.org menawarkan dua berkas. Untuk praktikum ini kita pilih <b>standalone installer</b> — satu berkas, sekali jalan.</p>
+          <div class="ostabs" id="wintabs">
+            <button class="ostab on" data-win="exe">Standalone installer</button>
+            <button class="ostab" data-win="mgr">Install manager</button>
+          </div>
+          <aside class="xplain" id="winx">
+            <h3><i data-lucide="download" style="width:15px;height:15px"></i>Standalone installer</h3>
+            <p>Pilihan kita: <b>python-3.14.7-amd64.exe</b>. Satu berkas, langsung menjalankan installer — paling sederhana untuk kelas.</p>
+          </aside>
+          <a class="linkchip" href="https://www.python.org/downloads/" target="_blank" rel="noopener" style="margin-top:14px"><i data-lucide="external-link"></i>python.org/downloads</a>
+        </div>
+        <div class="winstack two">
+          <figure class="shotcard">
+            <div class="imgwrap"><img src="img/win-01-download-page.jpg" alt="Halaman python.org bagian Windows dengan tombol install manager dan tautan standalone installer Python 3.14.7" width="711" height="496" loading="lazy"></div>
+            <span class="zoomtag"><i data-lucide="zoom-in"></i></span>
+            <figcaption class="shotcap">
+              <span class="stepchip c-blue">win 01</span>
+              <span><span class="shottitle">Halaman unduh Windows</span><span class="shotnote">pilih standalone installer 3.14.7</span></span>
+            </figcaption>
+          </figure>
+          <figure class="shotcard">
+            <div class="imgwrap"><img src="img/win-02-download-history.jpg" alt="Riwayat unduhan browser menampilkan python-3.14.7-amd64.exe berukuran 31,7 MB berstatus Done" width="342" height="140" loading="lazy"></div>
+            <span class="zoomtag"><i data-lucide="zoom-in"></i></span>
+            <figcaption class="shotcap">
+              <span class="stepchip c-blue">win 02</span>
+              <span><span class="shottitle">Berkas siap dijalankan</span><span class="shotnote">python-3.14.7-amd64.exe · 31,7 MB</span></span>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 09c · WINDOWS 2: PASANG -->
+  <section class="slide" data-sec="Praktik · Part 1 · Windows" id="sw2">
+    <div class="content">
+      <span class="kick"><span class="kd"></span>Jalur Windows — langkah 2 dari 4</span>
+      <h2>Pasang: centang &ldquo;Add python.exe to PATH&rdquo;</h2>
+      <div class="slide-body cols c2">
+        <div>
+          <p class="sub" style="margin-bottom:16px">Ini langkah yang paling sering terlewat. Sebelum menekan <b>Install Now</b>, pastikan kotak di bagian bawah jendela installer tercentang.</p>
+          <button class="winopt on" id="pathopt" type="button" aria-pressed="true">
+            <span class="box"><i data-lucide="check"></i></span>
+            <span><b>Add python.exe to PATH</b><small>Membuat perintah <code>python</code> bisa dikenali di terminal.</small></span>
+          </button>
+          <p class="winsub">Klik kotak di atas untuk melihat apa yang terjadi bila lupa mencentangnya.</p>
+          <p class="winwarn" id="pathwarn">Tanpa centang ini, terminal menjawab: <b>'python' is not recognized&hellip;</b> — dan kamu harus memasang ulang sambil mengaktifkan opsi ini.</p>
+        </div>
+        <figure class="shotcard">
+          <div class="imgwrap"><img src="img/win-03-installer-path.jpg" alt="Jendela installer Python 3.14.7 dengan opsi Install Now disorot dan kotak Add python.exe to PATH tercentang" width="653" height="411" loading="lazy"></div>
+          <span class="zoomtag"><i data-lucide="zoom-in"></i></span>
+          <figcaption class="shotcap">
+            <span class="stepchip c-blue">win 03</span>
+            <span><span class="shottitle">Centang PATH, lalu Install Now</span><span class="shotnote">dua hal yang wajib benar di jendela ini</span></span>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 09d · WINDOWS 3: PROSES -->
+  <section class="slide" data-sec="Praktik · Part 1 · Windows" id="sw3">
+    <div class="content">
+      <span class="kick"><span class="kd"></span>Jalur Windows — langkah 3 dari 4</span>
+      <h2>Tunggu sampai &ldquo;Setup was successful&rdquo;</h2>
+      <div class="slide-body cols c2">
+        <div>
+          <p class="sub" style="margin-bottom:16px">Installer menyalin interpreter Python, pip, dan IDLE. Jangan tutup jendelanya sebelum selesai.</p>
+          <button class="ostab" id="winrun" type="button"><i data-lucide="play"></i>jalankan installer</button>
+          <div class="winprog" aria-hidden="true"><span id="winfill"></span></div>
+          <p class="winstat" id="winstat">belum dijalankan</p>
+          <p class="sub" style="margin-top:16px">Setelah selesai, tekan <b>Close</b>. Instalasi hanya sekali — setelah ini <code>python</code> dan <code>pip</code> siap dipakai.</p>
+        </div>
+        <div class="winstack two">
+          <figure class="shotcard">
+            <div class="imgwrap"><img src="img/win-04-setup-progress.jpg" alt="Jendela Setup Progress sedang memasang Python 3.14.7 Core Interpreter 64-bit" width="656" height="415" loading="lazy"></div>
+            <span class="zoomtag"><i data-lucide="zoom-in"></i></span>
+            <figcaption class="shotcap">
+              <span class="stepchip c-blue">win 04</span>
+              <span><span class="shottitle">Proses instalasi</span><span class="shotnote">menyalin Core Interpreter (64-bit)</span></span>
+            </figcaption>
+          </figure>
+          <figure class="shotcard">
+            <div class="imgwrap"><img src="img/win-05-setup-success.jpg" alt="Jendela Setup was successful menandakan instalasi Python 3.14.7 selesai" width="656" height="415" loading="lazy"></div>
+            <span class="zoomtag"><i data-lucide="zoom-in"></i></span>
+            <figcaption class="shotcap">
+              <span class="stepchip c-blue">win 05</span>
+              <span><span class="shottitle">Setup was successful</span><span class="shotnote">Python siap — tekan Close</span></span>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 09e · WINDOWS 4: VERIFIKASI -->
+  <section class="slide" data-sec="Praktik · Part 1 · Windows" id="sw4">
+    <div class="content">
+      <span class="kick"><span class="kd"></span>Jalur Windows — langkah 4 dari 4</span>
+      <h2>Buka Terminal, lalu buktikan versinya</h2>
+      <div class="slide-body cols c2">
+        <div>
+          <p class="sub" style="margin-bottom:14px">Cari <b>Terminal</b> di menu Start. Di Windows perintahnya <code>python</code> — bukan <code>python3</code>. Jalankan dua perintah ini untuk memastikan semuanya siap.</p>
+          <div class="term">
+            <div class="termbar"><span class="tdot r"></span><span class="tdot y"></span><span class="tdot g"></span><span class="termtitle">Windows PowerShell</span></div>
+            <div class="termbody" id="twin" style="min-height:150px;max-height:165px"></div>
+            <div class="termfoot"><button class="minibtn" data-replay="twin"><i data-lucide="rotate-ccw"></i>ulangi</button></div>
+          </div>
+        </div>
+        <div class="winstack">
+          <figure class="shotcard">
+            <div class="imgwrap"><img src="img/win-06-open-terminal.jpg" alt="Menu Start Windows dengan pencarian terminal dan hasil Terminal di urutan teratas" width="640" height="303" loading="lazy"></div>
+            <span class="zoomtag"><i data-lucide="zoom-in"></i></span>
+            <figcaption class="shotcap">
+              <span class="stepchip c-blue">win 06</span>
+              <span><span class="shottitle">Buka Terminal dari Start</span><span class="shotnote">cari &ldquo;terminal&rdquo;, buka hasil teratas</span></span>
+            </figcaption>
+          </figure>
+          <figure class="shotcard">
+            <div class="imgwrap"><img src="img/win-07-verify-version.jpg" alt="Windows PowerShell menjalankan python --version dan pip --version menampilkan Python 3.14.7 dan pip 26.2.1" width="957" height="183" loading="lazy"></div>
+            <span class="zoomtag"><i data-lucide="zoom-in"></i></span>
+            <figcaption class="shotcap">
+              <span class="stepchip c-blue">win 07</span>
+              <span><span class="shottitle">Verifikasi versi</span><span class="shotnote">python 3.14.7 · pip 26.2.1</span></span>
+            </figcaption>
+          </figure>
+        </div>
       </div>
     </div>
   </section>
@@ -1675,7 +1871,7 @@ h2{
 
 <div class="dock">
   <button class="navbtn" id="btnPrev" aria-label="Slide sebelumnya"><i data-lucide="chevron-left"></i></button>
-  <div class="count"><span id="cur">1</span> / <span id="tot">23</span><span class="seclabel" id="seclabel">Pembuka</span></div>
+  <div class="count"><span id="cur">1</span> / <span id="tot">27</span><span class="seclabel" id="seclabel">Pembuka</span></div>
   <button class="navbtn" id="btnNext" aria-label="Slide berikutnya"><i data-lucide="chevron-right"></i></button>
 </div>
 
@@ -1714,6 +1910,7 @@ const HOOKS = {
   s15(){ if(!codeInit){ codeInit = true; selectLine($$('#s15 .cl')[0]); } },
   s16(){ runTerm('t15'); },
   s17(){ if(!brInit){ brInit = true; showBrowser(); } },
+  sw4(){ runTerm('twin'); },
   s22(){ if(!quizInit){ quizInit = true; renderQ(); } }
 };
 
@@ -1851,9 +2048,17 @@ T.t15 = [
   {c:'ok',  t:' * Debugger is active!'},
   {c:'ok',  t:' * Debugger PIN: 142-626-400'}
 ];
+T.twin = [
+  {c:'cmd', t:'python --version'},
+  {c:'ok',  t:'Python 3.14.7'},
+  {c:'cmd', t:'pip --version'},
+  {c:'ok',  t:'pip 26.2.1 from C:\\Users\\user\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\site-packages\\pip'}
+];
 
 const VENV = new Set(['t12', 't13', 't15']);
-function promptHTML(venv){
+const PWSH = new Set(['twin']);
+function promptHTML(venv, win){
+  if(win) return '<span class="pr winpr">PS C:\\Users\\user&gt; </span>';
   return venv
     ? '<span class="pr venvpr">(.venv) PrakPemWeb $ </span>'
     : '<span class="pr">$ </span>';
@@ -1862,14 +2067,14 @@ function runTerm(id, onDone){
   const el = document.getElementById(id);
   const script = (id === 't11') ? (t11os === 'nix' ? T.t11nix : T.t11win) : T[id];
   if(!el || !script) return;
-  const venv = VENV.has(id);
+  const venv = VENV.has(id), win = PWSH.has(id);
   el.innerHTML = '';
   if(RM || FORCE){
     script.forEach(st => {
       const d = document.createElement('div');
       d.className = 'ln ' + (st.c || '');
       if(st.c === 'cmd'){
-        d.innerHTML = promptHTML(venv) + '<span class="cmd"></span>';
+        d.innerHTML = promptHTML(venv, win) + '<span class="cmd"></span>';
         d.querySelector('.cmd').textContent = st.t;
       } else d.textContent = st.t;
       el.appendChild(d);
@@ -1884,7 +2089,7 @@ function runTerm(id, onDone){
     if(st.c === 'cmd'){
       const line = document.createElement('div');
       line.className = 'ln';
-      line.innerHTML = promptHTML(venv) + '<span class="cmd"></span><span class="cur"></span>';
+      line.innerHTML = promptHTML(venv, win) + '<span class="cmd"></span><span class="cur"></span>';
       el.appendChild(line);
       const cm = line.querySelector('.cmd');
       const cur = line.querySelector('.cur');
@@ -1970,6 +2175,41 @@ $$('#ostabs .ostab').forEach(t => t.onclick = () => {
   t11os = t.dataset.os;
   runTerm('t11');
 });
+
+/* ===================== JALUR WINDOWS ===================== */
+const WINX = {
+  exe: { h:'Standalone installer', b:'Pilihan kita: <b>python-3.14.7-amd64.exe</b>. Satu berkas, langsung menjalankan installer — paling sederhana untuk kelas.' },
+  mgr: { h:'Install manager', b:'Pengelola beberapa versi Python sekaligus. Berguna kalau kamu sering berpindah versi — untuk hari ini cukup yang <b>standalone</b>.' }
+};
+$$('#wintabs .ostab').forEach(t => t.onclick = () => {
+  $$('#wintabs .ostab').forEach(x => x.classList.remove('on'));
+  t.classList.add('on');
+  const w = WINX[t.dataset.win];
+  $('#winx').innerHTML = '<h3><i data-lucide="download" style="width:15px;height:15px"></i>' + w.h + '</h3><p>' + w.b + '</p>';
+  lucide.createIcons();
+});
+const pathopt = $('#pathopt');
+if(pathopt) pathopt.onclick = () => {
+  const on = pathopt.classList.toggle('on');
+  pathopt.classList.toggle('warn', !on);
+  pathopt.setAttribute('aria-pressed', String(on));
+  $('#pathwarn').classList.toggle('on', !on);
+};
+const winrun = $('#winrun');
+if(winrun) winrun.onclick = () => {
+  const fill = $('#winfill'), stat = $('#winstat');
+  winrun.classList.remove('on');
+  fill.style.width = '0%';
+  stat.textContent = 'installer berjalan — jangan tutup jendelanya';
+  stat.classList.remove('ok');
+  requestAnimationFrame(() => { fill.style.width = '45%'; });
+  setTimeout(() => { fill.style.width = '100%'; }, 420);
+  setTimeout(() => {
+    stat.textContent = 'Setup was successful — Python siap dipakai';
+    stat.classList.add('ok');
+    winrun.classList.add('on');
+  }, 1150);
+};
 
 /* ===================== HTTP SIM ===================== */
 const HTTP = {
@@ -2198,7 +2438,7 @@ if(printQuiz){
 }
 function preparePrint(){
   FORCE = true;
-  ['t9', 't10', 't11', 't12', 't13', 't15'].forEach(id => runTerm(id));
+  ['t9', 't10', 't11', 't12', 't13', 't15', 'twin'].forEach(id => runTerm(id));
   FORCE = false;
 }
 $('#pdfbtn').onclick = () => {
