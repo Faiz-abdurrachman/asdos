@@ -933,6 +933,35 @@ h2{
   .slide{filter:none;transform:none}
 }
 
+/* ===== EXPORT PDF ===== */
+.fsbtn.pdfbtn{right:66px}
+.printquiz{display:none}
+@page{size:297mm 167mm;margin:0}
+
+@media print{
+  html,body{background:#fff!important;overflow:visible!important;display:block!important;height:auto!important}
+  *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+  .stage{width:297mm!important;height:auto!important;background:#fff!important;display:block!important;overflow:visible!important}
+  .blobs,.stage::after,.bar,.corner,.fsbtn,.dock,.hintchip,.zoomtag,.lightbox,.cur{display:none!important}
+  .timerbox .tbtn,.termfoot,.ostabs{display:none!important}
+  .slide{
+    position:static!important;inset:auto!important;opacity:1!important;visibility:visible!important;
+    filter:none!important;transform:none!important;transition:none!important;
+    width:297mm;height:167mm;padding:20px 30px;overflow:hidden;
+    page-break-after:always;break-after:page;
+  }
+  .slide:last-child{page-break-after:auto;break-after:auto}
+  .content{max-width:100%!important}
+  .termbody,.codepane{max-height:none!important;overflow:visible!important}
+  .quizbox{display:none!important}
+  .printquiz{display:block}
+  .printquiz{columns:2;column-gap:28px}
+  .printquiz .qi{break-inside:avoid;margin:0 0 10px}
+  .printquiz .pq{margin:0 0 4px;font-size:12.5px;color:var(--ink)}
+  .printquiz ol{margin:0;padding-left:18px}
+  .printquiz li{font-size:11.5px;color:var(--dim);line-height:1.4}
+}
+
 </style>
 </head>
 <body>
@@ -940,6 +969,7 @@ h2{
   <div class="blobs" aria-hidden="true"></div>
   <div class="bar" id="pbar"></div>
   <div class="corner"><span class="dotmark"></span><span>Praktikum Pemrograman Web · <b>P01</b></span></div>
+  <button class="fsbtn pdfbtn" id="pdfbtn" aria-label="Ekspor ke PDF"><i data-lucide="printer"></i></button>
   <button class="fsbtn" id="fsbtn" aria-label="Layar penuh"><i data-lucide="maximize-2"></i></button>
   <div class="hintchip" id="hintchip">panah &#8592; &#8594; pindah slide · klik screenshot untuk memperbesar · F layar penuh</div>
 
@@ -1567,6 +1597,7 @@ h2{
           <div class="qopts" id="qopts"></div>
           <div class="qfoot" id="qfoot"></div>
         </div>
+        <div class="printquiz" id="printQuiz"></div>
       </div>
     </div>
   </section>
@@ -1607,6 +1638,7 @@ h2{
 
 <script>
 const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+let FORCE = false;
 const $ = s => document.querySelector(s);
 const $$ = s => [...document.querySelectorAll(s)];
 
@@ -1742,7 +1774,7 @@ function runTerm(id, onDone){
   if(!el || !script) return;
   const venv = VENV.has(id);
   el.innerHTML = '';
-  if(RM){
+  if(RM || FORCE){
     script.forEach(st => {
       const d = document.createElement('div');
       d.className = 'ln ' + (st.c || '');
@@ -2066,6 +2098,26 @@ function closeLB(){
 $$('.shotcard').forEach(c => c.onclick = () => openLB(c));
 $('#lbclose').onclick = e => { e.stopPropagation(); closeLB(); };
 $('#lightbox').onclick = e => { if(e.target.id === 'lightbox') closeLB(); };
+
+const printQuiz = document.getElementById('printQuiz');
+if(printQuiz){
+  printQuiz.innerHTML = QS.map((q, i) =>
+    '<div class="qi"><div class="pq"><b>Soal ' + (i + 1) + '.</b> ' + q.q + '</div>' +
+    '<ol type="A">' + q.o.map(o => '<li>' + o + '</li>').join('') + '</ol></div>'
+  ).join('');
+}
+function preparePrint(){
+  FORCE = true;
+  ['t9', 't10', 't11', 't12', 't13', 't15'].forEach(id => runTerm(id));
+  FORCE = false;
+}
+$('#pdfbtn').onclick = () => {
+  const prev = document.title;
+  document.title = 'P01 — Pengenalan Pemrograman Web & Python';
+  preparePrint();
+  window.print();
+  document.title = prev;
+};
 
 lucide.createIcons();
 tdraw();
