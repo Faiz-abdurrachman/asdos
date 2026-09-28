@@ -193,6 +193,7 @@ h2{
 .slide-body{margin-top:26px}
 
 .cols{display:grid;gap:22px}
+.cols>*{min-width:0}
 .cols.c2{grid-template-columns:1fr 1fr}
 .cols.c2-1{grid-template-columns:1.35fr 1fr}
 .cols.c1-2{grid-template-columns:1fr 1.35fr}
@@ -470,7 +471,7 @@ h2{
 .httpcap b{font-family:var(--mono);color:var(--ink)}
 
 /* ===== DARK GLASS (terminal & konsol) ===== */
-.term,.httplog,.ftree,.codepane{
+.term,.httplog,.codepane{
   background:linear-gradient(180deg,rgba(255,255,255,.08),transparent 12%),rgba(15,20,29,.8);
   backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
   border:1px solid rgba(255,255,255,.17);
@@ -543,16 +544,6 @@ h2{
 }
 .ostab:active{transform:scale(.97)}
 
-/* ===== FILE TREE ===== */
-.ftree{
-  border-radius:var(--rad);
-  padding:18px 22px;font:400 13.5px/2 var(--mono);color:#A9B7C9;text-align:left;
-}
-.ftree .dir{color:#FFC24D}
-.ftree .fil{color:#5CA9FF}
-.ftree .new{color:#3EE08C;font-weight:600}
-.ftree .hi{color:#5CA9FF}
-
 /* ===== SHOT CARDS ===== */
 .shotcard{
   background:var(--spec-top),var(--grad-glass);
@@ -579,7 +570,7 @@ h2{
 .stepchip.c-coral{color:var(--coral-t);border-color:rgba(255,98,87,.9)}
 .stepchip.c-violet{color:var(--violet-t);border-color:rgba(183,156,255,.9)}
 .shottitle{font:600 12.5px/1.3 var(--sans);color:var(--ink)}
-.shotnote{font:400 11px/1.35 var(--mono);color:var(--faint);margin-top:3px}
+.shotnote{display:block;font:400 11px/1.35 var(--mono);color:var(--faint);margin-top:3px}
 .zoomtag{
   position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:9px;
   display:grid;place-items:center;color:#fff;
@@ -1499,18 +1490,23 @@ h2{
   <section class="slide" data-sec="Praktik · Part 1" id="s10">
     <div class="content">
       <span class="kick"><span class="kd"></span>Praktikum · Part 1 — langkah 2 dari 4</span>
-      <h2>Buat folder khusus untuk proyek</h2>
+      <h2>Buat folder, lalu masuk ke dalamnya</h2>
       <div class="slide-body cols c2">
         <div>
-          <p class="sub" style="margin-bottom:16px">Satu proyek, satu folder — semuanya tinggal di dalamnya: kode, venv, dan file pendukung. Nama foldernya bebas — di contoh ini <b>PrakPemWeb</b>.</p>
-          <div class="ftree">PrakPemWeb/<br>&#8627; <span class="fil">app.py</span> — nanti<br>&#8627; <span class="dir">.venv/</span> — step berikutnya</div>
+          <p class="sub" style="margin-bottom:14px">Satu proyek, satu folder — semuanya tinggal di dalamnya: kode, venv, dan file pendukung. Nama foldernya bebas — di contoh ini <b>PrakPemWeb</b>. Setelah dibuat, <b>masuk ke dalamnya</b> supaya perintah berikutnya dijalankan di tempat yang benar.</p>
+          <div class="term">
+            <div class="termbar"><span class="tdot r"></span><span class="tdot y"></span><span class="tdot g"></span><span class="termtitle">PrakPemWeb — masuk folder proyek</span></div>
+            <div class="termbody" id="tcd" style="min-height:130px;max-height:150px"></div>
+            <div class="termfoot"><button class="minibtn" data-replay="tcd"><i data-lucide="rotate-ccw"></i>ulangi</button></div>
+          </div>
+          <p class="sub" style="margin-top:12px;font-size:13px">Tanpa mengetik: di File Explorer klik kanan folder → <b>Open in Terminal</b>; di VS Code <b>File → Open Folder</b>; di macOS klik kanan folder → <b>New Terminal at Folder</b>.</p>
         </div>
         <figure class="shotcard">
-          <div class="imgwrap"><img src="img/step-02-buat-folder.png" alt="File explorer pembuatan folder proyek baru" width="538" height="257" loading="lazy"></div>
+          <div class="imgwrap"><img src="img/step-02-buat-folder.png" alt="File explorer menampilkan folder proyek PrakPemWeb yang baru dibuat" width="538" height="257" loading="lazy"></div>
           <span class="zoomtag"><i data-lucide="zoom-in"></i></span>
           <figcaption class="shotcap">
             <span class="stepchip c-blue">step 02</span>
-            <span><span class="shottitle">Buat folder proyek</span><span class="shotnote">tampilan file explorer</span></span>
+            <span><span class="shottitle">Buat folder proyek</span><span class="shotnote">lalu masuk ke dalamnya sebelum lanjut</span></span>
           </figcaption>
         </figure>
       </div>
@@ -1523,15 +1519,21 @@ h2{
       <span class="kick"><span class="kd"></span>Praktikum · Part 1 — langkah 3 dari 4</span>
       <h2>Virtual environment: ruang terpisah setiap proyek</h2>
       <div class="slide-body cols c2-1">
-        <div class="term">
-          <div class="termbar"><span class="tdot r"></span><span class="tdot y"></span><span class="tdot g"></span><span class="termtitle">PrakPemWeb — buat venv</span></div>
-          <div class="termbody" id="t10"></div>
-          <div class="termfoot"><button class="minibtn" data-replay="t10"><i data-lucide="rotate-ccw"></i>ulangi</button></div>
+        <div>
+          <div class="ostabs" id="venvtabs" data-term="t10">
+            <button class="ostab on" data-os="nix">Linux / macOS</button>
+            <button class="ostab" data-os="win">Windows</button>
+          </div>
+          <div class="term">
+            <div class="termbar"><span class="tdot r"></span><span class="tdot y"></span><span class="tdot g"></span><span class="termtitle">PrakPemWeb — buat venv</span></div>
+            <div class="termbody" id="t10" style="min-height:140px;max-height:160px"></div>
+            <div class="termfoot"><button class="minibtn" data-replay="t10"><i data-lucide="rotate-ccw"></i>ulangi</button></div>
+          </div>
         </div>
         <div>
-          <p class="sub" style="margin-bottom:14px">Tanpa venv, semua proyek berbagi package Python yang sama — seperti satu rumah bersama untuk semua penghuninya. Dengan venv, setiap proyek punya ruang sendiri.</p>
+          <p class="sub" style="margin-bottom:14px">Tanpa venv, semua proyek berbagi package Python yang sama — seperti satu rumah bersama untuk semua penghuninya. Dengan venv, setiap proyek punya ruang sendiri. Perintahnya beda tipis: <code style="font-family:var(--mono);color:var(--blue-t)">python3</code> di Linux/macOS, <code style="font-family:var(--mono);color:var(--blue-t)">python</code> di Windows.</p>
           <figure class="shotcard">
-            <div class="imgwrap"><img src="img/step-03-venv.png" alt="Terminal menjalankan perintah python3 -m venv .venv" width="538" height="257" loading="lazy"></div>
+            <div class="imgwrap"><img src="img/step-03-venv.png" alt="Terminal menjalankan perintah python3 -m venv .venv di dalam folder proyek" width="538" height="257" loading="lazy"></div>
             <span class="zoomtag"><i data-lucide="zoom-in"></i></span>
             <figcaption class="shotcap">
               <span class="stepchip c-blue">step 03</span>
@@ -1550,7 +1552,7 @@ h2{
       <h2>Aktifkan venv — sesuai sistem kamu</h2>
       <div class="slide-body cols c2-1">
         <div>
-          <div class="ostabs" id="ostabs">
+          <div class="ostabs" id="ostabs" data-term="t11">
             <button class="ostab on" data-os="nix">Linux / macOS</button>
             <button class="ostab" data-os="win">Windows</button>
           </div>
@@ -1903,6 +1905,7 @@ const HOOKS = {
   s23(){ typeInto($('#logoutCmd'), 'exit'); },
   s4(){ $$('#rubric .rfill').forEach(f => f.style.width = (f.dataset.w / 35 * 100) + '%'); },
   s9(){ runTerm('t9'); },
+  s10(){ runTerm('tcd'); },
   s11(){ runTerm('t10'); },
   s12(){ runTerm('t11'); },
   s13(){ runTerm('t12'); },
@@ -1996,16 +1999,32 @@ function typeInto(el, text){
 
 /* ===================== TERMINAL ===================== */
 const T = {};
-let t11os = 'nix';
+const OSSTATE = { t10:'nix', t11:'nix' };
+const OSTERM = { t10:{ nix:'t10nix', win:'t10win' }, t11:{ nix:'t11nix', win:'t11win' } };
+function scriptOf(id){
+  const m = OSTERM[id];
+  return m ? T[m[OSSTATE[id]]] : T[id];
+}
 T.t9 = [
   {c:'cmd', t:'python --version'},
   {c:'ok',  t:'Python 3.12.3'},
   {c:'',    t:'# versi 3.10 ke atas = siap praktikum'}
 ];
-T.t10 = [
+T.t10nix = [
   {c:'cmd', t:'python3 -m venv .venv'},
   {c:'',    t:'# tanpa output — dan itu tanda sukses'},
   {c:'ok',  t:'.venv/ berhasil dibuat'}
+];
+T.t10win = [
+  {c:'cmd', t:'python -m venv .venv'},
+  {c:'',    t:'# Windows memakai python, bukan python3'},
+  {c:'ok',  t:'.venv\\ berhasil dibuat'}
+];
+T.tcd = [
+  {c:'cmd', t:'cd PrakPemWeb'},
+  {c:'ok',  t:'# masuk — kamu kini berada di dalam folder proyek'},
+  {c:'',    t:'# prompt ikut berubah, mis. ~/PrakPemWeb $'},
+  {c:'',    t:'#   di Windows: C:\\Users\\user\\PrakPemWeb>'}
 ];
 T.t11nix = [
   {c:'cmd', t:'source .venv/bin/activate'},
@@ -2065,7 +2084,7 @@ function promptHTML(venv, win){
 }
 function runTerm(id, onDone){
   const el = document.getElementById(id);
-  const script = (id === 't11') ? (t11os === 'nix' ? T.t11nix : T.t11win) : T[id];
+  const script = scriptOf(id);
   if(!el || !script) return;
   const venv = VENV.has(id), win = PWSH.has(id);
   el.innerHTML = '';
@@ -2108,7 +2127,7 @@ function runTerm(id, onDone){
   })();
 }
 function termCmds(id){
-  const script = (id === 't11') ? (t11os === 'nix' ? T.t11nix : T.t11win) : T[id];
+  const script = scriptOf(id);
   return (script || []).filter(s => s.c === 'cmd').map(s => s.t).join('\n');
 }
 function copyText(text, done){
@@ -2169,12 +2188,12 @@ if(copyApp) copyApp.onclick = () => copyText(APP_PY, () => flashBtn(copyApp, '<i
 lucide.createIcons();
 
 /* ===================== OS TABS ===================== */
-$$('#ostabs .ostab').forEach(t => t.onclick = () => {
-  $$('#ostabs .ostab').forEach(x => x.classList.remove('on'));
+$$('.ostabs[data-term]').forEach(g => g.querySelectorAll('.ostab').forEach(t => t.onclick = () => {
+  g.querySelectorAll('.ostab').forEach(x => x.classList.remove('on'));
   t.classList.add('on');
-  t11os = t.dataset.os;
-  runTerm('t11');
-});
+  OSSTATE[g.dataset.term] = t.dataset.os;
+  runTerm(g.dataset.term);
+}));
 
 /* ===================== JALUR WINDOWS ===================== */
 const WINX = {
@@ -2438,7 +2457,7 @@ if(printQuiz){
 }
 function preparePrint(){
   FORCE = true;
-  ['t9', 't10', 't11', 't12', 't13', 't15', 'twin'].forEach(id => runTerm(id));
+  ['t9', 'tcd', 't10', 't11', 't12', 't13', 't15', 'twin'].forEach(id => runTerm(id));
   FORCE = false;
 }
 $('#pdfbtn').onclick = () => {
