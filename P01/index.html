@@ -157,6 +157,9 @@ body{
   transition:opacity .6s;opacity:1;
 }
 .hintchip.gone{opacity:0}
+@media (max-width:1300px){
+  .hintchip{right:auto;left:50%;bottom:calc(86px + env(safe-area-inset-bottom));transform:translateX(-50%)}
+}
 
 /* ===== SLIDES — fokus kaca ===== */
 .slide{
