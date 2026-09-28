@@ -36,7 +36,7 @@ git push -u origin main
    - Build Command & Output Directory: kosongkan
 3. Deploy. URL jadi `https://<nama-proyek>.vercel.app/` → hub → `/P01/`.
 
-Kalau lo push repo yang lebih besar (misal seluruh folder `pemweb` yang ada modulnya), set **Root Directory = `web-perkuliahan`** saat import di Vercel.
+Jika kamu push repo yang lebih besar (misal seluruh folder `pemweb` yang ada modulnya), set **Root Directory = `web-perkuliahan`** saat import di Vercel.
 
 ## Nambah pertemuan baru
 

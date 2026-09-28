@@ -470,7 +470,7 @@ h2{
 }
 .term{
   border-radius:var(--rad);
-  overflow:hidden;text-align:left;
+  overflow:hidden;text-align:left;align-self:start;
 }
 .termbar{
   display:flex;align-items:center;gap:8px;padding:11px 16px;
@@ -480,18 +480,25 @@ h2{
 .tdot.r{background:#FF5F56}.tdot.y{background:#FFBD2E}.tdot.g{background:#27C93F}
 .termtitle{
   font:500 11.5px/1 var(--mono);color:#8FA3BC;margin-left:6px;
-  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;min-width:0;
 }
+.envchip{
+  margin-left:auto;flex:none;font:600 10.5px/1 var(--sans);letter-spacing:.02em;
+  padding:5px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.18);
+}
+.envchip.venv{color:#3EE08C;background:rgba(62,224,140,.14);border-color:rgba(62,224,140,.4)}
+.envchip.shell{color:#8FA3BC;background:rgba(255,255,255,.06)}
 .termfoot{
   display:flex;justify-content:flex-end;gap:8px;
   padding:10px 14px;border-top:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.035);
 }
 .termbody{
   padding:16px 20px;font:400 clamp(11.5px,1.35vw,14px)/1.72 var(--mono);
-  color:#A9B7C9;min-height:190px;max-height:230px;overflow:hidden;
+  color:#A9B7C9;min-height:0;max-height:230px;overflow:hidden;
   white-space:pre-wrap;word-break:break-word;
 }
 .termbody .pr{color:#FFC24D}
+.termbody .venvpr{color:#3EE08C}
 .termbody .cmd{color:#E9EFF6}
 .termbody .ok{color:#3EE08C;text-shadow:0 0 10px rgba(62,224,140,.35)}
 .termbody .warn{color:#FF6257}
@@ -509,6 +516,7 @@ h2{
 .minibtn svg{width:13px;height:13px}
 .minibtn:hover{color:#E9EFF6;background:rgba(255,255,255,.16);transform:translateY(-1px)}
 .minibtn:active{transform:scale(.96)}
+.minibtn.done{color:#3EE08C;background:rgba(62,224,140,.14);border-color:rgba(62,224,140,.5)}
 
 /* ===== OS TABS ===== */
 .ostabs{display:flex;gap:8px;margin-bottom:14px}
@@ -903,7 +911,7 @@ h2{
   .sticker{display:none}
   .qopts{grid-template-columns:1fr}
   .qq{font-size:17px;min-height:2em}
-  .termbody{min-height:140px;max-height:175px;font-size:11.5px}
+  .termbody{min-height:0;max-height:175px;font-size:11.5px}
   .dock{padding:6px 8px;bottom:12px}
   .count .seclabel{font-size:10px}
   .xplain{padding:12px 14px;min-height:0}
@@ -933,7 +941,7 @@ h2{
   <div class="bar" id="pbar"></div>
   <div class="corner"><span class="dotmark"></span><span>Praktikum Pemrograman Web · <b>P01</b></span></div>
   <button class="fsbtn" id="fsbtn" aria-label="Layar penuh"><i data-lucide="maximize-2"></i></button>
-  <div class="hintchip" id="hintchip">panah &#8592; &#8594; pindah slide · klik screenshot buat perbesar · F layar penuh</div>
+  <div class="hintchip" id="hintchip">panah &#8592; &#8594; pindah slide · klik screenshot untuk memperbesar · F layar penuh</div>
 
   <!-- 01 · TITLE -->
   <section class="slide title-slide on" data-sec="Pembuka" id="s1">
@@ -941,9 +949,9 @@ h2{
     <div class="sticker s2">(PrakPemWeb)</div>
     <div class="content">
       <span class="kick"><span class="kd"></span>Praktikum Pemrograman Web — Pertemuan 01</span>
-      <h1 class="h1">Bikin web app<br>pertama lo</h1>
+      <h1 class="h1">Buat web app<br>pertama kamu</h1>
       <p class="typeline"><span class="pr">$</span> <span id="titleCmd"></span><span class="cur"></span></p>
-      <p class="t-sub">Pengenalan Pemrograman Web &amp; Python: client-server, HTTP, virtual environment, sampai aplikasi Flask pertama lo jalan di browser.</p>
+      <p class="t-sub">Pengenalan Pemrograman Web &amp; Python: client-server, HTTP, virtual environment, sampai aplikasi Flask pertama kamu berjalan di browser.</p>
       <p class="credit">Materi: modul praktikum P01 · Deck versi web interaktif</p>
     </div>
   </section>
@@ -953,7 +961,7 @@ h2{
     <div class="content">
       <span class="kick"><span class="kd"></span>Run of show</span>
       <h2>Alur pertemuan hari ini</h2>
-      <p class="sub">100 menit total, dari nol sampai web app pertama lo nyala.</p>
+      <p class="sub">100 menit total, dari nol sampai web app pertama kamu berjalan.</p>
       <div class="slide-body steps">
         <div class="step">
           <span class="no">01</span>
@@ -962,17 +970,17 @@ h2{
         </div>
         <div class="step">
           <span class="no">02</span>
-          <div><h3>Praktik: setup sampai jalan</h3><p>Python, folder, venv, pip, <code>app.py</code>, server nyala</p></div>
+          <div><h3>Praktik: setup sampai jalan</h3><p>Python, folder, venv, pip, <code>app.py</code>, server berjalan</p></div>
           <span class="dur">45 menit</span>
         </div>
         <div class="step">
           <span class="no">03</span>
-          <div><h3>Tugas praktikum</h3><p>Route <code>/about</code> dan <code>/profile</code> versi lo sendiri</p></div>
+          <div><h3>Tugas praktikum</h3><p>Route <code>/about</code> dan <code>/profile</code> versi kamu sendiri</p></div>
           <span class="dur">30 menit</span>
         </div>
         <div class="step">
           <span class="no">04</span>
-          <div><h3>Kuis &amp; penutup</h3><p>Cek pemahaman, lalu recap apa yang sudah bisa lo lakukan</p></div>
+          <div><h3>Kuis &amp; penutup</h3><p>Cek pemahaman, lalu recap apa yang sudah bisa kamu lakukan</p></div>
           <span class="dur">&#177;10 menit</span>
         </div>
       </div>
@@ -983,12 +991,12 @@ h2{
   <section class="slide" data-sec="Kelas" id="s3">
     <div class="content">
       <span class="kick"><span class="kd"></span>Capaian pembelajaran</span>
-      <h2>Di akhir praktikum, lo bisa</h2>
+      <h2>Di akhir praktikum, kamu bisa</h2>
       <div class="slide-body cols c3 capaian">
         <div class="pcard">
           <div class="ic"><i data-lucide="globe"></i></div>
           <h3>Ngejer basisnya</h3>
-          <p>Memahami arsitektur client-server dan gimana HTTP jadi bahasa percakapan keduanya.</p>
+          <p>Memahami arsitektur client-server dan bagaimana HTTP menjadi bahasa percakapan keduanya.</p>
           <span class="tag">teori</span>
         </div>
         <div class="pcard">
@@ -999,8 +1007,8 @@ h2{
         </div>
         <div class="pcard">
           <div class="ic"><i data-lucide="rocket"></i></div>
-          <h3>Nyalain aplikasi</h3>
-          <p>Membuat aplikasi web pertama pakai Flask dan menjalankannya di browser.</p>
+          <h3>Jalankan aplikasi</h3>
+          <p>Membuat aplikasi web pertama dengan Flask dan menjalankannya di browser.</p>
           <span class="tag">praktik</span>
         </div>
       </div>
@@ -1011,8 +1019,8 @@ h2{
   <section class="slide" data-sec="Kelas" id="s4">
     <div class="content">
       <span class="kick"><span class="kd"></span>Rubrik penilaian</span>
-      <h2>Nilai lo dihitung dari mana</h2>
-      <p class="sub">Klik tiap kriteria buat lihat level penilaiannya — kode program paling ngemeng.</p>
+      <h2>Nilai kamu dihitung dari mana</h2>
+      <p class="sub">Klik setiap kriteria untuk melihat level penilaiannya — kode program paling menentukan.</p>
       <div class="slide-body rubric" id="rubric">
         <button class="rrow" data-k="inst">
           <span class="rhead">
@@ -1042,7 +1050,7 @@ h2{
         </button>
         <button class="rrow" data-k="uji">
           <span class="rhead">
-            <span><h3>Pengujian</h3><span class="rwhat">Semua route terbukti jalan di browser</span></span>
+            <span><h3>Pengujian</h3><span class="rwhat">Semua route terbukti berjalan di browser</span></span>
             <span class="rtrack"><span class="rfill" data-w="25"></span></span>
             <span class="rw">25%</span>
           </span>
@@ -1081,7 +1089,7 @@ h2{
           <div class="node client">
             <div class="nic"><i data-lucide="app-window"></i></div>
             <h3>Client</h3>
-            <p>Browser di komputer lo. Tugasnya: minta.</p>
+            <p>Browser di komputer kamu. Tugasnya: meminta.</p>
           </div>
           <div class="wirezone">
             <div class="wire"></div>
@@ -1096,7 +1104,7 @@ h2{
         <div class="csbtnrow">
           <button class="csbtn" id="csbtn"><i data-lucide="send"></i>Kirim request</button>
         </div>
-        <p class="csstat" id="csstat">Client nggak pernah ngasih — server nggak pernah nyerah. Coba kirim.</p>
+        <p class="csstat" id="csstat">Client tidak pernah memberi — server tidak pernah menyerah. Coba kirim.</p>
       </div>
     </div>
   </section>
@@ -1115,7 +1123,7 @@ h2{
           <button class="pad del" data-m="del">DELETE<span>menghapus data</span></button>
         </div>
         <div class="httplog" id="httplog" aria-live="polite"></div>
-        <p class="httpcap" id="httpcap">Contoh nyatanya: tiap lo buka halaman Instagram, browser ngirim <b>GET</b> ratusan kali.</p>
+        <p class="httpcap" id="httpcap">Contoh nyatanya: setiap kali kamu membuka halaman Instagram, browser mengirim <b>GET</b> ratusan kali.</p>
       </div>
     </div>
   </section>
@@ -1124,25 +1132,25 @@ h2{
   <section class="slide" data-sec="Dasar teori" id="s7">
     <div class="content">
       <span class="kick"><span class="kd"></span>Dasar teori · 3 dari 3</span>
-      <h2>Flask: framework kecil yang nggak ikut-ikutan</h2>
+      <h2>Flask: framework kecil yang tidak ikut-ikutan</h2>
       <p class="sub">Micro-framework web untuk Python — ringan, fleksibel, tinggal tambah sesuai kebutuhan.</p>
       <div class="slide-body cols c3">
         <div class="pcard">
           <div class="ic"><i data-lucide="flask-conical"></i></div>
           <h3>Flask</h3>
-          <p>Framework-nya sendiri. Nerima request, manggil kode lo, balas response. Satu file Python cukup buat start.</p>
+          <p>Framework-nya sendiri. Menerima request, memanggil kode kamu, membalas response. Satu file Python cukup untuk memulai.</p>
           <span class="tag">pip install flask</span>
         </div>
         <div class="pcard">
           <div class="ic"><i data-lucide="braces"></i></div>
           <h3>Jinja2</h3>
-          <p>Template engine bawaan Flask. Bikin HTML yang bisa diisi data dinamis dari Python.</p>
+          <p>Template engine bawaan Flask. Membuat HTML yang bisa diisi data dinamis dari Python.</p>
           <span class="tag">template engine</span>
         </div>
         <div class="pcard">
           <div class="ic"><i data-lucide="git-branch"></i></div>
           <h3>Micro apa maksudnya</h3>
-          <p>Inti kecil, sisanya pilihan. Nggak dikasih admin panel, ORM, atau aturan struktur folder — lo yang mutusin.</p>
+          <p>Inti kecil, sisanya pilihan. Tidak dikasih admin panel, ORM, atau aturan struktur folder — kamu yang memutuskan.</p>
           <span class="tag">no magic</span>
         </div>
       </div>
@@ -1153,8 +1161,8 @@ h2{
   <section class="slide" data-sec="Dasar teori" id="s8">
     <div class="content">
       <span class="kick"><span class="kd"></span>Perlengkapan</span>
-      <h2>Empat alat buat hari ini</h2>
-      <p class="sub">Semua gratis. Kalau ada yang belum ada, download sebelum praktik dimulai.</p>
+      <h2>Empat alat untuk hari ini</h2>
+      <p class="sub">Semua gratis. Jika ada yang belum ada, download sebelum praktik dimulai.</p>
       <div class="slide-body cols c4">
         <div class="tool">
           <div class="tic"><i data-lucide="terminal"></i></div>
@@ -1164,12 +1172,12 @@ h2{
         <div class="tool">
           <div class="tic"><i data-lucide="flask-conical"></i></div>
           <h3>Flask</h3>
-          <p>Framework web — nanti dipasang lewat pip</p>
+          <p>Framework web — nanti dipasang melalui pip</p>
         </div>
         <div class="tool">
           <div class="tic"><i data-lucide="code"></i></div>
           <h3>VS Code</h3>
-          <p>Code editor tempat kita nulis <code>app.py</code></p>
+          <p>Code editor tempat kita menulis <code>app.py</code></p>
         </div>
         <div class="tool">
           <div class="tic"><i data-lucide="globe"></i></div>
@@ -1187,7 +1195,7 @@ h2{
       <h2>Pasang Python dari situs resminya</h2>
       <div class="slide-body cols c2">
         <div>
-          <p class="sub" style="margin-bottom:16px">Unduh installer dari python.org, next-next sampai selesai — lalu jangan percaya, buktikan lewat terminal.</p>
+          <p class="sub" style="margin-bottom:16px">Unduh installer dari python.org, ikuti langkahnya sampai selesai — lalu jangan langsung percaya, buktikan melalui terminal.</p>
           <a class="linkchip" href="https://www.python.org/downloads/" target="_blank" rel="noopener"><i data-lucide="external-link"></i>python.org/downloads</a>
           <div class="term" style="margin-top:18px">
             <div class="termbar"><span class="tdot r"></span><span class="tdot y"></span><span class="tdot g"></span><span class="termtitle">terminal — cek versi</span></div>
@@ -1211,7 +1219,7 @@ h2{
   <section class="slide" data-sec="Praktik · Part 1" id="s10">
     <div class="content">
       <span class="kick"><span class="kd"></span>Praktikum · Part 1 — langkah 2 dari 4</span>
-      <h2>Bikin folder khusus buat proyek</h2>
+      <h2>Buat folder khusus untuk proyek</h2>
       <div class="slide-body cols c2">
         <div>
           <p class="sub" style="margin-bottom:16px">Satu proyek, satu folder — semuanya tinggal di dalamnya: kode, venv, dan file pendukung. Nama foldernya bebas — di contoh ini <b>PrakPemWeb</b>.</p>
@@ -1222,7 +1230,7 @@ h2{
           <span class="zoomtag"><i data-lucide="zoom-in"></i></span>
           <figcaption class="shotcap">
             <span class="stepchip c-blue">step 02</span>
-            <span><span class="shottitle">Bikin folder proyek</span><span class="shotnote">tampilan file explorer</span></span>
+            <span><span class="shottitle">Buat folder proyek</span><span class="shotnote">tampilan file explorer</span></span>
           </figcaption>
         </figure>
       </div>
@@ -1233,15 +1241,15 @@ h2{
   <section class="slide" data-sec="Praktik · Part 1" id="s11">
     <div class="content">
       <span class="kick"><span class="kd"></span>Praktikum · Part 1 — langkah 3 dari 4</span>
-      <h2>Virtual environment: kamar kos tiap proyek</h2>
+      <h2>Virtual environment: ruang terpisah setiap proyek</h2>
       <div class="slide-body cols c2-1">
         <div class="term">
-          <div class="termbar"><span class="tdot r"></span><span class="tdot y"></span><span class="tdot g"></span><span class="termtitle">PrakPemWeb — bikin venv</span></div>
+          <div class="termbar"><span class="tdot r"></span><span class="tdot y"></span><span class="tdot g"></span><span class="termtitle">PrakPemWeb — buat venv</span></div>
           <div class="termbody" id="t10"></div>
           <div class="termfoot"><button class="minibtn" data-replay="t10"><i data-lucide="rotate-ccw"></i>ulangi</button></div>
         </div>
         <div>
-          <p class="sub" style="margin-bottom:14px">Tanpa venv, semua proyek berbagi package Python yang sama — kayak satu kosan buat semua anak rumah. Dengan venv, tiap proyek punya kamar sendiri.</p>
+          <p class="sub" style="margin-bottom:14px">Tanpa venv, semua proyek berbagi package Python yang sama — seperti satu rumah bersama untuk semua penghuninya. Dengan venv, setiap proyek punya ruang sendiri.</p>
           <figure class="shotcard">
             <div class="imgwrap"><img src="img/step-03-venv.png" alt="Terminal menjalankan perintah python3 -m venv .venv" width="538" height="257" loading="lazy"></div>
             <span class="zoomtag"><i data-lucide="zoom-in"></i></span>
@@ -1259,7 +1267,7 @@ h2{
   <section class="slide" data-sec="Praktik · Part 1" id="s12">
     <div class="content">
       <span class="kick"><span class="kd"></span>Praktikum · Part 1 — langkah 4 dari 4</span>
-      <h2>Nyalakan venv-nya — sesuai sistem lo</h2>
+      <h2>Aktifkan venv — sesuai sistem kamu</h2>
       <div class="slide-body cols c2-1">
         <div>
           <div class="ostabs" id="ostabs">
@@ -1271,7 +1279,7 @@ h2{
             <div class="termbody" id="t11" style="min-height:150px;max-height:170px"></div>
             <div class="termfoot"><button class="minibtn" data-replay="t11"><i data-lucide="rotate-ccw"></i>ulangi</button></div>
           </div>
-          <p class="sub" style="margin-top:14px">Tanda venv aktif: Warp menampilkan nama environment di indikator Python-nya (di screenshot: <code style="font-family:var(--mono);color:var(--green-t)">PrakPemWeb 3.12.3</code>). Di shell biasa, prompt berubah jadi <code style="font-family:var(--mono);color:var(--green-t)">(.venv)</code> di depannya. Matiin kapan pun dengan <code style="font-family:var(--mono);color:var(--amber-t)">deactivate</code>.</p>
+          <p class="sub" style="margin-top:14px">Tanda venv aktif: Warp menampilkan nama environment di indikator Python-nya (di screenshot: <code style="font-family:var(--mono);color:var(--green-t)">PrakPemWeb 3.12.3</code>). Di shell biasa, prompt berubah menjadi <code style="font-family:var(--mono);color:var(--green-t)">(.venv)</code> di depannya. Matikan kapan pun dengan <code style="font-family:var(--mono);color:var(--amber-t)">deactivate</code>.</p>
         </div>
         <figure class="shotcard">
           <div class="imgwrap"><img src="img/step-04-activate.png" alt="Terminal menjalankan source .venv/bin/activate, indikator environment PrakPemWeb 3.12.3" width="1125" height="257" loading="lazy"></div>
@@ -1290,7 +1298,7 @@ h2{
     <div class="content">
       <span class="kick"><span class="kd"></span>Praktikum · Part 2 — pasang Flask</span>
       <h2>Satu perintah, tujuh paket</h2>
-      <p class="sub">Flask kecil, tapi dia nggak jalan sendirian — teman-temannya ikut terpasang ke venv kita, bukan ke sistem.</p>
+      <p class="sub">Flask kecil, tetapi ia tidak berjalan sendirian — teman-temannya ikut terpasang ke venv kita, bukan ke sistem.</p>
       <div class="slide-body cols c2">
         <div class="term">
           <div class="termbar"><span class="tdot r"></span><span class="tdot y"></span><span class="tdot g"></span><span class="termtitle">PrakPemWeb — pasang flask</span></div>
@@ -1339,7 +1347,7 @@ h2{
       <h2>app.py — sepuluh baris, klik semua</h2>
       <div class="slide-body codex">
         <div class="codepane">
-          <div class="codebar"><i data-lucide="file-code" style="width:13px;height:13px"></i><span class="fname">app.py</span><span style="margin-left:auto;color:#63748C"> klik barisnya</span></div>
+          <div class="codebar"><i data-lucide="file-code" style="width:13px;height:13px"></i><span class="fname">app.py</span><span style="margin-left:auto;color:#63748C"> klik barisnya</span><button class="minibtn copybtn" id="copyApp" type="button" aria-label="Salin kode app.py ke clipboard"><i data-lucide="copy"></i>salin</button></div>
           <div class="cl" data-x="import"><span class="ln">1</span><code><span class="kw">from</span> flask <span class="kw">import</span> Flask</code></div>
           <div class="cl" data-x="app"><span class="ln">2</span><code></code></div>
           <div class="cl" data-x="app"><span class="ln">3</span><code>app = <span class="fn">Flask</span>(__name__)</code></div>
@@ -1352,7 +1360,7 @@ h2{
         <div>
           <aside class="xplain" id="xplain">
             <h3>Baris <span id="xlno">1</span> · <span class="thecode" id="xlcode">from flask import Flask</span></h3>
-            <p id="xbody">Ambil class <b>Flask</b> dari package yang barusan lo pasang. Ini gerbangnya — tanpa baris ini, sisanya cuma teks.</p>
+            <p id="xbody">Ambil class <b>Flask</b> dari package yang baru saja kamu pasang. Ini gerbangnya — tanpa baris ini, sisanya hanya teks.</p>
           </aside>
           <figure class="shotcard" style="margin-top:12px;max-width:82%">
             <div class="imgwrap"><img src="img/step-07-app-py.png" alt="Tampilan VS Code dengan file app.py berisi kode Flask hello world" width="1517" height="629" loading="lazy"></div>
@@ -1370,7 +1378,7 @@ h2{
   <!-- 16 · P4: RUN -->
   <section class="slide" data-sec="Praktik · Part 4" id="s16">
     <div class="content">
-      <span class="kick"><span class="kd"></span>Praktikum · Part 4 — nyalakan</span>
+      <span class="kick"><span class="kd"></span>Praktikum · Part 4 — menjalankan</span>
       <h2>Jalankan: python app.py</h2>
       <div class="slide-body cols c2">
         <div class="term">
@@ -1383,7 +1391,7 @@ h2{
           <span class="zoomtag"><i data-lucide="zoom-in"></i></span>
           <figcaption class="shotcap">
             <span class="stepchip c-violet">step 08</span>
-            <span><span class="shottitle">Server nyala di terminal</span><span class="shotnote">debug mode on, debugger aktif, jalan di port 5001</span></span>
+            <span><span class="shottitle">Server aktif di terminal</span><span class="shotnote">debug mode aktif, debugger aktif, berjalan di port 5001</span></span>
           </figcaption>
         </figure>
       </div>
@@ -1397,7 +1405,7 @@ h2{
       <h2>127.0.0.1:5000 — ketuk pintunya</h2>
       <div class="slide-body cols c2">
         <div>
-          <p class="sub" style="margin-bottom:16px"><b>127.0.0.1</b> itu localhost — komputer lo sendiri. Default Flask jalan di port <b>5000</b>, jadi URL-nya <b>127.0.0.1:5000</b>. Kalau port 5000 sudah kepakai, Flask otomatis pindah — di screenshot ini dia jalan di <b>5001</b>, dan terminal selalu kasih tau lewat baris <b>Running on</b>. Ketik alamat yang muncul di browser, dan:</p>
+          <p class="sub" style="margin-bottom:16px"><b>127.0.0.1</b> itu localhost — komputer kamu sendiri. Secara default Flask berjalan di port <b>5000</b>, sehingga URL-nya <b>127.0.0.1:5000</b>. Jika port 5000 sudah terpakai, Flask otomatis pindah — di screenshot ini ia berjalan di <b>5001</b>, dan terminal selalu memberi tahu melalui baris <b>Running on</b>. Ketik alamat yang muncul di browser, dan:</p>
           <div class="browser" id="mockbrowser">
             <div class="btab"><span class="burl"><i data-lucide="lock"></i>127.0.0.1:5001</span><span>PrakPemWeb</span></div>
             <div class="bbody">
@@ -1413,7 +1421,7 @@ h2{
           <span class="zoomtag"><i data-lucide="zoom-in"></i></span>
           <figcaption class="shotcap">
             <span class="stepchip c-violet">step 09</span>
-            <span><span class="shottitle">Hello, World! di browser</span><span class="shotnote">moment pertama lo jadi web developer</span></span>
+            <span><span class="shottitle">Hello, World! di browser</span><span class="shotnote">momen pertama kamu menjadi web developer</span></span>
           </figcaption>
         </figure>
       </div>
@@ -1424,25 +1432,25 @@ h2{
   <section class="slide" data-sec="Praktik · Part 4" id="s18">
     <div class="content">
       <span class="kick"><span class="kd"></span>Praktikum · Part 4 — satu parameter penting</span>
-      <h2>debug=True itu ngapain sih</h2>
-      <p class="sub">Satu kata di baris terakhir yang ngubah pengalaman ngoding lo selagi development.</p>
+      <h2>Apa fungsi debug=True</h2>
+      <p class="sub">Satu kata di baris terakhir yang mengubah pengalaman coding kamu selama development.</p>
       <div class="slide-body cols c3">
         <div class="pcard">
           <div class="ic"><i data-lucide="refresh-cw"></i></div>
           <h3>Auto-reload</h3>
-          <p>Kode berubah, server restart sendiri. Nggak perlu Ctrl+C lalu jalanin ulang tiap koma.</p>
+          <p>Kode berubah, server restart sendiri. Tidak perlu Ctrl+C lalu jalankan ulang setiap kali.</p>
           <span class="tag">hemat hidup</span>
         </div>
         <div class="pcard">
           <div class="ic"><i data-lucide="bug"></i></div>
           <h3>Debugger aktif</h3>
-          <p>Error muncul langsung di browser lengkap dengan jejaknya — bukan cuma angka 500 misterius.</p>
+          <p>Error muncul langsung di browser lengkap dengan jejaknya — bukan hanya angka 500 misterius.</p>
           <span class="tag">temukan bug</span>
         </div>
         <div class="pcard">
           <div class="ic"><i data-lucide="alert-triangle"></i></div>
-          <h3>Cuma buat development</h3>
-          <p>Terminal lo sendiri ngingetin: jangan dipakai di production. Gunakan server WSGI saat online.</p>
+          <h3>Hanya untuk development</h3>
+          <p>Terminal kamu sendiri mengingatkan: jangan digunakan di production. Gunakan server WSGI saat online.</p>
           <span class="tag">jangan production</span>
         </div>
       </div>
@@ -1453,17 +1461,17 @@ h2{
   <section class="slide" data-sec="Bantuan" id="s19">
     <div class="content">
       <span class="kick"><span class="kd"></span>Bantuan cepat</span>
-      <h2>Kalau macet, cek ini dulu</h2>
+      <h2>Jika macet, cek ini dulu</h2>
       <p class="sub">Empat gangguan paling sering muncul di praktikum hari ini.</p>
       <div class="slide-body cols c4">
         <div class="tool">
           <div class="tic"><i data-lucide="terminal"></i></div>
-          <h3>python nggak dikenali</h3>
+          <h3>python tidak dikenali</h3>
           <p>Coba <code>python3</code>. Di Windows, pasang ulang Python + centang "Add Python to PATH".</p>
         </div>
         <div class="tool">
           <div class="tic"><i data-lucide="alert-triangle"></i></div>
-          <h3>Port 5000 sudah dipakai</h3>
+          <h3>Port 5000 sudah digunakan</h3>
           <p>Flask pindah ke port lain (mis. <code>5001</code>) — buka alamat di baris <code>Running on</code>.</p>
         </div>
         <div class="tool">
@@ -1473,8 +1481,8 @@ h2{
         </div>
         <div class="tool">
           <div class="tic"><i data-lucide="refresh-cw"></i></div>
-          <h3>Kode diubah, nggak berubah</h3>
-          <p>Pastikan <code>debug=True</code> biar auto-reload; kalau perlu restart server (Ctrl+C, jalan lagi).</p>
+          <h3>Kode diubah, tidak berubah</h3>
+          <p>Pastikan <code>debug=True</code> supaya auto-reload; jika perlu restart server (Ctrl+C, jalankan lagi).</p>
         </div>
       </div>
     </div>
@@ -1484,21 +1492,21 @@ h2{
   <section class="slide" data-sec="Tugas" id="s20">
     <div class="content">
       <span class="kick"><span class="kd"></span>Tugas praktikum — 30 menit</span>
-      <h2>Sekarang giliran lo</h2>
+      <h2>Sekarang giliran kamu</h2>
       <div class="slide-body tugas">
         <div>
           <div class="checks" id="checks">
             <button class="chk" data-i="0">
               <span class="box"><i data-lucide="check"></i></span>
-              <span><h4>Route /about</h4><p>Halaman "About Me" — tampilkan <code>Nama</code> dan <code>NIM</code> lo</p></span>
+              <span><h4>Route /about</h4><p>Halaman "About Me" — tampilkan <code>Nama</code> dan <code>NIM</code> kamu</p></span>
             </button>
             <button class="chk" data-i="1">
               <span class="box"><i data-lucide="check"></i></span>
-              <span><h4>Route /profile</h4><p>Halaman profile singkat versi lo sendiri</p></span>
+              <span><h4>Route /profile</h4><p>Halaman profile singkat versi kamu sendiri</p></span>
             </button>
             <button class="chk" data-i="2">
               <span class="box"><i data-lucide="check"></i></span>
-              <span><h4>Debug mode nyala</h4><p>Aplikasi otomatis reload saat kode berubah</p></span>
+              <span><h4>Mode debug aktif</h4><p>Aplikasi otomatis reload saat kode berubah</p></span>
             </button>
           </div>
           <p class="chprogress" id="chprog">0/3 selesai</p>
@@ -1537,7 +1545,7 @@ h2{
           <ul>
             <li>Upload file <b>.py dan screenshot</b> ke LMS</li>
             <li>Deadline: <b>sebelum pertemuan berikutnya</b></li>
-            <li>Uji dulu semua route di browser sebelum upload — yang dinilai: <b>yang jalan</b></li>
+            <li>Uji dulu semua route di browser sebelum upload — yang dinilai: <b>yang berjalan</b></li>
           </ul>
         </div>
       </div>
@@ -1567,11 +1575,11 @@ h2{
   <section class="slide" data-sec="Penutup" id="s23">
     <div class="content" style="max-width:840px">
       <span class="kick"><span class="kd"></span>Recap — pertemuan 01 selesai</span>
-      <h2>Hari ini, dari nol, lo sudah</h2>
+      <h2>Hari ini, dari nol, kamu sudah</h2>
       <div class="recaplist">
         <div class="rc"><span class="rcic"><i data-lucide="check"></i></span><p>Memahami percakapan <code>client &#8596; server</code> dan empat method HTTP</p></div>
-        <div class="rc"><span class="rcic"><i data-lucide="check"></i></span><p>Membikin <code>virtual environment</code> yang rapi dan pasang Flask di dalamnya</p></div>
-        <div class="rc"><span class="rcic"><i data-lucide="check"></i></span><p>Menjalankan <code>app.py</code> — web app pertama lo, live di <code>127.0.0.1:5000</code></p></div>
+        <div class="rc"><span class="rcic"><i data-lucide="check"></i></span><p>Membuat <code>virtual environment</code> yang rapi dan memasang Flask di dalamnya</p></div>
+        <div class="rc"><span class="rcic"><i data-lucide="check"></i></span><p>Menjalankan <code>app.py</code> — web app pertama kamu, live di <code>127.0.0.1:5000</code></p></div>
       </div>
       <p class="typeline"><span class="pr">$</span> <span id="logoutCmd"></span><span class="cur"></span></p>
       <p class="t-sub" style="margin-top:14px">Tugasnya jangan lupa: <b class="bignum">/about</b> dan <b class="bignum">/profile</b>, upload ke LMS sebelum pertemuan berikutnya. Sampai ketemu di P02.</p>
@@ -1678,7 +1686,7 @@ T.t9 = [
 T.t10 = [
   {c:'cmd', t:'python3 -m venv .venv'},
   {c:'',    t:'# tanpa output — dan itu tanda sukses'},
-  {c:'ok',  t:'.venv/ berhasil dibikin'}
+  {c:'ok',  t:'.venv/ berhasil dibuat'}
 ];
 T.t11nix = [
   {c:'cmd', t:'source .venv/bin/activate'},
@@ -1722,17 +1730,24 @@ T.t15 = [
   {c:'ok',  t:' * Debugger PIN: 142-626-400'}
 ];
 
+const VENV = new Set(['t12', 't13', 't15']);
+function promptHTML(venv){
+  return venv
+    ? '<span class="pr venvpr">(.venv) PrakPemWeb $ </span>'
+    : '<span class="pr">$ </span>';
+}
 function runTerm(id, onDone){
   const el = document.getElementById(id);
   const script = (id === 't11') ? (t11os === 'nix' ? T.t11nix : T.t11win) : T[id];
   if(!el || !script) return;
+  const venv = VENV.has(id);
   el.innerHTML = '';
   if(RM){
     script.forEach(st => {
       const d = document.createElement('div');
       d.className = 'ln ' + (st.c || '');
       if(st.c === 'cmd'){
-        d.innerHTML = '<span class="pr">$ </span><span class="cmd"></span>';
+        d.innerHTML = promptHTML(venv) + '<span class="cmd"></span>';
         d.querySelector('.cmd').textContent = st.t;
       } else d.textContent = st.t;
       el.appendChild(d);
@@ -1747,11 +1762,10 @@ function runTerm(id, onDone){
     if(st.c === 'cmd'){
       const line = document.createElement('div');
       line.className = 'ln';
-      const pr = document.createElement('span'); pr.className = 'pr'; pr.textContent = '$ ';
-      const cm = document.createElement('span'); cm.className = 'cmd';
-      const cur = document.createElement('span'); cur.className = 'cur';
-      line.append(pr, cm, cur);
+      line.innerHTML = promptHTML(venv) + '<span class="cmd"></span><span class="cur"></span>';
       el.appendChild(line);
+      const cm = line.querySelector('.cmd');
+      const cur = line.querySelector('.cur');
       let j = 0;
       (function ch(){
         if(j < st.t.length){ cm.textContent += st.t[j++]; setTimeout(ch, 42); }
@@ -1766,7 +1780,66 @@ function runTerm(id, onDone){
     }
   })();
 }
-$$('[data-replay]').forEach(b => b.onclick = () => runTerm(b.dataset.replay));
+function termCmds(id){
+  const script = (id === 't11') ? (t11os === 'nix' ? T.t11nix : T.t11win) : T[id];
+  return (script || []).filter(s => s.c === 'cmd').map(s => s.t).join('\n');
+}
+function copyText(text, done){
+  const fallback = () => {
+    const ta = document.createElement('textarea');
+    ta.value = text; ta.setAttribute('readonly', '');
+    ta.style.position = 'fixed'; ta.style.top = '-999px';
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); } catch(e){}
+    document.body.removeChild(ta);
+  };
+  if(navigator.clipboard && window.isSecureContext){
+    navigator.clipboard.writeText(text).then(done).catch(() => { fallback(); done(); });
+  } else { fallback(); done(); }
+}
+function flashBtn(btn, html){
+  const prev = btn.innerHTML;
+  btn.classList.add('done');
+  btn.innerHTML = html;
+  lucide.createIcons();
+  setTimeout(() => { btn.classList.remove('done'); btn.innerHTML = prev; lucide.createIcons(); }, 1500);
+}
+$$('[data-replay]').forEach(b => {
+  b.onclick = () => runTerm(b.dataset.replay);
+  const id = b.dataset.replay;
+  const cb = document.createElement('button');
+  cb.type = 'button';
+  cb.className = 'minibtn copybtn';
+  cb.setAttribute('aria-label', 'Salin perintah ke clipboard');
+  cb.innerHTML = '<i data-lucide="copy"></i>salin';
+  cb.onclick = () => copyText(termCmds(id), () => flashBtn(cb, '<i data-lucide="check"></i>tersalin'));
+  b.parentNode.insertBefore(cb, b.nextSibling);
+});
+$$('.term').forEach(term => {
+  const body = term.querySelector('.termbody');
+  const bar = term.querySelector('.termbar');
+  if(!body || !bar) return;
+  const venv = VENV.has(body.id);
+  const chip = document.createElement('span');
+  chip.className = 'envchip ' + (venv ? 'venv' : 'shell');
+  chip.textContent = venv ? 'venv aktif' : 'shell biasa';
+  bar.appendChild(chip);
+});
+const APP_PY = [
+  'from flask import Flask',
+  '',
+  'app = Flask(__name__)',
+  '',
+  "@app.route('/')",
+  'def hello_world():',
+  "    return 'Hello, World!'",
+  '',
+  "if __name__ == '__main__':",
+  '    app.run(debug=True)'
+].join('\n');
+const copyApp = document.getElementById('copyApp');
+if(copyApp) copyApp.onclick = () => copyText(APP_PY, () => flashBtn(copyApp, '<i data-lucide="check"></i>tersalin'));
+lucide.createIcons();
 
 /* ===================== OS TABS ===================== */
 $$('#ostabs .ostab').forEach(t => t.onclick = () => {
@@ -1778,25 +1851,25 @@ $$('#ostabs .ostab').forEach(t => t.onclick = () => {
 
 /* ===================== HTTP SIM ===================== */
 const HTTP = {
-  get: { cap: 'Contoh nyatanya: tiap lo buka halaman Instagram, browser ngirim <b>GET</b> ratusan kali.',
+  get: { cap: 'Contoh nyatanya: setiap kali kamu membuka halaman Instagram, browser mengirim <b>GET</b> ratusan kali.',
     lines: [
       '<span class="m get">GET</span> /halaman HTTP/1.1',
-      '<span class="arrow">&#8594;</span> server: nyari halamannya',
+      '<span class="arrow">&#8594;</span> server: mencari halamannya',
       '<span class="arrow">&#8592;</span> <span class="st">200 OK</span> — halaman dikirim ke browser'
     ]},
-  post: { cap: 'Submit formulir pendaftaran? Itu <b>POST</b> — ngirim data baru ke server.',
+  post: { cap: 'Submit formulir pendaftaran? Itu <b>POST</b> — mengirim data baru ke server.',
     lines: [
       '<span class="m post">POST</span> /daftar HTTP/1.1',
       '<span class="arrow">&#8594;</span> server: terima data (nama, email)',
       '<span class="arrow">&#8592;</span> <span class="st">201 Created</span> — akun baru tersimpan'
     ]},
-  put: { cap: 'Edit profil di media sosial — perubahan lo dikirim lewat <b>PUT</b>.',
+  put: { cap: 'Edit profil di media sosial — perubahan kamu dikirim melalui <b>PUT</b>.',
     lines: [
       '<span class="m put">PUT</span> /profil/123 HTTP/1.1',
       '<span class="arrow">&#8594;</span> server: update data profil #123',
       '<span class="arrow">&#8592;</span> <span class="st">200 OK</span> — profil ter-update'
     ]},
-  del: { cap: 'Hapus postingan — browser ngirim <b>DELETE</b>, data dihapus di server.',
+  del: { cap: 'Hapus postingan — browser mengirim <b>DELETE</b>, data dihapus di server.',
     lines: [
       '<span class="m del">DELETE</span> /post/456 HTTP/1.1',
       '<span class="arrow">&#8594;</span> server: hapus post #456',
@@ -1841,7 +1914,7 @@ $('#csbtn').onclick = () => {
   setTimeout(() => {
     pk.classList.remove('show');
     csBusy = false;
-    stat.textContent = 'perjalanan ke-' + trips + ' selesai — kapan pun lo mau lagi';
+    stat.textContent = 'perjalanan ke-' + trips + ' selesai — kapan pun kamu ingin lagi';
   }, 2600);
 };
 
@@ -1855,13 +1928,13 @@ $$('#rubric .rrow').forEach(r => r.onclick = () => {
 /* ===================== CODE EXPLORER ===================== */
 let codeInit = false;
 const EXPL = {
-  import: { n:'1', c:'from flask import Flask', b:'Ambil class <b>Flask</b> dari package yang barusan lo pasang. Ini gerbangnya — tanpa baris ini, sisanya cuma teks.' },
-  app: { n:'3', c:'app = Flask(__name__)', b:'Bikin instance aplikasi Flask. <b>__name__</b> ngasih tau Flask nama modul ini — dia pakai itu buat nyari file template & static nanti.' },
+  import: { n:'1', c:'from flask import Flask', b:'Ambil class <b>Flask</b> dari package yang baru saja kamu pasang. Ini gerbangnya — tanpa baris ini, sisanya hanya teks.' },
+  app: { n:'3', c:'app = Flask(__name__)', b:'Membuat instance aplikasi Flask. <b>__name__</b> memberi tahu Flask nama modul ini — Flask menggunakannya untuk mencari file template & static nanti.' },
   route: { n:'5', c:"@app.route('/')", b:'<b>Decorator:</b> daftarin path <b>/</b> ke fungsi di bawahnya. Path <b>/</b> = halaman depan. Ini inti routing Flask.' },
-  def: { n:'6', c:'def hello_world():', b:'Fungsi yang dijalankan pas <b>/</b> dikunjungi. Nama fungsinya bebas — <b>hello_world</b> cuma kebiasaan.' },
+  def: { n:'6', c:'def hello_world():', b:'Fungsi yang dijalankan saat <b>/</b> dikunjungi. Nama fungsinya bebas — <b>hello_world</b> hanya konvensi.' },
   ret: { n:'7', c:"return 'Hello, World!'", b:'Nilai yang dibalas ke browser. Teks ini yang muncul di layar — coba ganti, refresh, lihat berubah.' },
-  main: { n:'9', c:"if __name__ == '__main__':", b:'Server jalan cuma kalau file ini <b>dieksekusi langsung</b> — kalau di-import dari file lain, blok ini dilewati.' },
-  run: { n:'10', c:'app.run(debug=True)', b:'Nyalain server development bawaan Flask + <b>debug mode</b>: auto-reload & debugger aktif — lihat dua slide berikutnya.' }
+  main: { n:'9', c:"if __name__ == '__main__':", b:'Server berjalan hanya jika file ini <b>dieksekusi langsung</b> — jika di-import dari file lain, blok ini dilewati.' },
+  run: { n:'10', c:'app.run(debug=True)', b:'Jalankan server development bawaan Flask + <b>debug mode</b>: auto-reload & debugger aktif — lihat dua slide berikutnya.' }
 };
 function selectLine(cl){
   $$('#s15 .cl').forEach(x => x.classList.remove('act'));
@@ -1923,11 +1996,11 @@ $('#treset').onclick = () => {
 /* ===================== QUIZ ===================== */
 let quizInit = false;
 const QS = [
-  { q: 'Method HTTP yang dipakai buat MENGAMBIL data dari server?', o: ['GET', 'POST', 'PUT', 'DELETE'], a: 0 },
-  { q: 'Lo mau kirim data formulir pendaftaran ke server. Method yang tepat?', o: ['GET', 'POST', 'PUT', 'DELETE'], a: 1 },
-  { q: 'Perintah untuk bikin virtual environment baru bernama .venv?', o: ['pip install .venv', 'python venv --new', 'python -m venv .venv', 'source .venv'], a: 2 },
-  { q: 'Flask jalan di port berapa secara default?', o: ['80', '3000', '8080', '5000'], a: 3 },
-  { q: 'Template engine yang dipakai Flask?', o: ['Jinja2', 'Django', 'Tailwind', 'Laravel'], a: 0 }
+  { q: 'Method HTTP yang digunakan untuk MENGAMBIL data dari server?', o: ['GET', 'POST', 'PUT', 'DELETE'], a: 0 },
+  { q: 'Kamu ingin mengirim data formulir pendaftaran ke server. Method yang tepat?', o: ['GET', 'POST', 'PUT', 'DELETE'], a: 1 },
+  { q: 'Perintah untuk membuat virtual environment baru bernama .venv?', o: ['pip install .venv', 'python venv --new', 'python -m venv .venv', 'source .venv'], a: 2 },
+  { q: 'Flask berjalan di port berapa secara default?', o: ['80', '3000', '8080', '5000'], a: 3 },
+  { q: 'Template engine yang digunakan Flask?', o: ['Jinja2', 'Django', 'Tailwind', 'Laravel'], a: 0 }
 ];
 let qi = 0, qscore = 0, qmarks = [];
 function renderQ(reset){
@@ -1960,10 +2033,10 @@ function renderQ(reset){
 }
 function renderQEnd(){
   const col = qscore === 5 ? 'var(--green-t)' : qscore === 4 ? 'var(--blue-t)' : qscore === 3 ? 'var(--amber-t)' : 'var(--coral-t)';
-  const msg = qscore === 5 ? 'Sempurna — lo siap nyambung ke P02.'
-    : qscore === 4 ? 'Sikat — satu review kecil dan lo aman.'
-    : qscore === 3 ? 'Lumayan — coba buka lagi slide teorinya.'
-    : 'Buka lagi bagian teori dan praktiknya pelan-pelan, nggak apa-apa.';
+  const msg = qscore === 5 ? 'Sempurna — kamu siap lanjut ke P02.'
+    : qscore === 4 ? 'Bagus — satu review kecil dan kamu aman.'
+    : qscore === 3 ? 'Cukup baik — coba buka lagi slide teorinya.'
+    : 'Buka lagi bagian teori dan praktiknya pelan-pelan, tidak apa-apa.';
   $('#qno').textContent = 'Hasil';
   $('#qdots').innerHTML = QS.map((_, i) => '<i class="' + (qmarks[i] ? 'ok' : 'bad') + '"></i>').join('');
   $('#qq').innerHTML = '<span class="qscore" style="color:' + col + '">' + qscore + '/5</span>';
