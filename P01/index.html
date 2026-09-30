@@ -985,6 +985,11 @@ h2{
 }
 .blobs.paused::before,.blobs.paused::after{animation-play-state:paused}
 
+/* ===== HP: sembunyikan cetak & layar penuh ===== */
+@media (max-width:640px),(max-height:500px){
+  .fsbtn{display:none!important}
+}
+
 /* ===== JALUR WINDOWS ===== */
 .termbody .winpr{color:#5CA9FF}
 .winstack{display:grid;gap:14px}
