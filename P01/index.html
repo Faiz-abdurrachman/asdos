@@ -710,13 +710,12 @@ h2{
 }
 .timerbox .tlab{font:600 11.5px/1 var(--sans);color:var(--faint);letter-spacing:.02em}
 .tdigits{
-  font:700 clamp(44px,5.4vw,68px)/1.1 var(--mono);color:var(--ink);
-  margin:10px 0 14px;font-variant-numeric:tabular-nums;
+  font:700 clamp(30px,4.6vw,56px)/1.1 var(--mono);color:var(--ink);
+  margin:10px 0 16px;font-variant-numeric:tabular-nums;
   transition:.3s;
 }
 .tdigits.run{color:var(--amber-t);text-shadow:0 0 26px rgba(255,194,77,.55)}
 .tdigits.end{color:var(--coral-t);text-shadow:0 0 26px rgba(255,98,87,.5)}
-.tctrl{display:flex;justify-content:center;gap:10px}
 .tbtn{
   border:1px solid var(--glass-bd);
   background:var(--spec-top),var(--grad-glass);
@@ -1826,13 +1825,9 @@ h2{
           <p class="chprogress" id="chprog">0/3 selesai</p>
         </div>
         <div class="timerbox">
-          <span class="tlab">SISA WAKTU</span>
-          <div class="tdigits" id="tdigits">30:00</div>
-          <div class="tctrl">
-            <button class="tbtn go" id="tstart"><i data-lucide="play"></i>Mulai</button>
-            <button class="tbtn" id="treset"><i data-lucide="rotate-ccw"></i>Reset</button>
-          </div>
-          <p class="tnote">deadline: sebelum pertemuan berikutnya</p>
+          <span class="tlab">SISA WAKTU · hari : jam : menit : detik</span>
+          <div class="tdigits" id="tdigits">00:00:00:00</div>
+          <p class="tnote">deadline: Rabu, 7 Oktober 2026, 23.59</p>
         </div>
       </div>
     </div>
@@ -2371,44 +2366,32 @@ function showBrowser(){
   $('#bstate').textContent = '200 OK — localhost merespon';
 }
 
-/* ===================== CHECKLIST + TIMER ===================== */
+/* ===================== CHECKLIST + HITUNG MUNDUR ===================== */
 $$('.chk').forEach(c => c.onclick = () => {
   c.classList.toggle('done');
   const n = $$('.chk.done').length;
   $('#chprog').textContent = n + '/3 selesai' + (n === 3 ? ' — gas upload ke LMS' : '');
 });
-let tsec = 1800, trunning = false, tint = null;
+const DEADLINE = new Date(2026, 9, 7, 23, 59, 0);
 function tdraw(){
-  const m = String(Math.floor(tsec / 60)).padStart(2, '0');
-  const s = String(tsec % 60).padStart(2, '0');
   const el = $('#tdigits');
-  el.textContent = m + ':' + s;
-  el.classList.toggle('run', trunning && tsec > 0);
-  el.classList.toggle('end', tsec === 0);
-  if(tsec === 0) $('.tnote').textContent = 'waktu habis — screenshot hasilnya, upload ke LMS';
+  if(!el) return;
+  let diff = Math.max(0, Math.floor((DEADLINE - Date.now()) / 1000));
+  const dd = Math.floor(diff / 86400); diff -= dd * 86400;
+  const hh = Math.floor(diff / 3600); diff -= hh * 3600;
+  const mm = Math.floor(diff / 60);
+  const ss = diff - mm * 60;
+  const p = n => String(n).padStart(2, '0');
+  const over = DEADLINE - Date.now() <= 0;
+  el.textContent = p(dd) + ':' + p(hh) + ':' + p(mm) + ':' + p(ss);
+  el.classList.toggle('end', over);
+  el.classList.toggle('run', !over);
+  const note = document.querySelector('.tnote');
+  if(note) note.textContent = over
+    ? 'waktu habis — screenshot hasilnya, upload ke LMS'
+    : 'deadline: Rabu, 7 Oktober 2026, 23.59';
 }
-$('#tstart').onclick = () => {
-  if(tsec === 0) return;
-  trunning = !trunning;
-  $('#tstart').innerHTML = trunning
-    ? '<i data-lucide="pause"></i>Jeda'
-    : '<i data-lucide="play"></i>Mulai';
-  lucide.createIcons();
-  if(trunning){
-    tint = setInterval(() => {
-      if(tsec > 0){ tsec--; tdraw(); }
-      if(tsec === 0){ trunning = false; clearInterval(tint); }
-    }, 1000);
-  } else clearInterval(tint);
-};
-$('#treset').onclick = () => {
-  clearInterval(tint);
-  trunning = false; tsec = 1800;
-  $('#tstart').innerHTML = '<i data-lucide="play"></i>Mulai';
-  $('.tnote').textContent = 'deadline: sebelum pertemuan berikutnya';
-  lucide.createIcons();
-  tdraw();
-};
+setInterval(tdraw, 1000);
 
 /* ===================== QUIZ ===================== */
 let quizInit = false;
