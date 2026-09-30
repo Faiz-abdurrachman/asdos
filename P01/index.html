@@ -9,8 +9,27 @@
 <title>P01 · Pengenalan Pemrograman Web & Python — Deck Interaktif</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>
+(function(){
+const ICONS={"zoom-in":"<circle cx=\"11\" cy=\"11\" r=\"8\" /> <line x1=\"21\" x2=\"16.65\" y1=\"21\" y2=\"16.65\" /> <line x1=\"11\" x2=\"11\" y1=\"8\" y2=\"14\" /> <line x1=\"8\" x2=\"14\" y1=\"11\" y2=\"11\" />","rotate-ccw":"<path d=\"M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8\" /> <path d=\"M3 3v5h5\" />","check":"<path d=\"M20 6 9 17l-5-5\" />","play":"<path d=\"M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z\" />","terminal":"<path d=\"M12 19h8\" /> <path d=\"m4 17 6-6-6-6\" />","refresh-cw":"<path d=\"M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8\" /> <path d=\"M21 3v5h-5\" /> <path d=\"M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16\" /> <path d=\"M8 16H3v5\" />","package":"<path d=\"M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z\" /> <path d=\"M12 22V12\" /> <polyline points=\"3.29 7 12 12 20.71 7\" /> <path d=\"m7.5 4.27 9 5.15\" />","globe":"<circle cx=\"12\" cy=\"12\" r=\"10\" /> <path d=\"M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20\" /> <path d=\"M2 12h20\" />","flask-conical":"<path d=\"M14 2v6a2 2 0 0 0 .245.96l5.51 10.08A2 2 0 0 1 18 22H6a2 2 0 0 1-1.755-2.96l5.51-10.08A2 2 0 0 0 10 8V2\" /> <path d=\"M6.453 15h11.094\" /> <path d=\"M8.5 2h7\" />","external-link":"<path d=\"M15 3h6v6\" /> <path d=\"M10 14 21 3\" /> <path d=\"M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6\" />","download":"<path d=\"M12 15V3\" /> <path d=\"M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4\" /> <path d=\"m7 10 5 5 5-5\" />","copy":"<rect width=\"14\" height=\"14\" x=\"8\" y=\"8\" rx=\"2\" ry=\"2\" /> <path d=\"M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2\" />","alert-triangle":"<path d=\"m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3\" /> <path d=\"M12 9v4\" /> <path d=\"M12 17h.01\" />","x":"<path d=\"M18 6 6 18\" /> <path d=\"m6 6 12 12\" />","upload":"<path d=\"M12 3v12\" /> <path d=\"m17 8-5-5-5 5\" /> <path d=\"M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4\" />","server":"<rect width=\"20\" height=\"8\" x=\"2\" y=\"2\" rx=\"2\" ry=\"2\" /> <rect width=\"20\" height=\"8\" x=\"2\" y=\"14\" rx=\"2\" ry=\"2\" /> <line x1=\"6\" x2=\"6.01\" y1=\"6\" y2=\"6\" /> <line x1=\"6\" x2=\"6.01\" y1=\"18\" y2=\"18\" />","send":"<path d=\"M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z\" /> <path d=\"m21.854 2.147-10.94 10.939\" />","rocket":"<path d=\"M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5\" /> <path d=\"M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09\" /> <path d=\"M9 12a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.4 22.4 0 0 1-4 2z\" /> <path d=\"M9 12H4s.55-3.03 2-4c1.62-1.08 5 .05 5 .05\" />","printer":"<path d=\"M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2\" /> <path d=\"M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6\" /> <rect x=\"6\" y=\"14\" width=\"12\" height=\"8\" rx=\"1\" />","pause":"<rect x=\"14\" y=\"3\" width=\"5\" height=\"18\" rx=\"1\" /> <rect x=\"5\" y=\"3\" width=\"5\" height=\"18\" rx=\"1\" />","maximize-2":"<path d=\"M15 3h6v6\" /> <path d=\"m21 3-7 7\" /> <path d=\"m3 21 7-7\" /> <path d=\"M9 21H3v-6\" />","lock":"<rect width=\"18\" height=\"11\" x=\"3\" y=\"11\" rx=\"2\" ry=\"2\" /> <path d=\"M7 11V7a5 5 0 0 1 10 0v4\" />","list-checks":"<path d=\"M13 5h8\" /> <path d=\"M13 12h8\" /> <path d=\"M13 19h8\" /> <path d=\"m3 17 2 2 4-4\" /> <path d=\"m3 7 2 2 4-4\" />","git-branch":"<path d=\"M15 6a9 9 0 0 0-9 9V3\" /> <circle cx=\"18\" cy=\"6\" r=\"3\" /> <circle cx=\"6\" cy=\"18\" r=\"3\" />","file-code":"<path d=\"M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z\" /> <path d=\"M14 2v5a1 1 0 0 0 1 1h5\" /> <path d=\"M10 12.5 8 15l2 2.5\" /> <path d=\"m14 12.5 2 2.5-2 2.5\" />","code":"<path d=\"m16 18 6-6-6-6\" /> <path d=\"m8 6-6 6 6 6\" />","chevron-right":"<path d=\"m9 18 6-6-6-6\" />","chevron-left":"<path d=\"m15 18-6-6 6-6\" />","bug":"<path d=\"M12 20v-9\" /> <path d=\"M14 7a4 4 0 0 1 4 4v3a6 6 0 0 1-12 0v-3a4 4 0 0 1 4-4z\" /> <path d=\"M14.12 3.88 16 2\" /> <path d=\"M21 21a4 4 0 0 0-3.81-4\" /> <path d=\"M21 5a4 4 0 0 1-3.55 3.97\" /> <path d=\"M22 13h-4\" /> <path d=\"M3 21a4 4 0 0 1 3.81-4\" /> <path d=\"M3 5a4 4 0 0 0 3.55 3.97\" /> <path d=\"M6 13H2\" /> <path d=\"m8 2 1.88 1.88\" /> <path d=\"M9 7.13V6a3 3 0 1 1 6 0v1.13\" />","braces":"<path d=\"M8 3H7a2 2 0 0 0-2 2v5a2 2 0 0 1-2 2 2 2 0 0 1 2 2v5c0 1.1.9 2 2 2h1\" /> <path d=\"M16 21h1a2 2 0 0 0 2-2v-5c0-1.1.9-2 2-2a2 2 0 0 1-2-2V5a2 2 0 0 0-2-2h-1\" />","app-window":"<rect x=\"2\" y=\"4\" width=\"20\" height=\"16\" rx=\"2\" /> <path d=\"M10 4v4\" /> <path d=\"M2 8h20\" /> <path d=\"M6 4v4\" />"};
+window.lucide={createIcons:function(){
+document.querySelectorAll('i[data-lucide]').forEach(function(el){
+const name=el.getAttribute('data-lucide'),inner=ICONS[name];
+if(!inner)return;
+const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');
+svg.setAttribute('xmlns','http://www.w3.org/2000/svg');
+svg.setAttribute('width','24');svg.setAttribute('height','24');
+svg.setAttribute('viewBox','0 0 24 24');svg.setAttribute('fill','none');
+svg.setAttribute('stroke','currentColor');svg.setAttribute('stroke-width','2');
+svg.setAttribute('stroke-linecap','round');svg.setAttribute('stroke-linejoin','round');
+Array.prototype.forEach.call(el.attributes,function(a){if(a.name!=='data-lucide')svg.setAttribute(a.name,a.value);});
+svg.innerHTML=inner;
+el.replaceWith(svg);
+});
+}};
+})();
+</script>
 <style>
 :root{
   --bg-body:#C9D8EE;
@@ -957,6 +976,15 @@ h2{
 }
 .fsmode .hintchip,.fsmode .corner{display:none}
 
+/* ===== HEMAT GPU DI HP ===== */
+@media (max-width:640px),(max-height:500px){
+  :root{--grad-glass:linear-gradient(160deg,rgba(255,255,255,.95) 0%,rgba(255,255,255,.85) 100%)}
+  *{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+  .blobs::before,.blobs::after{animation:none!important}
+  .slide{filter:none!important;transition:opacity .3s ease,transform .3s ease,visibility .3s}
+}
+.blobs.paused::before,.blobs.paused::after{animation-play-state:paused}
+
 /* ===== JALUR WINDOWS ===== */
 .termbody .winpr{color:#5CA9FF}
 .winstack{display:grid;gap:14px}
@@ -1337,7 +1365,7 @@ h2{
           </div>
         </div>
         <figure class="shotcard">
-          <div class="imgwrap"><img src="img/step-01-download-python.png" alt="Halaman python.org dengan tombol Download Python 3.14.7 disorot" width="1213" height="519" loading="lazy"></div>
+          <div class="imgwrap"><img src="img/step-01-download-python.webp" alt="Halaman python.org dengan tombol Download Python 3.14.7 disorot" width="1213" height="519" loading="lazy" decoding="async"></div>
           <span class="zoomtag"><i data-lucide="zoom-in"></i></span>
           <figcaption class="shotcap">
             <span class="stepchip c-blue">step 01</span>
@@ -1368,7 +1396,7 @@ h2{
         </div>
         <div class="winstack two">
           <figure class="shotcard">
-            <div class="imgwrap"><img src="img/win-01-download-page.jpg" alt="Halaman python.org bagian Windows dengan tombol install manager dan tautan standalone installer Python 3.14.7" width="711" height="496" loading="lazy"></div>
+            <div class="imgwrap"><img src="img/win-01-download-page.webp" alt="Halaman python.org bagian Windows dengan tombol install manager dan tautan standalone installer Python 3.14.7" width="711" height="496" loading="lazy" decoding="async"></div>
             <span class="zoomtag"><i data-lucide="zoom-in"></i></span>
             <figcaption class="shotcap">
               <span class="stepchip c-blue">win 01</span>
@@ -1376,7 +1404,7 @@ h2{
             </figcaption>
           </figure>
           <figure class="shotcard">
-            <div class="imgwrap"><img src="img/win-02-download-history.jpg" alt="Riwayat unduhan browser menampilkan python-3.14.7-amd64.exe berukuran 31,7 MB berstatus Done" width="342" height="140" loading="lazy"></div>
+            <div class="imgwrap"><img src="img/win-02-download-history.webp" alt="Riwayat unduhan browser menampilkan python-3.14.7-amd64.exe berukuran 31,7 MB berstatus Done" width="342" height="140" loading="lazy" decoding="async"></div>
             <span class="zoomtag"><i data-lucide="zoom-in"></i></span>
             <figcaption class="shotcap">
               <span class="stepchip c-blue">win 02</span>
@@ -1404,7 +1432,7 @@ h2{
           <p class="winwarn" id="pathwarn">Tanpa centang ini, terminal menjawab: <b>'python' is not recognized&hellip;</b> — dan kamu harus memasang ulang sambil mengaktifkan opsi ini.</p>
         </div>
         <figure class="shotcard">
-          <div class="imgwrap"><img src="img/win-03-installer-path.jpg" alt="Jendela installer Python 3.14.7 dengan opsi Install Now disorot dan kotak Add python.exe to PATH tercentang" width="653" height="411" loading="lazy"></div>
+          <div class="imgwrap"><img src="img/win-03-installer-path.webp" alt="Jendela installer Python 3.14.7 dengan opsi Install Now disorot dan kotak Add python.exe to PATH tercentang" width="653" height="411" loading="lazy" decoding="async"></div>
           <span class="zoomtag"><i data-lucide="zoom-in"></i></span>
           <figcaption class="shotcap">
             <span class="stepchip c-blue">win 03</span>
@@ -1430,7 +1458,7 @@ h2{
         </div>
         <div class="winstack two">
           <figure class="shotcard">
-            <div class="imgwrap"><img src="img/win-04-setup-progress.jpg" alt="Jendela Setup Progress sedang memasang Python 3.14.7 Core Interpreter 64-bit" width="656" height="415" loading="lazy"></div>
+            <div class="imgwrap"><img src="img/win-04-setup-progress.webp" alt="Jendela Setup Progress sedang memasang Python 3.14.7 Core Interpreter 64-bit" width="656" height="415" loading="lazy" decoding="async"></div>
             <span class="zoomtag"><i data-lucide="zoom-in"></i></span>
             <figcaption class="shotcap">
               <span class="stepchip c-blue">win 04</span>
@@ -1438,7 +1466,7 @@ h2{
             </figcaption>
           </figure>
           <figure class="shotcard">
-            <div class="imgwrap"><img src="img/win-05-setup-success.jpg" alt="Jendela Setup was successful menandakan instalasi Python 3.14.7 selesai" width="656" height="415" loading="lazy"></div>
+            <div class="imgwrap"><img src="img/win-05-setup-success.webp" alt="Jendela Setup was successful menandakan instalasi Python 3.14.7 selesai" width="656" height="415" loading="lazy" decoding="async"></div>
             <span class="zoomtag"><i data-lucide="zoom-in"></i></span>
             <figcaption class="shotcap">
               <span class="stepchip c-blue">win 05</span>
@@ -1466,7 +1494,7 @@ h2{
         </div>
         <div class="winstack">
           <figure class="shotcard">
-            <div class="imgwrap"><img src="img/win-06-open-terminal.jpg" alt="Menu Start Windows dengan pencarian terminal dan hasil Terminal di urutan teratas" width="640" height="303" loading="lazy"></div>
+            <div class="imgwrap"><img src="img/win-06-open-terminal.webp" alt="Menu Start Windows dengan pencarian terminal dan hasil Terminal di urutan teratas" width="640" height="303" loading="lazy" decoding="async"></div>
             <span class="zoomtag"><i data-lucide="zoom-in"></i></span>
             <figcaption class="shotcap">
               <span class="stepchip c-blue">win 06</span>
@@ -1474,7 +1502,7 @@ h2{
             </figcaption>
           </figure>
           <figure class="shotcard">
-            <div class="imgwrap"><img src="img/win-07-verify-version.jpg" alt="Windows PowerShell menjalankan python --version dan pip --version menampilkan Python 3.14.7 dan pip 26.2.1" width="957" height="183" loading="lazy"></div>
+            <div class="imgwrap"><img src="img/win-07-verify-version.webp" alt="Windows PowerShell menjalankan python --version dan pip --version menampilkan Python 3.14.7 dan pip 26.2.1" width="957" height="183" loading="lazy" decoding="async"></div>
             <span class="zoomtag"><i data-lucide="zoom-in"></i></span>
             <figcaption class="shotcap">
               <span class="stepchip c-blue">win 07</span>
@@ -1502,7 +1530,7 @@ h2{
           <p class="sub" style="margin-top:12px;font-size:13px">Tanpa mengetik: di File Explorer klik kanan folder → <b>Open in Terminal</b>; di VS Code <b>File → Open Folder</b>; di macOS klik kanan folder → <b>New Terminal at Folder</b>.</p>
         </div>
         <figure class="shotcard">
-          <div class="imgwrap"><img src="img/step-02-buat-folder.png" alt="File explorer menampilkan folder proyek PrakPemWeb yang baru dibuat" width="538" height="257" loading="lazy"></div>
+          <div class="imgwrap"><img src="img/step-02-buat-folder.webp" alt="File explorer menampilkan folder proyek PrakPemWeb yang baru dibuat" width="538" height="257" loading="lazy" decoding="async"></div>
           <span class="zoomtag"><i data-lucide="zoom-in"></i></span>
           <figcaption class="shotcap">
             <span class="stepchip c-blue">step 02</span>
@@ -1533,7 +1561,7 @@ h2{
         <div>
           <p class="sub" style="margin-bottom:14px">Tanpa venv, semua proyek berbagi package Python yang sama — seperti satu rumah bersama untuk semua penghuninya. Dengan venv, setiap proyek punya ruang sendiri. Perintahnya beda tipis: <code style="font-family:var(--mono);color:var(--blue-t)">python3</code> di Linux/macOS, <code style="font-family:var(--mono);color:var(--blue-t)">python</code> di Windows.</p>
           <figure class="shotcard">
-            <div class="imgwrap"><img src="img/step-03-venv.png" alt="Terminal menjalankan perintah python3 -m venv .venv di dalam folder proyek" width="538" height="257" loading="lazy"></div>
+            <div class="imgwrap"><img src="img/step-03-venv.webp" alt="Terminal menjalankan perintah python3 -m venv .venv di dalam folder proyek" width="538" height="257" loading="lazy" decoding="async"></div>
             <span class="zoomtag"><i data-lucide="zoom-in"></i></span>
             <figcaption class="shotcap">
               <span class="stepchip c-blue">step 03</span>
@@ -1564,7 +1592,7 @@ h2{
           <p class="sub" style="margin-top:14px">Tanda venv aktif: Warp menampilkan nama environment di indikator Python-nya (di screenshot: <code style="font-family:var(--mono);color:var(--green-t)">PrakPemWeb 3.12.3</code>). Di shell biasa, prompt berubah menjadi <code style="font-family:var(--mono);color:var(--green-t)">(.venv)</code> di depannya. Matikan kapan pun dengan <code style="font-family:var(--mono);color:var(--amber-t)">deactivate</code>.</p>
         </div>
         <figure class="shotcard">
-          <div class="imgwrap"><img src="img/step-04-activate.png" alt="Terminal menjalankan source .venv/bin/activate, indikator environment PrakPemWeb 3.12.3" width="1125" height="257" loading="lazy"></div>
+          <div class="imgwrap"><img src="img/step-04-activate.webp" alt="Terminal menjalankan source .venv/bin/activate, indikator environment PrakPemWeb 3.12.3" width="1125" height="257" loading="lazy" decoding="async"></div>
           <span class="zoomtag"><i data-lucide="zoom-in"></i></span>
           <figcaption class="shotcap">
             <span class="stepchip c-blue">step 04</span>
@@ -1588,7 +1616,7 @@ h2{
           <div class="termfoot"><button class="minibtn" data-replay="t12"><i data-lucide="rotate-ccw"></i>ulangi</button></div>
         </div>
         <figure class="shotcard">
-          <div class="imgwrap"><img src="img/step-05-pip-install.png" alt="Output pip install flask beserta daftar dependensi yang ikut terpasang" width="1127" height="622" loading="lazy"></div>
+          <div class="imgwrap"><img src="img/step-05-pip-install.webp" alt="Output pip install flask beserta daftar dependensi yang ikut terpasang" width="1127" height="622" loading="lazy" decoding="async"></div>
           <span class="zoomtag"><i data-lucide="zoom-in"></i></span>
           <figcaption class="shotcap">
             <span class="stepchip c-green">step 05</span>
@@ -1611,7 +1639,7 @@ h2{
           <div class="termfoot"><button class="minibtn" data-replay="t13"><i data-lucide="rotate-ccw"></i>ulangi</button></div>
         </div>
         <figure class="shotcard">
-          <div class="imgwrap"><img src="img/step-06-pip-show.png" alt="Output pip show flask menampilkan versi, ringkasan, lokasi, dan dependensi Flask" width="1127" height="622" loading="lazy"></div>
+          <div class="imgwrap"><img src="img/step-06-pip-show.webp" alt="Output pip show flask menampilkan versi, ringkasan, lokasi, dan dependensi Flask" width="1127" height="622" loading="lazy" decoding="async"></div>
           <span class="zoomtag"><i data-lucide="zoom-in"></i></span>
           <figcaption class="shotcap">
             <span class="stepchip c-green">step 06</span>
@@ -1645,7 +1673,7 @@ h2{
             <p id="xbody">Ambil class <b>Flask</b> dari package yang baru saja kamu pasang. Ini gerbangnya — tanpa baris ini, sisanya hanya teks.</p>
           </aside>
           <figure class="shotcard" style="margin-top:12px;max-width:82%">
-            <div class="imgwrap"><img src="img/step-07-app-py.png" alt="Tampilan VS Code dengan file app.py berisi kode Flask hello world" width="1517" height="629" loading="lazy"></div>
+            <div class="imgwrap"><img src="img/step-07-app-py.webp" alt="Tampilan VS Code dengan file app.py berisi kode Flask hello world" width="1517" height="629" loading="lazy" decoding="async"></div>
             <span class="zoomtag"><i data-lucide="zoom-in"></i></span>
             <figcaption class="shotcap">
               <span class="stepchip c-amber">step 07</span>
@@ -1669,7 +1697,7 @@ h2{
           <div class="termfoot"><button class="minibtn" data-replay="t15"><i data-lucide="rotate-ccw"></i>ulangi</button></div>
         </div>
         <figure class="shotcard">
-          <div class="imgwrap"><img src="img/step-08-run.png" alt="Terminal menjalankan python app.py dengan output Serving Flask app, Debug mode on, dan Debugger is active" width="1291" height="629" loading="lazy"></div>
+          <div class="imgwrap"><img src="img/step-08-run.webp" alt="Terminal menjalankan python app.py dengan output Serving Flask app, Debug mode on, dan Debugger is active" width="1291" height="629" loading="lazy" decoding="async"></div>
           <span class="zoomtag"><i data-lucide="zoom-in"></i></span>
           <figcaption class="shotcap">
             <span class="stepchip c-violet">step 08</span>
@@ -1699,7 +1727,7 @@ h2{
           </div>
         </div>
         <figure class="shotcard">
-          <div class="imgwrap"><img src="img/step-09-browser.png" alt="Browser menampilkan halaman Hello, World di alamat 127.0.0.1:5001" width="599" height="285" loading="lazy"></div>
+          <div class="imgwrap"><img src="img/step-09-browser.webp" alt="Browser menampilkan halaman Hello, World di alamat 127.0.0.1:5001" width="599" height="285" loading="lazy" decoding="async"></div>
           <span class="zoomtag"><i data-lucide="zoom-in"></i></span>
           <figcaption class="shotcap">
             <span class="stepchip c-violet">step 09</span>
@@ -1986,6 +2014,10 @@ function toggleFS(){
 }
 $('#fsbtn').onclick = toggleFS;
 setTimeout(() => $('#hintchip').classList.add('gone'), 7000);
+document.addEventListener('visibilitychange', () => {
+  const b = document.querySelector('.blobs');
+  if(b) b.classList.toggle('paused', document.hidden);
+});
 
 /* ===================== TYPEWRITER ===================== */
 function typeInto(el, text){
