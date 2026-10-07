@@ -211,8 +211,9 @@ h2{
 .sub{color:var(--dim);font-size:clamp(14px,1.5vw,17.5px);max-width:64ch}
 .slide-body{margin-top:26px}
 
-.cols{display:grid;gap:22px}
+.cols{display:grid;gap:22px;align-items:start}
 .cols>*{min-width:0}
+.cols.astretch{align-items:stretch}
 .cols.c2{grid-template-columns:1fr 1fr}
 .cols.c2-1{grid-template-columns:1.35fr 1fr}
 .cols.c1-2{grid-template-columns:1fr 1.35fr}
@@ -601,6 +602,14 @@ h2{
 }
 .zoomtag svg{width:14px;height:14px}
 .shotcard:hover .zoomtag{opacity:1}
+.zoomhint{
+  display:flex;align-items:center;gap:6px;margin:7px 3px 0;
+  font:500 10.5px/1 var(--sans);color:var(--faint);letter-spacing:.01em;
+}
+.zoomhint svg{width:12px;height:12px;flex:none}
+@media (pointer:coarse){
+  .zoomhint{font-size:11.5px}
+}
 
 /* ===== CODE EXPLORER ===== */
 .codex{display:grid;grid-template-columns:1.15fr 1fr;gap:18px;align-items:start}
@@ -999,6 +1008,10 @@ h2{
 .winstack .shotcap .shottitle,.winstack .shotcap .shotnote{display:block}
 .winstack .imgwrap{max-height:165px}
 .winstack.two .imgwrap{max-height:140px}
+.img4{grid-template-columns:1fr 1fr}
+.img4 .shotcard{align-self:stretch;display:flex;flex-direction:column}
+.img4 .shotcard .imgwrap{height:150px;flex:none}
+.img4 .shotcard img{height:150px;object-fit:cover;object-position:top}
 .winopt{
   display:flex;align-items:flex-start;gap:12px;width:100%;text-align:left;cursor:pointer;
   background:var(--spec-top),var(--grad-glass);
@@ -1080,7 +1093,7 @@ h2{
   html,body{background:#fff!important;overflow:visible!important;display:block!important;height:auto!important}
   *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
   .stage{width:297mm!important;height:auto!important;background:#fff!important;display:block!important;overflow:visible!important}
-  .blobs,.stage::after,.bar,.corner,.fsbtn,.dock,.hintchip,.zoomtag,.lightbox,.cur{display:none!important}
+  .blobs,.stage::after,.bar,.corner,.fsbtn,.dock,.hintchip,.zoomtag,.zoomhint,.lightbox,.cur{display:none!important}
     .timerbox .tbtn,.termfoot,.ostabs,.winrow,.winprog,.winstat,.winwarn,#winrun{display:none!important}
     #sw4 .cols.c2{grid-template-columns:1fr 1fr}
     #sw4 .winstack{grid-template-columns:1fr 1fr;align-items:start}
@@ -1205,7 +1218,7 @@ h2{
     <div class="content">
       <span class="kick">Capaian pembelajaran</span>
       <h2>Di akhir praktikum, kamu bisa</h2>
-      <div class="slide-body cols c3 capaian">
+      <div class="slide-body cols c3 capaian astretch">
         <div class="pcard">
           <div class="ic"><i data-lucide="bug"></i></div>
           <h3>Debug mode</h3>
@@ -1433,7 +1446,7 @@ h2{
           </div>
           <div class="term">
             <div class="termbar"><span class="tdot r"></span><span class="tdot y"></span><span class="tdot g"></span><span class="termtitle">PrakPemWeb — jalankan</span></div>
-            <div class="termbody" id="t_run" style="min-height:150px;max-height:175px"></div>
+            <div class="termbody" id="t_run" style="min-height:132px;max-height:200px"></div>
             <div class="termfoot"><button class="minibtn" data-replay="t_run"><i data-lucide="rotate-ccw"></i>ulangi</button></div>
           </div>
         </div>
@@ -1663,7 +1676,7 @@ footer {
           </div>
           <div class="term">
             <div class="termbar"><span class="tdot r"></span><span class="tdot y"></span><span class="tdot g"></span><span class="termtitle">PrakPemWeb — konfigurasi Git</span></div>
-            <div class="termbody" id="t_config" style="min-height:130px;max-height:150px"></div>
+            <div class="termbody" id="t_config" style="min-height:132px;max-height:200px"></div>
             <div class="termfoot"><button class="minibtn" data-replay="t_config"><i data-lucide="rotate-ccw"></i>ulangi</button></div>
           </div>
         </div>
@@ -1690,7 +1703,7 @@ footer {
           </div>
           <div class="term">
             <div class="termbar"><span class="tdot r"></span><span class="tdot y"></span><span class="tdot g"></span><span class="termtitle">buat kunci SSH</span></div>
-            <div class="termbody" id="t_sshgen" style="min-height:150px;max-height:170px"></div>
+            <div class="termbody" id="t_sshgen" style="min-height:132px;max-height:200px"></div>
             <div class="termfoot"><button class="minibtn" data-replay="t_sshgen"><i data-lucide="rotate-ccw"></i>ulangi</button></div>
           </div>
         </div>
@@ -1711,46 +1724,40 @@ footer {
     <div class="content">
       <span class="kick">Praktikum · Part 4 — tempel kunci di GitHub</span>
       <h2>Settings → SSH and GPG keys</h2>
-      <div class="slide-body cols c2">
-        <div>
-          <p class="sub" style="margin-bottom:14px">Di GitHub, buka menu profil (kanan atas) → <b>Settings</b> → <b>SSH and GPG keys</b>. Dari sini kita menambahkan kunci publik yang tadi disalin.</p>
-          <div class="winstack two">
-            <figure class="shotcard">
-              <div class="imgwrap"><img src="img/p2-09-github-settings.webp" alt="Menu profil GitHub terbuka dengan pilihan Settings disorot" width="914" height="659" loading="lazy" decoding="async"></div>
-              <span class="zoomtag"><i data-lucide="zoom-in"></i></span>
-              <figcaption class="shotcap">
-                <span class="stepchip c-violet">p2 08</span>
-                <span><span class="shottitle">Buka Settings</span><span class="shotnote">menu profil kanan atas</span></span>
-              </figcaption>
-            </figure>
-            <figure class="shotcard">
-              <div class="imgwrap"><img src="img/p2-10-ssh-gpg-menu.webp" alt="Menu Settings GitHub dengan pilihan SSH and GPG keys disorot" width="1125" height="363" loading="lazy" decoding="async"></div>
-              <span class="zoomtag"><i data-lucide="zoom-in"></i></span>
-              <figcaption class="shotcap">
-                <span class="stepchip c-violet">p2 09</span>
-                <span><span class="shottitle">SSH and GPG keys</span><span class="shotnote">menu kiri, bagian Access</span></span>
-              </figcaption>
-            </figure>
-          </div>
-        </div>
-        <div class="winstack">
-          <figure class="shotcard">
-            <div class="imgwrap"><img src="img/p2-11-new-ssh-key.webp" alt="Halaman SSH keys dengan tombol New SSH key disorot" width="989" height="399" loading="lazy" decoding="async"></div>
-            <span class="zoomtag"><i data-lucide="zoom-in"></i></span>
-            <figcaption class="shotcap">
-              <span class="stepchip c-blue">p2 10</span>
-              <span><span class="shottitle">Klik New SSH key</span><span class="shotnote">default masih kosong (no keys)</span></span>
-            </figcaption>
-          </figure>
-          <figure class="shotcard">
-            <div class="imgwrap"><img src="img/p2-12-add-ssh-form.webp" alt="Form Add new SSH Key dengan Title SSH Github - Ubuntu dan isi Key ssh-ed25519" width="1013" height="548" loading="lazy" decoding="async"></div>
-            <span class="zoomtag"><i data-lucide="zoom-in"></i></span>
-            <figcaption class="shotcap">
-              <span class="stepchip c-blue">p2 11</span>
-              <span><span class="shottitle">Isi Title &amp; Key</span><span class="shotnote">tempel isi id_ed25519.pub</span></span>
-            </figcaption>
-          </figure>
-        </div>
+      <p class="sub" style="margin-top:12px;margin-bottom:16px">Di GitHub, buka menu profil (kanan atas) → <b>Settings</b> → <b>SSH and GPG keys</b>. Dari sini kita menambahkan kunci publik yang tadi disalin.</p>
+      <div class="slide-body cols c2 img4">
+        <figure class="shotcard">
+          <div class="imgwrap"><img src="img/p2-09-github-settings.webp" alt="Menu profil GitHub terbuka dengan pilihan Settings disorot" width="914" height="659" loading="lazy" decoding="async"></div>
+          <span class="zoomtag"><i data-lucide="zoom-in"></i></span>
+          <figcaption class="shotcap">
+            <span class="stepchip c-violet">p2 08</span>
+            <span><span class="shottitle">Buka Settings</span><span class="shotnote">menu profil kanan atas</span></span>
+          </figcaption>
+        </figure>
+        <figure class="shotcard">
+          <div class="imgwrap"><img src="img/p2-10-ssh-gpg-menu.webp" alt="Menu Settings GitHub dengan pilihan SSH and GPG keys disorot" width="1125" height="363" loading="lazy" decoding="async"></div>
+          <span class="zoomtag"><i data-lucide="zoom-in"></i></span>
+          <figcaption class="shotcap">
+            <span class="stepchip c-violet">p2 09</span>
+            <span><span class="shottitle">SSH and GPG keys</span><span class="shotnote">menu kiri, bagian Access</span></span>
+          </figcaption>
+        </figure>
+        <figure class="shotcard">
+          <div class="imgwrap"><img src="img/p2-11-new-ssh-key.webp" alt="Halaman SSH keys dengan tombol New SSH key disorot" width="989" height="399" loading="lazy" decoding="async"></div>
+          <span class="zoomtag"><i data-lucide="zoom-in"></i></span>
+          <figcaption class="shotcap">
+            <span class="stepchip c-blue">p2 10</span>
+            <span><span class="shottitle">Klik New SSH key</span><span class="shotnote">default masih kosong (no keys)</span></span>
+          </figcaption>
+        </figure>
+        <figure class="shotcard">
+          <div class="imgwrap"><img src="img/p2-12-add-ssh-form.webp" alt="Form Add new SSH Key dengan Title SSH Github - Ubuntu dan isi Key ssh-ed25519" width="1013" height="548" loading="lazy" decoding="async"></div>
+          <span class="zoomtag"><i data-lucide="zoom-in"></i></span>
+          <figcaption class="shotcap">
+            <span class="stepchip c-blue">p2 11</span>
+            <span><span class="shottitle">Isi Title &amp; Key</span><span class="shotnote">tempel isi id_ed25519.pub</span></span>
+          </figcaption>
+        </figure>
       </div>
     </div>
   </section>
@@ -1760,28 +1767,15 @@ footer {
     <div class="content">
       <span class="kick">Praktikum · Part 4 — buktikan tersambung</span>
       <h2>ssh -T: uji koneksi ke GitHub</h2>
-      <div class="slide-body cols c2">
-        <div>
-          <div class="winstack">
-            <figure class="shotcard">
-              <div class="imgwrap"><img src="img/p2-13-ssh-added.webp" alt="Daftar SSH keys menampilkan SSH Github - Ubuntu yang baru ditambahkan" width="1013" height="342" loading="lazy" decoding="async"></div>
-              <span class="zoomtag"><i data-lucide="zoom-in"></i></span>
-              <figcaption class="shotcap">
-                <span class="stepchip c-green">p2 12</span>
-                <span><span class="shottitle">Kunci tersimpan</span><span class="shotnote">muncul di Authentication keys</span></span>
-              </figcaption>
-            </figure>
-            <div class="ostabs" data-term="t_sshT">
-              <button class="ostab on" data-os="win">Windows</button>
-              <button class="ostab" data-os="nix">Linux / macOS</button>
-            </div>
-            <div class="term">
-              <div class="termbar"><span class="tdot r"></span><span class="tdot y"></span><span class="tdot g"></span><span class="termtitle">uji koneksi SSH</span></div>
-              <div class="termbody" id="t_sshT" style="min-height:120px;max-height:140px"></div>
-              <div class="termfoot"><button class="minibtn" data-replay="t_sshT"><i data-lucide="rotate-ccw"></i>ulangi</button></div>
-            </div>
-          </div>
-        </div>
+      <div class="slide-body cols c2 img4">
+        <figure class="shotcard">
+          <div class="imgwrap"><img src="img/p2-13-ssh-added.webp" alt="Daftar SSH keys menampilkan SSH Github - Ubuntu yang baru ditambahkan" width="1013" height="342" loading="lazy" decoding="async"></div>
+          <span class="zoomtag"><i data-lucide="zoom-in"></i></span>
+          <figcaption class="shotcap">
+            <span class="stepchip c-green">p2 12</span>
+            <span><span class="shottitle">Kunci tersimpan</span><span class="shotnote">muncul di Authentication keys</span></span>
+          </figcaption>
+        </figure>
         <figure class="shotcard">
           <div class="imgwrap"><img src="img/p2-14-ssh-verify.webp" alt="Terminal menjalankan ssh -T git@github.com dan menampilkan pesan Hi XsafiD You've successfully authenticated" width="1013" height="342" loading="lazy" decoding="async"></div>
           <span class="zoomtag"><i data-lucide="zoom-in"></i></span>
@@ -1790,6 +1784,15 @@ footer {
             <span><span class="shottitle">Berhasil terhubung</span><span class="shotnote">&ldquo;successfully authenticated&rdquo;</span></span>
           </figcaption>
         </figure>
+      </div>
+      <div class="ostabs" data-term="t_sshT" style="margin-top:18px">
+        <button class="ostab on" data-os="win">Windows</button>
+        <button class="ostab" data-os="nix">Linux / macOS</button>
+      </div>
+      <div class="term">
+        <div class="termbar"><span class="tdot r"></span><span class="tdot y"></span><span class="tdot g"></span><span class="termtitle">uji koneksi SSH</span></div>
+        <div class="termbody" id="t_sshT" style="min-height:132px;max-height:200px"></div>
+        <div class="termfoot"><button class="minibtn" data-replay="t_sshT"><i data-lucide="rotate-ccw"></i>ulangi</button></div>
       </div>
     </div>
   </section>
@@ -1809,7 +1812,7 @@ footer {
           </div>
           <div class="term" style="margin-top:18px">
             <div class="termbar"><span class="tdot r"></span><span class="tdot y"></span><span class="tdot g"></span><span class="termtitle">cek Git</span></div>
-            <div class="termbody" id="t_gitver" style="min-height:90px;max-height:110px"></div>
+            <div class="termbody" id="t_gitver" style="min-height:132px;max-height:200px"></div>
             <div class="termfoot"><button class="minibtn" data-replay="t_gitver"><i data-lucide="rotate-ccw"></i>ulangi</button></div>
           </div>
         </div>
@@ -1836,7 +1839,7 @@ footer {
           </div>
           <div class="term">
             <div class="termbar"><span class="tdot r"></span><span class="tdot y"></span><span class="tdot g"></span><span class="termtitle">PrakPemWeb — mulai repo</span></div>
-            <div class="termbody" id="t_init" style="min-height:130px;max-height:150px"></div>
+            <div class="termbody" id="t_init" style="min-height:132px;max-height:200px"></div>
             <div class="termfoot"><button class="minibtn" data-replay="t_init"><i data-lucide="rotate-ccw"></i>ulangi</button></div>
           </div>
           <p class="sub" style="margin-top:12px;font-size:13px"><code>git init</code> membuat folder tersembunyi <code>.git</code> — di sanalah seluruh riwayat proyek disimpan.</p>
@@ -1869,46 +1872,40 @@ footer {
     <div class="content">
       <span class="kick">Praktikum · Part 5 — repositori baru</span>
       <h2>Buat repo baru di GitHub</h2>
-      <div class="slide-body cols c2">
-        <div>
-          <p class="sub" style="margin-bottom:14px">Klik tombol <b>New</b> di Dashboard → beri nama <b>Project-PrakPemWeb</b> → pilih <b>Public</b> → <b>Create repository</b>. Setelah jadi, pilih tab <b>SSH</b> dan catat URL repo-nya.</p>
-          <div class="winstack two">
-            <figure class="shotcard">
-              <div class="imgwrap"><img src="img/p2-15-github-home.webp" alt="Dashboard GitHub dengan tombol New di bagian Top repositories" width="640" height="279" loading="lazy" decoding="async"></div>
-              <span class="zoomtag"><i data-lucide="zoom-in"></i></span>
-              <figcaption class="shotcap">
-                <span class="stepchip c-violet">p2 16</span>
-                <span><span class="shottitle">Tombol New</span><span class="shotnote">buat repo baru</span></span>
-              </figcaption>
-            </figure>
-            <figure class="shotcard">
-              <div class="imgwrap"><img src="img/p2-16-new-repo-btn.webp" alt="Tombol New disorot merah di dashboard GitHub" width="640" height="279" loading="lazy" decoding="async"></div>
-              <span class="zoomtag"><i data-lucide="zoom-in"></i></span>
-              <figcaption class="shotcap">
-                <span class="stepchip c-violet">p2 17</span>
-                <span><span class="shottitle">Klik New</span><span class="shotnote">mulai buat repo</span></span>
-              </figcaption>
-            </figure>
-          </div>
-        </div>
-        <div class="winstack">
-          <figure class="shotcard">
-            <div class="imgwrap"><img src="img/p2-18-repo-ssh-url.webp" alt="Halaman repo baru menampilkan tab SSH dengan URL git@github.com XsafiD Project-PrakPemWeb.git" width="1010" height="450" loading="lazy" decoding="async"></div>
-            <span class="zoomtag"><i data-lucide="zoom-in"></i></span>
-            <figcaption class="shotcap">
-              <span class="stepchip c-green">p2 19</span>
-              <span><span class="shottitle">URL SSH repo</span><span class="shotnote">git@github.com:XsafiD/Project-PrakPemWeb.git</span></span>
-            </figcaption>
-          </figure>
-          <figure class="shotcard">
-            <div class="imgwrap"><img src="img/p2-17-create-repo.webp" alt="Halaman Create a new repository dengan nama Project-PrakPemWeb dan owner XsafiD" width="1124" height="660" loading="lazy" decoding="async"></div>
-            <span class="zoomtag"><i data-lucide="zoom-in"></i></span>
-            <figcaption class="shotcap">
-              <span class="stepchip c-blue">p2 18</span>
-              <span><span class="shottitle">Beri nama repo</span><span class="shotnote">Project-PrakPemWeb · Public</span></span>
-            </figcaption>
-          </figure>
-        </div>
+      <p class="sub" style="margin-top:12px;margin-bottom:16px">Klik tombol <b>New</b> di Dashboard → beri nama <b>Project-PrakPemWeb</b> → pilih <b>Public</b> → <b>Create repository</b>. Setelah jadi, pilih tab <b>SSH</b> dan catat URL repo-nya.</p>
+      <div class="slide-body cols c2 img4">
+        <figure class="shotcard">
+          <div class="imgwrap"><img src="img/p2-18-repo-ssh-url.webp" alt="Halaman repo baru menampilkan tab SSH dengan URL git@github.com XsafiD Project-PrakPemWeb.git" width="1010" height="450" loading="lazy" decoding="async"></div>
+          <span class="zoomtag"><i data-lucide="zoom-in"></i></span>
+          <figcaption class="shotcap">
+            <span class="stepchip c-green">p2 19</span>
+            <span><span class="shottitle">URL SSH repo</span><span class="shotnote">git@github.com:XsafiD/Project-PrakPemWeb.git</span></span>
+          </figcaption>
+        </figure>
+        <figure class="shotcard">
+          <div class="imgwrap"><img src="img/p2-17-create-repo.webp" alt="Halaman Create a new repository dengan nama Project-PrakPemWeb dan owner XsafiD" width="1124" height="660" loading="lazy" decoding="async"></div>
+          <span class="zoomtag"><i data-lucide="zoom-in"></i></span>
+          <figcaption class="shotcap">
+            <span class="stepchip c-blue">p2 18</span>
+            <span><span class="shottitle">Beri nama repo</span><span class="shotnote">Project-PrakPemWeb · Public</span></span>
+          </figcaption>
+        </figure>
+        <figure class="shotcard">
+          <div class="imgwrap"><img src="img/p2-15-github-home.webp" alt="Dashboard GitHub dengan tombol New di bagian Top repositories" width="640" height="279" loading="lazy" decoding="async"></div>
+          <span class="zoomtag"><i data-lucide="zoom-in"></i></span>
+          <figcaption class="shotcap">
+            <span class="stepchip c-violet">p2 16</span>
+            <span><span class="shottitle">Tombol New</span><span class="shotnote">buat repo baru</span></span>
+          </figcaption>
+        </figure>
+        <figure class="shotcard">
+          <div class="imgwrap"><img src="img/p2-16-new-repo-btn.webp" alt="Tombol New disorot merah di dashboard GitHub" width="640" height="279" loading="lazy" decoding="async"></div>
+          <span class="zoomtag"><i data-lucide="zoom-in"></i></span>
+          <figcaption class="shotcap">
+            <span class="stepchip c-violet">p2 17</span>
+            <span><span class="shottitle">Klik New</span><span class="shotnote">mulai buat repo</span></span>
+          </figcaption>
+        </figure>
       </div>
     </div>
   </section>
@@ -1926,7 +1923,7 @@ footer {
           </div>
           <div class="term">
             <div class="termbar"><span class="tdot r"></span><span class="tdot y"></span><span class="tdot g"></span><span class="termtitle">PrakPemWeb — commit</span></div>
-            <div class="termbody" id="t_commit" style="min-height:150px;max-height:180px"></div>
+            <div class="termbody" id="t_commit" style="min-height:132px;max-height:200px"></div>
             <div class="termfoot"><button class="minibtn" data-replay="t_commit"><i data-lucide="rotate-ccw"></i>ulangi</button></div>
           </div>
         </div>
@@ -1965,7 +1962,7 @@ footer {
           </div>
           <div class="term">
             <div class="termbar"><span class="tdot r"></span><span class="tdot y"></span><span class="tdot g"></span><span class="termtitle">PrakPemWeb — push ke GitHub</span></div>
-            <div class="termbody" id="t_push" style="min-height:170px;max-height:200px"></div>
+            <div class="termbody" id="t_push" style="min-height:132px;max-height:200px"></div>
             <div class="termfoot"><button class="minibtn" data-replay="t_push"><i data-lucide="rotate-ccw"></i>ulangi</button></div>
           </div>
         </div>
@@ -2015,7 +2012,7 @@ footer {
     <div class="content">
       <span class="kick">Aturan main</span>
       <h2>Ketentuan &amp; pengumpulan</h2>
-      <div class="slide-body cols c2">
+      <div class="slide-body cols c2 astretch">
         <div class="spec">
           <div class="sic"><i data-lucide="list-checks"></i></div>
           <h3>Ketentuan kode</h3>
@@ -2189,7 +2186,7 @@ function toggleFS(){
   Promise.resolve(req.call(el)).catch(fauxFS);
 }
 $('#fsbtn').onclick = toggleFS;
-setTimeout(() => $('#hintchip').classList.add('gone'), 7000);
+if($('#hintchip')) setTimeout(() => $('#hintchip').classList.add('gone'), 7000);
 document.addEventListener('visibilitychange', () => {
   const b = document.querySelector('.blobs');
   if(b) b.classList.toggle('paused', document.hidden);
@@ -2232,7 +2229,7 @@ T.t_run_win = [
   {c:'ok',  t:' * Debugger is active!'}
 ];
 T.t_run_nix = [
-  {c:'cmd', t:'python app.py'},
+  {c:'cmd', t:'python3 app.py'},
   {c:'ok',  t:' * Debug mode: on'},
   {c:'',    t:' * Running on http://127.0.0.1:5001'},
   {c:'ok',  t:' * Debugger is active!'}
@@ -2688,7 +2685,15 @@ function closeLB(){
   $('#lightbox').classList.remove('on');
   $('#lightbox').setAttribute('aria-hidden', 'true');
 }
-$$('.shotcard').forEach(c => c.onclick = () => openLB(c));
+$$('.shotcard').forEach(c => {
+  c.onclick = () => openLB(c);
+  if(!c.querySelector('.zoomhint')){
+    const h = document.createElement('span');
+    h.className = 'zoomhint';
+    h.innerHTML = '<i data-lucide="zoom-in"></i>tekan gambar untuk memperbesar';
+    c.appendChild(h);
+  }
+});
 $('#lbclose').onclick = e => { e.stopPropagation(); closeLB(); };
 $('#lightbox').onclick = e => { if(e.target.id === 'lightbox') closeLB(); };
 
