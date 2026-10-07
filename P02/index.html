@@ -578,6 +578,10 @@ h2{
 .shotcard:hover{transform:translateY(-4px);box-shadow:var(--out-sh-lg),var(--inner-light)}
 .shotcard .imgwrap{border-radius:13px;overflow:hidden;border:1px solid rgba(31,45,68,.16);background:#0B1017;box-shadow:inset 0 1px 3px rgba(31,45,68,.2)}
 .shotcard img{display:block;width:100%;height:auto;transition:transform .4s ease}
+.cols .shotcard{border-radius:var(--rad)}
+.cols .shotcard .imgwrap{height:190px}
+.cols .shotcard img{height:190px;object-fit:cover;object-position:top}
+.cols.c2 .shotcard{border-radius:var(--rad)}
 .shotcard:hover img{transform:scale(1.025)}
 .shotcap{display:flex;align-items:center;gap:8px;margin-top:9px;padding:0 3px}
 .stepchip{
@@ -1006,7 +1010,8 @@ h2{
 .winstack.two{grid-template-columns:1fr 1fr;align-items:start}
 .winstack .shotcap{align-items:flex-start}
 .winstack .shotcap .shottitle,.winstack .shotcap .shotnote{display:block}
-.winstack .imgwrap{max-height:165px}
+.cols .winstack .imgwrap{height:135px}
+.cols .winstack .shotcard img{height:135px;object-fit:cover;object-position:top}
 .winstack.two .imgwrap{max-height:140px}
 .img4{grid-template-columns:1fr 1fr}
 .img4 .shotcard{align-self:stretch;display:flex;flex-direction:column}
@@ -1844,7 +1849,7 @@ footer {
           </div>
           <p class="sub" style="margin-top:12px;font-size:13px"><code>git init</code> membuat folder tersembunyi <code>.git</code> — di sanalah seluruh riwayat proyek disimpan.</p>
         </div>
-        <div>
+        <div class="winstack">
           <figure class="shotcard">
             <div class="imgwrap"><img src="img/p2-19-git-init.webp" alt="Terminal menjalankan git init dengan hint menggunakan nama branch master" width="568" height="186" loading="lazy" decoding="async"></div>
             <span class="zoomtag"><i data-lucide="zoom-in"></i></span>
@@ -1853,7 +1858,7 @@ footer {
               <span><span class="shottitle">git init</span><span class="shotnote">repo lokal dimulai</span></span>
             </figcaption>
           </figure>
-          <figure class="shotcard" style="margin-top:10px">
+          <figure class="shotcard">
             <div class="imgwrap"><img src="img/p2-20-gitignore.webp" alt="VS Code menampilkan file .gitignore berisi .venv, __pycache__, dan *.pyc" width="891" height="335" loading="lazy" decoding="async"></div>
             <span class="zoomtag"><i data-lucide="zoom-in"></i></span>
             <figcaption class="shotcap">
