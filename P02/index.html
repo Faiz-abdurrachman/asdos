@@ -547,7 +547,6 @@ h2{
 .minibtn:active{transform:scale(.96)}
 .minibtn.done{color:#3EE08C;background:rgba(62,224,140,.14);border-color:rgba(62,224,140,.5)}
 .term.hideout .ln.out{display:none}
-.hidebtn{margin-left:auto}
 
 /* ===== OS TABS ===== */
 .ostabs{display:flex;gap:8px;margin-bottom:14px}
@@ -579,8 +578,8 @@ h2{
 .shotcard .imgwrap{border-radius:13px;overflow:hidden;border:1px solid rgba(31,45,68,.16);background:#0B1017;box-shadow:inset 0 1px 3px rgba(31,45,68,.2)}
 .shotcard img{display:block;width:100%;height:auto;transition:transform .4s ease}
 .cols .shotcard{border-radius:var(--rad)}
-.cols .shotcard .imgwrap{height:190px}
-.cols .shotcard img{height:190px;object-fit:cover;object-position:top}
+.cols .shotcard .imgwrap{height:168px}
+.cols .shotcard img{height:168px;object-fit:cover;object-position:top}
 .cols.c2 .shotcard{border-radius:var(--rad)}
 .shotcard:hover img{transform:scale(1.025)}
 .shotcap{display:flex;align-items:center;gap:8px;margin-top:9px;padding:0 3px}
@@ -608,15 +607,18 @@ h2{
 .shotcard:hover .zoomtag{opacity:1}
 .zoomhint{
   display:flex;align-items:center;gap:6px;margin:7px 3px 0;
-  font:500 10.5px/1 var(--sans);color:var(--faint);letter-spacing:.01em;
+  font:700 11px/1 var(--sans);color:var(--dim);letter-spacing:.01em;
 }
-.zoomhint svg{width:12px;height:12px;flex:none}
+.zoomhint svg{width:12px;height:12px;flex:none;color:var(--blue-t)}
 @media (pointer:coarse){
-  .zoomhint{font-size:11.5px}
+  .zoomhint{font-size:12px}
 }
 
 /* ===== CODE EXPLORER ===== */
 .codex{display:grid;grid-template-columns:1.15fr 1fr;gap:18px;align-items:start}
+.codex .xplain{min-height:130px}
+.codex .shotcard .imgwrap{height:118px}
+.codex .shotcard img{height:118px;object-fit:cover;object-position:top}
 .codepane{
   border-radius:var(--rad);
   overflow:hidden;text-align:left;
@@ -654,36 +656,6 @@ h2{
 }
 .xplain p{font-size:13.5px;color:var(--dim);line-height:1.6}
 .xplain p b{color:var(--ink)}
-
-/* ===== BROWSER MOCK ===== */
-.browser{
-  background:linear-gradient(180deg,rgba(255,255,255,.6),transparent 20%),rgba(255,255,255,.86);
-  backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
-  border:1px solid var(--glass-bd);border-radius:var(--rad);
-  overflow:hidden;text-align:center;
-  box-shadow:var(--out-sh-lg),var(--inner-light);
-  opacity:0;transform:translateY(10px) scale(.97);transition:.45s cubic-bezier(.2,.7,.3,1.2);
-}
-.browser.show{opacity:1;transform:none}
-.btab{
-  background:linear-gradient(180deg,rgba(255,255,255,.09),transparent 12%),rgba(15,20,29,.84);
-  color:#E9EFF6;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:10px 14px;font:500 11px/1 var(--mono);
-}
-.burl{
-  background:rgba(255,255,255,.15);border-radius:99px;padding:6px 12px;
-  display:flex;align-items:center;gap:7px;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.2);
-}
-.burl svg{width:11px;height:11px}
-.bbody{
-  padding:44px 20px;min-height:170px;
-  display:grid;place-items:center;
-  background:rgba(255,255,255,.92);
-}
-.bbody .hw{font:700 clamp(22px,2.6vw,34px)/1 var(--disp);color:var(--ink);text-shadow:0 2px 0 rgba(255,255,255,.8)}
-.bbody .bstate{font:500 12px/1 var(--mono);color:var(--dim);margin-top:14px}
 
 /* ===== TUGAS + TIMER ===== */
 .tugas{display:grid;grid-template-columns:1.3fr 1fr;gap:22px;margin-top:6px}
@@ -949,7 +921,6 @@ h2{
   .xplain{padding:12px 14px;min-height:0}
   .xplain h3{font-size:12px;margin-bottom:8px}
   .xplain p{font-size:12px;line-height:1.5}
-  .bbody{padding:26px 16px;min-height:120px}
   .quizbox{padding:20px 18px}
   .rc{padding:12px 14px}
   .rc p{font-size:13px}
@@ -1010,13 +981,13 @@ h2{
 .winstack.two{grid-template-columns:1fr 1fr;align-items:start}
 .winstack .shotcap{align-items:flex-start}
 .winstack .shotcap .shottitle,.winstack .shotcap .shotnote{display:block}
-.cols .winstack .imgwrap{height:135px}
-.cols .winstack .shotcard img{height:135px;object-fit:cover;object-position:top}
+.cols .winstack .imgwrap{height:115px}
+.cols .winstack .shotcard img{height:115px;object-fit:cover;object-position:top}
 .winstack.two .imgwrap{max-height:140px}
 .img4{grid-template-columns:1fr 1fr}
 .img4 .shotcard{align-self:stretch;display:flex;flex-direction:column}
-.img4 .shotcard .imgwrap{height:150px;flex:none}
-.img4 .shotcard img{height:150px;object-fit:cover;object-position:top}
+.img4 .shotcard .imgwrap{height:132px;flex:none}
+.img4 .shotcard img{height:132px;object-fit:cover;object-position:top}
 .winopt{
   display:flex;align-items:flex-start;gap:12px;width:100%;text-align:left;cursor:pointer;
   background:var(--spec-top),var(--grad-glass);
@@ -1162,7 +1133,11 @@ h2{
   border:1px solid var(--glass-bd);border-radius:16px;box-shadow:var(--out-sh),var(--inner-light);overflow:hidden}
 .filecard .fh{display:flex;align-items:center;gap:8px;padding:9px 14px;border-bottom:1px solid rgba(255,255,255,.4);
   font:600 12.5px/1 var(--mono);color:var(--ink);background:rgba(255,255,255,.35)}
+.filecard .fh .copybtn{margin-left:auto}
+.codebar .copybtn{margin-left:8px}
 .filecard pre{margin:0;padding:14px 16px;font:400 12px/1.55 var(--mono);color:#243247;overflow:auto;max-height:230px;white-space:pre;text-align:left}
+#s6 .shotcard .imgwrap{height:120px}
+#s6 .shotcard img{height:120px;object-fit:cover;object-position:top}
 #s21 .shotcard img{max-height:150px;object-fit:cover;object-position:top}
 #s21 .winstack .shotcard:first-child img{max-height:120px}
 </style>
@@ -1601,7 +1576,7 @@ footer {
             <h3>Baris <span id="xlno12">7</span> · <span class="thecode" id="xlcode12">render_template('index.html')</span></h3>
             <p id="xbody12">Flask mengambil <b>templates/index.html</b> dan mengirimkannya ke browser sebagai halaman jadi — inilah cara kerja template.</p>
           </aside>
-          <figure class="shotcard" style="margin-top:12px;max-width:84%">
+          <figure class="shotcard" style="margin-top:12px">
             <div class="imgwrap"><img src="img/p2-05-render-template.webp" alt="VS Code menampilkan app.py dengan from flask import Flask, render_template dan return render_template index.html disorot" width="867" height="349" loading="lazy" decoding="async"></div>
             <span class="zoomtag"><i data-lucide="zoom-in"></i></span>
             <figcaption class="shotcap">
@@ -1621,15 +1596,12 @@ footer {
       <h2>Halamannya sekarang dari index.html</h2>
       <div class="slide-body cols c2">
         <div>
-          <p class="sub" style="margin-bottom:16px">Buka <b>127.0.0.1:5001</b> (atau port yang muncul di baris <b>Running on</b>). Kali ini yang tampil bukan lagi teks polos, tapi halaman HTML yang sudah diberi CSS. Coba ubah teks di <code>index.html</code>, simpan, dan karena debug mode — halamannya berubah tanpa restart.</p>
-          <div class="browser show" id="mockbrowser2">
-            <div class="btab"><span class="burl"><i data-lucide="lock"></i>127.0.0.1:5001</span><span>PrakPemWeb</span></div>
-            <div class="bbody">
-              <div>
-                <div class="hw">Struktur Project Flask</div>
-                <div class="bstate">halaman dari templates/index.html</div>
-              </div>
-            </div>
+          <p class="sub" style="margin-bottom:16px">Buka <b>127.0.0.1:5001</b> (atau port yang muncul di baris <b>Running on</b>). Kali ini yang tampil bukan lagi teks polos, tapi halaman HTML yang sudah diberi CSS.</p>
+          <div class="pcard">
+            <div class="ic"><i data-lucide="refresh-cw"></i></div>
+            <h3>Auto-reload</h3>
+            <p>Ubah teks di <code>index.html</code>, simpan, lalu muat ulang browser — perubahannya langsung muncul tanpa restart server.</p>
+            <span class="tag">debug mode</span>
           </div>
         </div>
         <figure class="shotcard">
@@ -1672,7 +1644,7 @@ footer {
     <div class="content">
       <span class="kick">Praktikum · Part 4 — kenalkan diri ke Git</span>
       <h2>git config: nama &amp; email kamu</h2>
-      <div class="slide-body cols c2">
+      <div class="slide-body cols c2 astretch">
         <div>
           <p class="sub" style="margin-bottom:14px">Sebelum membuat commit, Git harus tahu siapa yang menulisnya. Sekali saja, berlaku untuk semua proyek (<code>--global</code>).</p>
           <div class="ostabs" data-term="t_config">
@@ -1685,10 +1657,11 @@ footer {
             <div class="termfoot"><button class="minibtn" data-replay="t_config"><i data-lucide="rotate-ccw"></i>ulangi</button></div>
           </div>
         </div>
-        <div class="pcard" style="align-self:start">
+        <div class="pcard">
           <div class="ic"><i data-lucide="history"></i></div>
           <h3>Kenapa wajib</h3>
           <p>Setiap commit menempelkan nama &amp; email ini. Kalau kosong, Git akan menolak atau commit-mu tidak terhubung ke akun GitHub.</p>
+          <p style="margin-top:10px">Cek hasilnya kapan saja dengan <code>git config --list</code> — pastikan <code>user.name</code> dan <code>user.email</code> sudah benar.</p>
           <span class="tag">sekali saja</span>
         </div>
       </div>
@@ -1807,7 +1780,7 @@ footer {
     <div class="content">
       <span class="kick">Praktikum · Part 5 — pasang Git</span>
       <h2>Belum punya Git? Pasang dulu</h2>
-      <div class="slide-body cols c2">
+      <div class="slide-body cols c2 astretch">
         <div>
           <p class="sub" style="margin-bottom:14px">Jika perintah <code>git</code> belum dikenali di terminal, unduh dan pasang Git dari situs resminya. Setelah terpasang, cek dengan <code>git --version</code>.</p>
           <a class="linkchip" href="https://git-scm.com/install/" target="_blank" rel="noopener"><i data-lucide="external-link"></i>git-scm.com/install</a>
@@ -1821,10 +1794,12 @@ footer {
             <div class="termfoot"><button class="minibtn" data-replay="t_gitver"><i data-lucide="rotate-ccw"></i>ulangi</button></div>
           </div>
         </div>
-        <div class="pcard" style="align-self:start">
+        <div class="pcard">
           <div class="ic"><i data-lucide="square-terminal"></i></div>
-          <h3>Windows</h3>
-          <p>Unduh installer <b>Git for Windows</b>, jalankan, dan biarkan semua opsi default. Setelah selesai, buka <b>Terminal</b> baru supaya perintah <code>git</code> dikenali.</p>
+          <h3>Pasang Git</h3>
+          <p><b>Windows:</b> unduh installer <b>Git for Windows</b>, jalankan, dan biarkan semua opsi default.</p>
+          <p style="margin-top:10px"><b>Linux:</b> pasang lewat package manager, mis. <code>sudo apt install git</code>. <b>macOS:</b> jalankan <code>git --version</code> — biasanya sudah tersedia.</p>
+          <p style="margin-top:10px">Setelah terpasang, buka terminal baru agar perintah <code>git</code> dikenali.</p>
           <span class="tag">default sudah cukup</span>
         </div>
       </div>
@@ -1847,7 +1822,7 @@ footer {
             <div class="termbody" id="t_init" style="min-height:132px;max-height:200px"></div>
             <div class="termfoot"><button class="minibtn" data-replay="t_init"><i data-lucide="rotate-ccw"></i>ulangi</button></div>
           </div>
-          <p class="sub" style="margin-top:12px;font-size:13px"><code>git init</code> membuat folder tersembunyi <code>.git</code> — di sanalah seluruh riwayat proyek disimpan.</p>
+          <p class="sub" style="margin-top:12px;font-size:13px"><code>git init</code> membuat folder tersembunyi <code>.git</code> — di sanalah seluruh riwayat proyek disimpan. Konvensi <code>.gitignore</code>: <code>.venv/</code>, <code>__pycache__/</code>, <code>*.pyc</code>, <code>.env</code> — file yang tidak perlu masuk repo.</p>
         </div>
         <div class="winstack">
           <figure class="shotcard">
@@ -1868,7 +1843,6 @@ footer {
           </figure>
         </div>
       </div>
-      <p class="sub" style="margin-top:12px;font-size:13px">Konvensi umum: <code>.venv/</code>, <code>__pycache__/</code>, <code>*.pyc</code>, <code>.env</code> — file yang tidak perlu masuk repo.</p>
     </div>
   </section>
 
@@ -1930,6 +1904,11 @@ footer {
             <div class="termbar"><span class="tdot r"></span><span class="tdot y"></span><span class="tdot g"></span><span class="termtitle">PrakPemWeb — commit</span></div>
             <div class="termbody" id="t_commit" style="min-height:132px;max-height:200px"></div>
             <div class="termfoot"><button class="minibtn" data-replay="t_commit"><i data-lucide="rotate-ccw"></i>ulangi</button></div>
+          </div>
+          <div class="pcard" style="margin-top:14px">
+            <div class="ic"><i data-lucide="git-commit"></i></div>
+            <h3>Apa yang terjadi</h3>
+            <p><b>git add .</b> menandai semua perubahan untuk disimpan. <b>git commit</b> menyimpannya sebagai satu titik di riwayat proyek.</p>
           </div>
         </div>
         <div class="winstack">
@@ -2407,20 +2386,22 @@ $$('[data-replay]').forEach(b => {
   cb.innerHTML = '<i data-lucide="copy"></i>salin perintah';
   cb.onclick = () => copyText(termCmds(id), () => flashBtn(cb, '<i data-lucide="check"></i>tersalin'));
 
+  const term = document.getElementById(id).parentElement;
+  term.classList.add('hideout');
+
   const hb = document.createElement('button');
   hb.type = 'button';
   hb.className = 'minibtn hidebtn';
-  hb.setAttribute('aria-label', 'Sembunyikan output, lihat perintah saja');
-  hb.innerHTML = '<i data-lucide="eye-off"></i>sembunyikan output';
+  hb.setAttribute('aria-label', 'Tampilkan output');
+  hb.innerHTML = '<i data-lucide="eye"></i>tampilkan output';
   hb.onclick = () => {
-    const term = document.getElementById(id).parentElement;
     term.classList.toggle('hideout');
     const hidden = term.classList.contains('hideout');
     hb.innerHTML = hidden ? '<i data-lucide="eye"></i>tampilkan output' : '<i data-lucide="eye-off"></i>sembunyikan output';
     lucide.createIcons();
   };
   b.parentNode.insertBefore(hb, b.nextSibling);
-  b.parentNode.insertBefore(cb, b.nextSibling);
+  hb.insertAdjacentElement('afterend', cb);
 });
 
 const APP8 = [

@@ -546,7 +546,6 @@ h2{
 .minibtn:active{transform:scale(.96)}
 .minibtn.done{color:#3EE08C;background:rgba(62,224,140,.14);border-color:rgba(62,224,140,.5)}
 .term.hideout .ln.out{display:none}
-.hidebtn{margin-left:auto}
 
 /* ===== OS TABS ===== */
 .ostabs{display:flex;gap:8px;margin-bottom:14px}
@@ -577,10 +576,10 @@ h2{
 .shotcard:hover{transform:translateY(-4px);box-shadow:var(--out-sh-lg),var(--inner-light)}
 .shotcard .imgwrap{border-radius:13px;overflow:hidden;border:1px solid rgba(31,45,68,.16);background:#0B1017;box-shadow:inset 0 1px 3px rgba(31,45,68,.2)}
 .shotcard img{display:block;width:100%;height:auto;transition:transform .4s ease}
-.cols .shotcard .imgwrap{height:190px}
-.cols .shotcard img{height:190px;object-fit:cover;object-position:top}
-.cols .winstack .imgwrap{height:135px}
-.cols .winstack .shotcard img{height:135px;object-fit:cover;object-position:top}
+.cols .shotcard .imgwrap{height:168px}
+.cols .shotcard img{height:168px;object-fit:cover;object-position:top}
+.cols .winstack .imgwrap{height:115px}
+.cols .winstack .shotcard img{height:115px;object-fit:cover;object-position:top}
 .shotcard:hover img{transform:scale(1.025)}
 .shotcap{display:flex;align-items:center;gap:8px;margin-top:9px;padding:0 3px}
 .stepchip{
@@ -607,11 +606,11 @@ h2{
 .shotcard:hover .zoomtag{opacity:1}
 .zoomhint{
   display:flex;align-items:center;gap:6px;margin:7px 3px 0;
-  font:500 10.5px/1 var(--sans);color:var(--faint);letter-spacing:.01em;
+  font:700 11px/1 var(--sans);color:var(--dim);letter-spacing:.01em;
 }
-.zoomhint svg{width:12px;height:12px;flex:none}
+.zoomhint svg{width:12px;height:12px;flex:none;color:var(--blue-t)}
 @media (pointer:coarse){
-  .zoomhint{font-size:11.5px}
+  .zoomhint{font-size:12px}
 }
 
 /* ===== CODE EXPLORER ===== */
@@ -2211,20 +2210,22 @@ $$('[data-replay]').forEach(b => {
   cb.innerHTML = '<i data-lucide="copy"></i>salin perintah';
   cb.onclick = () => copyText(termCmds(id), () => flashBtn(cb, '<i data-lucide="check"></i>tersalin'));
 
+  const term = document.getElementById(id).parentElement;
+  term.classList.add('hideout');
+
   const hb = document.createElement('button');
   hb.type = 'button';
   hb.className = 'minibtn hidebtn';
-  hb.setAttribute('aria-label', 'Sembunyikan output, lihat perintah saja');
-  hb.innerHTML = '<i data-lucide="eye-off"></i>sembunyikan output';
+  hb.setAttribute('aria-label', 'Tampilkan output');
+  hb.innerHTML = '<i data-lucide="eye"></i>tampilkan output';
   hb.onclick = () => {
-    const term = document.getElementById(id).parentElement;
     term.classList.toggle('hideout');
     const hidden = term.classList.contains('hideout');
     hb.innerHTML = hidden ? '<i data-lucide="eye"></i>tampilkan output' : '<i data-lucide="eye-off"></i>sembunyikan output';
     lucide.createIcons();
   };
   b.parentNode.insertBefore(hb, b.nextSibling);
-  b.parentNode.insertBefore(cb, b.nextSibling);
+  hb.insertAdjacentElement('afterend', cb);
 });
 $$('.term').forEach(term => {
   const body = term.querySelector('.termbody');
