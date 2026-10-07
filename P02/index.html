@@ -33,16 +33,16 @@ el.replaceWith(svg);
 </script>
 <style>
 :root{
-  --bg-body:#C9D8EE;
-  --ink:#1C2A3E;
-  --dim:#43566F;
-  --faint:#6F829B;
-  --ink-line:rgba(31,45,68,.14);
+  --bg-body:#C6E3DA;
+  --ink:#15302A;
+  --dim:#3B5A50;
+  --faint:#68867C;
+  --ink-line:rgba(21,48,42,.14);
   --glass-bd:rgba(255,255,255,.78);
   --blur:blur(24px) saturate(180%);
   --inner-light:inset 0 1px 0 rgba(255,255,255,.95),inset 0 -1px 0 rgba(255,255,255,.22);
-  --out-sh:0 16px 40px rgba(31,45,68,.16);
-  --out-sh-lg:0 26px 60px rgba(31,45,68,.22);
+  --out-sh:0 16px 40px rgba(20,54,45,.16);
+  --out-sh-lg:0 26px 60px rgba(20,54,45,.22);
   --green:#2BC46F;--green-t:#0B7A43;
   --blue:#5CA9FF;--blue-t:#1D5FC9;
   --amber:#FFC24D;--amber-t:#8F5E00;
@@ -68,7 +68,7 @@ body{
   display:grid;
   place-items:center;
 }
-::selection{background:rgba(110,75,209,.28)}
+::selection{background:rgba(11,122,67,.28)}
 
 /* ===== STAGE ===== */
 .stage{
@@ -78,22 +78,22 @@ body{
   width:min(100vw,calc(100dvh * 16 / 9));
   height:min(100dvh,calc(100vw * 9 / 16));
   overflow:hidden;
-  background:#E4EDFB;
+  background:#DCF1EA;
 }
 .blobs{position:absolute;inset:-26%;z-index:0;pointer-events:none}
 .blobs::before,.blobs::after{content:"";position:absolute;inset:0;filter:blur(46px)}
 .blobs::before{
   background:
-    radial-gradient(36% 44% at 18% 22%,rgba(92,169,255,.62) 0%,transparent 70%),
-    radial-gradient(32% 40% at 82% 16%,rgba(183,156,255,.58) 0%,transparent 70%),
-    radial-gradient(34% 42% at 68% 76%,rgba(255,143,191,.5) 0%,transparent 72%);
+    radial-gradient(36% 44% at 18% 22%,rgba(43,196,111,.60) 0%,transparent 70%),
+    radial-gradient(32% 40% at 82% 16%,rgba(46,181,170,.56) 0%,transparent 70%),
+    radial-gradient(34% 42% at 68% 76%,rgba(122,214,180,.5) 0%,transparent 72%);
   animation:blobA 34s ease-in-out infinite alternate;
 }
 .blobs::after{
   background:
-    radial-gradient(38% 46% at 24% 78%,rgba(62,224,140,.5) 0%,transparent 72%),
-    radial-gradient(30% 38% at 84% 72%,rgba(255,194,77,.52) 0%,transparent 70%),
-    radial-gradient(26% 34% at 52% 40%,rgba(255,98,87,.34) 0%,transparent 72%);
+    radial-gradient(38% 46% at 24% 78%,rgba(92,169,255,.42) 0%,transparent 72%),
+    radial-gradient(30% 38% at 84% 72%,rgba(255,194,77,.4) 0%,transparent 70%),
+    radial-gradient(26% 34% at 52% 40%,rgba(15,122,72,.3) 0%,transparent 72%);
   animation:blobB 46s ease-in-out infinite alternate-reverse;
 }
 @keyframes blobA{
@@ -116,8 +116,8 @@ body{
 /* ===== CHROME ===== */
 .bar{
   position:absolute;top:0;left:0;height:4px;width:0;z-index:60;
-  background:linear-gradient(90deg,var(--blue),var(--violet),var(--pink));
-  box-shadow:0 0 16px rgba(92,169,255,.6);
+  background:linear-gradient(90deg,var(--green),rgba(46,181,170,1),var(--blue));
+  box-shadow:0 0 16px rgba(43,196,111,.6);
   transition:width .35s cubic-bezier(.2,.7,.3,1);
 }
 .corner{
