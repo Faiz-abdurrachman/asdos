@@ -33,16 +33,16 @@ el.replaceWith(svg);
 </script>
 <style>
 :root{
-  --bg-body:#D9DCF3;
-  --ink:#1E2350;
-  --dim:#3F4676;
-  --faint:#6E769E;
-  --ink-line:rgba(30,35,80,.14);
+  --bg-body:#F7E4CE;
+  --ink:#4A2A16;
+  --dim:#7A5334;
+  --faint:#A6815E;
+  --ink-line:rgba(90,50,20,.14);
   --glass-bd:rgba(255,255,255,.78);
   --blur:blur(24px) saturate(180%);
   --inner-light:inset 0 1px 0 rgba(255,255,255,.95),inset 0 -1px 0 rgba(255,255,255,.22);
-  --out-sh:0 16px 40px rgba(35,38,92,.16);
-  --out-sh-lg:0 26px 60px rgba(35,38,92,.22);
+  --out-sh:0 16px 40px rgba(120,70,30,.16);
+  --out-sh-lg:0 26px 60px rgba(120,70,30,.22);
   --green:#2BC46F;--green-t:#0B7A43;
   --blue:#5CA9FF;--blue-t:#1D5FC9;
   --amber:#FFC24D;--amber-t:#8F5E00;
@@ -68,7 +68,7 @@ body{
   display:grid;
   place-items:center;
 }
-::selection{background:rgba(29,95,201,.26)}
+::selection{background:rgba(200,90,30,.24)}
 
 /* ===== STAGE ===== */
 .stage{
@@ -78,22 +78,22 @@ body{
   width:min(100vw,calc(100dvh * 16 / 9));
   height:min(100dvh,calc(100vw * 9 / 16));
   overflow:hidden;
-  background:#E8EAF8;
+  background:#FBEEDD;
 }
 .blobs{position:absolute;inset:-26%;z-index:0;pointer-events:none}
 .blobs::before,.blobs::after{content:"";position:absolute;inset:0;filter:blur(46px)}
 .blobs::before{
   background:
-    radial-gradient(36% 44% at 18% 22%,rgba(255,122,61,.58) 0%,transparent 70%),
-    radial-gradient(32% 40% at 82% 16%,rgba(92,169,255,.54) 0%,transparent 70%),
-    radial-gradient(34% 42% at 68% 76%,rgba(183,156,255,.5) 0%,transparent 72%);
+    radial-gradient(36% 44% at 18% 22%,rgba(255,110,40,.60) 0%,transparent 70%),
+    radial-gradient(32% 40% at 82% 16%,rgba(255,180,60,.56) 0%,transparent 70%),
+    radial-gradient(34% 42% at 68% 76%,rgba(210,80,45,.5) 0%,transparent 72%);
   animation:blobA 34s ease-in-out infinite alternate;
 }
 .blobs::after{
   background:
-    radial-gradient(38% 46% at 24% 78%,rgba(92,169,255,.46) 0%,transparent 72%),
-    radial-gradient(30% 38% at 84% 72%,rgba(255,194,77,.42) 0%,transparent 70%),
-    radial-gradient(26% 34% at 52% 40%,rgba(255,98,87,.28) 0%,transparent 72%);
+    radial-gradient(38% 46% at 24% 78%,rgba(255,150,60,.5) 0%,transparent 72%),
+    radial-gradient(30% 38% at 84% 72%,rgba(255,98,87,.44) 0%,transparent 70%),
+    radial-gradient(26% 34% at 52% 40%,rgba(190,110,50,.36) 0%,transparent 72%);
   animation:blobB 46s ease-in-out infinite alternate-reverse;
 }
 @keyframes blobA{
@@ -106,7 +106,7 @@ body{
 }
 .stage::after{
   content:"";position:absolute;inset:0;z-index:0;
-  background-image:radial-gradient(rgba(31,45,68,.05) 1px,transparent 1px);
+  background-image:radial-gradient(rgba(120,70,30,.06) 1px,transparent 1px);
   background-size:26px 26px;
 }
 @media (max-aspect-ratio:16/10),(max-height:560px){
@@ -116,8 +116,8 @@ body{
 /* ===== CHROME ===== */
 .bar{
   position:absolute;top:0;left:0;height:4px;width:0;z-index:60;
-  background:linear-gradient(90deg,#FF7A3D,rgba(92,169,255,1),var(--blue));
-  box-shadow:0 0 16px rgba(255,122,61,.55);
+  background:linear-gradient(90deg,#FF6E28,rgba(255,180,60,1),#FFB43C);
+  box-shadow:0 0 16px rgba(255,110,40,.55);
   transition:width .35s cubic-bezier(.2,.7,.3,1);
 }
 .corner{
