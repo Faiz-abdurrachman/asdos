@@ -1,92 +1,85 @@
-# P03 — Komponen Dasar UI (HTML & CSS)
+# P03 — Bangun Portofolio Pribadi Modern (HTML & CSS)
 
-_Ringkasan isi deck P03 (27 slide). Deck self-contained di `P03/index.html` + aset WebP di `P03/img/`._
+_Ringkasan isi deck P03 (27 slide). Deck self-contained di `P03/index.html` + aset WebP otentik di `P03/img/`._
 
-**Urutan bagian:** Pembuka → Kelas → Dasar teori → Praktik Part 1–4 + Bonus → Tugas → Penutup.
-**Deadline tugas:** Rabu, 21 Oktober 2026, 23.59.
-
-## Daftar isi
-
-- 1. Komponen dasar UI — kenalan sama HTML & CSS *(Pembuka)*
-- 2. Alur pertemuan hari ini *(Pembuka)*
-- 3. Di akhir praktikum, kamu bisa *(Kelas)*
-- 4. Nilai kamu dihitung dari mana *(Kelas)*
-- 5. HTML: kerangka halaman web *(Dasar teori)*
-- 6. CSS: memberi gaya pada struktur *(Dasar teori)*
-- 7. Tiga cara memasang CSS *(Dasar teori)*
-- 8. Kerangka yang sama di tiap halaman *(Dasar teori)*
-- 9. Ingat proyek P02? Sekarang kita isi *(Praktik · Part 1)*
-- 10. Buat file `templates/index.html` *(Praktik · Part 1)*
-- 11. Menu yang menghubungkan halaman *(Praktik · Part 1)*
-- 12. Sambungkan `style.css` ke HTML *(Praktik · Part 1)*
-- 13. Buat file `static/css/style.css` *(Praktik · Part 2)*
-- 14. Lihat bedanya CSS secara langsung *(Praktik · Part 2)*
-- 15. Tambah route di `app.py` *(Praktik · Part 3)*
-- 16. Dari URL ke halaman *(Praktik · Part 3)*
-- 17. Jalankan server, buka di browser *(Praktik · Part 3)*
-- 18. Halaman Home sudah berwarna *(Praktik · Part 3)*
-- 19. Tambah halaman `templates/about.html` *(Praktik · Part 4)*
-- 20. Tambah halaman `templates/contact.html` *(Praktik · Part 4)*
-- 21. Klik menu, pindah halaman *(Praktik · Part 4)*
-- 22. Halaman tadi bisa jadi seperti ini *(Praktik · Bonus)*
-- 23. Sekarang giliran kamu *(Tugas)*
-- 24. Ketentuan & pengumpulan *(Tugas)*
-- 25. Kuis kilat — lima soal *(Penutup)*
-- 26. Kamu baru saja membangun UI pertamamu *(Penutup)*
-- 27. Tampilan web pertamamu sudah jadi *(Penutup)*
-- Lampiran — Kuis (5 soal)
+**Basis Materi:** Codebase portofolio 6 halaman otentik dari `asdos/praktikum` (Flask + HTML5 Semantik + CSS3 Tokens/Flexbox/Grid).  
+**Konsep Pembelajaran:** Mahasiswa membedah arsitektur proyek portofolio siap pakai (Home, About, Skills, Projects, Blog, Contact), lalu mempersonalisasi seluruh data diri (nama, bio, foto, keahlian, proyek nyata, medsos, serta variasi tema warna).  
+**Deadline tugas:** Rabu, 21 Oktober 2026, 23.59 WIB.
 
 ---
 
-## Materi & capaian
+## Daftar Isi (27 Slide)
 
-Setelah mengikuti praktikum, mahasiswa mampu: (1) membangun tampilan antarmuka dengan **HTML5**, (2) memakai **CSS3** untuk styling dasar, (3) menghubungkan **file CSS eksternal** ke HTML.
+- 1. Bangun Portofolio Pribadi Modern *(Pembuka)*
+- 2. Alur pertemuan hari ini *(Pembuka)*
+- 3. Di akhir praktikum, kamu bisa *(Kelas)*
+- 4. Nilai kamu dihitung dari mana *(Kelas)*
+- 5. HTML5 Semantik: Bukan sekadar `<div>` *(Dasar teori)*
+- 6. Design Tokens: Kendali warna di `:root` *(Dasar teori)*
+- 7. Kapan Flexbox, kapan CSS Grid? *(Dasar teori)*
+- 8. Jinja2: Memuat file statis dengan aman *(Dasar teori)*
+- 9. Struktur proyek portofolio *(Praktik · Titik awal)*
+- 10. Enam rute di `app.py` *(Praktik · Part 1 — backend)*
+- 11. Pondasi `style.css`: Reset & Tokens *(Praktik · Part 1 — styling)*
+- 12. Home: Hero section & identitas *(Praktik · Part 2 — halaman 1)*
+- 13. Header melayang & menu aktif *(Praktik · Part 2 — layout)*
+- 14. About: Biodata, statistik & riwayat *(Praktik · Part 3 — halaman 2)*
+- 15. Skills: Progress bar berbasis CSS variable *(Praktik · Part 3 — halaman 3)*
+- 16. Projects: Galeri karya dengan CSS Grid *(Praktik · Part 3 — halaman 4)*
+- 17. Blog: Artikel teknis & metadata *(Praktik · Part 3 — halaman 5)*
+- 18. Contact: Formulir & kartu medsos *(Praktik · Part 3 — halaman 6)*
+- 19. Jalankan server, buka di browser *(Praktik · Part 4 — pengujian)*
+- 20. Jelajahi 6 halaman portofolio *(Praktik · Part 4 — navsim)*
+- 21. Ubah data Faiz menjadi datamu *(Praktik · Personalisasi — identitas)*
+- 22. Eksplorasi tema warna portofolio *(Praktik · Personalisasi — tema)*
+- 23. Sekarang giliran kamu *(Tugas)*
+- 24. Ketentuan & pengumpulan *(Tugas)*
+- 25. Kuis portofolio web modern *(Penutup)*
+- 26. Kamu siap punya web portofolio sendiri *(Penutup)*
+- 27. Selamat berkreasi! *(Penutup)*
 
-- **Teori:** elemen HTML dasar (`html`, `head`, `body`, `h1`–`h6`, `p`, `a`, `img`, `div`, `ul`/`ol`), anatomi aturan CSS (selector + property), tiga cara memasang CSS (inline / internal / eksternal), kerangka semantic `header → main → footer`.
-- **Praktik:** `templates/index.html`, `static/css/style.css`, tambah 3 route di `app.py`, lalu `templates/about.html` & `templates/contact.html`.
-- **Tugas (30 menit):** halaman profil pribadi min. 3 halaman (Home/About/Contact), CSS eksternal, header + nav + main + footer, memakai heading/paragraf/list/link/image. Kumpul zip ke LMS.
+---
 
-## Rubrik (dari modul 003)
+## Capaian Pembelajaran
 
-| Kriteria | Bobot | Excellent | Good | Fair | Poor |
-|---|---|---|---|---|---|
-| Struktur HTML | 25% | Lengkap, semantic | Lengkap | Kurang lengkap | Tidak ada |
-| CSS Styling | 30% | Rapi, konsisten | Cukup rapi | Kurang rapi | Tidak ada |
-| Navigasi | 20% | Semua halaman terhubung | 2 halaman | 1 halaman | Tidak ada |
-| Konten | 25% | Lengkap dan informatif | Cukup lengkap | Kurang lengkap | Tidak ada |
+Setelah mengikuti praktikum P03, mahasiswa mampu:
+1. Membangun dan menata halaman web multi-halaman dengan struktur **HTML5 Semantik** (`<header>`, `<nav>`, `<main>`, `<section>`, `<article>`, `<form>`, `<footer>`).
+2. Menerapkan sistem desain modern menggunakan **CSS3 Custom Properties (`:root`)**, efek glassmorphism (`backdrop-filter`), Flexbox, dan CSS Grid responsif.
+3. Menghubungkan seluruh template dengan backend Flask menggunakan fungsi **`url_for('static', ...)`** yang bebas dari link patah.
+4. Mempersonalisasi identitas, portofolio karya, dan tema warna web secara mandiri.
 
-## Interaksi / widget
+---
 
-- **Explorer elemen HTML** (s5) — klik 9 elemen → penjelasan.
-- **Explorer aturan CSS** (s6) — klik 4 aturan (`body`, `header`, `h2`, `a:hover`) → penjelasan.
-- **Tiga cara memasang CSS** (s7) — kartu inline/internal/eksternal.
-- **url_for: tulis vs browser** (s12) — toggle menampilkan sintak Jinja ↔ hasil `/static/css/style.css`.
-- **CSS playground** (s14) — tombol "dengan CSS / tanpa CSS" + 4 swatch warna header.
-- **Code explorer `app.py`** (s15) — klik baris → penjelasan.
-- **Peta route → template** (s16) — klik `/`, `/about`, `/contact`.
-- **Terminal typewriter OS-aware** (s9 `dir`/`ls`, s17 `python app.py`), badge `venv aktif`/`shell biasa`, output default tersembunyi, tombol **salin perintah** (command-only).
-- **Salin isi file** (index.html, style.css, app.py, about.html, contact.html) + **salin baris `<link>`**.
-- **Simulator navigasi** (s21) — klik Home/About/Contact → ganti tangkapan hasil render.
-- **Checklist tugas + hitung mundur** (s23), **kuis 5 soal** (s25), **lightbox zoom** di tiap `.shotcard` (hint "tekan gambar untuk memperbesar").
+## Rubrik Penilaian
 
-## Aset gambar (`P03/img/`)
+| Kriteria | Bobot | Indikator Utama |
+|---|---|---|
+| **Struktur HTML5 Semantik** | 25% | Menggunakan elemen semantik yang tepat di seluruh 6 file template, valid, tanpa elemen `<div>` berlebihan. |
+| **CSS Styling & Responsif** | 30% | Memanfaatkan design tokens (`:root`), Flexbox, CSS Grid, tipografi bersih, dan responsif di mobile/desktop. |
+| **Navigasi & 6 Rute Flask** | 20% | Semua 6 rute (`/`, `/about`, `/skills`, `/projects`, `/blog`, `/contact`) berjalan mulus dengan link aktif. |
+| **Personalisasi Konten & Data Diri** | 25% | Seluruh data bawaan (nama Faiz, bio, kontak, foto, proyek) telah diganti dengan identitas otentik mahasiswa. |
 
-5 tangkapan modul (VS Code) + hasil render yang dibikin ulang via Playwright:
+---
 
-- `step-01-index-html` … `step-05-contact-html` — tangkapan sumber modul 003.
-- `render-home`, `render-about`, `render-contact` — hasil render `127.0.0.1` dari app contoh (kode modul 003).
-- `adv-home`, `adv-about`, `adv-contact` — contoh **pengembangan lanjutan** (proyek pribadi asdos, 7 halaman, dark glass) di slide bonus s22.
+## Fitur & Interaktivitas Deck
 
-## Kuis (5 soal)
+- **Explorer Elemen Semantik** (s5): Klik 6 elemen semantik utama untuk melihat peran arsitekturnya.
+- **Explorer Design Tokens** (s6): Klik variabel token CSS (`--bg-primary`, `--accent`, `--glass-bg`, dll.) untuk memahami sistem desain terpusat.
+- **Terminal OS-Aware** (s9 & s19): Pilihan tab Windows vs Linux/macOS, badge `venv aktif`, tombol salin command-only, dan output default tersembunyi ("tampilkan output").
+- **Code Explorer `app.py`** (s10): Klik tiap baris rute Flask untuk membedah fungsinya satu per satu.
+- **Tombol Salin Kode Penuh**: Tersedia di setiap kartu kode (`app.py`, reset CSS, dan seluruh cuplikan template HTML).
+- **Galeri Screenshot Otentik & Lightbox Zoom** (s12, s14, s15, s16, s17, s18): Screenshot WebP resolusi tinggi dengan hint **"tekan gambar untuk memperbesar"**.
+- **Simulator Navigasi (Navsim)** (s20): Jelajahi langsung 6 halaman portofolio dalam 1 viewport interaktif.
+- **Live Theme Switcher** (s22): Uji coba pergantian skema warna (Indigo/Violet, Emerald Green, Sky Blue, Sunset Amber, Coral Rose) secara dinamis sebelum diterapkan ke `style.css`.
+- **Kuis Interaktif** (s25): 5 soal evaluasi dengan umpan balik instan dan skor 5/5.
+- **Ekspor Cetak PDF**: 1 slide = 1 halaman 16:9 pas (297×167 mm), tepat 27 halaman.
 
-1. Tag HTML untuk heading/judul paling besar? → **`<h1>`**
-2. Atribut pada `<a>` yang berisi alamat tujuan link? → **`href`**
-3. Cara paling rapi menghubungkan CSS ke HTML? → **file eksternal via `<link>`**
-4. Tag untuk membuat daftar berurutan (bernomor)? → **`<ol>`**
-5. Folder Flask tempat menyimpan file HTML? → **`templates/`**
+---
 
-## Catatan penting
+## Kunci Jawaban Kuis
 
-- Deck **melanjutkan P02**: P02 sudah membuat `app.py`, `templates/index.html`, dan `static/css/style.css`; P03 **melengkapinya** jadi 3 halaman + UI lengkap (bukan membuat dari nol), sesuai instruksi user.
-- Modul 003 memakai CSS dasar (Arial, header `#2c3e50`, body `#f4f4f4`). Semua kode di deck mengikuti modul.
-- Jalur lanjutan (s22) bersifat opsional/inspirasi — bukan tuntutan tugas.
+1. **Tag semantik pembungkus menu tautan?** → `<nav>`
+2. **Cara mendefinisikan CSS custom property global?** → `:root { --nama: nilai; }`
+3. **Fungsi Jinja2 untuk memuat file statis secara andal?** → `url_for('static', filename='...')`
+4. **Properti CSS untuk efek blur latar belakang kaca?** → `backdrop-filter: blur(...)`
+5. **Tata letak terbaik untuk galeri kartu dua arah (baris dan kolom)?** → `CSS Grid (display: grid)`
