@@ -1087,11 +1087,87 @@ h2{
 
   <!-- 11 · PONDASI STYLE.CSS -->
     <!-- 11 · STYLE.CSS TOKENS & RESET -->
-  <section class="slide" data-sec="Praktik · Part 1" id="s11">
+    <!-- 11 · HOME: HERO & IDENTITAS -->
+  <section class="slide" data-sec="Praktik · Part 2" id="s11">
     <div class="content">
-      <span class="kick">Praktikum · Part 1 — styling</span>
+      <span class="kick">Praktikum · Part 2 — halaman 1</span>
+      <h2>Home: Hero section &amp; identitas</h2>
+      <div class="slide-body cols c2">
+        <div class="filecard">
+          <div class="fh"><i data-lucide="layout-template" style="width:14px;height:14px"></i>templates/index.html<button class="minibtn copybtn" id="copyHome" type="button" aria-label="Salin index.html utuh"><i data-lucide="copy"></i>salin index.html utuh</button></div>
+          <pre>&lt;section class="hero"&gt;
+  &lt;div class="hero-image"&gt;
+    &lt;img src="{{ url_for('static', filename='images/profile.jpg') }}" alt="Faiz"&gt;
+  &lt;/div&gt;
+  &lt;div class="hero-text"&gt;
+    &lt;p class="tagline"&gt;Mahasiswa Informatika&lt;/p&gt;
+    &lt;h2&gt;Halo, saya &lt;span class="highlight"&gt;Faiz&lt;/span&gt;.&lt;br&gt;
+        &lt;span class="typewriter"&gt;Saya bikin web.&lt;/span&gt;&lt;/h2&gt;
+    &lt;p&gt;Saya tertarik dengan pengembangan web, basis data, dan jaringan komputer.&lt;/p&gt;
+    &lt;div class="hero-cta"&gt;
+      &lt;a href="/contact" class="btn btn-primary"&gt;Hubungi Saya&lt;/a&gt;
+      &lt;a href="/projects" class="btn btn-ghost"&gt;Lihat Proyek&lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</pre>
+        </div>
+        <figure class="shotcard">
+          <div class="imgwrap"><img src="img/render-home.webp" alt="Tampilan halaman Home portofolio dengan hero section dan foto profil" width="1600" height="1000" loading="lazy" decoding="async"></div>
+          <span class="zoomtag"><i data-lucide="zoom-in"></i></span>
+          <figcaption class="shotcap">
+            <span class="stepchip c-green">hasil</span>
+            <span><span class="shottitle">Home di 127.0.0.1:5000</span><span class="shotnote">hero image, typewriter, cta buttons</span></span>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12 · HOME: HERO SECTION -->
+    <!-- 12 · HOME: HERO & IDENTITAS -->
+    <!-- 12 · ASET STATIS GAMBAR -->
+  <section class="slide" data-sec="Praktik · Part 2" id="s12">
+    <div class="content">
+      <span class="kick">Praktikum · Part 2 — aset statis</span>
+      <h2>Aset gambar: Foto profil di static/images/</h2>
+      <div class="slide-body cols c2">
+        <div>
+          <div class="filecard">
+            <div class="fh"><i data-lucide="image" style="width:14px;height:14px"></i>pemanggilan gambar di templates/index.html</div>
+            <pre>&lt;!-- Tag gambar di dalam hero section --&gt;
+&lt;div class="hero-image"&gt;
+  &lt;img src="{{ url_for('static', filename='images/profile.jpg') }}"
+       alt="Foto Profil"&gt;
+&lt;/div&gt;</pre>
+          </div>
+          <div class="pcard" style="margin-top:14px">
+            <div class="ic"><i data-lucide="folder"></i></div>
+            <h3>Langkah Menyiapkan Gambar</h3>
+            <p>1. Buat folder baru bernama <b>images</b> di dalam folder <b>static/</b>.</p>
+            <p style="margin-top:6px">2. Masukkan file foto profilmu dengan nama <b>profile.jpg</b> ke dalam folder <code>static/images/</code>.</p>
+            <span class="tag" style="margin-top:10px">static/images/profile.jpg</span>
+          </div>
+        </div>
+        <figure class="shotcard">
+          <div class="imgwrap"><img src="img/step-asset-image.webp" alt="Struktur folder static/images/profile.jpg dan sintaks Jinja2 url_for di VS Code" width="1200" height="750" loading="lazy" decoding="async"></div>
+          <span class="zoomtag"><i data-lucide="zoom-in"></i></span>
+          <figcaption class="shotcap">
+            <span class="stepchip c-blue">aset</span>
+            <span><span class="shottitle">Struktur folder di VS Code</span><span class="shotnote">static/images/profile.jpg</span></span>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 13 · HEADER & NAVIGASI -->
+    <!-- 13 · HEADER & MENU AKTIF -->
+    <!-- 13 · STYLE.CSS TOKENS & RESET -->
+  <section class="slide" data-sec="Praktik · Part 2" id="s13">
+    <div class="content">
+      <span class="kick">Praktikum · Part 2 — styling</span>
       <h2>Pondasi style.css: Reset &amp; Tokens</h2>
-      <p class="sub">CSS portofolio ini sudah selesai dibangun (768 baris murni tanpa framework). Kamu cukup memahami sistem variabelnya.</p>
+      <p class="sub">Setelah kerangka HTML dan foto profil siap, kita pasang seluruh styling CSS-nya.</p>
       <div class="slide-body cols c2">
         <div class="filecard">
           <div class="fh"><i data-lucide="palette" style="width:14px;height:14px"></i>static/css/style.css<button class="minibtn copybtn" id="copyTokens" type="button" aria-label="Salin style.css lengkap"><i data-lucide="copy"></i>salin style.css lengkap</button></div>
@@ -1129,46 +1205,10 @@ h2{
     </div>
   </section>
 
-  <!-- 12 · HOME: HERO SECTION -->
-    <!-- 12 · HOME: HERO & IDENTITAS -->
-  <section class="slide" data-sec="Praktik · Part 2" id="s12">
-    <div class="content">
-      <span class="kick">Praktikum · Part 2 — halaman 1</span>
-      <h2>Home: Hero section &amp; identitas</h2>
-      <div class="slide-body cols c2">
-        <div class="filecard">
-          <div class="fh"><i data-lucide="layout-template" style="width:14px;height:14px"></i>templates/index.html<button class="minibtn copybtn" id="copyHome" type="button" aria-label="Salin index.html utuh"><i data-lucide="copy"></i>salin index.html utuh</button></div>
-          <pre>&lt;section class="hero"&gt;
-  &lt;div class="hero-image"&gt;
-    &lt;img src="{{ url_for('static', filename='images/profile.jpg') }}" alt="Faiz"&gt;
-  &lt;/div&gt;
-  &lt;div class="hero-text"&gt;
-    &lt;p class="tagline"&gt;Mahasiswa Informatika&lt;/p&gt;
-    &lt;h2&gt;Halo, saya &lt;span class="highlight"&gt;Faiz&lt;/span&gt;.&lt;br&gt;
-        &lt;span class="typewriter"&gt;Saya bikin web.&lt;/span&gt;&lt;/h2&gt;
-    &lt;p&gt;Saya tertarik dengan pengembangan web, basis data, dan jaringan komputer.&lt;/p&gt;
-    &lt;div class="hero-cta"&gt;
-      &lt;a href="/contact" class="btn btn-primary"&gt;Hubungi Saya&lt;/a&gt;
-      &lt;a href="/projects" class="btn btn-ghost"&gt;Lihat Proyek&lt;/a&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/section&gt;</pre>
-        </div>
-        <figure class="shotcard">
-          <div class="imgwrap"><img src="img/render-home.webp" alt="Tampilan halaman Home portofolio dengan hero section dan foto profil" width="1600" height="1000" loading="lazy" decoding="async"></div>
-          <span class="zoomtag"><i data-lucide="zoom-in"></i></span>
-          <figcaption class="shotcap">
-            <span class="stepchip c-green">hasil</span>
-            <span><span class="shottitle">Home di 127.0.0.1:5000</span><span class="shotnote">hero image, typewriter, cta buttons</span></span>
-          </figcaption>
-        </figure>
-      </div>
-    </div>
-  </section>
-
-  <!-- 13 · HEADER & NAVIGASI -->
-    <!-- 13 · HEADER & MENU AKTIF -->
-  <section class="slide" data-sec="Praktik · Part 2" id="s13">
+  <!-- 14 · ABOUT: BIODATA & TIMELINE -->
+    <!-- 14 · ABOUT: BIODATA & TIMELINE -->
+    <!-- 14 · HEADER & MENU AKTIF -->
+  <section class="slide" data-sec="Praktik · Part 2" id="s14">
     <div class="content">
       <span class="kick">Praktikum · Part 2 — layout</span>
       <h2>Header melayang &amp; menu aktif</h2>
@@ -1210,9 +1250,10 @@ header {
     </div>
   </section>
 
-  <!-- 14 · ABOUT: BIODATA & TIMELINE -->
-    <!-- 14 · ABOUT: BIODATA & TIMELINE -->
-  <section class="slide" data-sec="Praktik · Part 3" id="s14">
+  <!-- 15 · SKILLS: PROGRESS BAR -->
+    <!-- 15 · SKILLS: PROGRESS BAR CSS VARIABLE -->
+    <!-- 15 · ABOUT: BIODATA & TIMELINE -->
+  <section class="slide" data-sec="Praktik · Part 3" id="s15">
     <div class="content">
       <span class="kick">Praktikum · Part 3 — halaman 2</span>
       <h2>About: Biodata, riwayat &amp; kutipan</h2>
@@ -1252,9 +1293,10 @@ header {
     </div>
   </section>
 
-  <!-- 15 · SKILLS: PROGRESS BAR -->
-    <!-- 15 · SKILLS: PROGRESS BAR CSS VARIABLE -->
-  <section class="slide" data-sec="Praktik · Part 3" id="s15">
+  <!-- 16 · PROJECTS: CSS GRID -->
+    <!-- 16 · PROJECTS: GALERI KARYA -->
+    <!-- 16 · SKILLS: PROGRESS BAR CSS VARIABLE -->
+  <section class="slide" data-sec="Praktik · Part 3" id="s16">
     <div class="content">
       <span class="kick">Praktikum · Part 3 — halaman 3</span>
       <h2>Skills: Progress bar berbasis CSS variable</h2>
@@ -1289,9 +1331,10 @@ header {
     </div>
   </section>
 
-  <!-- 16 · PROJECTS: CSS GRID -->
-    <!-- 16 · PROJECTS: GALERI KARYA -->
-  <section class="slide" data-sec="Praktik · Part 3" id="s16">
+  <!-- 17 · BLOG: ARTIKEL & META -->
+    <!-- 17 · BLOG: ARTIKEL & METADATA -->
+    <!-- 17 · PROJECTS: GALERI KARYA -->
+  <section class="slide" data-sec="Praktik · Part 3" id="s17">
     <div class="content">
       <span class="kick">Praktikum · Part 3 — halaman 4</span>
       <h2>Projects: Galeri karya dengan CSS Grid</h2>
@@ -1328,16 +1371,22 @@ header {
     </div>
   </section>
 
-  <!-- 17 · BLOG: ARTIKEL & META -->
-    <!-- 17 · BLOG: ARTIKEL & METADATA -->
-  <section class="slide" data-sec="Praktik · Part 3" id="s17">
+  <!-- 18 · CONTACT: FORMULIR -->
+    <!-- 18 · CONTACT: KOMUNIKASI & MEDSOS -->
+    <!-- 18 · BLOG & CONTACT -->
+  <section class="slide" data-sec="Praktik · Part 3" id="s18">
     <div class="content">
-      <span class="kick">Praktikum · Part 3 — halaman 5</span>
-      <h2>Blog: Catatan teknis &amp; tag</h2>
-      <div class="slide-body cols c2">
-        <div class="filecard">
-          <div class="fh"><i data-lucide="layout-template" style="width:14px;height:14px"></i>templates/blog.html<button class="minibtn copybtn" id="copyBlog" type="button" aria-label="Salin blog.html utuh"><i data-lucide="copy"></i>salin blog.html utuh</button></div>
-          <pre>&lt;section class="section"&gt;
+      <span class="kick">Praktikum · Part 3 — halaman 5 &amp; 6</span>
+      <h2>Blog &amp; Contact: Catatan &amp; jalur medsos</h2>
+      <div class="slide-body">
+        <div class="ostabs" id="bcTabs" style="margin-bottom:12px">
+          <button class="ostab on" data-bc="blog" type="button"><i data-lucide="layout-template" style="width:13px;height:13px"></i>templates/blog.html</button>
+          <button class="ostab" data-bc="contact" type="button"><i data-lucide="layout-template" style="width:13px;height:13px"></i>templates/contact.html</button>
+        </div>
+        <div class="cols c2" id="bcBlog">
+          <div class="filecard">
+            <div class="fh"><i data-lucide="layout-template" style="width:14px;height:14px"></i>templates/blog.html<button class="minibtn copybtn" id="copyBlog" type="button" aria-label="Salin blog.html utuh"><i data-lucide="copy"></i>salin blog.html utuh</button></div>
+            <pre>&lt;section class="section"&gt;
   &lt;h3 class="section-title"&gt;Catatan&lt;/h3&gt;
   &lt;div class="blog-grid stagger"&gt;
     &lt;div class="blog-card"&gt;
@@ -1348,29 +1397,20 @@ header {
     &lt;/div&gt;
   &lt;/div&gt;
 &lt;/section&gt;</pre>
+          </div>
+          <figure class="shotcard">
+            <div class="imgwrap"><img src="img/render-blog.webp" alt="Tampilan halaman Blog portofolio dengan daftar artikel dan tag" width="1600" height="1000" loading="lazy" decoding="async"></div>
+            <span class="zoomtag"><i data-lucide="zoom-in"></i></span>
+            <figcaption class="shotcap">
+              <span class="stepchip c-green">hasil</span>
+              <span><span class="shottitle">Blog di 127.0.0.1:5000</span><span class="shotnote">blog-grid, date chip, tag</span></span>
+            </figcaption>
+          </figure>
         </div>
-        <figure class="shotcard">
-          <div class="imgwrap"><img src="img/render-blog.webp" alt="Tampilan halaman Blog portofolio dengan daftar artikel dan tag" width="1600" height="1000" loading="lazy" decoding="async"></div>
-          <span class="zoomtag"><i data-lucide="zoom-in"></i></span>
-          <figcaption class="shotcap">
-            <span class="stepchip c-green">hasil</span>
-            <span><span class="shottitle">Blog di 127.0.0.1:5000</span><span class="shotnote">blog-grid, date chip, tag</span></span>
-          </figcaption>
-        </figure>
-      </div>
-    </div>
-  </section>
-
-  <!-- 18 · CONTACT: FORMULIR -->
-    <!-- 18 · CONTACT: KOMUNIKASI & MEDSOS -->
-  <section class="slide" data-sec="Praktik · Part 3" id="s18">
-    <div class="content">
-      <span class="kick">Praktikum · Part 3 — halaman 6</span>
-      <h2>Contact: Jalur komunikasi &amp; medsos</h2>
-      <div class="slide-body cols c2">
-        <div class="filecard">
-          <div class="fh"><i data-lucide="layout-template" style="width:14px;height:14px"></i>templates/contact.html<button class="minibtn copybtn" id="copyContact" type="button" aria-label="Salin contact.html utuh"><i data-lucide="copy"></i>salin contact.html utuh</button></div>
-          <pre>&lt;section class="section"&gt;
+        <div class="cols c2" id="bcContact" style="display:none">
+          <div class="filecard">
+            <div class="fh"><i data-lucide="layout-template" style="width:14px;height:14px"></i>templates/contact.html<button class="minibtn copybtn" id="copyContact" type="button" aria-label="Salin contact.html utuh"><i data-lucide="copy"></i>salin contact.html utuh</button></div>
+            <pre>&lt;section class="section"&gt;
   &lt;h3 class="section-title"&gt;Hubungi Saya&lt;/h3&gt;
   &lt;p class="text-muted mb-3"&gt;Silakan hubungi saya melalui email atau medsos di bawah ini.&lt;/p&gt;
   &lt;ul class="contact-list stagger"&gt;
@@ -1386,15 +1426,16 @@ header {
     &lt;/li&gt;
   &lt;/ul&gt;
 &lt;/section&gt;</pre>
+          </div>
+          <figure class="shotcard">
+            <div class="imgwrap"><img src="img/render-contact.webp" alt="Tampilan halaman Contact portofolio dengan daftar kontak dan medsos" width="1600" height="1000" loading="eager" decoding="async"></div>
+            <span class="zoomtag"><i data-lucide="zoom-in"></i></span>
+            <figcaption class="shotcap">
+              <span class="stepchip c-green">hasil</span>
+              <span><span class="shottitle">Contact di 127.0.0.1:5000</span><span class="shotnote">contact-list, SVG icons, values</span></span>
+            </figcaption>
+          </figure>
         </div>
-        <figure class="shotcard">
-          <div class="imgwrap"><img src="img/render-contact.webp" alt="Tampilan halaman Contact portofolio dengan daftar kontak dan medsos" width="1600" height="1000" loading="lazy" decoding="async"></div>
-          <span class="zoomtag"><i data-lucide="zoom-in"></i></span>
-          <figcaption class="shotcap">
-            <span class="stepchip c-green">hasil</span>
-            <span><span class="shottitle">Contact di 127.0.0.1:5000</span><span class="shotnote">contact-list, SVG icons, values</span></span>
-          </figcaption>
-        </figure>
       </div>
     </div>
   </section>
@@ -2352,6 +2393,17 @@ if(copyBlog) copyBlog.onclick = () => copyText(FULL_FILES['blog.html'], () => fl
 
 const copyContact = document.getElementById('copyContact');
 if(copyContact) copyContact.onclick = () => copyText(FULL_FILES['contact.html'], () => flashBtn(copyContact, '<i data-lucide="check"></i>tersalin contact.html'));
+
+
+$$('#bcTabs .ostab').forEach(b => b.onclick = () => {
+  $$('#bcTabs .ostab').forEach(x => x.classList.remove('on'));
+  b.classList.add('on');
+  const isBlog = b.dataset.bc === 'blog';
+  const blogEl = document.getElementById('bcBlog');
+  const contactEl = document.getElementById('bcContact');
+  if(blogEl) blogEl.style.display = isBlog ? 'grid' : 'none';
+  if(contactEl) contactEl.style.display = isBlog ? 'none' : 'grid';
+});
 
 lucide.createIcons();
 show(0);

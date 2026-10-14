@@ -20,16 +20,16 @@ _Ringkasan isi deck P03 (27 slide). Deck self-contained di `P03/index.html` + as
 - 8. Jinja2: Memuat file statis dengan aman *(Dasar teori)*
 - 9. Struktur proyek portofolio *(Praktik · Titik awal)*
 - 10. Enam rute di `app.py` *(Praktik · Part 1 — backend)*
-- 11. Pondasi `style.css`: Reset & Tokens *(Praktik · Part 1 — styling)*
-- 12. Home: Hero section & identitas *(Praktik · Part 2 — halaman 1)*
-- 13. Header melayang & menu aktif *(Praktik · Part 2 — layout)*
-- 14. About: Biodata, statistik & riwayat *(Praktik · Part 3 — halaman 2)*
-- 15. Skills: Progress bar berbasis CSS variable *(Praktik · Part 3 — halaman 3)*
-- 16. Projects: Galeri karya dengan CSS Grid *(Praktik · Part 3 — halaman 4)*
-- 17. Blog: Artikel teknis & metadata *(Praktik · Part 3 — halaman 5)*
-- 18. Contact: Formulir & kartu medsos *(Praktik · Part 3 — halaman 6)*
-- 19. Jalankan server, buka di browser *(Praktik · Part 4 — pengujian)*
-- 20. Jelajahi 6 halaman portofolio *(Praktik · Part 4 — navsim)*
+- 11. Home: Hero section & struktur awal *(Praktik · Part 2 — template)*
+- 12. Aset gambar: Foto profil di static/images/ *(Praktik · Part 2 — aset)*
+- 13. Pondasi `style.css`: Reset & Tokens *(Praktik · Part 3 — styling)*
+- 14. Header melayang & menu aktif *(Praktik · Part 3 — layout)*
+- 15. About: Biodata, statistik & riwayat *(Praktik · Part 4 — halaman 2)*
+- 16. Skills: Progress bar berbasis CSS variable *(Praktik · Part 4 — halaman 3)*
+- 17. Projects: Galeri karya dengan CSS Grid *(Praktik · Part 4 — halaman 4)*
+- 18. Blog & Contact: Artikel dan kartu narahubung *(Praktik · Part 4 — halaman 5 & 6)*
+- 19. Jalankan server, buka di browser *(Praktik · Part 5 — pengujian)*
+- 20. Jelajahi 6 halaman portofolio *(Praktik · Part 5 — navsim)*
 - 21. Ubah data Faiz menjadi datamu *(Praktik · Personalisasi — identitas)*
 - 22. Eksplorasi tema warna portofolio *(Praktik · Personalisasi — tema)*
 - 23. Sekarang giliran kamu *(Tugas)*
