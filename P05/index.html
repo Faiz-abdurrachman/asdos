@@ -310,14 +310,24 @@ h2{
 
 /* QUIZ */
 .qopt{
-  display:block;width:100%;text-align:left;padding:12px 18px;margin-bottom:8px;
-  background:#FFFFFF;border:1px solid #CBD5E1;
-  border-radius:var(--rad-sm);color:var(--ink);font:500 13.5px/1.4 var(--sans);
-  cursor:pointer;transition:all .15s;
+  display:flex;align-items:center;gap:14px;width:100%;text-align:left;
+  padding:14px 18px;margin-bottom:10px;background:#FFFFFF;border:1.5px solid #CBD5E1;
+  border-radius:var(--rad-sm);color:var(--ink);font:500 14px/1.4 var(--sans);
+  cursor:pointer;transition:all .15s ease;box-shadow:0 2px 5px rgba(15,23,42,0.03);
 }
-.qopt:hover{background:rgba(2,132,199,0.08);border-color:var(--accent)}
-.qopt.right{background:rgba(5,150,105,0.15);border-color:var(--green);color:#065F46;font-weight:600}
-.qopt.wrong{background:rgba(220,38,38,0.15);border-color:var(--red);color:#991B1B;font-weight:600}
+.qopt:hover{background:rgba(2,132,199,0.06);border-color:var(--accent);transform:translateX(3px)}
+.qopt-letter{
+  display:grid;place-items:center;width:28px;height:28px;border-radius:8px;
+  background:#F1F5F9;border:1px solid #CBD5E1;font:700 12px/1 var(--mono);
+  color:var(--dim);flex-shrink:0;
+}
+.qopt-text{flex:1;color:var(--ink);font-weight:500}
+.qopt.right{background:rgba(5,150,105,0.12);border-color:#059669;color:#065F46;font-weight:600}
+.qopt.right .qopt-letter{background:#059669;border-color:#059669;color:#FFFFFF}
+.qopt.right .qopt-text{color:#065F46;font-weight:600}
+.qopt.wrong{background:rgba(220,38,38,0.12);border-color:#DC2626;color:#991B1B;font-weight:600}
+.qopt.wrong .qopt-letter{background:#DC2626;border-color:#DC2626;color:#FFFFFF}
+.qopt.wrong .qopt-text{color:#991B1B;font-weight:600}
 
 /* RESPONSIVE */
 @media(max-width:860px){
@@ -1213,6 +1223,12 @@ const QUESTIONS = [
     a: 2
   }
 ];
+function escHtml(s){
+  const d = document.createElement('div');
+  d.textContent = s;
+  return d.innerHTML;
+}
+const LETTERS = ['A', 'B', 'C', 'D'];
 let qIndex = 0, qScore = 0, qMarks = [];
 function renderQuiz(reset){
   if(reset){ qIndex = 0; qScore = 0; qMarks = []; }
@@ -1229,7 +1245,12 @@ function renderQuiz(reset){
   $('#qno').textContent = 'Soal ' + (qIndex + 1) + ' / ' + QUESTIONS.length;
   $('#qdots').innerHTML = QUESTIONS.map((_, i) => '<span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:' + (i < qMarks.length ? (qMarks[i] ? '#059669' : '#DC2626') : i === qIndex ? 'var(--accent)' : '#CBD5E1') + '"></span>').join('');
   $('#qq').textContent = curQ.q;
-  $('#qopts').innerHTML = curQ.o.map((opt, i) => '<button class="qopt" type="button" data-i="' + i + '">' + opt + '</button>').join('');
+  $('#qopts').innerHTML = curQ.o.map((opt, i) => 
+    '<button class="qopt" type="button" data-i="' + i + '">' +
+      '<span class="qopt-letter">' + LETTERS[i] + '</span>' +
+      '<span class="qopt-text">' + escHtml(opt) + '</span>' +
+    '</button>'
+  ).join('');
   $('#qfoot').innerHTML = '';
   $$('#qopts .qopt').forEach(btn => {
     btn.onclick = () => {
