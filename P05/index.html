@@ -329,10 +329,147 @@ h2{
 .qopt.wrong .qopt-letter{background:#DC2626;border-color:#DC2626;color:#FFFFFF}
 .qopt.wrong .qopt-text{color:#991B1B;font-weight:600}
 
-/* RESPONSIVE */
-@media(max-width:860px){
-  .cols.c2,.cols.c2-1,.cols.c1-2,.cols.c3,.cols.c4{grid-template-columns:1fr}
-  .slide{padding:20px 16px 80px}
+/* ========================================================
+   RESPONSIVE DESIGN BREAKPOINTS
+   ======================================================== */
+@media (max-width: 1080px) {
+  .cols.c4 { grid-template-columns: repeat(2, 1fr); }
+  .cols.c3 { grid-template-columns: repeat(2, 1fr); }
+  .cols.c2-1, .cols.c1-2 { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 768px) {
+  html, body {
+    height: 100%;
+    overflow-y: auto;
+  }
+  .slide {
+    padding: 24px 16px 88px;
+    align-items: flex-start;
+  }
+  .content {
+    margin: 0 auto;
+    padding-top: 10px;
+  }
+  .cols.c2, .cols.c3, .cols.c4, .cols.c2-1, .cols.c1-2 {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .title-slide h1 {
+    font-size: clamp(28px, 7.5vw, 42px);
+    margin: 12px 0 14px;
+  }
+  .title-slide .typeline {
+    font-size: 11px;
+    padding: 7px 16px;
+    flex-wrap: wrap;
+    text-align: center;
+    justify-content: center;
+    gap: 6px;
+  }
+  .title-slide .t-sub {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  h2 {
+    font-size: clamp(20px, 5.5vw, 28px);
+  }
+  .sub {
+    font-size: 13.5px;
+    line-height: 1.5;
+  }
+  .pcard {
+    padding: 16px 18px;
+  }
+  .sim-box {
+    padding: 16px 14px;
+  }
+  .sim-input-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+    padding: 10px 12px;
+  }
+  .sim-prefix {
+    font-size: 11.5px;
+    word-break: break-all;
+  }
+  .sim-input {
+    font-size: 13px;
+    width: 100%;
+  }
+  table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+  }
+  .cbox pre {
+    padding: 12px 14px;
+    font-size: 11.5px;
+    line-height: 1.5;
+  }
+  .dock {
+    bottom: 12px;
+    padding: 5px 12px;
+    gap: 6px;
+  }
+  .dock-btn {
+    width: 32px;
+    height: 32px;
+  }
+  .dock-btn svg {
+    width: 15px;
+    height: 15px;
+  }
+  .slide-count {
+    font-size: 11px;
+    min-width: 62px;
+    padding: 0 4px;
+  }
+  .seclabel {
+    font-size: 8px;
+  }
+  .qopt {
+    padding: 12px 14px;
+    font-size: 13px;
+    gap: 10px;
+  }
+  .qopt-letter {
+    width: 24px;
+    height: 24px;
+    font-size: 11px;
+    border-radius: 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  .slide {
+    padding: 16px 12px 84px;
+  }
+  .title-slide h1 {
+    font-size: 26px;
+  }
+  .kick {
+    font-size: 9.5px;
+    padding: 4px 10px;
+  }
+  .dock {
+    bottom: 8px;
+    padding: 4px 8px;
+    gap: 4px;
+  }
+  .dock-btn {
+    width: 28px;
+    height: 28px;
+  }
+  .slide-count {
+    min-width: 54px;
+    font-size: 10px;
+  }
+  .seclabel {
+    display: none;
+  }
 }
 </style>
 </head>
@@ -351,7 +488,6 @@ h2{
     <div class="typeline"><code>@app.route('/blog/&lt;int:post_id&gt;')</code> &bull; GET vs POST</div>
     <h1>Routing Dinamis &amp;<br>Formulir Interaktif</h1>
     <p class="t-sub">Mengubah website portofolio statis menjadi aplikasi dinamis: menangkap parameter URL, memproses formulir POST, dan memberikan feedback instan dengan Flash Messages.</p>
-    <div class="credit">FAIZ &bull; ASISTEN PRAKTIKUM PEMROGRAMAN WEB 2026</div>
   </div>
 </section>
 
