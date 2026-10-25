@@ -13,3 +13,7 @@ docs/
 
 # Materi mentah modul (tidak untuk di-push)
 004 Layout dan Template Engine (Jinja2)/
+
+# Backup directories
+*-bak/
+*backup*/
