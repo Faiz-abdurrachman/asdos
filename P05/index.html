@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>P05 · Routing Dinamis &amp; Formulir Interaktif — Deck Praktikum Interaktif</title>
+<meta name="description" content="Deck panduan praktikum Pemrograman Web P05 — Variable Rules, Converters, HTTP Methods (GET & POST), Form Handling, dan Flash Messages untuk Mahasiswa Pemula.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>
+(function(){
+const ICONS={
+  "sparkles":"<path d='m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z'/><path d='M5 3v4'/><path d='M19 17v4'/><path d='M3 5h4'/><path d='M17 19h4'/>",
+  "layers":"<polygon points='12 2 2 7 12 12 22 7 12 2'/><polyline points='2 17 12 22 22 17'/><polyline points='2 12 12 17 22 12'/>",
+  "layout":"<rect width='18' height='18' x='3' y='3' rx='2'/><path d='M3 9h18'/><path d='M9 21V9'/>",
+  "code":"<path d='m16 18 6-6-6-6'/><path d='m8 6-6 6 6 6'/>",
+  "terminal":"<path d='M12 19h8'/><path d='m4 17 6-6-6-6'/>",
+  "copy":"<rect width='14' height='14' x='8' y='8' rx='2' ry='2'/><path d='M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2'/>",
+  "check":"<path d='M20 6 9 17l-5-5'/>",
+  "circle-check":"<circle cx='12' cy='12' r='10'/><path d='m16 9-5.5 5.5L8 12'/>",
+  "chevron-right":"<path d='m9 18 6-6-6-6'/>",
+  "chevron-left":"<path d='m15 18-6-6 6-6'/>",
+  "maximize-2":"<path d='M15 3h6v6'/><path d='m21 3-7 7'/><path d='m3 21 7-7'/><path d='M9 21H3v-6'/>",
+  "printer":"<path d='M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2'/><path d='M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6'/><rect x='6' y='14' width='12' height='8' rx='1'/>",
+  "shield-check":"<path d='M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z'/><path d='m9 12 2 2 4-4'/>",
+  "refresh-cw":"<path d='M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8'/><path d='M21 3v5h-5'/><path d='M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16'/><path d='M8 16H3v5'/>",
+  "flask-conical":"<path d='M14 2v6a2 2 0 0 0 .245.96l5.51 10.08A2 2 0 0 1 18 22H6a2 2 0 0 1-1.755-2.96l5.51-10.08A2 2 0 0 0 10 8V2'/><path d='M6.453 15h11.094'/><path d='M8.5 2h7'/>",
+  "file":"<path d='M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z'/><path d='M14 2v5a1 1 0 0 0 1 1h5'/>",
+  "folder":"<path d='M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z'/>",
+  "zoom-in":"<circle cx='11' cy='11' r='8'/><line x1='21' x2='16.65' y1='21' y2='16.65'/><line x1='11' x2='11' y1='8' y2='14'/><line x1='8' x2='14' y1='11' y2='11'/>",
+  "x":"<path d='M18 6 6 18'/><path d='m6 6 12 12'/>",
+  "package":"<path d='M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z'/><path d='M12 22V12'/><polyline points='3.29 7 12 12 20.71 7'/><path d='m7.5 4.27 9 5.15'/>",
+  "help-circle":"<circle cx='12' cy='12' r='10'/><path d='M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3'/><path d='M12 17h.01'/>",
+  "send":"<line x1='22' y1='2' x2='11' y2='13'/><polygon points='22 2 15 22 11 13 2 9 22 2'/>",
+  "lock":"<rect x='3' y='11' width='18' height='11' rx='2' ry='2'/><path d='M7 11V7a5 5 0 0 1 10 0v4'/>",
+  "globe":"<circle cx='12' cy='12' r='10'/><line x1='2' y1='12' x2='22' y2='12'/><path d='M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z'/>",
+  "alert-triangle":"<path d='m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z'/><line x1='12' y1='9' x2='12' y2='13'/><line x1='12' y1='17' x2='12.01' y2='17'/>"
+};
+window.lucide={createIcons:function(){
+document.querySelectorAll('i[data-lucide]').forEach(function(el){
+const name=el.getAttribute('data-lucide'),inner=ICONS[name];
+if(!inner)return;
+const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');
+svg.setAttribute('xmlns','http://www.w3.org/2000/svg');
+svg.setAttribute('width','24');svg.setAttribute('height','24');
+svg.setAttribute('viewBox','0 0 24 24');svg.setAttribute('fill','none');
+svg.setAttribute('stroke','currentColor');svg.setAttribute('stroke-width','2');
+svg.setAttribute('stroke-linecap','round');svg.setAttribute('stroke-linejoin','round');
+Array.prototype.forEach.call(el.attributes,function(a){if(a.name!=='data-lucide')svg.setAttribute(a.name,a.value);});
+svg.innerHTML=inner;
+el.replaceWith(svg);
+});
+}};
+})();
+</script>
+<style>
+:root{
+  --disp:'Unbounded',sans-serif;
+  --sans:'IBM Plex Sans',system-ui,sans-serif;
+  --mono:'IBM Plex Mono',monospace;
+  --bg-deep:#06080A;
+  --bg-base:#0A0E13;
+  --glass:rgba(18,24,32,0.68);
+  --glass-strong:rgba(22,30,40,0.85);
+  --glass-bd:rgba(255,255,255,0.08);
+  --glass-bd-glow:rgba(56,189,248,0.35);
+  --ink:#F1F5F9;
+  --dim:#94A3B8;
+  --faint:#64748B;
+  --accent:#38BDF8;
+  --accent-glow:rgba(56,189,248,0.25);
+  --green:#10B981;
+  --green-glow:rgba(16,185,129,0.22);
+  --red:#EF4444;
+  --red-glow:rgba(239,68,68,0.22);
+  --amber:#F59E0B;
+  --purple:#A855F7;
+  --rad:16px;
+  --rad-sm:8px;
+  --rad-lg:24px;
+  --blur:blur(18px) saturate(160%);
+  --shadow:0 16px 36px -10px rgba(0,0,0,0.6);
+  --shadow-lg:0 24px 56px -12px rgba(0,0,0,0.75);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{
+  width:100%;height:100%;overflow:hidden;
+  background:var(--bg-deep);color:var(--ink);
+  font:400 15px/1.6 var(--sans);
+  -webkit-font-smoothing:antialiased;
+}
+.bg-blobs{
+  position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;
+}
+.blob{
+  position:absolute;border-radius:50%;filter:blur(120px);opacity:.35;
+  animation:drift 28s ease-in-out infinite alternate;
+}
+.blob-1{top:-10%;left:15%;width:480px;height:480px;background:#0284c7}
+.blob-2{bottom:-15%;right:10%;width:540px;height:540px;background:#059669}
+.blob-3{top:40%;left:-10%;width:420px;height:420px;background:#7c3aed;opacity:.22}
+@keyframes drift{
+  0%{transform:translate(0,0) scale(1)}
+  100%{transform:translate(40px,30px) scale(1.08)}
+}
+
+/* PROGRESS BAR */
+.progress-bar{
+  position:fixed;top:0;left:0;height:3px;
+  background:linear-gradient(90deg,var(--accent),var(--green));
+  z-index:100;transition:width .25s ease;
+  box-shadow:0 0 10px var(--accent);
+}
+
+/* DOCK NAVIGATION */
+.dock{
+  position:fixed;bottom:20px;left:50%;transform:translateX(-50%);
+  z-index:90;display:flex;align-items:center;gap:10px;
+  background:var(--glass-strong);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
+  border:1px solid var(--glass-bd);border-radius:999px;
+  padding:6px 14px;box-shadow:var(--shadow-lg);
+}
+.dock-btn{
+  background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.08);
+  color:var(--ink);border-radius:50%;width:34px;height:34px;
+  display:grid;place-items:center;cursor:pointer;transition:all .2s;
+}
+.dock-btn:hover{background:var(--accent);color:#04131f;transform:scale(1.08)}
+.dock-btn:active{transform:scale(.94)}
+.dock-btn svg{width:16px;height:16px}
+.slide-count{
+  font:600 12px/1.2 var(--mono);color:var(--dim);
+  padding:0 8px;min-width:76px;text-align:center;
+}
+.seclabel{
+  display:block;font-size:9.5px;color:var(--faint);margin-top:3px;text-transform:uppercase;letter-spacing:.05em;
+}
+
+/* SLIDES */
+.slide{
+  position:absolute;inset:0;z-index:1;
+  display:flex;align-items:center;justify-content:center;
+  padding:clamp(20px,4vh,44px) clamp(20px,4vw,48px) 84px;
+  opacity:0;visibility:hidden;
+  transition:opacity .35s ease,visibility .35s;
+  pointer-events:none;overflow-y:auto;overflow-x:hidden;
+}
+.slide.on{opacity:1;visibility:visible;pointer-events:auto;z-index:2}
+.content{
+  position:relative;width:100%;max-width:1140px;margin:auto 0;text-align:left;
+}
+.kick{
+  display:inline-flex;align-items:center;gap:8px;
+  font:600 11px/1 var(--mono);text-transform:uppercase;letter-spacing:.08em;
+  color:var(--accent);background:var(--accent-glow);
+  border:1px solid rgba(56,189,248,.35);border-radius:999px;padding:6px 14px;margin-bottom:12px;
+}
+h2{
+  font:700 clamp(24px,3.2vw,38px)/1.15 var(--disp);
+  letter-spacing:-.015em;margin-bottom:8px;color:var(--ink);
+}
+.sub{
+  color:var(--dim);font-size:clamp(13.5px,1.4vw,16px);max-width:70ch;line-height:1.55;
+}
+.slide-body{margin-top:20px}
+
+/* GRIDS */
+.cols{display:grid;gap:20px;align-items:start}
+.cols.c2{grid-template-columns:1fr 1fr}
+.cols.c2-1{grid-template-columns:1.25fr 1fr}
+.cols.c1-2{grid-template-columns:1fr 1.25fr}
+.cols.c3{grid-template-columns:repeat(3,1fr)}
+.cols.c4{grid-template-columns:repeat(4,1fr)}
+
+/* CARDS */
+.pcard{
+  background:var(--glass);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
+  border:1px solid var(--glass-bd);border-radius:var(--rad);
+  padding:20px 22px;box-shadow:var(--shadow);
+  transition:transform .2s,border-color .2s;
+}
+.pcard:hover{transform:translateY(-2px);border-color:var(--glass-bd-glow)}
+.pcard .ic{
+  width:38px;height:38px;border-radius:10px;display:grid;place-items:center;
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
+  color:var(--accent);margin-bottom:12px;
+}
+.pcard .ic svg{width:18px;height:18px}
+.pcard h3{font:700 16px/1.25 var(--sans);margin-bottom:8px;color:var(--ink)}
+.pcard p{font-size:13.5px;color:var(--dim);line-height:1.55}
+
+/* CODE BLOCKS */
+.cbox{
+  background:#090C10;border:1px solid rgba(255,255,255,0.08);border-radius:var(--rad);
+  overflow:hidden;box-shadow:var(--shadow);
+}
+.cbox-head{
+  height:38px;background:#131820;border-bottom:1px solid rgba(255,255,255,0.06);
+  display:flex;align-items:center;justify-content:space-between;padding:0 14px;
+}
+.cbox-title{font:600 12px/1 var(--mono);color:var(--dim);display:flex;align-items:center;gap:6px}
+.copy-btn{
+  background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.08);
+  color:var(--dim);border-radius:6px;padding:4px 10px;font:500 11px/1 var(--mono);
+  cursor:pointer;display:inline-flex;align-items:center;gap:5px;transition:all .15s;
+}
+.copy-btn:hover{background:var(--accent);color:#04131f}
+.cbox pre{
+  padding:16px 18px;font:400 13px/1.65 var(--mono);color:#E2E8F0;overflow-x:auto;
+}
+.cbox pre code{font-family:inherit}
+
+/* MOCKUP SHOTCARD */
+.shotcard{
+  background:#090C10;border:1px solid var(--glass-bd);border-radius:var(--rad);
+  overflow:hidden;box-shadow:var(--shadow);cursor:zoom-in;position:relative;
+  transition:transform .2s,border-color .2s;
+}
+.shotcard:hover{transform:translateY(-2px);border-color:var(--accent)}
+.shotcard img{width:100%;height:auto;display:block}
+.shotcard-bar{
+  height:32px;background:#131820;display:flex;align-items:center;justify-content:space-between;
+  padding:0 12px;border-top:1px solid rgba(255,255,255,0.06);
+}
+.shotcard-title{font:500 11px/1 var(--mono);color:var(--dim)}
+.shotcard-hint{font:600 10.5px/1 var(--mono);color:var(--accent);display:inline-flex;align-items:center;gap:4px}
+
+/* TITLE SLIDE */
+.title-slide .content{max-width:920px;text-align:center}
+.title-slide h1{
+  font:700 clamp(32px,5.4vw,62px)/1.08 var(--disp);
+  letter-spacing:-.02em;margin:16px 0 18px;color:var(--ink);
+}
+.title-slide .typeline{
+  display:inline-flex;align-items:center;gap:10px;
+  font:500 clamp(13px,1.5vw,18px)/1 var(--mono);
+  color:#38BDF8;background:rgba(18,24,32,0.85);
+  border:1px solid rgba(56,189,248,0.35);padding:10px 20px;border-radius:999px;margin-bottom:18px;
+  box-shadow:0 12px 30px rgba(0,0,0,0.4);
+}
+.title-slide .t-sub{
+  font-size:clamp(14.5px,1.6vw,18px);line-height:1.6;
+  color:var(--dim);max-width:62ch;margin:0 auto 20px;
+}
+.title-slide .credit{
+  font:500 12px/1 var(--mono);color:var(--faint);letter-spacing:.04em;
+}
+
+/* SIMULATOR WIDGETS */
+.sim-box{
+  background:var(--glass-strong);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
+  border:1px solid var(--glass-bd);border-radius:var(--rad);padding:22px;box-shadow:var(--shadow);
+}
+.sim-input-row{
+  display:flex;align-items:center;gap:10px;margin:14px 0;background:#090C10;
+  border:1px solid rgba(255,255,255,0.1);border-radius:var(--rad-sm);padding:8px 14px;
+}
+.sim-prefix{font:600 13px/1 var(--mono);color:var(--dim)}
+.sim-input{
+  flex:1;background:transparent;border:none;outline:none;font:500 14px/1 var(--mono);
+  color:var(--accent);
+}
+.sim-result{
+  padding:14px 16px;border-radius:var(--rad-sm);font-size:13.5px;line-height:1.5;
+  display:flex;align-items:flex-start;gap:10px;margin-top:12px;
+}
+.sim-ok{background:rgba(16,185,129,0.12);border:1px solid rgba(16,185,129,0.4);color:#34D399}
+.sim-err{background:rgba(239,68,68,0.12);border:1px solid rgba(239,68,68,0.4);color:#F87171}
+
+/* LIGHTBOX */
+.lightbox{
+  position:fixed;inset:0;background:rgba(0,0,0,0.85);backdrop-filter:blur(8px);
+  z-index:200;display:grid;place-items:center;padding:24px;opacity:0;pointer-events:none;
+  transition:opacity .25s ease;
+}
+.lightbox.on{opacity:1;pointer-events:auto}
+.lb-box{
+  position:relative;max-width:1160px;width:100%;max-height:90vh;display:flex;flex-direction:column;
+  background:#090C10;border:1px solid rgba(255,255,255,0.15);border-radius:var(--rad);
+  overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,0.9);
+}
+.lb-head{
+  height:44px;background:#131820;display:flex;align-items:center;justify-content:space-between;
+  padding:0 18px;border-bottom:1px solid rgba(255,255,255,0.08);
+}
+.lb-title{font:600 13px/1 var(--mono);color:var(--ink)}
+.lb-close{
+  background:none;border:none;color:var(--dim);cursor:pointer;display:grid;place-items:center;
+  width:28px;height:28px;border-radius:6px;transition:color .15s;
+}
+.lb-close:hover{color:#fff}
+.lb-body{overflow:auto;padding:12px;display:flex;justify-content:center}
+.lb-body img{max-width:100%;height:auto;border-radius:6px}
+
+/* RUBRIC & QUIZ */
+.rrow{
+  background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:10px;
+  margin-bottom:8px;overflow:hidden;cursor:pointer;transition:border-color .2s;
+}
+.rrow.open{border-color:var(--accent);background:rgba(56,189,248,0.05)}
+.rhead{padding:14px 18px;display:flex;align-items:center;justify-content:space-between;font-weight:600}
+.rdesc{padding:0 18px 14px;color:var(--dim);font-size:13.5px;display:none;line-height:1.6}
+.rrow.open .rdesc{display:block}
+
+/* QUIZ */
+.qopt{
+  display:block;width:100%;text-align:left;padding:12px 18px;margin-bottom:8px;
+  background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);
+  border-radius:var(--rad-sm);color:var(--ink);font:500 13.5px/1.4 var(--sans);
+  cursor:pointer;transition:all .15s;
+}
+.qopt:hover{background:rgba(56,189,248,0.1);border-color:var(--accent)}
+.qopt.right{background:rgba(16,185,129,0.18);border-color:var(--green);color:#34D399}
+.qopt.wrong{background:rgba(239,68,68,0.18);border-color:var(--red);color:#F87171}
+
+/* RESPONSIVE */
+@media(max-width:860px){
+  .cols.c2,.cols.c2-1,.cols.c1-2,.cols.c3,.cols.c4{grid-template-columns:1fr}
+  .slide{padding:20px 16px 80px}
+}
+</style>
+</head>
+<body>
+<div class="bg-blobs">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+</div>
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- ========================= SLIDE 1 ========================= -->
+<section class="slide title-slide on" data-sec="Babak 1 · Orientasi" id="s1">
+  <div class="content">
+    <span class="kick"><i data-lucide="sparkles"></i> Pertemuan 05 · Pemrograman Web</span>
+    <div class="typeline"><code>@app.route('/blog/&lt;int:post_id&gt;')</code> &bull; GET vs POST</div>
+    <h1>Routing Dinamis &amp;<br>Formulir Interaktif</h1>
+    <p class="t-sub">Mengubah website portofolio statis menjadi aplikasi dinamis: menangkap parameter URL, memproses formulir POST, dan memberikan feedback instan dengan Flash Messages.</p>
+    <div class="credit">FAIZ &bull; ASISTEN PRAKTIKUM PEMROGRAMAN WEB 2026</div>
+  </div>
+</section>
+
+<!-- ========================= SLIDE 2 ========================= -->
+<section class="slide" data-sec="Babak 1 · Orientasi" id="s2">
+  <div class="content">
+    <span class="kick"><i data-lucide="layers"></i> Roadmap Praktikum</span>
+    <h2>Peta Perjalanan Belajar Kita</h2>
+    <p class="sub">Lihat bagaimana website portofolio Anda berkembang tahap demi tahap dari modul awal hingga hari ini:</p>
+    <div class="cols c4 slide-body">
+      <div class="pcard">
+        <div class="ic"><i data-lucide="terminal"></i></div>
+        <h3>P01 &bull; Pondasi</h3>
+        <p>Instalasi Python, Flask microframework, virtualenv, dan web server lokal di <code>127.0.0.1:5000</code>.</p>
+      </div>
+      <div class="pcard">
+        <div class="ic"><i data-lucide="layout"></i></div>
+        <h3>P03 &bull; Tampilan</h3>
+        <p>Desain visual dark-glass murni HTML5 &amp; CSS Tokens, Flexbox, serta CSS Grid.</p>
+      </div>
+      <div class="pcard">
+        <div class="ic"><i data-lucide="code"></i></div>
+        <h3>P04 &bull; Jinja2</h3>
+        <p>Template inheritance <code>base.html</code>, block content, dan passing dictionary dari Python.</p>
+      </div>
+      <div class="pcard" style="border-color:var(--accent);background:rgba(56,189,248,0.06)">
+        <div class="ic" style="color:var(--accent)"><i data-lucide="send"></i></div>
+        <h3 style="color:var(--accent)">P05 &bull; Hari Ini</h3>
+        <p>Variable rules, rute dinamis, HTTP method POST, form handling &amp; notifikasi Flash.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= SLIDE 3 ========================= -->
+<section class="slide" data-sec="Babak 1 · Orientasi" id="s3">
+  <div class="content">
+    <span class="kick"><i data-lucide="alert-triangle"></i> Masalah Nyata</span>
+    <h2>Kenapa Butuh Dynamic Routing?</h2>
+    <p class="sub">Bayangkan jika website portofolio Anda nantinya memiliki 100 catatan blog atau artikel teknis:</p>
+    <div class="cols c2 slide-body">
+      <div class="pcard" style="border-color:rgba(239,68,68,0.3)">
+        <h3 style="color:#F87171">❌ Cara Statis (Tanpa Dynamic Route)</h3>
+        <p style="margin-bottom:12px">Anda harus membuat 100 fungsi route berbeda di <code>app.py</code> dan 100 file HTML manual:</p>
+        <div class="cbox">
+          <pre><code>@app.route('/blog/artikel-1')
+def blog1(): return render_template('blog1.html')
+
+@app.route('/blog/artikel-2')
+def blog2(): return render_template('blog2.html')
+# ... diulang sampai 100 kali! 😱</code></pre>
+        </div>
+      </div>
+      <div class="pcard" style="border-color:rgba(16,185,129,0.3)">
+        <h3 style="color:#34D399">✅ Cara Cerdas (Variable Rules)</h3>
+        <p style="margin-bottom:12px">Cukup <strong>1 Rute Dinamis</strong> di Flask untuk melayani jutaan artikel sekaligus:</p>
+        <div class="cbox">
+          <pre><code>@app.route('/blog/&lt;int:post_id&gt;')
+def blog_detail(post_id):
+    # post_id ditangkap otomatis dari URL!
+    artikel = cari_artikel(post_id)
+    return render_template('blog_detail.html', artikel=artikel)</code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= SLIDE 4 ========================= -->
+<section class="slide" data-sec="Babak 1 · Orientasi" id="s4">
+  <div class="content">
+    <span class="kick"><i data-lucide="globe"></i> Teori Dasar</span>
+    <h2>Variable Rules &amp; Converter Types</h2>
+    <p class="sub">Flask menyediakan pengonversi bawaan untuk memastikan URL yang diketik pengunjung valid sesuai tipe datanya:</p>
+    <div class="cols c2-1 slide-body">
+      <div class="pcard">
+        <table style="width:100%;border-collapse:collapse;font-size:13.5px">
+          <thead>
+            <tr style="border-bottom:1px solid rgba(255,255,255,0.1);color:var(--accent);text-align:left">
+              <th style="padding:8px 6px">Converter</th>
+              <th style="padding:8px 6px">Contoh Sintaks</th>
+              <th style="padding:8px 6px">Keterangan</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid rgba(255,255,255,0.05)">
+              <td style="padding:10px 6px"><code>string</code> (default)</td>
+              <td style="padding:10px 6px"><code>/user/&lt;nama&gt;</code></td>
+              <td style="padding:10px 6px;color:var(--dim)">Menerima teks apapun tanpa tanda slash <code>/</code></td>
+            </tr>
+            <tr style="border-bottom:1px solid rgba(255,255,255,0.05)">
+              <td style="padding:10px 6px"><code>int</code></td>
+              <td style="padding:10px 6px"><code>/blog/&lt;int:id&gt;</code></td>
+              <td style="padding:10px 6px;color:var(--dim)">Hanya menerima bilangan bulat positif (angka 0-9)</td>
+            </tr>
+            <tr style="border-bottom:1px solid rgba(255,255,255,0.05)">
+              <td style="padding:10px 6px"><code>float</code></td>
+              <td style="padding:10px 6px"><code>/rate/&lt;float:val&gt;</code></td>
+              <td style="padding:10px 6px;color:var(--dim)">Menerima angka desimal dengan titik</td>
+            </tr>
+            <tr>
+              <td style="padding:10px 6px"><code>path</code></td>
+              <td style="padding:10px 6px"><code>/files/&lt;path:p&gt;</code></td>
+              <td style="padding:10px 6px;color:var(--dim)">Menerima teks yang mengandung tanda slash <code>/</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="shotcard" data-shot="modul-converters.png">
+        <img src="img/modul-converters.png" alt="Modul Converter Types">
+        <div class="shotcard-bar">
+          <span class="shotcard-title">Referensi Modul Perkuliahan</span>
+          <span class="shotcard-hint"><i data-lucide="zoom-in"></i> Zoom</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= SLIDE 5 ========================= -->
+<section class="slide" data-sec="Babak 1 · Orientasi" id="s5">
+  <div class="content">
+    <span class="kick"><i data-lucide="flask-conical"></i> Eksperimen Langsung</span>
+    <h2>Simulator URL Converter Interaktif</h2>
+    <p class="sub">Uji langsung bagaimana Flask menyaring URL berdasarkan tipe data converter integer <code>&lt;int:post_id&gt;</code>:</p>
+    <div class="sim-box slide-body">
+      <label style="font:600 13px/1 var(--sans);color:var(--dim)">Ketik URL yang ingin Anda kunjungi:</label>
+      <div class="sim-input-row">
+        <span class="sim-prefix">http://127.0.0.1:5000/blog/</span>
+        <input type="text" id="simUrlInput" class="sim-input" value="1" placeholder="ketik angka misal 1, 2 atau huruf 'flask'">
+      </div>
+      <div id="simFeedback" class="sim-result sim-ok">
+        <i data-lucide="circle-check"></i>
+        <div>
+          <strong>HTTP 200 OK — Diterima oleh Converter Integer!</strong>
+          <p style="margin-top:4px">Nilai <code>1</code> adalah integer valid. Flask meneruskan variabel <code>post_id = 1</code> bertipe integer ke fungsi controller.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= SLIDE 6 ========================= -->
+<section class="slide" data-sec="Babak 2 · Dynamic Routing" id="s6">
+  <div class="content">
+    <span class="kick"><i data-lucide="lock"></i> Langkah 1 &bull; Backend</span>
+    <h2>Setup Import Baru &amp; Secret Key</h2>
+    <p class="sub">Buka <code>app.py</code>. Kita butuh fungsi baru dari Flask dan memasang <code>secret_key</code> agar fitur flash message berjalan:</p>
+    <div class="cols c1-2 slide-body">
+      <div class="pcard">
+        <h3>Kenapa Butuh Secret Key?</h3>
+        <p style="margin-bottom:14px">Flash Message disimpan dalam <strong>Session Cookie</strong> di browser. Secret key digunakan oleh Flask sebagai tanda tangan kriptografi (signing) agar isi cookie tidak bisa dimanipulasi dari luar.</p>
+        <div class="cbox">
+          <div class="cbox-head">
+            <span class="cbox-title">app.py</span>
+            <button class="copy-btn" data-copy="from flask import Flask, render_template, request, redirect, url_for, flash&#10;&#10;app = Flask(__name__)&#10;app.secret_key = 'kunci-rahasia-portofolio-faiz'"><i data-lucide="copy"></i> Salin</button>
+          </div>
+          <pre><code>from flask import Flask, render_template, request, redirect, url_for, flash
+
+app = Flask(__name__)
+# Wajib untuk flash messages
+app.secret_key = 'kunci-rahasia-portofolio-faiz'</code></pre>
+        </div>
+      </div>
+      <div class="shotcard" data-shot="vscode-p05-step-01-app-imports.png">
+        <img src="img/vscode-p05-step-01-app-imports.png" alt="VS Code Imports & Secret Key">
+        <div class="shotcard-bar">
+          <span class="shotcard-title">app.py &bull; Baris 1-7</span>
+          <span class="shotcard-hint"><i data-lucide="zoom-in"></i> Zoom</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= SLIDE 7 ========================= -->
+<section class="slide" data-sec="Babak 2 · Dynamic Routing" id="s7">
+  <div class="content">
+    <span class="kick"><i data-lucide="code"></i> Langkah 2 &bull; Backend</span>
+    <h2>Membuat Rute Dinamis di app.py</h2>
+    <p class="sub">Tambahkan dua route dinamis: satu dengan integer converter untuk artikel blog, dan satu dengan string untuk salam pengunjung:</p>
+    <div class="cols c1-2 slide-body">
+      <div class="pcard">
+        <h3>Dua Jenis Rute Dinamis</h3>
+        <p style="margin-bottom:14px">Perhatikan bagaimana parameter dalam kurung sudut <code>&lt;...&gt;</code> otomatis menjadi argumen fungsi Python:</p>
+        <div class="cbox">
+          <div class="cbox-head">
+            <span class="cbox-title">app.py</span>
+            <button class="copy-btn" data-copy="@app.route('/blog/<int:post_id>')&#10;def blog_detail(post_id):&#10;    artikel = next((item for item in data_blog if item['id'] == post_id), None)&#10;    return render_template('blog_detail.html', aktif='blog', artikel=artikel, post_id=post_id)&#10;&#10;@app.route('/user/<nama>')&#10;def user_greeting(nama):&#10;    return render_template('user.html', nama=nama)"><i data-lucide="copy"></i> Salin</button>
+          </div>
+          <pre><code>@app.route('/blog/&lt;int:post_id&gt;')
+def blog_detail(post_id):
+    artikel = next((item for item in data_blog if item["id"] == post_id), None)
+    return render_template('blog_detail.html', aktif='blog', artikel=artikel, post_id=post_id)
+
+@app.route('/user/&lt;nama&gt;')
+def user_greeting(nama):
+    return render_template('user.html', nama=nama)</code></pre>
+        </div>
+      </div>
+      <div class="shotcard" data-shot="vscode-p05-step-02-dynamic-routes.png">
+        <img src="img/vscode-p05-step-02-dynamic-routes.png" alt="VS Code Dynamic Routes">
+        <div class="shotcard-bar">
+          <span class="shotcard-title">app.py &bull; Dynamic Routes</span>
+          <span class="shotcard-hint"><i data-lucide="zoom-in"></i> Zoom</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= SLIDE 8 ========================= -->
+<section class="slide" data-sec="Babak 2 · Dynamic Routing" id="s8">
+  <div class="content">
+    <span class="kick"><i data-lucide="layout"></i> Langkah 3 &bull; Frontend</span>
+    <h2>Dynamic URL Building di Template</h2>
+    <p class="sub">Di <code>templates/blog.html</code>, kita gunakan Jinja2 <code>url_for()</code> dengan argumen kata kunci untuk menghasilkan link otomatis:</p>
+    <div class="cols c1-2 slide-body">
+      <div class="pcard">
+        <h3>Aturan Emas url_for Dinamis</h3>
+        <p style="margin-bottom:14px">Argumen <code>post_id=item.id</code> akan otomatis disisipkan ke placeholder <code>&lt;int:post_id&gt;</code> di rute Flask:</p>
+        <div class="cbox">
+          <div class="cbox-head">
+            <span class="cbox-title">templates/blog.html</span>
+            <button class="copy-btn" data-copy="{% for item in artikel_list %}&#10;<div class=&quot;blog-card&quot;>&#10;    <div class=&quot;date&quot;>{{ item.tanggal }}</div>&#10;    <h4>{{ item.judul }}</h4>&#10;    <p>{{ item.ringkasan }}</p>&#10;    <div class=&quot;blog-card-footer&quot;>&#10;        <span class=&quot;tag&quot;>{{ item.kategori }}</span>&#10;        <a href=&quot;{{ url_for('blog_detail', post_id=item.id) }}&quot; class=&quot;blog-read-link&quot;>&#10;            Baca Selengkapnya &rarr;&#10;        </a>&#10;    </div>&#10;</div>&#10;{% endfor %}"><i data-lucide="copy"></i> Salin</button>
+          </div>
+          <pre><code>{% for item in artikel_list %}
+<div class="blog-card">
+    <div class="date">{{ item.tanggal }}</div>
+    <h4>{{ item.judul }}</h4>
+    <p>{{ item.ringkasan }}</p>
+    <div class="blog-card-footer">
+        <span class="tag">{{ item.kategori }}</span>
+        <!-- URL Building Dinamis -->
+        <a href="{{ url_for('blog_detail', post_id=item.id) }}" class="blog-read-link">
+            Baca Selengkapnya &rarr;
+        </a>
+    </div>
+</div>
+{% endfor %}</code></pre>
+        </div>
+      </div>
+      <div class="shotcard" data-shot="render-p05-blog.png">
+        <img src="img/render-p05-blog.png" alt="Render Daftar Blog">
+        <div class="shotcard-bar">
+          <span class="shotcard-title">Tampilan Browser /blog</span>
+          <span class="shotcard-hint"><i data-lucide="zoom-in"></i> Zoom</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= SLIDE 9 ========================= -->
+<section class="slide" data-sec="Babak 2 · Dynamic Routing" id="s9">
+  <div class="content">
+    <span class="kick"><i data-lucide="file"></i> Langkah 4 &bull; Template Baru</span>
+    <h2>Template Detail Artikel (blog_detail.html)</h2>
+    <p class="sub">Buat file <code>templates/blog_detail.html</code> yang mewarisi <code>base.html</code> dan menampilkan konten sesuai ID yang dipilih:</p>
+    <div class="cols c1-2 slide-body">
+      <div class="pcard">
+        <h3>Proteksi Kondisi {% if artikel %}</h3>
+        <p style="margin-bottom:14px">Jika ID artikel tidak ada di database, tampilkan pesan ramah (*Empty State*) alih-alih layar blank putih:</p>
+        <div class="cbox">
+          <div class="cbox-head">
+            <span class="cbox-title">templates/blog_detail.html</span>
+            <button class="copy-btn" data-copy="{% extends 'base.html' %}&#10;&#10;{% block title %}{{ artikel.judul if artikel else 'Artikel Tidak Ditemukan' }}{% endblock %}&#10;&#10;{% block content %}&#10;<section class=&quot;section&quot;>&#10;    <a href=&quot;{{ url_for('blog') }}&quot; class=&quot;back-link&quot;>&larr; Kembali ke Semua Artikel</a>&#10;    {% if artikel %}&#10;        <article class=&quot;article-content&quot;>&#10;            <span class=&quot;badge badge-route&quot;>Route: /blog/{{ post_id }}</span>&#10;            <h1 class=&quot;article-title&quot;>{{ artikel.judul }}</h1>&#10;            <div class=&quot;article-body&quot;><p>{{ artikel.konten }}</p></div>&#10;        </article>&#10;    {% else %}&#10;        <h2>Artikel Tidak Ditemukan</h2>&#10;    {% endif %}&#10;</section>&#10;{% endblock %}"><i data-lucide="copy"></i> Salin</button>
+          </div>
+          <pre><code>{% extends 'base.html' %}
+
+{% block title %}{{ artikel.judul if artikel else 'Tidak Ditemukan' }}{% endblock %}
+
+{% block content %}
+<section class="section">
+    <a href="{{ url_for('blog') }}" class="back-link">&larr; Kembali</a>
+    {% if artikel %}
+        <article class="article-content">
+            <span class="badge badge-route">Route: /blog/{{ post_id }}</span>
+            <h1 class="article-title">{{ artikel.judul }}</h1>
+            <div class="article-body"><p>{{ artikel.konten }}</p></div>
+        </article>
+    {% else %}
+        <h2>Artikel Tidak Ditemukan</h2>
+    {% endif %}
+</section>
+{% endblock %}</code></pre>
+        </div>
+      </div>
+      <div class="shotcard" data-shot="render-p05-blog-detail.png">
+        <img src="img/render-p05-blog-detail.png" alt="Render Blog Detail">
+        <div class="shotcard-bar">
+          <span class="shotcard-title">Tampilan Browser /blog/1</span>
+          <span class="shotcard-hint"><i data-lucide="zoom-in"></i> Zoom</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= SLIDE 10 ========================= -->
+<section class="slide" data-sec="Babak 3 · HTTP Methods &amp; Form" id="s10">
+  <div class="content">
+    <span class="kick"><i data-lucide="globe"></i> Teori HTTP</span>
+    <h2>HTTP Methods: GET vs POST</h2>
+    <p class="sub">Dua metode komunikasi paling penting antara browser dan server web:</p>
+    <div class="cols c2 slide-body">
+      <div class="pcard">
+        <div class="ic" style="color:#38BDF8"><i data-lucide="send"></i></div>
+        <h3>HTTP GET &bull; "Kartu Pos Terbuka"</h3>
+        <p style="margin-bottom:12px">Digunakan untuk <strong>mengambil data</strong>. Parameter ditempel langsung di URL browser:</p>
+        <ul style="font-size:13px;color:var(--dim);list-style:square;padding-left:18px;line-height:1.7">
+          <li>Terlihat di address bar: <code>/search?keyword=flask</code></li>
+          <li>Dapat disimpan di Bookmark peramban</li>
+          <li>Ada batasan panjang URL (~2048 karakter)</li>
+          <li><strong>DILARANG</strong> untuk data sensitif seperti password</li>
+        </ul>
+      </div>
+      <div class="pcard">
+        <div class="ic" style="color:#10B981"><i data-lucide="lock"></i></div>
+        <h3>HTTP POST &bull; "Surat Amplop Tertutup"</h3>
+        <p style="margin-bottom:12px">Digunakan untuk <strong>mengirim data baru</strong>. Data dibungkus di dalam Request Body:</p>
+        <ul style="font-size:13px;color:var(--dim);list-style:square;padding-left:18px;line-height:1.7">
+          <li>Tidak tampil di URL address bar browser</li>
+          <li>Tidak dapat dibookmark sembarangan</li>
+          <li>Ukuran data praktis tidak terbatas (cocok untuk pesan/file)</li>
+          <li><strong>WAJIB</strong> untuk formulir login, kontak, atau upload</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= SLIDE 11 ========================= -->
+<section class="slide" data-sec="Babak 3 · HTTP Methods &amp; Form" id="s11">
+  <div class="content">
+    <span class="kick"><i data-lucide="flask-conical"></i> Eksperimen Interaktif</span>
+    <h2>Simulator Perbedaan GET vs POST</h2>
+    <p class="sub">Klik pilihan metode di bawah ini untuk melihat bagaimana data dikirimkan:</p>
+    <div class="sim-box slide-body">
+      <div style="display:flex;gap:12px;margin-bottom:18px">
+        <button id="btnSimGet" class="dock-btn" style="width:auto;border-radius:8px;padding:8px 18px;background:var(--accent);color:#04131f;font-weight:600">Metode GET</button>
+        <button id="btnSimPost" class="dock-btn" style="width:auto;border-radius:8px;padding:8px 18px;background:rgba(255,255,255,0.06);font-weight:600">Metode POST</button>
+      </div>
+      <div id="methodView" class="pcard" style="background:#090C10">
+        <span style="font:600 11px/1 var(--mono);color:var(--accent);text-transform:uppercase">Format Request GET:</span>
+        <div class="sim-input-row" style="margin-top:8px">
+          <span style="font:600 13px/1 var(--mono);color:var(--dim)">GET /contact?name=Budi&amp;email=budi@gmail.com HTTP/1.1</span>
+        </div>
+        <p style="font-size:13px;color:var(--dim);margin-top:10px">⚠️ Perhatikan: Data nama dan email terpampang jelas di URL address bar peramban!</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= SLIDE 12 ========================= -->
+<section class="slide" data-sec="Babak 3 · HTTP Methods &amp; Form" id="s12">
+  <div class="content">
+    <span class="kick"><i data-lucide="layout"></i> Langkah 5 &bull; Frontend</span>
+    <h2>Mengaktifkan Form Kontak (POST)</h2>
+    <p class="sub">Di <code>templates/contact.html</code>, ubah method form menjadi POST dan pastikan atribut <code>name</code> terpasang:</p>
+    <div class="cols c1-2 slide-body">
+      <div class="pcard">
+        <h3>Jebakan Terbesar Pemula: Atribut Name!</h3>
+        <p style="margin-bottom:14px">Flask <strong>TIDAK BISA</strong> membaca input jika Anda hanya memberi atribut <code>id</code>. Flask wajib membaca nilai via <code>name="..."</code>:</p>
+        <div class="cbox">
+          <div class="cbox-head">
+            <span class="cbox-title">templates/contact.html</span>
+            <button class="copy-btn" data-copy="<form action=&quot;{{ url_for('contact') }}&quot; method=&quot;POST&quot;>&#10;    <div class=&quot;form-group&quot;>&#10;        <label for=&quot;name&quot;>Nama Lengkap</label>&#10;        <input type=&quot;text&quot; id=&quot;name&quot; name=&quot;name&quot; placeholder=&quot;Masukkan nama&quot; required>&#10;    </div>&#10;    <div class=&quot;form-group&quot;>&#10;        <label for=&quot;email&quot;>Alamat Email</label>&#10;        <input type=&quot;email&quot; id=&quot;email&quot; name=&quot;email&quot; placeholder=&quot;Masukkan email&quot; required>&#10;    </div>&#10;    <div class=&quot;form-group&quot;>&#10;        <label for=&quot;message&quot;>Isi Pesan</label>&#10;        <textarea id=&quot;message&quot; name=&quot;message&quot; placeholder=&quot;Tulis pesan...&quot; required></textarea>&#10;    </div>&#10;    <button type=&quot;submit&quot; class=&quot;btn&quot;>Kirim Pesan via POST</button>&#10;</form>"><i data-lucide="copy"></i> Salin</button>
+          </div>
+          <pre><code><form action="{{ url_for('contact') }}" method="POST">
+    <div class="form-group">
+        <label for="name">Nama Lengkap</label>
+        <input type="text" id="name" name="name" required>
+    </div>
+    <div class="form-group">
+        <label for="email">Alamat Email</label>
+        <input type="email" id="email" name="email" required>
+    </div>
+    <div class="form-group">
+        <label for="message">Isi Pesan</label>
+        <textarea id="message" name="message" required></textarea>
+    </div>
+    <button type="submit" class="btn">Kirim Pesan</button>
+</form></code></pre>
+        </div>
+      </div>
+      <div class="shotcard" data-shot="vscode-p05-step-04-contact-post.png">
+        <img src="img/vscode-p05-step-04-contact-post.png" alt="VS Code contact.html">
+        <div class="shotcard-bar">
+          <span class="shotcard-title">contact.html &bull; Form POST</span>
+          <span class="shotcard-hint"><i data-lucide="zoom-in"></i> Zoom</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= SLIDE 13 ========================= -->
+<section class="slide" data-sec="Babak 3 · HTTP Methods &amp; Form" id="s13">
+  <div class="content">
+    <span class="kick"><i data-lucide="code"></i> Langkah 6 &bull; Backend</span>
+    <h2>Backend Handler &amp; Pola PRG</h2>
+    <p class="sub">Tangani kiriman data form di <code>app.py</code> dengan method POST dan terapkan pola <strong>Post/Redirect/Get</strong>:</p>
+    <div class="cols c1-2 slide-body">
+      <div class="pcard">
+        <h3>Kenapa Wajib Redirect Setelah POST?</h3>
+        <p style="margin-bottom:14px">Jika me-render template langsung dari POST, saat user menekan refresh (F5), browser akan memunculkan popup *"Confirm Form Resubmission"*. Pola PRG mencegahnya!</p>
+        <div class="cbox">
+          <div class="cbox-head">
+            <span class="cbox-title">app.py</span>
+            <button class="copy-btn" data-copy="@app.route('/contact', methods=['GET', 'POST'])&#10;def contact():&#10;    if request.method == 'POST':&#10;        nama = request.form.get('name')&#10;        email = request.form.get('email')&#10;        pesan = request.form.get('message')&#10;        &#10;        if not nama or not email or not pesan:&#10;            flash('Harap isi semua kolom formulir!', 'danger')&#10;            return render_template('contact.html', aktif='contact')&#10;            &#10;        flash(f'Terima kasih, {nama}! Pesan Anda berhasil dikirim.', 'success')&#10;        return redirect(url_for('contact'))&#10;        &#10;    return render_template('contact.html', aktif='contact')"><i data-lucide="copy"></i> Salin</button>
+          </div>
+          <pre><code>@app.route('/contact', methods=['GET', 'POST'])
+def contact():
+    if request.method == 'POST':
+        nama = request.form.get('name')
+        email = request.form.get('email')
+        pesan = request.form.get('message')
+        
+        flash(f'Terima kasih, {nama}! Pesan berhasil dikirim.', 'success')
+        # Pola PRG: Selalu redirect setelah POST!
+        return redirect(url_for('contact'))
+        
+    return render_template('contact.html', aktif='contact')</code></pre>
+        </div>
+      </div>
+      <div class="shotcard" data-shot="vscode-p05-step-05-contact-handler.png">
+        <img src="img/vscode-p05-step-05-contact-handler.png" alt="VS Code contact handler">
+        <div class="shotcard-bar">
+          <span class="shotcard-title">app.py &bull; def contact()</span>
+          <span class="shotcard-hint"><i data-lucide="zoom-in"></i> Zoom</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= SLIDE 14 ========================= -->
+<section class="slide" data-sec="Babak 4 · Flash &amp; Latihan Modul" id="s14">
+  <div class="content">
+    <span class="kick"><i data-lucide="sparkles"></i> Langkah 7 &bull; Global Alert</span>
+    <h2>Wadah Flash Messages di base.html</h2>
+    <p class="sub">Letakkan blok <code>get_flashed_messages()</code> di layout induk <code>templates/base.html</code> agar alert otomatis aktif di semua halaman:</p>
+    <div class="cols c1-2 slide-body">
+      <div class="pcard">
+        <h3>Satu Tempat untuk Semua Notifikasi</h3>
+        <p style="margin-bottom:14px">Dengan menaruhnya di dalam tag <code>&lt;main&gt;</code> di <code>base.html</code>, Anda tidak perlu mengulang kode alert di halaman lain:</p>
+        <div class="cbox">
+          <div class="cbox-head">
+            <span class="cbox-title">templates/base.html</span>
+            <button class="copy-btn" data-copy="{% with messages = get_flashed_messages(with_categories=true) %}&#10;  {% if messages %}&#10;    <div class=&quot;flash-container&quot;>&#10;      {% for category, message in messages %}&#10;        <div class=&quot;flash-alert flash-{{ category }}&quot;>&#10;          <span class=&quot;flash-text&quot;>{{ message }}</span>&#10;        </div>&#10;      {% endfor %}&#10;    </div>&#10;  {% endif %}&#10;{% endwith %}"><i data-lucide="copy"></i> Salin</button>
+          </div>
+          <pre><code>{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="flash-container">
+      {% for category, message in messages %}
+        <div class="flash-alert flash-{{ category }}">
+          <span>{{ message }}</span>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}</code></pre>
+        </div>
+      </div>
+      <div class="shotcard" data-shot="render-p05-flash-success.png">
+        <img src="img/render-p05-flash-success.png" alt="Render Flash Success">
+        <div class="shotcard-bar">
+          <span class="shotcard-title">Live Alert Notifikasi Sukses</span>
+          <span class="shotcard-hint"><i data-lucide="zoom-in"></i> Zoom</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= SLIDE 15 ========================= -->
+<section class="slide" data-sec="Babak 4 · Flash &amp; Latihan Modul" id="s15">
+  <div class="content">
+    <span class="kick"><i data-lucide="lock"></i> Latihan Modul Perkuliahan</span>
+    <h2>Formulir Login Sederhana (/login)</h2>
+    <p class="sub">Implementasi tugas resmi modul: autentikasi kredensial simulasi menggunakan Flash Danger dan Flash Success:</p>
+    <div class="cols c1-2 slide-body">
+      <div class="pcard">
+        <h3>Logika Backend /login</h3>
+        <p style="margin-bottom:14px">Jika kredensial <code>admin</code> / <code>12345</code> cocok, kirim flash sukses; jika salah, kirim flash danger merah:</p>
+        <div class="cbox">
+          <div class="cbox-head">
+            <span class="cbox-title">app.py</span>
+            <button class="copy-btn" data-copy="@app.route('/login', methods=['GET', 'POST'])&#10;def login():&#10;    if request.method == 'POST':&#10;        u = request.form.get('username')&#10;        p = request.form.get('password')&#10;        if u == 'admin' and p == '12345':&#10;            flash('Login berhasil! Selamat datang, Admin.', 'success')&#10;            return redirect(url_for('home'))&#10;        flash('Username atau password salah!', 'danger')&#10;    return render_template('login.html', aktif='login')"><i data-lucide="copy"></i> Salin</button>
+          </div>
+          <pre><code>@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        u = request.form.get('username')
+        p = request.form.get('password')
+        if u == 'admin' and p == '12345':
+            flash('Login berhasil! Selamat datang, Admin.', 'success')
+            return redirect(url_for('home'))
+        flash('Username atau password salah!', 'danger')
+    return render_template('login.html', aktif='login')</code></pre>
+        </div>
+      </div>
+      <div class="shotcard" data-shot="render-p05-flash-danger.png">
+        <img src="img/render-p05-flash-danger.png" alt="Render Login Alert">
+        <div class="shotcard-bar">
+          <span class="shotcard-title">Live Alert Notifikasi Gagal</span>
+          <span class="shotcard-hint"><i data-lucide="zoom-in"></i> Zoom</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= SLIDE 16 ========================= -->
+<section class="slide" data-sec="Babak 5 · Evaluasi" id="s16">
+  <div class="content">
+    <span class="kick"><i data-lucide="shield-check"></i> Freshmen Shield</span>
+    <h2>Panduan Solusi 6 Eror Terpopuler Pemula</h2>
+    <p class="sub">Jika aplikasi Anda mengalami kendala saat sesi praktikum, jangan panik! Cek tabel penyelamat ini:</p>
+    <div class="pcard slide-body">
+      <table style="width:100%;border-collapse:collapse;font-size:13px">
+        <thead>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.1);color:var(--accent);text-align:left">
+            <th style="padding:8px 6px">Pesan / Gejala Eror</th>
+            <th style="padding:8px 6px">Penyebab Utama</th>
+            <th style="padding:8px 6px">Solusi Instan (5 Detik)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.05)">
+            <td style="padding:10px 6px;color:#F87171"><code>405 Method Not Allowed</code></td>
+            <td style="padding:10px 6px">Lupa parameter <code>methods=['GET', 'POST']</code></td>
+            <td style="padding:10px 6px;color:var(--dim)">Tambahkan <code>methods=['GET', 'POST']</code> di decorator <code>@app.route</code></td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.05)">
+            <td style="padding:10px 6px;color:#F87171"><code>RuntimeError: session unavailable</code></td>
+            <td style="padding:10px 6px">Menggunakan <code>flash()</code> tanpa secret_key</td>
+            <td style="padding:10px 6px;color:var(--dim)">Pasang <code>app.secret_key = 'kunci-rahasia'</code> di bawah inisialisasi Flask</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.05)">
+            <td style="padding:10px 6px;color:#F87171">Input Python bernilai <code>None</code></td>
+            <td style="padding:10px 6px">Tag input HTML tidak memiliki atribut <code>name</code></td>
+            <td style="padding:10px 6px;color:var(--dim)">Beri atribut <code>name="nama_field"</code> pada setiap input HTML</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.05)">
+            <td style="padding:10px 6px;color:#F87171"><code>404 Not Found</code> pada rute blog</td>
+            <td style="padding:10px 6px">Ketik huruf ke rute berconverter <code>&lt;int:id&gt;</code></td>
+            <td style="padding:10px 6px;color:var(--dim)">Pastikan URL diisi angka bilangan bulat murni (contoh: <code>/blog/1</code>)</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.05)">
+            <td style="padding:10px 6px;color:#F87171">Popup "Confirm Form Resubmission"</td>
+            <td style="padding:10px 6px">Merender template langsung dari method POST</td>
+            <td style="padding:10px 6px;color:var(--dim)">Terapkan pola PRG: ganti dengan <code>return redirect(url_for(...))</code></td>
+          </tr>
+          <tr>
+            <td style="padding:10px 6px;color:#F87171"><code>NameError: name 'request' is not defined</code></td>
+            <td style="padding:10px 6px">Lupa import fungsi baru dari modul Flask</td>
+            <td style="padding:10px 6px;color:var(--dim)">Update baris 1 <code>app.py</code>: <code>from flask import ..., request, flash</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= SLIDE 17 ========================= -->
+<section class="slide" data-sec="Babak 5 · Evaluasi" id="s17">
+  <div class="content">
+    <span class="kick"><i data-lucide="check"></i> Verifikasi Hasil</span>
+    <h2>Pengujian Seluruh Rute Aplikasi P-05</h2>
+    <p class="sub">Klik masing-masing rute di bawah untuk menandai verifikasi status HTTP 200 OK di web browser Anda:</p>
+    <div id="routeList" class="cols c3 slide-body">
+      <div class="pcard rrow" style="cursor:pointer">
+        <h4 style="font:600 14px/1 var(--mono);color:var(--accent)">GET /</h4>
+        <p style="font-size:12.5px;color:var(--dim)">Beranda Portofolio</p>
+        <span class="rtbadge" style="display:inline-block;margin-top:8px;font:700 11px/1 var(--mono);color:#34D399">200 OK</span>
+      </div>
+      <div class="pcard rrow" style="cursor:pointer">
+        <h4 style="font:600 14px/1 var(--mono);color:var(--accent)">GET /blog</h4>
+        <p style="font-size:12.5px;color:var(--dim)">Daftar Artikel Loop</p>
+        <span class="rtbadge" style="display:inline-block;margin-top:8px;font:700 11px/1 var(--mono);color:#34D399">200 OK</span>
+      </div>
+      <div class="pcard rrow" style="cursor:pointer">
+        <h4 style="font:600 14px/1 var(--mono);color:var(--accent)">GET /blog/1</h4>
+        <p style="font-size:12.5px;color:var(--dim)">Detail Rute Dinamis Int</p>
+        <span class="rtbadge" style="display:inline-block;margin-top:8px;font:700 11px/1 var(--mono);color:#34D399">200 OK</span>
+      </div>
+      <div class="pcard rrow" style="cursor:pointer">
+        <h4 style="font:600 14px/1 var(--mono);color:var(--accent)">GET /user/faiz</h4>
+        <p style="font-size:12.5px;color:var(--dim)">Dynamic Rule String</p>
+        <span class="rtbadge" style="display:inline-block;margin-top:8px;font:700 11px/1 var(--mono);color:#34D399">200 OK</span>
+      </div>
+      <div class="pcard rrow" style="cursor:pointer">
+        <h4 style="font:600 14px/1 var(--mono);color:var(--accent)">POST /contact</h4>
+        <p style="font-size:12.5px;color:var(--dim)">Form Pesan &amp; Flash</p>
+        <span class="rtbadge" style="display:inline-block;margin-top:8px;font:700 11px/1 var(--mono);color:#34D399">302 &rarr; 200</span>
+      </div>
+      <div class="pcard rrow" style="cursor:pointer">
+        <h4 style="font:600 14px/1 var(--mono);color:var(--accent)">POST /login</h4>
+        <p style="font-size:12.5px;color:var(--dim)">Validasi &amp; Flash Alert</p>
+        <span class="rtbadge" style="display:inline-block;margin-top:8px;font:700 11px/1 var(--mono);color:#34D399">200 OK</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= SLIDE 18 ========================= -->
+<section class="slide" data-sec="Babak 5 · Evaluasi" id="s18">
+  <div class="content">
+    <span class="kick"><i data-lucide="package"></i> Rubrik Penilaian</span>
+    <h2>Rubrik Penilaian Modul P-05 (Total 100%)</h2>
+    <p class="sub">Klik masing-masing kriteria di bawah untuk melihat rincian bobot penilaian praktikum Anda:</p>
+    <div id="rubric" class="slide-body">
+      <div class="rrow open">
+        <div class="rhead"><span>1. Variable Rules &amp; Converter Types (25 Poin)</span><span style="color:var(--accent)">25%</span></div>
+        <div class="rdesc">Mengimplementasikan minimal 2 rute dinamis di <code>app.py</code>: satu menggunakan converter integer <code>&lt;int:post_id&gt;</code> dan satu menggunakan string <code>&lt;nama&gt;</code>. Menolak input teks non-angka pada converter integer dengan respon 404 yang tepat.</div>
+      </div>
+      <div class="rrow">
+        <div class="rhead"><span>2. Dynamic URL Building dengan url_for() (20 Poin)</span><span style="color:var(--accent)">20%</span></div>
+        <div class="rdesc">Seluruh link navigasi antar kartu artikel di <code>blog.html</code> menuju ke detail menggunakan sintaks Jinja2 <code>url_for('blog_detail', post_id=item.id)</code> tanpa hardcode URL string statis.</div>
+      </div>
+      <div class="rrow">
+        <div class="rhead"><span>3. HTTP Methods (GET &amp; POST) (25 Poin)</span><span style="color:var(--accent)">25%</span></div>
+        <div class="rdesc">Formulir di <code>contact.html</code> mengirimkan data via method POST. Backend rute <code>/contact</code> didekorasi dengan <code>methods=['GET', 'POST']</code> dan memeriksa <code>request.method == 'POST'</code> dengan benar.</div>
+      </div>
+      <div class="rrow">
+        <div class="rhead"><span>4. Form Handling, Flash Messages &amp; Pola PRG (30 Poin)</span><span style="color:var(--accent)">30%</span></div>
+        <div class="rdesc">Membaca masukan formulir via <code>request.form.get()</code>, mengatur <code>app.secret_key</code>, menampilkan notifikasi feedback sukses/gagal di layout <code>base.html</code>, serta menerapkan pola redirect setelah submit form.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= SLIDE 19 ========================= -->
+<section class="slide" data-sec="Babak 5 · Evaluasi" id="s19">
+  <div class="content">
+    <span class="kick"><i data-lucide="refresh-cw"></i> Deadline &amp; Checklist</span>
+    <h2>Checklist Pengumpulan Tugas Praktikum</h2>
+    <p class="sub">Pastikan hal-hal berikut telah selesai sebelum batas waktu pengumpulan tugas praktikum:</p>
+    <div class="cols c2 slide-body">
+      <div class="pcard">
+        <h3>Hitung Mundur Deadline</h3>
+        <p style="margin-bottom:12px">Batas waktu pengumpulan laporan &amp; repository GitHub:</p>
+        <div style="font:700 28px/1 var(--mono);color:var(--accent);margin:14px 0" id="tdigits">09:14:22:05</div>
+        <span style="font-size:12px;color:var(--dim)">Rabu, 4 November 2026 &bull; Pukul 23.59 WIB</span>
+      </div>
+      <div class="pcard">
+        <h3>Daftar Periksa Mahasiswa</h3>
+        <ul style="list-style:none;display:grid;gap:10px;font-size:13.5px;color:var(--dim)">
+          <li class="chk" style="cursor:pointer">🔘 <code>app.secret_key</code> sudah terpasang di <code>app.py</code></li>
+          <li class="chk" style="cursor:pointer">🔘 Dynamic route <code>/blog/&lt;int:post_id&gt;</code> berfungsi dengan baik</li>
+          <li class="chk" style="cursor:pointer">🔘 Form kontak menggunakan <code>method="POST"</code> dan atribut <code>name</code></li>
+          <li class="chk" style="cursor:pointer">🔘 Flash messages tampil rapi di <code>templates/base.html</code></li>
+          <li class="chk" style="cursor:pointer">🔘 Kode sudah di-commit dan di-push ke repository GitHub Anda</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= SLIDE 20 ========================= -->
+<section class="slide" data-sec="Babak 5 · Evaluasi" id="s20">
+  <div class="content">
+    <span class="kick"><i data-lucide="help-circle"></i> Kuis Pemahaman</span>
+    <h2>Kuis Interaktif Materi Pertemuan 05</h2>
+    <p class="sub">Uji pemahaman Anda tentang dynamic routing, HTTP methods, dan form handling di Flask:</p>
+    <div class="sim-box slide-body" style="max-width:720px">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+        <span id="qno" style="font:600 12px/1 var(--mono);color:var(--accent)">Soal 1 / 5</span>
+        <div id="qdots" style="display:flex;gap:6px"></div>
+      </div>
+      <h3 id="qq" style="font:600 16px/1.4 var(--sans);margin-bottom:16px;color:var(--ink)">Pertanyaan Kuis</h3>
+      <div id="qopts"></div>
+      <div id="qfoot" style="margin-top:16px;text-align:right"></div>
+    </div>
+  </div>
+</section>
+
+<!-- DOCK NAVIGATION BAR -->
+<nav class="dock">
+  <button class="dock-btn" id="prevBtn" title="Slide Sebelumnya (Panah Kiri)"><i data-lucide="chevron-left"></i></button>
+  <div class="slide-count">
+    <span id="curNum">01</span> / <span id="totNum">20</span>
+    <span class="seclabel" id="secLabel">Orientasi</span>
+  </div>
+  <button class="dock-btn" id="nextBtn" title="Slide Selanjutnya (Panah Kanan)"><i data-lucide="chevron-right"></i></button>
+  <button class="dock-btn" id="fsBtn" title="Layar Penuh (F)"><i data-lucide="maximize-2"></i></button>
+</nav>
+
+<!-- LIGHTBOX MODAL -->
+<div class="lightbox" id="lightbox">
+  <div class="lb-box">
+    <div class="lb-head">
+      <span class="lb-title" id="lbtitle">Detail Gambar</span>
+      <button class="lb-close" id="lbclose"><i data-lucide="x"></i></button>
+    </div>
+    <div class="lb-body">
+      <img id="lbimg" src="" alt="Zoom Screenshot">
+    </div>
+  </div>
+</div>
+
+<script>
+const $ = s => document.querySelector(s);
+const $$ = s => document.querySelectorAll(s);
+
+const slides = Array.from($$('.slide'));
+const totalSlides = slides.length;
+let curSlide = 0;
+
+function show(idx){
+  if(idx < 0) idx = 0;
+  if(idx >= totalSlides) idx = totalSlides - 1;
+  curSlide = idx;
+  slides.forEach((s, i) => {
+    s.classList.toggle('on', i === idx);
+  });
+  const curEl = slides[idx];
+  $('#curNum').textContent = String(idx + 1).padStart(2, '0');
+  $('#totNum').textContent = String(totalSlides).padStart(2, '0');
+  $('#secLabel').textContent = curEl.dataset.sec || '';
+  $('#progressBar').style.width = ((idx + 1) / totalSlides * 100) + '%';
+  window.location.hash = curEl.id;
+}
+
+$('#prevBtn').onclick = () => show(curSlide - 1);
+$('#nextBtn').onclick = () => show(curSlide + 1);
+
+document.addEventListener('keydown', e => {
+  if(e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') { show(curSlide + 1); }
+  else if(e.key === 'ArrowLeft' || e.key === 'PageUp') { show(curSlide - 1); }
+  else if(e.key === 'f' || e.key === 'F') { toggleFullscreen(); }
+});
+
+function toggleFullscreen(){
+  if(!document.fullscreenElement){
+    document.documentElement.requestFullscreen().catch(()=>{});
+  } else {
+    document.exitFullscreen().catch(()=>{});
+  }
+}
+$('#fsBtn').onclick = toggleFullscreen;
+
+/* COPY BUTTONS */
+$$('.copy-btn').forEach(btn => {
+  btn.onclick = () => {
+    const text = btn.dataset.copy;
+    navigator.clipboard.writeText(text).then(() => {
+      const orig = btn.innerHTML;
+      btn.innerHTML = '<i data-lucide="check"></i> Tersalin!';
+      btn.style.background = 'var(--green)';
+      btn.style.color = '#04131f';
+      lucide.createIcons();
+      setTimeout(() => {
+        btn.innerHTML = orig;
+        btn.style.background = '';
+        btn.style.color = '';
+        lucide.createIcons();
+      }, 2000);
+    });
+  };
+});
+
+/* URL CONVERTER SIMULATOR (s5) */
+const simInput = $('#simUrlInput');
+const simFeedback = $('#simFeedback');
+if(simInput){
+  simInput.oninput = () => {
+    const val = simInput.value.trim();
+    if(/^\d+$/.test(val)){
+      simFeedback.className = 'sim-result sim-ok';
+      simFeedback.innerHTML = '<i data-lucide="circle-check"></i><div><strong>HTTP 200 OK — Diterima oleh Converter Integer!</strong><p style="margin-top:4px">Nilai <code>' + val + '</code> adalah integer valid. Flask meneruskan variabel <code>post_id = ' + val + '</code> bertipe integer ke fungsi controller.</p></div>';
+    } else {
+      simFeedback.className = 'sim-result sim-err';
+      simFeedback.innerHTML = '<i data-lucide="alert-triangle"></i><div><strong>HTTP 404 Not Found — Ditolak oleh Converter Integer!</strong><p style="margin-top:4px">Nilai <code>"' + val + '"</code> mengandung teks non-angka. Flask otomatis melempar error 404 Not Found untuk melindungi backend Anda.</p></div>';
+    }
+    lucide.createIcons();
+  };
+}
+
+/* HTTP METHOD TOGGLE (s11) */
+const btnSimGet = $('#btnSimGet');
+const btnSimPost = $('#btnSimPost');
+const methodView = $('#methodView');
+if(btnSimGet && btnSimPost){
+  btnSimGet.onclick = () => {
+    btnSimGet.style.background = 'var(--accent)';
+    btnSimGet.style.color = '#04131f';
+    btnSimPost.style.background = 'rgba(255,255,255,0.06)';
+    btnSimPost.style.color = 'var(--ink)';
+    methodView.innerHTML = '<span style="font:600 11px/1 var(--mono);color:var(--accent);text-transform:uppercase">Format Request GET:</span><div class="sim-input-row" style="margin-top:8px"><span style="font:600 13px/1 var(--mono);color:var(--dim)">GET /contact?name=Budi&amp;email=budi@gmail.com HTTP/1.1</span></div><p style="font-size:13px;color:var(--dim);margin-top:10px">⚠️ Data formulir terpampang di URL address bar browser dan tersimpan di riwayat browsing.</p>';
+  };
+  btnSimPost.onclick = () => {
+    btnSimPost.style.background = 'var(--green)';
+    btnSimPost.style.color = '#04131f';
+    btnSimGet.style.background = 'rgba(255,255,255,0.06)';
+    btnSimGet.style.color = 'var(--ink)';
+    methodView.innerHTML = '<span style="font:600 11px/1 var(--mono);color:var(--green);text-transform:uppercase">Format Request POST:</span><div class="sim-input-row" style="margin-top:8px"><span style="font:600 13px/1 var(--mono);color:var(--dim)">POST /contact HTTP/1.1 &bull; Content-Type: application/x-www-form-urlencoded</span></div><div class="cbox" style="margin-top:10px;padding:10px 14px"><pre style="padding:0"><code>[Request Body Tertutup]&#10;name=Budi&amp;email=budi@gmail.com&amp;message=Halo+Faiz</code></pre></div><p style="font-size:13px;color:#34D399;margin-top:10px">✅ URL tetap bersih <code>/contact</code>. Seluruh data dikemas aman di dalam Request Body!</p>';
+  };
+}
+
+/* RUBRIC ACCORDION (s18) */
+$$('#rubric .rrow').forEach(row => {
+  row.onclick = () => {
+    const wasOpen = row.classList.contains('open');
+    $$('#rubric .rrow').forEach(r => r.classList.remove('open'));
+    if(!wasOpen) row.classList.add('open');
+  };
+});
+
+/* CHECKLIST TOGGLE */
+$$('.chk').forEach(c => {
+  c.onclick = () => {
+    const isDone = c.innerHTML.includes('✅');
+    if(isDone){
+      c.innerHTML = c.innerHTML.replace('✅', '🔘');
+      c.style.color = 'var(--dim)';
+    } else {
+      c.innerHTML = c.innerHTML.replace('🔘', '✅');
+      c.style.color = '#34D399';
+    }
+  };
+});
+
+/* DEADLINE TIMER */
+const DEADLINE = new Date(2026, 10, 4, 23, 59, 0);
+function updateTimer(){
+  let diff = Math.max(0, Math.floor((DEADLINE - Date.now()) / 1000));
+  const dd = Math.floor(diff / 86400); diff -= dd * 86400;
+  const hh = Math.floor(diff / 3600); diff -= hh * 3600;
+  const mm = Math.floor(diff / 60);
+  const ss = diff - mm * 60;
+  const p = n => String(n).padStart(2, '0');
+  const el = $('#tdigits');
+  if(el) el.textContent = p(dd) + 'h : ' + p(hh) + 'j : ' + p(mm) + 'm : ' + p(ss) + 'd';
+}
+updateTimer();
+setInterval(updateTimer, 1000);
+
+/* QUIZ INTERAKTIF (s20) */
+const QUESTIONS = [
+  {
+    q: 'Converter apa di Flask yang digunakan untuk menyaring hanya angka bilangan bulat positif?',
+    o: ['<number:id>', '<int:id>', '<integer:id>', '<numeric:id>'],
+    a: 1
+  },
+  {
+    q: 'Mengapa kita wajib mengatur app.secret_key saat menggunakan notifikasi flash()?',
+    o: ['Agar Flask bisa berjalan tanpa Python', 'Untuk menandatangani dan mengenkripsi Session Cookie browser', 'Untuk menghubungkan database MySQL', 'Agar port 5000 tidak bentrok'],
+    a: 1
+  },
+  {
+    q: 'Atribut apa pada tag input HTML yang digunakan oleh Flask untuk mengambil data via request.form.get()?',
+    o: ['id', 'class', 'name', 'value'],
+    a: 2
+  },
+  {
+    q: 'Apa fungsi utama pola PRG (Post/Redirect/Get) dalam pengiriman formulir web?',
+    o: ['Mempercepat loading CSS', 'Mencegah resubmission ganda saat pengguna me-refresh halaman', 'Menghapus session cookie browser', 'Mengubah database menjadi NoSQL'],
+    a: 1
+  },
+  {
+    q: 'Status eror apa yang terjadi jika Anda mengirim formulir POST ke rute yang lupa diberi methods=[\'GET\', \'POST\']?',
+    o: ['404 Not Found', '500 Internal Server Error', '405 Method Not Allowed', '403 Forbidden'],
+    a: 2
+  }
+];
+let qIndex = 0, qScore = 0, qMarks = [];
+function renderQuiz(reset){
+  if(reset){ qIndex = 0; qScore = 0; qMarks = []; }
+  if(qIndex >= QUESTIONS.length){
+    $('#qno').textContent = 'Hasil Kuis P-05';
+    $('#qdots').innerHTML = QUESTIONS.map((_, i) => '<span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:' + (qMarks[i] ? '#10B981' : '#EF4444') + '"></span>').join('');
+    $('#qq').innerHTML = '<span style="font-size:30px;font-family:var(--disp);color:#34D399">Skor Anda: ' + qScore + ' / 5</span>';
+    $('#qopts').innerHTML = '<p style="font-size:14px;color:var(--dim);line-height:1.6">' + (qScore >= 4 ? 'Luar biasa! Anda telah menguasai seluruh konsep routing dinamis, HTTP POST, dan Flash messages.' : 'Bagus! Coba pelajari kembali materi pada Freshmen Shield di slide 16.') + '</p>';
+    $('#qfoot').innerHTML = '<button class="dock-btn" id="retryQuiz" type="button" style="width:auto;border-radius:8px;padding:8px 18px;background:var(--accent);color:#04131f;font-weight:600">Ulangi Kuis</button>';
+    $('#retryQuiz').onclick = () => renderQuiz(true);
+    return;
+  }
+  const curQ = QUESTIONS[qIndex];
+  $('#qno').textContent = 'Soal ' + (qIndex + 1) + ' / ' + QUESTIONS.length;
+  $('#qdots').innerHTML = QUESTIONS.map((_, i) => '<span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:' + (i < qMarks.length ? (qMarks[i] ? '#10B981' : '#EF4444') : i === qIndex ? 'var(--accent)' : 'rgba(255,255,255,0.2)') + '"></span>').join('');
+  $('#qq').textContent = curQ.q;
+  $('#qopts').innerHTML = curQ.o.map((opt, i) => '<button class="qopt" type="button" data-i="' + i + '">' + opt + '</button>').join('');
+  $('#qfoot').innerHTML = '';
+  $$('#qopts .qopt').forEach(btn => {
+    btn.onclick = () => {
+      const selected = Number(btn.dataset.i);
+      const isRight = selected === curQ.a;
+      if(isRight) qScore++;
+      qMarks.push(isRight);
+      $$('#qopts .qopt').forEach((b, j) => {
+        b.disabled = true;
+        if(j === curQ.a) b.classList.add('right');
+      });
+      if(!isRight) btn.classList.add('wrong');
+      $('#qfoot').innerHTML = '<button class="dock-btn" id="nextQ" type="button" style="width:auto;border-radius:8px;padding:8px 18px;background:var(--accent);color:#04131f;font-weight:600">' + (qIndex === QUESTIONS.length - 1 ? 'Lihat Skor' : 'Lanjut &rarr;') + '</button>';
+      $('#nextQ').onclick = () => { qIndex++; renderQuiz(); };
+    };
+  });
+}
+renderQuiz(true);
+
+/* LIGHTBOX */
+function openLB(card){
+  const img = card.querySelector('img');
+  $('#lbimg').src = img.src;
+  $('#lbtitle').textContent = card.querySelector('.shotcard-title').textContent;
+  $('#lightbox').classList.add('on');
+}
+$$('.shotcard').forEach(c => c.onclick = () => openLB(c));
+$('#lbclose').onclick = () => $('#lightbox').classList.remove('on');
+$('#lightbox').onclick = e => { if(e.target === $('#lightbox')) $('#lightbox').classList.remove('on'); };
+document.addEventListener('keydown', e => { if(e.key === 'Escape') $('#lightbox').classList.remove('on'); });
+
+lucide.createIcons();
+let startIdx = 0;
+if(window.location.hash){
+  const found = slides.findIndex(s => '#' + s.id === window.location.hash);
+  if(found !== -1) startIdx = found;
+}
+show(startIdx);
+</script>
+</body>
+</html>
