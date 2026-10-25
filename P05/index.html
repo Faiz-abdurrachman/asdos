@@ -153,7 +153,7 @@ html,body{
 }
 .slide.on{opacity:1;visibility:visible;pointer-events:auto;z-index:2}
 .content{
-  position:relative;width:100%;max-width:1140px;margin:auto 0;text-align:left;
+  position:relative;width:100%;max-width:1140px;margin:auto;text-align:left;
 }
 .kick{
   display:inline-flex;align-items:center;gap:8px;
@@ -172,6 +172,7 @@ h2{
 
 /* GRIDS */
 .cols{display:grid;gap:20px;align-items:start}
+.cols>*{min-width:0;max-width:100%}
 .cols.c2{grid-template-columns:1fr 1fr}
 .cols.c2-1{grid-template-columns:1.25fr 1fr}
 .cols.c1-2{grid-template-columns:1fr 1.25fr}
@@ -351,38 +352,52 @@ h2{
 .qopt.wrong .qopt-text{color:#991B1B;font-weight:600}
 
 /* ========================================================
-   RESPONSIVE DESIGN BREAKPOINTS
+   SCROLLBAR & RESPONSIVE DESIGN BREAKPOINTS
    ======================================================== */
-@media (max-width: 1080px) {
+.slide::-webkit-scrollbar, .cbox pre::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.slide::-webkit-scrollbar-thumb, .cbox pre::-webkit-scrollbar-thumb {
+  background: rgba(15, 23, 42, 0.2);
+  border-radius: 999px;
+}
+.slide::-webkit-scrollbar-track, .cbox pre::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+@media (max-width: 1100px) {
+  .content { max-width: 960px; }
   .cols.c4 { grid-template-columns: repeat(2, 1fr); }
   .cols.c3 { grid-template-columns: repeat(2, 1fr); }
   .cols.c2-1, .cols.c1-2 { grid-template-columns: 1fr; }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 960px) {
   html, body {
     height: 100%;
     overflow-y: auto;
   }
   .slide {
-    padding: 24px 16px 88px;
+    padding: 24px 18px 90px;
     align-items: flex-start;
+  }
+  .content {
+    margin: 0 auto;
+    padding-top: 10px;
+    width: 100%;
+  }
+  .cols.c2, .cols.c3, .cols.c4, .cols.c2-1, .cols.c1-2 {
+    grid-template-columns: 1fr;
+    gap: 16px;
   }
   .title-slide {
     align-items: center;
     padding-top: 24px;
   }
-  .content {
-    margin: 0 auto;
-    padding-top: 10px;
-  }
   .title-slide .content {
     margin: auto auto;
     padding-top: 0;
-  }
-  .cols.c2, .cols.c3, .cols.c4, .cols.c2-1, .cols.c1-2 {
-    grid-template-columns: 1fr;
-    gap: 16px;
   }
   .title-slide h1 {
     font-size: clamp(26px, 7vw, 38px);
@@ -398,10 +413,10 @@ h2{
     line-height: 1.6;
   }
   h2 {
-    font-size: clamp(20px, 5.5vw, 28px);
+    font-size: clamp(20px, 4.8vw, 28px);
   }
   .sub {
-    font-size: 13.5px;
+    font-size: 13px;
     line-height: 1.5;
   }
   .pcard {
@@ -432,7 +447,7 @@ h2{
   }
   .cbox pre {
     padding: 12px 14px;
-    font-size: 11.5px;
+    font-size: 12px;
     line-height: 1.5;
   }
   .dock {
@@ -469,9 +484,21 @@ h2{
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 640px) {
   .slide {
     padding: 16px 12px 84px;
+  }
+  .kick {
+    font-size: 10px;
+    padding: 4px 10px;
+    margin-bottom: 8px;
+  }
+  h2 {
+    font-size: clamp(18px, 5.5vw, 24px);
+    margin-bottom: 6px;
+  }
+  .sub {
+    font-size: 12.5px;
   }
   .title-slide h1 {
     font-size: clamp(22px, 6.5vw, 28px);
@@ -486,9 +513,8 @@ h2{
     font-size: 12.5px;
     line-height: 1.5;
   }
-  .kick {
-    font-size: 9.5px;
-    padding: 4px 10px;
+  .pcard {
+    padding: 14px 14px;
   }
   .dock {
     bottom: 8px;
@@ -505,6 +531,59 @@ h2{
   }
   .seclabel {
     display: none;
+  }
+}
+
+@media (max-height: 800px) {
+  .slide {
+    padding-top: 18px;
+    padding-bottom: 78px;
+  }
+  .kick {
+    margin-bottom: 6px;
+    padding: 3px 9px;
+    font-size: 9.5px;
+  }
+  h2 {
+    font-size: clamp(18px, 2.4vw, 26px);
+    margin-bottom: 4px;
+  }
+  .sub {
+    font-size: 12px;
+    line-height: 1.4;
+    margin-bottom: 6px;
+  }
+  .slide-body {
+    margin-top: 10px;
+  }
+  .pcard {
+    padding: 12px 14px;
+  }
+  .pcard .ic {
+    width: 28px;
+    height: 28px;
+    margin-bottom: 6px;
+  }
+  .pcard .ic svg {
+    width: 15px;
+    height: 15px;
+  }
+  .pcard h3 {
+    font-size: 13.5px;
+    margin-bottom: 4px;
+  }
+  .pcard p {
+    font-size: 11.5px;
+    line-height: 1.45;
+  }
+  .cbox pre {
+    padding: 8px 12px;
+    font-size: 11px;
+    line-height: 1.45;
+  }
+  .dock {
+    bottom: 10px;
+    padding: 4px 6px;
   }
 }
 </style>
@@ -569,10 +648,12 @@ h2{
         <p style="margin-bottom:12px">Anda harus membuat 100 fungsi route berbeda di <code>app.py</code> dan 100 file HTML manual:</p>
         <div class="cbox">
           <pre><code>@app.route('/blog/artikel-1')
-def blog1(): return render_template('blog1.html')
+def blog1():
+    return render_template('blog1.html')
 
 @app.route('/blog/artikel-2')
-def blog2(): return render_template('blog2.html')
+def blog2():
+    return render_template('blog2.html')
 # ... diulang sampai 100 kali! 😱</code></pre>
         </div>
       </div>
@@ -582,9 +663,12 @@ def blog2(): return render_template('blog2.html')
         <div class="cbox">
           <pre><code>@app.route('/blog/&lt;int:post_id&gt;')
 def blog_detail(post_id):
-    # post_id ditangkap otomatis dari URL!
+    # post_id ditangkap dari URL
     artikel = cari_artikel(post_id)
-    return render_template('blog_detail.html', artikel=artikel)</code></pre>
+    return render_template(
+        'blog_detail.html',
+        artikel=artikel
+    )</code></pre>
         </div>
       </div>
     </div>
