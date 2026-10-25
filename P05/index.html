@@ -232,6 +232,22 @@ h2{
 .shotcard-title{font:600 11.5px/1 var(--mono);color:var(--dim)}
 .shotcard-hint{font:600 10.5px/1 var(--mono);color:var(--accent);display:inline-flex;align-items:center;gap:4px}
 
+/* STEP GUIDE BAR (PEMULA-FRIENDLY DIRECTIVE) */
+.step-guide-bar{
+  display:inline-flex;flex-wrap:wrap;align-items:center;gap:8px;
+  margin:8px 0 16px;background:rgba(255,255,255,0.92);
+  border:1.5px solid #CBD5E1;border-radius:10px;padding:6px 12px;
+  box-shadow:0 2px 6px rgba(15,23,42,0.04);
+}
+.guide-tag{
+  font:600 11.5px/1 var(--mono);display:inline-flex;align-items:center;gap:6px;
+  padding:4px 10px;border-radius:6px;
+}
+.guide-tag svg{width:13px;height:13px}
+.guide-tag.file{background:#0F172A;color:#F8FAFC}
+.guide-tag.loc{background:rgba(2,132,199,0.12);color:var(--accent);border:1px solid rgba(2,132,199,0.25)}
+.guide-tag.act{background:rgba(5,150,105,0.12);color:#047857;border:1px solid rgba(5,150,105,0.25)}
+
 /* TITLE SLIDE */
 .title-slide{
   align-items:center;
@@ -755,6 +771,11 @@ def blog_detail(post_id):
     <span class="kick"><i data-lucide="lock"></i> Langkah 1 &bull; Backend</span>
     <h2>Setup Import Baru &amp; Secret Key</h2>
     <p class="sub">Buka <code>app.py</code>. Kita butuh fungsi baru dari Flask dan memasang <code>secret_key</code> agar fitur flash message berjalan:</p>
+    <div class="step-guide-bar">
+      <span class="guide-tag file"><i data-lucide="file"></i> app.py</span>
+      <span class="guide-tag loc"><i data-lucide="terminal"></i> Baris 1-7 (Paling Atas)</span>
+      <span class="guide-tag act"><i data-lucide="code"></i> Tambah Import Baru &amp; secret_key</span>
+    </div>
     <div class="cols c1-2 slide-body">
       <div class="pcard">
         <h3>Kenapa Butuh Secret Key?</h3>
@@ -788,6 +809,11 @@ app.secret_key = 'kunci-rahasia-portofolio-faiz'</code></pre>
     <span class="kick"><i data-lucide="code"></i> Langkah 2 &bull; Backend</span>
     <h2>Membuat Rute Dinamis di app.py</h2>
     <p class="sub">Tambahkan dua route dinamis: satu dengan integer converter untuk artikel blog, dan satu dengan string untuk salam pengunjung:</p>
+    <div class="step-guide-bar">
+      <span class="guide-tag file"><i data-lucide="file"></i> app.py</span>
+      <span class="guide-tag loc"><i data-lucide="terminal"></i> Baris 30+ (Di Bawah Route Lain)</span>
+      <span class="guide-tag act"><i data-lucide="code"></i> Tambah 2 Route Dinamis Baru</span>
+    </div>
     <div class="cols c1-2 slide-body">
       <div class="pcard">
         <h3>Dua Jenis Rute Dinamis</h3>
@@ -824,6 +850,11 @@ def user_greeting(nama):
     <span class="kick"><i data-lucide="layout"></i> Langkah 3 &bull; Frontend</span>
     <h2>Menghubungkan Halaman Blog ke Rute Dinamis</h2>
     <p class="sub">Bagaimana menghubungkan daftar artikel di <code>templates/blog.html</code> dengan rute <code>/blog/&lt;int:post_id&gt;</code> yang baru kita buat di <code>app.py</code>?</p>
+    <div class="step-guide-bar">
+      <span class="guide-tag file"><i data-lucide="file"></i> templates/blog.html</span>
+      <span class="guide-tag loc"><i data-lucide="terminal"></i> Di dalam loop {% for %}</span>
+      <span class="guide-tag act"><i data-lucide="code"></i> Pasang url_for Dinamis</span>
+    </div>
     <div class="cols c2 slide-body">
       <div class="pcard">
         <h3>🔗 Jembatan: url_for() dengan Parameter</h3>
@@ -878,6 +909,11 @@ def user_greeting(nama):
     <span class="kick"><i data-lucide="file"></i> Langkah 4 &bull; Template Baru</span>
     <h2>Template Detail Artikel (blog_detail.html)</h2>
     <p class="sub">Buat file <code>templates/blog_detail.html</code> yang mewarisi <code>base.html</code> dan menampilkan konten sesuai ID yang dipilih:</p>
+    <div class="step-guide-bar">
+      <span class="guide-tag file"><i data-lucide="file"></i> templates/blog_detail.html</span>
+      <span class="guide-tag loc"><i data-lucide="folder"></i> Folder templates/</span>
+      <span class="guide-tag act" style="background:rgba(217,119,6,0.12);color:#B45309;border-color:rgba(217,119,6,0.25)"><i data-lucide="sparkles"></i> Buat File Baru</span>
+    </div>
     <div class="cols c1-2 slide-body">
       <div class="pcard">
         <h3>Proteksi Kondisi {% if artikel %}</h3>
@@ -979,6 +1015,11 @@ def user_greeting(nama):
     <span class="kick"><i data-lucide="layout"></i> Langkah 5 &bull; Frontend</span>
     <h2>Mengaktifkan Form Kontak (POST)</h2>
     <p class="sub">Di <code>templates/contact.html</code>, ubah method form menjadi POST dan pastikan atribut <code>name</code> terpasang:</p>
+    <div class="step-guide-bar">
+      <span class="guide-tag file"><i data-lucide="file"></i> templates/contact.html</span>
+      <span class="guide-tag loc"><i data-lucide="terminal"></i> Tag &lt;form&gt; &amp; &lt;input&gt;</span>
+      <span class="guide-tag act"><i data-lucide="code"></i> Pasang method="POST" &amp; Atribut name</span>
+    </div>
     <div class="cols c1-2 slide-body">
       <div class="pcard">
         <h3>Jebakan Terbesar Pemula: Atribut Name!</h3>
@@ -1022,6 +1063,11 @@ def user_greeting(nama):
     <span class="kick"><i data-lucide="code"></i> Langkah 6 &bull; Backend</span>
     <h2>Backend Handler &amp; Pola PRG</h2>
     <p class="sub">Tangani kiriman data form di <code>app.py</code> dengan method POST dan terapkan pola <strong>Post/Redirect/Get</strong>:</p>
+    <div class="step-guide-bar">
+      <span class="guide-tag file"><i data-lucide="file"></i> app.py</span>
+      <span class="guide-tag loc"><i data-lucide="terminal"></i> Fungsi def contact()</span>
+      <span class="guide-tag act"><i data-lucide="code"></i> Tambah Handler POST &amp; PRG Redirect</span>
+    </div>
     <div class="cols c1-2 slide-body">
       <div class="pcard">
         <h3>Kenapa Wajib Redirect Setelah POST?</h3>
@@ -1062,6 +1108,11 @@ def contact():
     <span class="kick"><i data-lucide="sparkles"></i> Langkah 7 &bull; Global Alert</span>
     <h2>Wadah Flash Messages di base.html</h2>
     <p class="sub">Letakkan blok <code>get_flashed_messages()</code> di layout induk <code>templates/base.html</code> agar alert otomatis aktif di semua halaman:</p>
+    <div class="step-guide-bar">
+      <span class="guide-tag file"><i data-lucide="file"></i> templates/base.html</span>
+      <span class="guide-tag loc"><i data-lucide="terminal"></i> Di dalam tag &lt;main&gt;</span>
+      <span class="guide-tag act"><i data-lucide="code"></i> Pasang Wadah get_flashed_messages</span>
+    </div>
     <div class="cols c1-2 slide-body">
       <div class="pcard">
         <h3>Satu Tempat untuk Semua Notifikasi</h3>
@@ -1101,6 +1152,11 @@ def contact():
     <span class="kick"><i data-lucide="lock"></i> Latihan Modul Perkuliahan</span>
     <h2>Formulir Login Sederhana (/login)</h2>
     <p class="sub">Implementasi tugas resmi modul: autentikasi kredensial simulasi menggunakan Flash Danger dan Flash Success:</p>
+    <div class="step-guide-bar">
+      <span class="guide-tag file"><i data-lucide="file"></i> app.py &amp; templates/login.html</span>
+      <span class="guide-tag loc"><i data-lucide="folder"></i> Rute &amp; File Baru</span>
+      <span class="guide-tag act" style="background:rgba(217,119,6,0.12);color:#B45309;border-color:rgba(217,119,6,0.25)"><i data-lucide="sparkles"></i> Latihan Mandiri Modul</span>
+    </div>
     <div class="cols c1-2 slide-body">
       <div class="pcard">
         <h3>Logika Backend /login</h3>
