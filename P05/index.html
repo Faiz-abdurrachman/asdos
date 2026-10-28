@@ -272,6 +272,17 @@ h2{
   font-weight:600;color:#0F172A;
 }
 
+/* ACTION DIRECTIVE BANNER (PEMULA MECHANICAL CLARITY) */
+.action-banner{
+  display:flex;align-items:center;gap:8px;padding:7px 12px;border-radius:6px;
+  font:600 12px/1.4 var(--sans);margin-bottom:8px;
+}
+.action-banner svg{width:15px;height:15px;flex:none}
+.action-banner.create{background:#F0F9FF;border:1.5px solid #0284C7;color:#0369A1}
+.action-banner.replace{background:#FEF2F2;border:1.5px solid #DC2626;color:#991B1B}
+.action-banner.append{background:#F0FDF4;border:1.5px solid #16A34A;color:#15803D}
+.action-banner.edit{background:#FDF4FF;border:1.5px solid #A855F7;color:#7E22CE}
+
 /* PROGRESSIVE DISCLOSURE TABS (CARD TUTORIAL) */
 .pcard-tabs{
   display:inline-flex;gap:4px;background:#F1F5F9;padding:3px;
@@ -1015,6 +1026,7 @@ code .</code></pre>
 
       <!-- KOLOM KANAN: KODINGAN & VERIFIKASI -->
       <div>
+        <div class="action-banner edit"><i data-lucide="edit-3"></i> <span><strong>AKSI: EDIT FILE app.py</strong> &bull; Ubah Baris 1 &amp; sisipkan <code>secret_key</code> di Baris 5. <em>(Jangan hapus menu_list!)</em></span></div>
         <div class="cbox">
           <div class="cbox-head">
             <span class="cbox-title">app.py</span>
@@ -1100,9 +1112,10 @@ app.secret_key = 'kunci-rahasia-kita'</code></pre>
 
       <!-- KOLOM KANAN: KODINGAN & VERIFIKASI -->
       <div>
+        <div class="action-banner append"><i data-lucide="arrow-down-to-line"></i> <span><strong>AKSI: TEMPEL DI PALING BAWAH app.py</strong> &bull; Scroll ke baris paling bawah, lalu paste rute ini. <em>(JANGAN timpa/hapus kode lama!)</em></span></div>
         <div class="cbox">
           <div class="cbox-head">
-            <span class="cbox-title">app.py</span>
+            <span class="cbox-title">app.py (Tempel di Paling Bawah)</span>
             <button class="copy-btn" data-copy="# Tambahkan di PALING BAWAH app.py:&#10;&#10;# 1. Rute Dinamis Detail Menu (Converter Integer: &lt;int:id&gt;)&#10;@app.route('/menu/<int:id>')&#10;def detail_menu(id):&#10;    menu = next((item for item in menu_list if item['id'] == id), None)&#10;    return render_template('detail.html', menu=menu, id=id)&#10;&#10;# 2. Rute Dinamis Salam Pelanggan (Variable Rule String: &lt;nama&gt;)&#10;@app.route('/halo/<nama>')&#10;def sapa_user(nama):&#10;    return f&quot;&lt;h1&gt;Halo, {nama}!&lt;/h1&gt;&lt;p&gt;Selamat datang di Kantin Kampus.&lt;/p&gt;&quot;"><i data-lucide="copy"></i> Salin</button>
           </div>
           <pre><code><span style="color:#047857"># Tambahkan di PALING BAWAH app.py:</span>
@@ -1192,9 +1205,10 @@ def sapa_user(nama):
 
       <!-- KOLOM KANAN: KODINGAN & VERIFIKASI -->
       <div>
+        <div class="action-banner replace"><i data-lucide="refresh-cw"></i> <span><strong>AKSI: TIMPA TOTAL (Ctrl+A &rarr; Ctrl+V)</strong> &bull; Buka <code>templates/index.html</code>, pilih semua (Ctrl+A), lalu paste kode ini.</span></div>
         <div class="cbox">
           <div class="cbox-head">
-            <span class="cbox-title">templates/index.html (File Lengkap)</span>
+            <span class="cbox-title">templates/index.html (Timpa Seluruh Isi File)</span>
             <button class="copy-btn" data-copy="{% extends 'base.html' %}&#10;&#10;{% block title %}Daftar Menu Kantin{% endblock %}&#10;&#10;{% block content %}&#10;<h1 class=&quot;page-title&quot;>Daftar Menu Kantin Kampus</h1>&#10;&#10;<div class=&quot;card-grid&quot;>&#10;    {% for item in menu_list %}&#10;    <div class=&quot;card&quot;>&#10;        <span class=&quot;badge&quot;>{{ item.kategori }} &bull; {{ item.harga }}</span>&#10;        <h3>{{ item.nama }}</h3>&#10;        <p>{{ item.deskripsi }}</p>&#10;        <a href=&quot;{{ url_for('detail_menu', id=item.id) }}&quot; class=&quot;btn&quot;>&#10;            Lihat Detail Menu &rarr;&#10;        </a>&#10;    </div>&#10;    {% endfor %}&#10;</div>&#10;{% endblock %}"><i data-lucide="copy"></i> Salin Seluruh File</button>
           </div>
           <pre><code>{% extends 'base.html' %}
@@ -1290,9 +1304,10 @@ def sapa_user(nama):
 
       <!-- KOLOM KANAN: KODINGAN & VERIFIKASI -->
       <div>
+        <div class="action-banner create"><i data-lucide="file-plus-2"></i> <span><strong>AKSI: BUAT FILE BARU</strong> &bull; Di folder <code>templates/</code>, buat file <code>detail.html</code>, lalu paste kode lengkap ini.</span></div>
         <div class="cbox">
           <div class="cbox-head">
-            <span class="cbox-title">templates/detail.html (File Lengkap)</span>
+            <span class="cbox-title">templates/detail.html (File Lengkap Baru)</span>
             <button class="copy-btn" data-copy="{% extends 'base.html' %}&#10;&#10;{% block title %}{{ menu.nama if menu else 'Menu Tidak Ditemukan' }}{% endblock %}&#10;&#10;{% block content %}&#10;<a href=&quot;{{ url_for('home') }}&quot; class=&quot;back-link&quot;>&larr; Kembali ke Daftar Menu</a>&#10;&#10;{% if menu %}&#10;    <div class=&quot;detail-box&quot;>&#10;        <span class=&quot;badge&quot;>{{ menu.kategori }}</span>&#10;        <h1>{{ menu.nama }}</h1>&#10;        <p class=&quot;lead&quot;>Harga: <strong>{{ menu.harga }}</strong></p>&#10;        <hr>&#10;        <p>{{ menu.deskripsi }}</p>&#10;    </div>&#10;{% else %}&#10;    <div class=&quot;empty-box&quot;>&#10;        <h2>Menu Tidak Ditemukan!</h2>&#10;        <p>Maaf, menu dengan ID #{{ id }} tidak tersedia di kantin.</p>&#10;    </div>&#10;{% endif %}&#10;{% endblock %}"><i data-lucide="copy"></i> Salin Seluruh File</button>
           </div>
           <pre><code>{% extends 'base.html' %}
@@ -1447,9 +1462,10 @@ def sapa_user(nama):
 
       <!-- KOLOM KANAN: KODINGAN & VERIFIKASI -->
       <div>
+        <div class="action-banner create"><i data-lucide="file-plus-2"></i> <span><strong>AKSI: BUAT FILE BARU</strong> &bull; Di folder <code>templates/</code>, buat file <code>kontak.html</code>, lalu paste kode lengkap ini.</span></div>
         <div class="cbox">
           <div class="cbox-head">
-            <span class="cbox-title">templates/kontak.html (File Lengkap)</span>
+            <span class="cbox-title">templates/kontak.html (File Lengkap Baru)</span>
             <button class="copy-btn" data-copy="{% extends 'base.html' %}&#10;&#10;{% block title %}Masukan &amp; Saran Kantin{% endblock %}&#10;&#10;{% block content %}&#10;&lt;h1 class=&quot;page-title&quot;&gt;Kirim Masukan &amp; Saran&lt;/h1&gt;&#10;&#10;&lt;div class=&quot;form-card&quot;&gt;&#10;    &lt;form action=&quot;{{ url_for('kontak') }}&quot; method=&quot;POST&quot;&gt;&#10;        &lt;div class=&quot;form-group&quot;&gt;&#10;            &lt;label for=&quot;nama&quot;&gt;Nama Lengkap&lt;/label&gt;&#10;            &lt;input type=&quot;text&quot; id=&quot;nama&quot; name=&quot;nama&quot; placeholder=&quot;Contoh: Faiz&quot; required&gt;&#10;        &lt;/div&gt;&#10;        &lt;div class=&quot;form-group&quot;&gt;&#10;            &lt;label for=&quot;pesan&quot;&gt;Pesan atau Masukan Menu&lt;/label&gt;&#10;            &lt;textarea id=&quot;pesan&quot; name=&quot;pesan&quot; placeholder=&quot;Tuliskan masukan untuk kantin kampus...&quot; required&gt;&lt;/textarea&gt;&#10;        &lt;/div&gt;&#10;        &lt;button type=&quot;submit&quot; class=&quot;btn&quot;&gt;Kirim Masukan via POST&lt;/button&gt;&#10;    &lt;/form&gt;&#10;&lt;/div&gt;&#10;{% endblock %}"><i data-lucide="copy"></i> Salin Seluruh File</button>
           </div>
           <pre><code>{% extends 'base.html' %}
@@ -1546,9 +1562,10 @@ def sapa_user(nama):
 
       <!-- KOLOM KANAN: KODINGAN & VERIFIKASI -->
       <div>
+        <div class="action-banner append"><i data-lucide="arrow-down-to-line"></i> <span><strong>AKSI: TEMPEL DI PALING BAWAH app.py</strong> &bull; Scroll ke baris paling bawah, lalu paste rute ini. <em>(JANGAN timpa kode lama!)</em></span></div>
         <div class="cbox">
           <div class="cbox-head">
-            <span class="cbox-title">app.py (Tambahkan di Paling Bawah)</span>
+            <span class="cbox-title">app.py (Tempel di Paling Bawah)</span>
             <button class="copy-btn" data-copy="@app.route('/kontak', methods=['GET', 'POST'])&#10;def kontak():&#10;    if request.method == 'POST':&#10;        nama = request.form.get('nama')&#10;        pesan = request.form.get('pesan')&#10;        flash(f'Terima kasih, {nama}! Masukan Anda telah berhasil dikirim.', 'success')&#10;        return redirect(url_for('kontak'))&#10;    return render_template('kontak.html')"><i data-lucide="copy"></i> Salin Kode Rute</button>
           </div>
           <pre><code><span style="color:#047857"># Tambahkan di baris paling bawah app.py:</span>
@@ -1635,10 +1652,11 @@ def kontak():
 
       <!-- KOLOM KANAN: KODINGAN & VERIFIKASI -->
       <div>
+        <div class="action-banner replace"><i data-lucide="refresh-cw"></i> <span><strong>AKSI: TIMPA TOTAL (Ctrl+A &rarr; Ctrl+V)</strong> &bull; Buka <code>templates/base.html</code>, pilih semua (Ctrl+A), lalu paste kode ini untuk menimpa file.</span></div>
         <div class="cbox">
           <div class="cbox-head">
-            <span class="cbox-title">templates/base.html (File Lengkap)</span>
-            <button class="copy-btn" data-copy="&lt;!DOCTYPE html&gt;&#10;&lt;html lang=&quot;id&quot;&gt;&#10;&lt;head&gt;&#10;    &lt;meta charset=&quot;UTF-8&quot;&gt;&#10;    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;&#10;    &lt;title&gt;{% block title %}Kantin Kampus{% endblock %}&lt;/title&gt;&#10;    &lt;link rel=&quot;stylesheet&quot; href=&quot;{{ url_for('static', filename='style.css') }}&quot;&gt;&#10;&lt;/head&gt;&#10;&lt;body&gt;&#10;    &lt;nav class=&quot;navbar&quot;&gt;&#10;        &lt;a href=&quot;{{ url_for('home') }}&quot; class=&quot;brand&quot;&gt;Kantin Kampus&lt;/a&gt;&#10;        &lt;div class=&quot;nav-links&quot;&gt;&#10;            &lt;a href=&quot;{{ url_for('home') }}&quot;&gt;Beranda&lt;/a&gt;&#10;            &lt;a href=&quot;{{ url_for('kontak') }}&quot;&gt;Masukan&lt;/a&gt;&#10;            &lt;a href=&quot;{{ url_for('login') }}&quot;&gt;Login Admin&lt;/a&gt;&#10;        &lt;/div&gt;&#10;    &lt;/nav&gt;&#10;&#10;    &lt;main class=&quot;container&quot;&gt;&#10;        {% with messages = get_flashed_messages(with_categories=true) %}&#10;            {% if messages %}&#10;                {% for category, message in messages %}&#10;                    &lt;div class=&quot;alert alert-{{ category }}&quot;&gt;&#10;                        {{ message }}&#10;                    &lt;/div&gt;&#10;                {% endfor %}&#10;            {% endif %}&#10;        {% endwith %}&#10;&#10;        {% block content %}{% endblock %}&#10;    &lt;/main&gt;&#10;&lt;/body&gt;&#10;&lt;/html&gt;"><i data-lucide="copy"></i> Salin Seluruh File</button>
+            <span class="cbox-title">templates/base.html (Timpa Seluruh Isi File)</span>
+            <button class="copy-btn" data-copy="&lt;!DOCTYPE html&gt;&#10;&lt;html lang=&quot;id&quot;&gt;&#10;&lt;head&gt;&#10;    &lt;meta charset=&quot;UTF-8&quot;&gt;&#10;    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;&#10;    &lt;title&gt;{% block title %}Kantin Kampus{% endblock %}&lt;/title&gt;&#10;    &lt;link rel=&quot;stylesheet&quot; href=&quot;{{ url_for('static', filename='style.css') }}&quot;&gt;&#10;&lt;/head&gt;&#10;&lt;body&gt;&#10;    &lt;nav class=&quot;navbar&quot;&gt;&#10;        &lt;a href=&quot;{{ url_for('home') }}&quot; class=&quot;brand&quot;&gt;Kantin Kampus&lt;/a&gt;&#10;        &lt;div class=&quot;nav-links&quot;&gt;&#10;            &lt;a href=&quot;{{ url_for('home') }}&quot;&gt;Beranda&lt;/a&gt;&#10;            &lt;a href=&quot;{{ url_for('kontak') }}&quot;&gt;Masukan&lt;/a&gt;&#10;            &lt;a href=&quot;/login&quot;&gt;Login Admin&lt;/a&gt;&#10;        &lt;/div&gt;&#10;    &lt;/nav&gt;&#10;&#10;    &lt;main class=&quot;container&quot;&gt;&#10;        {% with messages = get_flashed_messages(with_categories=true) %}&#10;            {% if messages %}&#10;                {% for category, message in messages %}&#10;                    &lt;div class=&quot;alert alert-{{ category }}&quot;&gt;&#10;                        {{ message }}&#10;                    &lt;/div&gt;&#10;                {% endfor %}&#10;            {% endif %}&#10;        {% endwith %}&#10;&#10;        {% block content %}{% endblock %}&#10;    &lt;/main&gt;&#10;&lt;/body&gt;&#10;&lt;/html&gt;"><i data-lucide="copy"></i> Salin Seluruh File</button>
           </div>
           <pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang="id"&gt;
@@ -1653,7 +1671,7 @@ def kontak():
         &lt;div class="nav-links"&gt;
             &lt;a href="{{ url_for('home') }}"&gt;Beranda&lt;/a&gt;
             &lt;a href="{{ url_for('kontak') }}"&gt;Masukan&lt;/a&gt;
-            &lt;a href="{{ url_for('login') }}"&gt;Login Admin&lt;/a&gt;
+            &lt;a href="/login"&gt;Login Admin&lt;/a&gt;
         &lt;/div&gt;
     &lt;/nav&gt;
 
@@ -1751,8 +1769,9 @@ def kontak():
         </div>
 
         <div id="tabContentApp" class="cbox">
+          <div class="action-banner append" style="margin:10px 10px 4px"><i data-lucide="arrow-down-to-line"></i> <span><strong>AKSI 1: TEMPEL DI PALING BAWAH app.py</strong> &bull; Scroll ke bawah, paste rute ini.</span></div>
           <div class="cbox-head">
-            <span class="cbox-title">app.py (Tambahkan di Paling Bawah)</span>
+            <span class="cbox-title">app.py (Tempel di Paling Bawah)</span>
             <button class="copy-btn" data-copy="@app.route('/login', methods=['GET', 'POST'])&#10;def login():&#10;    if request.method == 'POST':&#10;        u = request.form.get('username')&#10;        p = request.form.get('password')&#10;        if u == 'admin' and p == '12345':&#10;            flash('Login berhasil! Selamat datang, Admin Kantin.', 'success')&#10;            return redirect(url_for('home'))&#10;        flash('Username atau password salah! Coba lagi.', 'danger')&#10;        return redirect(url_for('login'))&#10;    return render_template('login.html')"><i data-lucide="copy"></i> Salin Rute</button>
           </div>
           <pre style="padding:10px 14px;font-size:12px"><code><span style="color:#047857"># Tambahkan di baris paling bawah app.py:</span>
@@ -1770,8 +1789,9 @@ def login():
         </div>
 
         <div id="tabContentHtml" class="cbox" style="display:none">
+          <div class="action-banner create" style="margin:10px 10px 4px"><i data-lucide="file-plus-2"></i> <span><strong>AKSI 2: BUAT FILE BARU</strong> &bull; Di folder <code>templates/</code>, buat file <code>login.html</code>.</span></div>
           <div class="cbox-head">
-            <span class="cbox-title">templates/login.html (File Lengkap)</span>
+            <span class="cbox-title">templates/login.html (File Baru Lengkap)</span>
             <button class="copy-btn" data-copy="{% extends 'base.html' %}&#10;&#10;{% block title %}Login Admin Kantin{% endblock %}&#10;&#10;{% block content %}&#10;<h1 class=&quot;page-title&quot;>Login Admin Kantin</h1>&#10;&#10;<div class=&quot;form-card&quot;>&#10;    <form action=&quot;{{ url_for('login') }}&quot; method=&quot;POST&quot;>&#10;        <div class=&quot;form-group&quot;>&#10;            <label for=&quot;username&quot;>Username</label>&#10;            <input type=&quot;text&quot; id=&quot;username&quot; name=&quot;username&quot; placeholder=&quot;Masukkan username&quot; required autofocus>&#10;        </div>&#10;        <div class=&quot;form-group&quot;>&#10;            <label for=&quot;password&quot;>Password</label>&#10;            <input type=&quot;password&quot; id=&quot;password&quot; name=&quot;password&quot; placeholder=&quot;Masukkan password&quot; required>&#10;        </div>&#10;        <button type=&quot;submit&quot; class=&quot;btn&quot; style=&quot;width:100%&quot;>Masuk (Login)</button>&#10;    </form>&#10;</div>&#10;{% endblock %}"><i data-lucide="copy"></i> Salin Seluruh File</button>
           </div>
           <pre style="padding:10px 14px;font-size:12px"><code>{% extends 'base.html' %}
