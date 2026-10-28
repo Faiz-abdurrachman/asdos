@@ -284,8 +284,23 @@ h2{
   margin-bottom: 6px;
 }
 .tut-header.why { background: rgba(2, 132, 199, 0.12); color: var(--accent); }
+.tut-header.analogy { background: rgba(245, 158, 11, 0.12); color: #B45309; }
 .tut-header.how { background: rgba(124, 58, 237, 0.12); color: #7C3AED; }
-.tut-header.diff { background: rgba(217, 119, 6, 0.12); color: #B45309; }
+.tut-header.diff { background: rgba(16, 185, 129, 0.12); color: #047857; }
+
+.analogy-box {
+  background: rgba(245, 158, 11, 0.07);
+  border-left: 3px solid #F59E0B;
+  padding: 6px 10px;
+  border-radius: 0 6px 6px 0;
+  font-size: 11.5px;
+  line-height: 1.45;
+  color: #78350F;
+  margin-top: 4px;
+}
+.analogy-box strong {
+  color: #B45309;
+}
 
 .compare-grid {
   display: grid;
@@ -865,7 +880,7 @@ def blog_detail(post_id):
         <div class="check-result-box" style="margin-top:0">
           <i data-lucide="check-circle-2"></i>
           <div>
-            <strong>Garansi Aman:</strong> Seluruh kodingan P-04 Anda tetap utuh. Di modul P-05 ini kita hanya menyambung fitur baru di atasnya!
+            <strong>🎭 Analoginya:</strong> Virtual Environment (<code>.venv</code>) itu ibarat <strong>"Kotak Perkakas Pribadi di Lab"</strong>. Daripada menaruh obeng campur aduk di meja umum lab (sistem laptop), kamu punya koper sendiri agar modul Flask tidak bentrok dengan mata kuliah lain!
           </div>
         </div>
       </div>
@@ -926,24 +941,27 @@ code .</code></pre>
       <div class="pcard">
         <div class="tut-item" style="margin-top:0">
           <span class="tut-header why"><i data-lucide="lightbulb"></i> 1. Fungsinya Buat Apa?</span>
-          <p>Kita mengimpor 4 senjata baru Flask: <code>request</code> (menangkap input form/URL), <code>redirect</code> (mengalihkan rute), <code>url_for</code> (membuat link otomatis), dan <code>flash</code> (notifikasi pop-up). Kita juga memasang <code>secret_key</code> sebagai kunci pengaman session.</p>
+          <p>Mengimpor 4 fungsi inti Flask (<code>request</code>, <code>redirect</code>, <code>url_for</code>, <code>flash</code>) dan memasang <code>secret_key</code> sebagai kunci pengaman session.</p>
+          <div class="analogy-box">
+            <strong>🎭 Analoginya:</strong> <code>secret_key</code> itu ibarat <strong>"Stempel Segel Lilin Cap Raja"</strong> pada amplop surat rahasia. Saat Flask menitipkan pesan alert ke saku browser (cookie session), Flask menempelkan stempel segel ini. Jika isi cookie diotak-atik via Inspect Element, segelnya rusak dan server langsung menolaknya!
+          </div>
         </div>
 
         <div class="tut-item">
-          <span class="tut-header how"><i data-lucide="cpu"></i> 2. Kalau Pakai Ini Bakal Apa?</span>
-          <p>Flask menggunakan <code>secret_key</code> untuk menandatangani secara kriptografi (*signing*) cookie session di browser user. Pesan <code>flash()</code> yang kita kirim akan tersimpan aman dan tidak bisa dimanipulasi dari Inspect Element.</p>
+          <span class="tut-header how"><i data-lucide="cpu"></i> 2. Pengaruhnya di Balik Layar:</span>
+          <p>Flask menandatangani secara kriptografi (*signing*) cookie session browser. Notifikasi <code>flash()</code> yang kita kirim dari Python tersimpan aman di peramban tanpa risiko manipulasi.</p>
         </div>
 
         <div class="tut-item">
-          <span class="tut-header diff"><i data-lucide="scale"></i> 3. Bedanya Gimana?</span>
+          <span class="tut-header diff"><i data-lucide="scale"></i> 3. Kenapa Harus Gunakan Itu?</span>
           <div class="compare-grid">
             <div class="compare-box bad">
               <strong>❌ Tanpa secret_key</strong>
-              Memanggil <code>flash()</code> langsung bikin web crash: <em>RuntimeError: The session is unavailable because no secret key was set</em>.
+              Memanggil <code>flash()</code> langsung bikin web crash total: <em>RuntimeError: session unavailable</em>.
             </div>
             <div class="compare-box good">
               <strong>✅ Dengan secret_key</strong>
-              Fitur Flash Message &amp; Session aktif 100%, siap menampilkan alert hijau/merah secara aman!
+              Fitur Session &amp; Flash Alert aktif 100%, siap menampilkan notifikasi hijau/merah secara aman!
             </div>
           </div>
         </div>
@@ -1005,24 +1023,27 @@ app.secret_key = 'kunci-rahasia-portofolio-faiz'
       <div class="pcard">
         <div class="tut-item" style="margin-top:0">
           <span class="tut-header why"><i data-lucide="lightbulb"></i> 1. Fungsinya Buat Apa?</span>
-          <p>Membuat basis data tiruan <code>data_blog</code> (List of Dict), lalu memasang rute dinamis <code>&lt;int:post_id&gt;</code> dan <code>&lt;nama&gt;</code>. Fungsi <code>next()</code> bertugas mencari satu artikel yang memiliki ID cocok.</p>
+          <p>Membuat database tiruan <code>data_blog</code>, lalu memasang rute dinamis <code>&lt;int:post_id&gt;</code> dan <code>&lt;nama&gt;</code> untuk menangkap variabel dari URL.</p>
+          <div class="analogy-box">
+            <strong>🎭 Analoginya:</strong> Dynamic Routing itu ibarat <strong>"Sistem Nomor Antrean Bank atau Resi Paket"</strong>. Bank tidak membangun 1.000 pintu untuk 1.000 nasabah. Cukup <strong>1 loket serbaguna</strong> ber-scanner nomor antrean! Berapa pun nomor tiketmu, loket langsung tahu berkasmu.
+          </div>
         </div>
 
         <div class="tut-item">
-          <span class="tut-header how"><i data-lucide="cpu"></i> 2. Kalau Pakai Ini Bakal Apa?</span>
-          <p>Flask bertindak sebagai URL parser otomatis. Begitu browser meminta <code>/blog/2</code>, Flask mengubah angka <code>2</code> jadi integer Python, menyalurkannya ke parameter fungsi <code>blog_detail(post_id=2)</code>, lalu melempar data artikel ke template.</p>
+          <span class="tut-header how"><i data-lucide="cpu"></i> 2. Pengaruhnya di Balik Layar:</span>
+          <p>Flask membaca URL layaknya scanner. Saat browser mengakses <code>/blog/2</code>, angka <code>2</code> dikonversi menjadi integer Python dan disalurkan ke fungsi <code>blog_detail(post_id=2)</code>.</p>
         </div>
 
         <div class="tut-item">
-          <span class="tut-header diff"><i data-lucide="scale"></i> 3. Bedanya Gimana?</span>
+          <span class="tut-header diff"><i data-lucide="scale"></i> 3. Kenapa Harus Gunakan Itu?</span>
           <div class="compare-grid">
             <div class="compare-box bad">
               <strong>❌ Routing Statis</strong>
-              Harus membuat 100 fungsi manual untuk 100 artikel (<code>@app.route('/blog1')</code>, <code>/blog2</code>... melelahkan!).
+              Harus membuat ratusan fungsi manual untuk ratusan artikel (<code>@app.route('/blog1')</code>, <code>/blog2</code>... mimpi buruk!).
             </div>
             <div class="compare-box good">
               <strong>✅ Routing Dinamis</strong>
-              Cukup 1 fungsi untuk jutaan artikel! Converter <code>&lt;int:&gt;</code> otomatis menolak huruf/teks dengan status 404.
+              Cukup 1 fungsi untuk jutaan artikel! Converter <code>&lt;int:&gt;</code> otomatis menolak teks non-angka dengan respon 404.
             </div>
           </div>
         </div>
@@ -1091,24 +1112,27 @@ def user_greeting(nama):
       <div class="pcard">
         <div class="tut-item" style="margin-top:0">
           <span class="tut-header why"><i data-lucide="lightbulb"></i> 1. Fungsinya Buat Apa?</span>
-          <p>Mengganti 6 kartu artikel statis HTML dari P-04 menjadi 1 blok perulangan dinamis Jinja2 <code>{% for item in artikel_list %}</code>, di mana tautan tombolnya dibuat otomatis menggunakan <code>url_for('blog_detail', post_id=item.id)</code>.</p>
+          <p>Mengganti 6 kartu statis dengan perulangan <code>{% for item in artikel_list %}</code> dan membuat link otomatis via <code>url_for('blog_detail', post_id=item.id)</code>.</p>
+          <div class="analogy-box">
+            <strong>🎭 Analoginya:</strong> Fungsi <code>url_for()</code> itu ibarat <strong>"Buku Kontak di HP"</strong>. Kamu simpan nomor temanmu dengan nama kontak *"Budi"*, bukan menghafal 12 digit nomornya setiap kali menelepon. Jika nomor HP Budi ganti (rute URL diubah), cukup ubah di satu tempat tanpa perlu merombak seluruh HP!
+          </div>
         </div>
 
         <div class="tut-item">
-          <span class="tut-header how"><i data-lucide="cpu"></i> 2. Kalau Pakai Ini Bakal Apa?</span>
-          <p>Berapa pun jumlah artikel di <code>app.py</code> (<code>data_blog</code>), template HTML otomatis menggandakan kartu artikel sejumlah data tersebut. Flask menyuntikkan ID artikel ke dalam URL, sehingga tombol artikel 1 punya link <code>/blog/1</code>, artikel 2 punya link <code>/blog/2</code>, dst.</p>
+          <span class="tut-header how"><i data-lucide="cpu"></i> 2. Pengaruhnya di Balik Layar:</span>
+          <p>Berapa pun jumlah data di <code>app.py</code>, template HTML otomatis menggandakan kartu artikel sejumlah data tersebut dan menyuntikkan ID artikel ke dalam URL tujuan.</p>
         </div>
 
         <div class="tut-item">
-          <span class="tut-header diff"><i data-lucide="scale"></i> 3. Bedanya Gimana?</span>
+          <span class="tut-header diff"><i data-lucide="scale"></i> 3. Kenapa Harus Gunakan Itu?</span>
           <div class="compare-grid">
             <div class="compare-box bad">
               <strong>❌ Link Manual (href="/blog/1")</strong>
-              Jika rute di backend diubah dari <code>/blog/</code> jadi <code>/artikel/</code>, Anda harus edit puluhan tag <code>&lt;a&gt;</code> manual satu per satu di file HTML.
+              Jika nama rute di backend diubah jadi <code>/artikel/</code>, Anda wajib mengedit puluhan tag <code>&lt;a&gt;</code> manual satu per satu di HTML.
             </div>
             <div class="compare-box good">
-              <strong>✅ url_for('blog_detail', post_id=item.id)</strong>
-              Jika nama rute di <code>app.py</code> diubah, seluruh link navigasi di template otomatis update tanpa ubah HTML! (Prinsip DRY).
+              <strong>✅ url_for('blog_detail', ...)</strong>
+              Prinsip DRY: Jika nama rute di <code>app.py</code> diganti, seluruh link di template otomatis menyesuaikan tanpa menyentuh HTML!
             </div>
           </div>
         </div>
@@ -1169,24 +1193,27 @@ def user_greeting(nama):
       <div class="pcard">
         <div class="tut-item" style="margin-top:0">
           <span class="tut-header why"><i data-lucide="lightbulb"></i> 1. Fungsinya Buat Apa?</span>
-          <p>Menyajikan satu template dinamis serbaguna (<code>templates/blog_detail.html</code>) yang mewarisi <code>base.html</code> untuk menampilkan konten artikel lengkap berdasarkan ID, dilengkapi proteksi kondisi <code>{% if artikel %}</code> dan <em>Empty State</em> ramah.</p>
+          <p>Satu template dinamis (<code>blog_detail.html</code>) yang mewarisi <code>base.html</code> untuk membaca artikel berdasarkan ID, diproteksi logika <code>{% if artikel %}</code>.</p>
+          <div class="analogy-box">
+            <strong>🎭 Analoginya:</strong> Template dinamis &amp; Empty State itu ibarat <strong>"Layar Mesin ATM"</strong>. Bank cuma bikin 1 desain layar untuk jutaan nasabah. Kalau kamu mengetik nomor rekening yang salah, ATM tidak akan meledak atau mati mendadak, tapi ramah menampilkan: <em>"Rekening Tidak Ditemukan"</em>.
+          </div>
         </div>
 
         <div class="tut-item">
-          <span class="tut-header how"><i data-lucide="cpu"></i> 2. Kalau Pakai Ini Bakal Apa?</span>
-          <p>Ketika artikel ditemukan di <code>data_blog</code>, Jinja me-render judul, tanggal, kategori, dan isi artikel. Namun jika user mengetik ID artikel yang tidak ada (misal <code>/blog/999</code>), blok <code>{% else %}</code> otomatis menyajikan kartu peringatan ramah tanpa membuat server panik.</p>
+          <span class="tut-header how"><i data-lucide="cpu"></i> 2. Pengaruhnya di Balik Layar:</span>
+          <p>Jika ID cocok, Jinja menampilkan judul dan konten artikel. Jika ID tidak ada di database (misal <code>/blog/999</code>), blok <code>{% else %}</code> menampilkan pesan ramah tanpa error.</p>
         </div>
 
         <div class="tut-item">
-          <span class="tut-header diff"><i data-lucide="scale"></i> 3. Bedanya Gimana?</span>
+          <span class="tut-header diff"><i data-lucide="scale"></i> 3. Kenapa Harus Gunakan Itu?</span>
           <div class="compare-grid">
             <div class="compare-box bad">
               <strong>❌ Tanpa {% if artikel %}</strong>
-              Jinja mencoba baca <code>artikel.judul</code> dari variabel <code>None</code>. Web langsung crash total: <em>UndefinedError: 'None' has no attribute 'judul'</em>.
+              Jinja mencari atribut pada data <code>None</code>. Web langsung crash: <em>UndefinedError: 'None' has no attribute</em>.
             </div>
             <div class="compare-box good">
               <strong>✅ Dengan Proteksi &amp; Empty State</strong>
-              Tampilan ramah pengguna (UX Modern), web tetap utuh, dan pengunjung dipandu kembali ke daftar artikel via tombol navigasi.
+              Tampilan profesional (UX modern), web tetap utuh, dan user dipandu tombol kembali ke daftar artikel.
             </div>
           </div>
         </div>
@@ -1317,24 +1344,27 @@ def user_greeting(nama):
       <div class="pcard">
         <div class="tut-item" style="margin-top:0">
           <span class="tut-header why"><i data-lucide="lightbulb"></i> 1. Fungsinya Buat Apa?</span>
-          <p>Mengonfigurasi formulir di <code>templates/contact.html</code> agar mengirim data secara aman menggunakan protokol <strong>HTTP POST</strong>, serta menyematkan atribut <code>name</code> dan <code>required</code> pada setiap elemen form.</p>
+          <p>Mengonfigurasi formulir di <code>contact.html</code> agar mengirim data via <strong>HTTP POST</strong>, serta menyematkan atribut <code>name</code> dan <code>required</code>.</p>
+          <div class="analogy-box">
+            <strong>🎭 Analoginya:</strong> GET vs POST itu persis seperti <strong>"Kartu Pos Terbuka vs Surat dalam Amplop Tertutup"</strong>. Kartu pos (<code>GET</code>) isinya dibaca semua orang di URL bar! Sedangkan amplop tertutup (<code>POST</code>) menyembunyikan pesan di badan surat (Request Body).
+          </div>
         </div>
 
         <div class="tut-item">
-          <span class="tut-header how"><i data-lucide="cpu"></i> 2. Kalau Pakai Ini Bakal Apa?</span>
-          <p>Ketika tombol submit diklik, browser membungkus teks form ke dalam <em>Request Body</em> tertutup (tidak tampil di URL) dan mengirimkannya ke endpoint <code>{{ url_for('contact') }}</code>. Atribut <code>required</code> mencegah form terkirim kosong.</p>
+          <span class="tut-header how"><i data-lucide="cpu"></i> 2. Pengaruhnya di Balik Layar:</span>
+          <p>Browser membungkus teks form ke dalam <em>Request Body</em> tertutup dan mengirimkannya ke endpoint <code>{{ url_for('contact') }}</code>. Flask menggunakan atribut <code>name</code> untuk mengekstrak datanya.</p>
         </div>
 
         <div class="tut-item">
-          <span class="tut-header diff"><i data-lucide="scale"></i> 3. Bedanya Gimana?</span>
+          <span class="tut-header diff"><i data-lucide="scale"></i> 3. Kenapa Harus Gunakan Itu?</span>
           <div class="compare-grid">
             <div class="compare-box bad">
               <strong>❌ Form Method GET</strong>
-              Data pribadi terpampang telanjang di address bar URL: <code>/contact?name=Budi&amp;email=...</code> (sangat tidak aman!).
+              Data pribadi terpampang telanjang di address bar URL: <code>/contact?name=Budi&amp;email=...</code>.
             </div>
             <div class="compare-box good">
               <strong>✅ Form Method POST</strong>
-              URL tetap bersih <code>/contact</code>, data tertutup amplop. <em>Catatan penting:</em> Flask <strong>hanya bisa</strong> membaca input jika memiliki atribut <code>name</code>!
+              URL bersih <code>/contact</code>, data aman. <em>Ingat:</em> Tanpa atribut <code>name</code>, Flask menganggap nilainya <code>None</code>!
             </div>
           </div>
         </div>
@@ -1397,24 +1427,27 @@ def user_greeting(nama):
       <div class="pcard">
         <div class="tut-item" style="margin-top:0">
           <span class="tut-header why"><i data-lucide="lightbulb"></i> 1. Fungsinya Buat Apa?</span>
-          <p>Memperbarui rute <code>contact()</code> di <code>app.py</code> agar menerima method <code>POST</code>, mengekstrak data input via <code>request.form.get()</code>, memvalidasi isian, dan menerapkan arsitektur <strong>Post/Redirect/Get (PRG)</strong>.</p>
+          <p>Memperbarui rute <code>contact()</code> di <code>app.py</code> agar menangkap input POST, memvalidasi form, dan menerapkan pola <strong>Post/Redirect/Get (PRG)</strong>.</p>
+          <div class="analogy-box">
+            <strong>🎭 Analoginya:</strong> Pola PRG itu ibarat <strong>"Kasir Bioskop yang Memberi Tiket lalu Menyuruhmu Pindah ke Pintu Teater"</strong>. Setelah uang diterima (POST), kamu disuruh melangkah ke pintu masuk (Redirect ke GET). Jadi kalau kamu bingung menoleh ke belakang (tekan tombol Refresh/F5), uangmu tidak terpotong dua kali!
+          </div>
         </div>
 
         <div class="tut-item">
-          <span class="tut-header how"><i data-lucide="cpu"></i> 2. Kalau Pakai Ini Bakal Apa?</span>
-          <p>Setelah selesai memproses data form dan menyiapkan Flash message, Flask mengirimkan respons HTTP status <code>302 Found</code> yang memerintahkan browser untuk redirect (GET) kembali ke rute <code>/contact</code>.</p>
+          <span class="tut-header how"><i data-lucide="cpu"></i> 2. Pengaruhnya di Balik Layar:</span>
+          <p>Setelah memproses data dan membuat flash message, Flask mengirim status HTTP <code>302 Found</code> yang memerintahkan browser redirect (GET) kembali ke rute <code>/contact</code>.</p>
         </div>
 
         <div class="tut-item">
-          <span class="tut-header diff"><i data-lucide="scale"></i> 3. Bedanya Gimana?</span>
+          <span class="tut-header diff"><i data-lucide="scale"></i> 3. Kenapa Harus Gunakan Itu?</span>
           <div class="compare-grid">
             <div class="compare-box bad">
               <strong>❌ Langsung render_template()</strong>
-              Saat user tekan refresh (F5), browser memunculkan popup mengganggu: <em>"Confirm Form Resubmission"</em> dan data terkirim dobel!
+              Saat user tekan F5, muncul popup mengganggu: <em>"Confirm Form Resubmission"</em> dan data terkirim dobel!
             </div>
             <div class="compare-box good">
               <strong>✅ Pola PRG (redirect)</strong>
-              URL kembali ke GET bersih. Tekan F5 berkali-kali pun aman, tidak akan pernah ada pengiriman pesan duplikat.
+              URL kembali ke GET bersih. Tekan F5 berkali-kali pun aman, tidak akan pernah ada duplikasi transaksi.
             </div>
           </div>
         </div>
@@ -1475,16 +1508,19 @@ def contact():
       <div class="pcard">
         <div class="tut-item" style="margin-top:0">
           <span class="tut-header why"><i data-lucide="lightbulb"></i> 1. Fungsinya Buat Apa?</span>
-          <p>Memasang komponen penampung notifikasi universal (*Global Alert Container*) di layout induk <code>templates/base.html</code> menggunakan fungsi bawaan Jinja2 <code>get_flashed_messages(with_categories=true)</code>.</p>
+          <p>Memasang wadah notifikasi global di <code>base.html</code> via <code>get_flashed_messages(with_categories=true)</code>.</p>
+          <div class="analogy-box">
+            <strong>🎭 Analoginya:</strong> Flash message di <code>base.html</code> itu ibarat <strong>"Papan Reklame LED di Gerbang Utama Kampus"</strong>. Kampus tidak perlu memasang speaker di tiap kelas satu per satu. Pasang 1 papan di gerbang utama, semua mahasiswa melihat pengumuman yang sama, dan langsung terhapus setelah dibaca!
+          </div>
         </div>
 
         <div class="tut-item">
-          <span class="tut-header how"><i data-lucide="cpu"></i> 2. Kalau Pakai Ini Bakal Apa?</span>
-          <p>Setiap kali fungsi <code>flash('pesan', 'kategori')</code> dipanggil di backend (dari rute mana pun), Jinja mengambil pesan dari session cookie dan merendernya sebagai alert melayang. Pesan <strong>otomatis terhapus dari session</strong> sehingga hilang saat halaman di-refresh.</p>
+          <span class="tut-header how"><i data-lucide="cpu"></i> 2. Pengaruhnya di Balik Layar:</span>
+          <p>Jinja mengambil pesan dari session cookie, merendernya sebagai alert melayang sesuai warna kategori, lalu <strong>otomatis menghapus pesan dari session</strong>.</p>
         </div>
 
         <div class="tut-item">
-          <span class="tut-header diff"><i data-lucide="scale"></i> 3. Bedanya Gimana?</span>
+          <span class="tut-header diff"><i data-lucide="scale"></i> 3. Kenapa Harus Gunakan Itu?</span>
           <div class="compare-grid">
             <div class="compare-box bad">
               <strong>❌ Manual per Halaman</strong>
@@ -1551,24 +1587,27 @@ def contact():
       <div class="pcard">
         <div class="tut-item" style="margin-top:0">
           <span class="tut-header why"><i data-lucide="lightbulb"></i> 1. Fungsinya Buat Apa?</span>
-          <p>Menerapkan seluruh materi pertemuan 5 (Dynamic Routing, HTTP POST, Form Handling, &amp; Flash Messages berkategori) ke dalam fitur autentikasi login pengguna (<code>/login</code>).</p>
+          <p>Menerapkan seluruh konsep P-05 (Dynamic Routing, POST, Form Handling, &amp; Flash Categories) ke dalam fitur login autentikasi pengguna (<code>/login</code>).</p>
+          <div class="analogy-box">
+            <strong>🎭 Analoginya:</strong> Flash Categories itu ibarat <strong>"Lampu Indikator Pintu Akses RFID"</strong>. Tempelkan kartu dan ketik PIN: jika benar, <strong>lampu hijau menyala ramah</strong> dan pintu terbuka (<code>success</code>); jika salah, <strong>lampu merah berbunyi tegas</strong> melarang masuk (<code>danger</code>).
+          </div>
         </div>
 
         <div class="tut-item">
-          <span class="tut-header how"><i data-lucide="cpu"></i> 2. Kalau Pakai Ini Bakal Apa?</span>
-          <p>Backend <code>app.py</code> memeriksa input username dan password. Jika kredensial <code>admin</code> / <code>12345</code> cocok, sistem memicu notifikasi <code>'success'</code> dan redirect ke beranda. Jika salah, sistem memicu notifikasi <code>'danger'</code> dan tetap di form login.</p>
+          <span class="tut-header how"><i data-lucide="cpu"></i> 2. Pengaruhnya di Balik Layar:</span>
+          <p>Backend memeriksa <code>admin</code> / <code>12345</code>. Status <code>'success'</code> memicu redirect ke home; status <code>'danger'</code> menampilkan alert merah di halaman login.</p>
         </div>
 
         <div class="tut-item">
-          <span class="tut-header diff"><i data-lucide="scale"></i> 3. Bedanya Gimana?</span>
+          <span class="tut-header diff"><i data-lucide="scale"></i> 3. Kenapa Harus Gunakan Itu?</span>
           <div class="compare-grid">
             <div class="compare-box bad">
-              <strong>❌ Alert Polos / Teks Statis</strong>
-              Pengguna bingung apakah status aksi berhasil atau gagal karena tidak ada indikator visual status yang jelas.
+              <strong>❌ Alert Polos</strong>
+              User bingung status aksi karena tidak ada pembeda warna visual.
             </div>
             <div class="compare-box good">
-              <strong>✅ Flash Categories (success vs danger)</strong>
-              Visual feedback instan! Kotak hijau untuk login sukses, kotak merah tegas untuk password salah.
+              <strong>✅ Flash Categories</strong>
+              Feedback instan: Hijau untuk sukses, merah tegas untuk eror.
             </div>
           </div>
         </div>
