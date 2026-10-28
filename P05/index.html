@@ -268,6 +268,54 @@ h2{
   font-weight:600;color:#0F172A;
 }
 
+/* TUTORIAL CARD & COMPARISON STYLES (3 PILAR EDUKASI) */
+.tut-item {
+  margin-top: 12px;
+}
+.tut-header {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font: 700 11px/1 var(--mono);
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  padding: 4px 8px;
+  border-radius: 4px;
+  margin-bottom: 6px;
+}
+.tut-header.why { background: rgba(2, 132, 199, 0.12); color: var(--accent); }
+.tut-header.how { background: rgba(124, 58, 237, 0.12); color: #7C3AED; }
+.tut-header.diff { background: rgba(217, 119, 6, 0.12); color: #B45309; }
+
+.compare-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 6px;
+}
+.compare-box {
+  padding: 8px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  line-height: 1.45;
+}
+.compare-box.bad {
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  color: #991B1B;
+}
+.compare-box.good {
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  color: #065F46;
+}
+.compare-box strong {
+  display: block;
+  font-family: var(--mono);
+  font-size: 11px;
+  margin-bottom: 3px;
+}
+
 /* TITLE SLIDE */
 .title-slide{
   align-items:center;
@@ -873,10 +921,36 @@ code .</code></pre>
       <span class="guide-tag loc"><i data-lucide="terminal"></i> Baris 1-7 (Paling Atas)</span>
       <span class="guide-tag act"><i data-lucide="edit"></i> Edit Baris 1 &amp; Sisipkan secret_key</span>
     </div>
-    <div class="cols c1-2 slide-body">
+    <div class="cols c2 slide-body">
+      <!-- KOLOM KIRI: TUTORIAL KONSEPTUAL -->
       <div class="pcard">
-        <h3>Kenapa Butuh Secret Key?</h3>
-        <p style="margin-bottom:14px">Flash Message disimpan dalam <strong>Session Cookie</strong> di browser. Secret key digunakan oleh Flask sebagai tanda tangan kriptografi (signing) agar isi cookie aman dari manipulasi.</p>
+        <div class="tut-item" style="margin-top:0">
+          <span class="tut-header why"><i data-lucide="lightbulb"></i> 1. Fungsinya Buat Apa?</span>
+          <p>Kita mengimpor 4 senjata baru Flask: <code>request</code> (menangkap input form/URL), <code>redirect</code> (mengalihkan rute), <code>url_for</code> (membuat link otomatis), dan <code>flash</code> (notifikasi pop-up). Kita juga memasang <code>secret_key</code> sebagai kunci pengaman session.</p>
+        </div>
+
+        <div class="tut-item">
+          <span class="tut-header how"><i data-lucide="cpu"></i> 2. Kalau Pakai Ini Bakal Apa?</span>
+          <p>Flask menggunakan <code>secret_key</code> untuk menandatangani secara kriptografi (*signing*) cookie session di browser user. Pesan <code>flash()</code> yang kita kirim akan tersimpan aman dan tidak bisa dimanipulasi dari Inspect Element.</p>
+        </div>
+
+        <div class="tut-item">
+          <span class="tut-header diff"><i data-lucide="scale"></i> 3. Bedanya Gimana?</span>
+          <div class="compare-grid">
+            <div class="compare-box bad">
+              <strong>❌ Tanpa secret_key</strong>
+              Memanggil <code>flash()</code> langsung bikin web crash: <em>RuntimeError: The session is unavailable because no secret key was set</em>.
+            </div>
+            <div class="compare-box good">
+              <strong>✅ Dengan secret_key</strong>
+              Fitur Flash Message &amp; Session aktif 100%, siap menampilkan alert hijau/merah secara aman!
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- KOLOM KANAN: KODINGAN & VERIFIKASI -->
+      <div>
         <div class="cbox">
           <div class="cbox-head">
             <span class="cbox-title">app.py</span>
@@ -900,15 +974,15 @@ app.secret_key = 'kunci-rahasia-portofolio-faiz'
         <div class="check-result-box">
           <i data-lucide="check-circle-2"></i>
           <div>
-            <strong>Cara Cek Hasil:</strong> Simpan file (<code>Ctrl+S</code>). Terminal Flask Anda tidak boleh menampilkan error, dan server otomatis me-reload di background!
+            <strong>Cara Cek Hasil:</strong> Simpan file (<code>Ctrl+S</code>). Terminal Flask Anda tidak boleh menampilkan error, dan server otomatis reload di background!
           </div>
         </div>
-      </div>
-      <div class="shotcard" data-shot="vscode-p05-step-01-app-imports.png">
-        <img src="img/vscode-p05-step-01-app-imports.png" alt="VS Code Imports & Secret Key">
-        <div class="shotcard-bar">
-          <span class="shotcard-title">app.py &bull; Baris 1-7</span>
-          <span class="shotcard-hint"><i data-lucide="zoom-in"></i> Zoom</span>
+        <div class="shotcard" data-shot="vscode-p05-step-01-app-imports.png" style="margin-top:12px">
+          <img src="img/vscode-p05-step-01-app-imports.png" alt="VS Code Imports & Secret Key">
+          <div class="shotcard-bar">
+            <span class="shotcard-title">app.py &bull; Baris 1-7</span>
+            <span class="shotcard-hint"><i data-lucide="zoom-in"></i> Zoom</span>
+          </div>
         </div>
       </div>
     </div>
@@ -926,10 +1000,36 @@ app.secret_key = 'kunci-rahasia-portofolio-faiz'
       <span class="guide-tag loc"><i data-lucide="terminal"></i> Bawah skills &amp; Bawah rute lama</span>
       <span class="guide-tag act"><i data-lucide="code"></i> Tambah data_blog &amp; Rute Dinamis</span>
     </div>
-    <div class="cols c1-2 slide-body">
+    <div class="cols c2 slide-body">
+      <!-- KOLOM KIRI: TUTORIAL KONSEPTUAL -->
       <div class="pcard">
-        <h3>Alur Data Blog ke Rute Dinamis</h3>
-        <p style="margin-bottom:14px">Agar rute dinamis bisa mencari artikel berdasarkan ID, kita siapkan list <code>data_blog</code>, lalu rute <code>/blog/&lt;int:post_id&gt;</code> akan menyaringnya:</p>
+        <div class="tut-item" style="margin-top:0">
+          <span class="tut-header why"><i data-lucide="lightbulb"></i> 1. Fungsinya Buat Apa?</span>
+          <p>Membuat basis data tiruan <code>data_blog</code> (List of Dict), lalu memasang rute dinamis <code>&lt;int:post_id&gt;</code> dan <code>&lt;nama&gt;</code>. Fungsi <code>next()</code> bertugas mencari satu artikel yang memiliki ID cocok.</p>
+        </div>
+
+        <div class="tut-item">
+          <span class="tut-header how"><i data-lucide="cpu"></i> 2. Kalau Pakai Ini Bakal Apa?</span>
+          <p>Flask bertindak sebagai URL parser otomatis. Begitu browser meminta <code>/blog/2</code>, Flask mengubah angka <code>2</code> jadi integer Python, menyalurkannya ke parameter fungsi <code>blog_detail(post_id=2)</code>, lalu melempar data artikel ke template.</p>
+        </div>
+
+        <div class="tut-item">
+          <span class="tut-header diff"><i data-lucide="scale"></i> 3. Bedanya Gimana?</span>
+          <div class="compare-grid">
+            <div class="compare-box bad">
+              <strong>❌ Routing Statis</strong>
+              Harus membuat 100 fungsi manual untuk 100 artikel (<code>@app.route('/blog1')</code>, <code>/blog2</code>... melelahkan!).
+            </div>
+            <div class="compare-box good">
+              <strong>✅ Routing Dinamis</strong>
+              Cukup 1 fungsi untuk jutaan artikel! Converter <code>&lt;int:&gt;</code> otomatis menolak huruf/teks dengan status 404.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- KOLOM KANAN: KODINGAN & VERIFIKASI -->
+      <div>
         <div class="cbox">
           <div class="cbox-head">
             <span class="cbox-title">app.py</span>
@@ -963,12 +1063,12 @@ def user_greeting(nama):
             <strong>Cara Cek Hasil:</strong> Buka <code>http://127.0.0.1:5000/user/Faiz</code> di browser &rarr; Muncul salam <em>"Halo, Faiz!"</em> yang nilainya ditangkap dinamis langsung dari URL!
           </div>
         </div>
-      </div>
-      <div class="shotcard" data-shot="vscode-p05-step-02-dynamic-routes.png">
-        <img src="img/vscode-p05-step-02-dynamic-routes.png" alt="VS Code Dynamic Routes">
-        <div class="shotcard-bar">
-          <span class="shotcard-title">app.py &bull; Dynamic Routes</span>
-          <span class="shotcard-hint"><i data-lucide="zoom-in"></i> Zoom</span>
+        <div class="shotcard" data-shot="vscode-p05-step-02-dynamic-routes.png" style="margin-top:12px">
+          <img src="img/vscode-p05-step-02-dynamic-routes.png" alt="VS Code Dynamic Routes">
+          <div class="shotcard-bar">
+            <span class="shotcard-title">app.py &bull; Dynamic Routes</span>
+            <span class="shotcard-hint"><i data-lucide="zoom-in"></i> Zoom</span>
+          </div>
         </div>
       </div>
     </div>
@@ -987,29 +1087,35 @@ def user_greeting(nama):
       <span class="guide-tag act"><i data-lucide="code"></i> Ganti 6 Kartu Statis dengan Loop Jinja</span>
     </div>
     <div class="cols c2 slide-body">
+      <!-- KOLOM KIRI: TUTORIAL KONSEPTUAL -->
       <div class="pcard">
-        <h3>🔗 Jembatan: url_for() dengan Parameter</h3>
-        <p style="margin-bottom:12px">Jangan tulis URL manual! Flask menyediakan fungsi cerdas <code>url_for()</code> untuk mengisi parameter URL otomatis:</p>
-        
-        <div style="background:#FFFFFF;border:1.5px solid #E2E8F0;border-radius:var(--rad-sm);padding:14px;margin-bottom:14px;font-size:13px;line-height:1.6">
-          <div style="font-weight:700;color:var(--accent);margin-bottom:6px;font-family:var(--mono);font-size:11.5px">RUMUS URL DINAMIS FLASK:</div>
-          <code style="background:var(--accent-light);color:var(--accent);padding:4px 8px;border-radius:4px;font-weight:600;font-size:12.5px;display:inline-block">url_for('nama_fungsi', nama_param=nilai)</code>
-          <div style="margin-top:10px;display:grid;gap:6px;color:var(--dim)">
-            <div>👉 <code>'blog_detail'</code> = nama fungsi rute di <code>app.py</code></div>
-            <div>👉 <code>post_id=item.id</code> = disuntikkan ke <code>&lt;int:post_id&gt;</code></div>
-            <div>👉 <strong>Hasil Nyata</strong> = <code>/blog/1</code>, <code>/blog/2</code>, dst.</div>
-          </div>
+        <div class="tut-item" style="margin-top:0">
+          <span class="tut-header why"><i data-lucide="lightbulb"></i> 1. Fungsinya Buat Apa?</span>
+          <p>Mengganti 6 kartu artikel statis HTML dari P-04 menjadi 1 blok perulangan dinamis Jinja2 <code>{% for item in artikel_list %}</code>, di mana tautan tombolnya dibuat otomatis menggunakan <code>url_for('blog_detail', post_id=item.id)</code>.</p>
         </div>
 
-        <div style="display:flex;gap:10px;font-size:12px;background:rgba(2,132,199,0.06);border:1px solid var(--accent-border);padding:10px 12px;border-radius:var(--rad-sm)">
-          <i data-lucide="sparkles" style="color:var(--accent);flex:none;width:18px;height:18px"></i>
-          <div><strong>Keunggulan DRY:</strong> Jika rute di <code>app.py</code> diubah dari <code>/blog/</code> jadi <code>/artikel/</code>, seluruh link di website otomatis update tanpa edit HTML manual!</div>
+        <div class="tut-item">
+          <span class="tut-header how"><i data-lucide="cpu"></i> 2. Kalau Pakai Ini Bakal Apa?</span>
+          <p>Berapa pun jumlah artikel di <code>app.py</code> (<code>data_blog</code>), template HTML otomatis menggandakan kartu artikel sejumlah data tersebut. Flask menyuntikkan ID artikel ke dalam URL, sehingga tombol artikel 1 punya link <code>/blog/1</code>, artikel 2 punya link <code>/blog/2</code>, dst.</p>
+        </div>
+
+        <div class="tut-item">
+          <span class="tut-header diff"><i data-lucide="scale"></i> 3. Bedanya Gimana?</span>
+          <div class="compare-grid">
+            <div class="compare-box bad">
+              <strong>❌ Link Manual (href="/blog/1")</strong>
+              Jika rute di backend diubah dari <code>/blog/</code> jadi <code>/artikel/</code>, Anda harus edit puluhan tag <code>&lt;a&gt;</code> manual satu per satu di file HTML.
+            </div>
+            <div class="compare-box good">
+              <strong>✅ url_for('blog_detail', post_id=item.id)</strong>
+              Jika nama rute di <code>app.py</code> diubah, seluruh link navigasi di template otomatis update tanpa ubah HTML! (Prinsip DRY).
+            </div>
+          </div>
         </div>
       </div>
 
-      <div class="pcard">
-        <h3>templates/blog.html</h3>
-        <p style="margin-bottom:12px">Ganti 6 kartu statis lama dengan 1 loop Jinja &amp; <code>url_for()</code>:</p>
+      <!-- KOLOM KANAN: KODINGAN & VERIFIKASI -->
+      <div>
         <div class="cbox">
           <div class="cbox-head">
             <span class="cbox-title">templates/blog.html</span>
@@ -1032,7 +1138,14 @@ def user_greeting(nama):
         <div class="check-result-box">
           <i data-lucide="check-circle-2"></i>
           <div>
-            <strong>Cara Cek Hasil:</strong> Refresh halaman <code>http://127.0.0.1:5000/blog</code>. Arahkan mouse ke tombol artikel &rarr; URL di pojok kiri bawah browser sekarang mengarah ke <code>/blog/1</code>, <code>/blog/2</code>, dan <code>/blog/3</code>!
+            <strong>Cara Cek Hasil:</strong> Simpan file &amp; refresh <code>http://127.0.0.1:5000/blog</code>. Arahkan mouse ke tombol artikel &rarr; URL di pojok kiri bawah browser sekarang mengarah dinamis ke <code>/blog/1</code>, <code>/blog/2</code>, dan <code>/blog/3</code>!
+          </div>
+        </div>
+        <div class="shotcard" data-shot="render-p05-blog.png" style="margin-top:12px">
+          <img src="img/render-p05-blog.png" alt="Render Halaman Blog">
+          <div class="shotcard-bar">
+            <span class="shotcard-title">Tampilan Browser /blog</span>
+            <span class="shotcard-hint"><i data-lucide="zoom-in"></i> Zoom</span>
           </div>
         </div>
       </div>
@@ -1051,10 +1164,36 @@ def user_greeting(nama):
       <span class="guide-tag loc"><i data-lucide="folder"></i> Folder templates/</span>
       <span class="guide-tag act" style="background:rgba(217,119,6,0.12);color:#B45309;border-color:rgba(217,119,6,0.25)"><i data-lucide="sparkles"></i> Buat File Baru</span>
     </div>
-    <div class="cols c1-2 slide-body">
+    <div class="cols c2 slide-body">
+      <!-- KOLOM KIRI: TUTORIAL KONSEPTUAL -->
       <div class="pcard">
-        <h3>Proteksi Kondisi {% if artikel %}</h3>
-        <p style="margin-bottom:14px">Jika ID artikel tidak ada di database, tampilkan pesan ramah (*Empty State*) alih-alih layar blank putih:</p>
+        <div class="tut-item" style="margin-top:0">
+          <span class="tut-header why"><i data-lucide="lightbulb"></i> 1. Fungsinya Buat Apa?</span>
+          <p>Menyajikan satu template dinamis serbaguna (<code>templates/blog_detail.html</code>) yang mewarisi <code>base.html</code> untuk menampilkan konten artikel lengkap berdasarkan ID, dilengkapi proteksi kondisi <code>{% if artikel %}</code> dan <em>Empty State</em> ramah.</p>
+        </div>
+
+        <div class="tut-item">
+          <span class="tut-header how"><i data-lucide="cpu"></i> 2. Kalau Pakai Ini Bakal Apa?</span>
+          <p>Ketika artikel ditemukan di <code>data_blog</code>, Jinja me-render judul, tanggal, kategori, dan isi artikel. Namun jika user mengetik ID artikel yang tidak ada (misal <code>/blog/999</code>), blok <code>{% else %}</code> otomatis menyajikan kartu peringatan ramah tanpa membuat server panik.</p>
+        </div>
+
+        <div class="tut-item">
+          <span class="tut-header diff"><i data-lucide="scale"></i> 3. Bedanya Gimana?</span>
+          <div class="compare-grid">
+            <div class="compare-box bad">
+              <strong>❌ Tanpa {% if artikel %}</strong>
+              Jinja mencoba baca <code>artikel.judul</code> dari variabel <code>None</code>. Web langsung crash total: <em>UndefinedError: 'None' has no attribute 'judul'</em>.
+            </div>
+            <div class="compare-box good">
+              <strong>✅ Dengan Proteksi &amp; Empty State</strong>
+              Tampilan ramah pengguna (UX Modern), web tetap utuh, dan pengunjung dipandu kembali ke daftar artikel via tombol navigasi.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- KOLOM KANAN: KODINGAN & VERIFIKASI -->
+      <div>
         <div class="cbox">
           <div class="cbox-head">
             <span class="cbox-title">templates/blog_detail.html</span>
@@ -1067,7 +1206,7 @@ def user_greeting(nama):
 {% block content %}
 &lt;section class="section"&gt;
     &lt;div class="article-container"&gt;
-        &lt;a href="{{ url_for('blog') }}" class="back-link"&gt;&amp;larr; Kembali&lt;/a&gt;
+        &lt;a href="{{ url_for('blog') }}" class="back-link"&gt;&amp;larr; Kembali ke Semua Artikel&lt;/a&gt;
         {% if artikel %}
             &lt;article class="article-content"&gt;
                 &lt;div class="article-meta"&gt;
@@ -1095,12 +1234,12 @@ def user_greeting(nama):
             <div>2. Buka <code>http://127.0.0.1:5000/blog/999</code> &rarr; Tampil kotak ramah <em>"Artikel Tidak Ditemukan"</em>!</div>
           </div>
         </div>
-      </div>
-      <div class="shotcard" data-shot="render-p05-blog-detail.png">
-        <img src="img/render-p05-blog-detail.png" alt="Render Blog Detail">
-        <div class="shotcard-bar">
-          <span class="shotcard-title">Tampilan Browser /blog/1</span>
-          <span class="shotcard-hint"><i data-lucide="zoom-in"></i> Zoom</span>
+        <div class="shotcard" data-shot="render-p05-blog-detail.png" style="margin-top:12px">
+          <img src="img/render-p05-blog-detail.png" alt="Render Blog Detail">
+          <div class="shotcard-bar">
+            <span class="shotcard-title">Tampilan Browser /blog/1</span>
+            <span class="shotcard-hint"><i data-lucide="zoom-in"></i> Zoom</span>
+          </div>
         </div>
       </div>
     </div>
@@ -1173,10 +1312,36 @@ def user_greeting(nama):
       <span class="guide-tag loc"><i data-lucide="terminal"></i> Tag &lt;form&gt; &amp; &lt;input&gt;</span>
       <span class="guide-tag act"><i data-lucide="code"></i> Pasang method="POST" &amp; Atribut name</span>
     </div>
-    <div class="cols c1-2 slide-body">
+    <div class="cols c2 slide-body">
+      <!-- KOLOM KIRI: TUTORIAL KONSEPTUAL -->
       <div class="pcard">
-        <h3>Jebakan Terbesar Pemula: Atribut Name!</h3>
-        <p style="margin-bottom:14px">Flask <strong>TIDAK BISA</strong> membaca input jika Anda hanya memberi atribut <code>id</code>. Flask wajib membaca nilai via <code>name="..."</code>:</p>
+        <div class="tut-item" style="margin-top:0">
+          <span class="tut-header why"><i data-lucide="lightbulb"></i> 1. Fungsinya Buat Apa?</span>
+          <p>Mengonfigurasi formulir di <code>templates/contact.html</code> agar mengirim data secara aman menggunakan protokol <strong>HTTP POST</strong>, serta menyematkan atribut <code>name</code> dan <code>required</code> pada setiap elemen form.</p>
+        </div>
+
+        <div class="tut-item">
+          <span class="tut-header how"><i data-lucide="cpu"></i> 2. Kalau Pakai Ini Bakal Apa?</span>
+          <p>Ketika tombol submit diklik, browser membungkus teks form ke dalam <em>Request Body</em> tertutup (tidak tampil di URL) dan mengirimkannya ke endpoint <code>{{ url_for('contact') }}</code>. Atribut <code>required</code> mencegah form terkirim kosong.</p>
+        </div>
+
+        <div class="tut-item">
+          <span class="tut-header diff"><i data-lucide="scale"></i> 3. Bedanya Gimana?</span>
+          <div class="compare-grid">
+            <div class="compare-box bad">
+              <strong>❌ Form Method GET</strong>
+              Data pribadi terpampang telanjang di address bar URL: <code>/contact?name=Budi&amp;email=...</code> (sangat tidak aman!).
+            </div>
+            <div class="compare-box good">
+              <strong>✅ Form Method POST</strong>
+              URL tetap bersih <code>/contact</code>, data tertutup amplop. <em>Catatan penting:</em> Flask <strong>hanya bisa</strong> membaca input jika memiliki atribut <code>name</code>!
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- KOLOM KANAN: KODINGAN & VERIFIKASI -->
+      <div>
         <div class="cbox">
           <div class="cbox-head">
             <span class="cbox-title">templates/contact.html</span>
@@ -1201,15 +1366,15 @@ def user_greeting(nama):
         <div class="check-result-box">
           <i data-lucide="check-circle-2"></i>
           <div>
-            <strong>Cara Cek Hasil:</strong> Buka <code>http://127.0.0.1:5000/contact</code> di browser. Buka Inspect Element (F12) &rarr; pastikan tag form memiliki atribut <code>method="POST"</code>!
+            <strong>Cara Cek Hasil:</strong> Buka <code>http://127.0.0.1:5000/contact</code> di browser. Buka Inspect Element (F12) &rarr; pastikan tag form memiliki atribut <code>method="POST"</code> dan setiap input memiliki atribut <code>name</code>!
           </div>
         </div>
-      </div>
-      <div class="shotcard" data-shot="vscode-p05-step-04-contact-post.png">
-        <img src="img/vscode-p05-step-04-contact-post.png" alt="VS Code contact.html">
-        <div class="shotcard-bar">
-          <span class="shotcard-title">contact.html &bull; Form POST</span>
-          <span class="shotcard-hint"><i data-lucide="zoom-in"></i> Zoom</span>
+        <div class="shotcard" data-shot="vscode-p05-step-04-contact-post.png" style="margin-top:12px">
+          <img src="img/vscode-p05-step-04-contact-post.png" alt="VS Code contact.html">
+          <div class="shotcard-bar">
+            <span class="shotcard-title">contact.html &bull; Form POST</span>
+            <span class="shotcard-hint"><i data-lucide="zoom-in"></i> Zoom</span>
+          </div>
         </div>
       </div>
     </div>
@@ -1227,10 +1392,36 @@ def user_greeting(nama):
       <span class="guide-tag loc"><i data-lucide="terminal"></i> Fungsi def contact() (dari P-04)</span>
       <span class="guide-tag act"><i data-lucide="edit"></i> Modifikasi def contact() Lama</span>
     </div>
-    <div class="cols c1-2 slide-body">
+    <div class="cols c2 slide-body">
+      <!-- KOLOM KIRI: TUTORIAL KONSEPTUAL -->
       <div class="pcard">
-        <h3>Kenapa Wajib Redirect Setelah POST?</h3>
-        <p style="margin-bottom:14px">Jika me-render template langsung dari POST, saat user menekan refresh (F5), browser akan memunculkan popup *"Confirm Form Resubmission"*. Pola PRG mencegahnya!</p>
+        <div class="tut-item" style="margin-top:0">
+          <span class="tut-header why"><i data-lucide="lightbulb"></i> 1. Fungsinya Buat Apa?</span>
+          <p>Memperbarui rute <code>contact()</code> di <code>app.py</code> agar menerima method <code>POST</code>, mengekstrak data input via <code>request.form.get()</code>, memvalidasi isian, dan menerapkan arsitektur <strong>Post/Redirect/Get (PRG)</strong>.</p>
+        </div>
+
+        <div class="tut-item">
+          <span class="tut-header how"><i data-lucide="cpu"></i> 2. Kalau Pakai Ini Bakal Apa?</span>
+          <p>Setelah selesai memproses data form dan menyiapkan Flash message, Flask mengirimkan respons HTTP status <code>302 Found</code> yang memerintahkan browser untuk redirect (GET) kembali ke rute <code>/contact</code>.</p>
+        </div>
+
+        <div class="tut-item">
+          <span class="tut-header diff"><i data-lucide="scale"></i> 3. Bedanya Gimana?</span>
+          <div class="compare-grid">
+            <div class="compare-box bad">
+              <strong>❌ Langsung render_template()</strong>
+              Saat user tekan refresh (F5), browser memunculkan popup mengganggu: <em>"Confirm Form Resubmission"</em> dan data terkirim dobel!
+            </div>
+            <div class="compare-box good">
+              <strong>✅ Pola PRG (redirect)</strong>
+              URL kembali ke GET bersih. Tekan F5 berkali-kali pun aman, tidak akan pernah ada pengiriman pesan duplikat.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- KOLOM KANAN: KODINGAN & VERIFIKASI -->
+      <div>
         <div class="cbox">
           <div class="cbox-head">
             <span class="cbox-title">app.py</span>
@@ -1256,12 +1447,12 @@ def contact():
             <strong>Cara Cek Hasil:</strong> Isi form kontak di browser dan klik Kirim &rarr; Halaman tidak lagi error 405, melainkan otomatis redirect kembali ke <code>/contact</code>!
           </div>
         </div>
-      </div>
-      <div class="shotcard" data-shot="vscode-p05-step-05-contact-handler.png">
-        <img src="img/vscode-p05-step-05-contact-handler.png" alt="VS Code contact handler">
-        <div class="shotcard-bar">
-          <span class="shotcard-title">app.py &bull; def contact()</span>
-          <span class="shotcard-hint"><i data-lucide="zoom-in"></i> Zoom</span>
+        <div class="shotcard" data-shot="vscode-p05-step-05-contact-handler.png" style="margin-top:12px">
+          <img src="img/vscode-p05-step-05-contact-handler.png" alt="VS Code contact handler">
+          <div class="shotcard-bar">
+            <span class="shotcard-title">app.py &bull; def contact()</span>
+            <span class="shotcard-hint"><i data-lucide="zoom-in"></i> Zoom</span>
+          </div>
         </div>
       </div>
     </div>
@@ -1279,10 +1470,36 @@ def contact():
       <span class="guide-tag loc"><i data-lucide="terminal"></i> Di dalam tag &lt;main&gt;, tepat di atas {% block content %}</span>
       <span class="guide-tag act"><i data-lucide="code"></i> Pasang Wadah get_flashed_messages</span>
     </div>
-    <div class="cols c1-2 slide-body">
+    <div class="cols c2 slide-body">
+      <!-- KOLOM KIRI: TUTORIAL KONSEPTUAL -->
       <div class="pcard">
-        <h3>Satu Tempat untuk Semua Notifikasi</h3>
-        <p style="margin-bottom:14px">Dengan menaruhnya di dalam tag <code>&lt;main&gt;</code> di <code>base.html</code>, Anda tidak perlu mengulang kode alert di halaman lain:</p>
+        <div class="tut-item" style="margin-top:0">
+          <span class="tut-header why"><i data-lucide="lightbulb"></i> 1. Fungsinya Buat Apa?</span>
+          <p>Memasang komponen penampung notifikasi universal (*Global Alert Container*) di layout induk <code>templates/base.html</code> menggunakan fungsi bawaan Jinja2 <code>get_flashed_messages(with_categories=true)</code>.</p>
+        </div>
+
+        <div class="tut-item">
+          <span class="tut-header how"><i data-lucide="cpu"></i> 2. Kalau Pakai Ini Bakal Apa?</span>
+          <p>Setiap kali fungsi <code>flash('pesan', 'kategori')</code> dipanggil di backend (dari rute mana pun), Jinja mengambil pesan dari session cookie dan merendernya sebagai alert melayang. Pesan <strong>otomatis terhapus dari session</strong> sehingga hilang saat halaman di-refresh.</p>
+        </div>
+
+        <div class="tut-item">
+          <span class="tut-header diff"><i data-lucide="scale"></i> 3. Bedanya Gimana?</span>
+          <div class="compare-grid">
+            <div class="compare-box bad">
+              <strong>❌ Manual per Halaman</strong>
+              Harus menyalin kode alert di <code>contact.html</code>, <code>login.html</code>, dst. Boros kode dan rawan tidak konsisten!
+            </div>
+            <div class="compare-box good">
+              <strong>✅ Terpusat di base.html</strong>
+              Cukup 1 kali pasang di layout induk, seluruh 6+ halaman website otomatis memiliki wadah notifikasi melayang profesional!
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- KOLOM KANAN: KODINGAN & VERIFIKASI -->
+      <div>
         <div class="cbox">
           <div class="cbox-head">
             <span class="cbox-title">templates/base.html</span>
@@ -1306,12 +1523,12 @@ def contact():
             <strong>Cara Cek Hasil:</strong> Kirim formulir kontak di <code>/contact</code> lagi &rarr; Notifikasi melayang hijau sekarang langsung muncul di atas layar: <em>"Terima kasih! Pesan Anda berhasil dikirim."</em>
           </div>
         </div>
-      </div>
-      <div class="shotcard" data-shot="render-p05-flash-success.png">
-        <img src="img/render-p05-flash-success.png" alt="Render Flash Success">
-        <div class="shotcard-bar">
-          <span class="shotcard-title">Live Alert Notifikasi Sukses</span>
-          <span class="shotcard-hint"><i data-lucide="zoom-in"></i> Zoom</span>
+        <div class="shotcard" data-shot="render-p05-flash-success.png" style="margin-top:12px">
+          <img src="img/render-p05-flash-success.png" alt="Render Flash Success">
+          <div class="shotcard-bar">
+            <span class="shotcard-title">Live Alert Notifikasi Sukses</span>
+            <span class="shotcard-hint"><i data-lucide="zoom-in"></i> Zoom</span>
+          </div>
         </div>
       </div>
     </div>
@@ -1329,13 +1546,44 @@ def contact():
       <span class="guide-tag loc"><i data-lucide="folder"></i> Rute &amp; File Baru</span>
       <span class="guide-tag act" style="background:rgba(217,119,6,0.12);color:#B45309;border-color:rgba(217,119,6,0.25)"><i data-lucide="sparkles"></i> Latihan Mandiri Modul</span>
     </div>
-    <div class="cols c1-2 slide-body">
+    <div class="cols c2 slide-body">
+      <!-- KOLOM KIRI: TUTORIAL KONSEPTUAL -->
       <div class="pcard">
-        <h3>Logika Backend /login</h3>
-        <p style="margin-bottom:14px">Jika kredensial <code>admin</code> / <code>12345</code> cocok, kirim flash sukses; jika salah, kirim flash danger merah:</p>
-        <div class="cbox" style="margin-bottom:10px">
+        <div class="tut-item" style="margin-top:0">
+          <span class="tut-header why"><i data-lucide="lightbulb"></i> 1. Fungsinya Buat Apa?</span>
+          <p>Menerapkan seluruh materi pertemuan 5 (Dynamic Routing, HTTP POST, Form Handling, &amp; Flash Messages berkategori) ke dalam fitur autentikasi login pengguna (<code>/login</code>).</p>
+        </div>
+
+        <div class="tut-item">
+          <span class="tut-header how"><i data-lucide="cpu"></i> 2. Kalau Pakai Ini Bakal Apa?</span>
+          <p>Backend <code>app.py</code> memeriksa input username dan password. Jika kredensial <code>admin</code> / <code>12345</code> cocok, sistem memicu notifikasi <code>'success'</code> dan redirect ke beranda. Jika salah, sistem memicu notifikasi <code>'danger'</code> dan tetap di form login.</p>
+        </div>
+
+        <div class="tut-item">
+          <span class="tut-header diff"><i data-lucide="scale"></i> 3. Bedanya Gimana?</span>
+          <div class="compare-grid">
+            <div class="compare-box bad">
+              <strong>❌ Alert Polos / Teks Statis</strong>
+              Pengguna bingung apakah status aksi berhasil atau gagal karena tidak ada indikator visual status yang jelas.
+            </div>
+            <div class="compare-box good">
+              <strong>✅ Flash Categories (success vs danger)</strong>
+              Visual feedback instan! Kotak hijau untuk login sukses, kotak merah tegas untuk password salah.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- KOLOM KANAN: KODINGAN & VERIFIKASI -->
+      <div>
+        <div style="display:flex;gap:8px;margin-bottom:8px">
+          <button id="tabBtnApp" type="button" class="dock-btn" style="width:auto;border-radius:6px;padding:6px 14px;background:var(--accent);color:#FFFFFF;font-weight:600;font-size:12px">1. app.py (Rute /login)</button>
+          <button id="tabBtnHtml" type="button" class="dock-btn" style="width:auto;border-radius:6px;padding:6px 14px;background:#F1F5F9;color:var(--dim);border:1px solid #CBD5E1;font-weight:600;font-size:12px">2. templates/login.html</button>
+        </div>
+
+        <div id="tabContentApp" class="cbox">
           <div class="cbox-head">
-            <span class="cbox-title">1. app.py (Rute /login)</span>
+            <span class="cbox-title">app.py</span>
             <button class="copy-btn" data-copy="@app.route('/login', methods=['GET', 'POST'])&#10;def login():&#10;    if request.method == 'POST':&#10;        u = request.form.get('username')&#10;        p = request.form.get('password')&#10;        if u == 'admin' and p == '12345':&#10;            flash('Login berhasil! Selamat datang kembali, Admin.', 'success')&#10;            return redirect(url_for('home'))&#10;        flash('Username atau password salah! Silakan coba lagi.', 'danger')&#10;    return render_template('login.html', aktif='login')"><i data-lucide="copy"></i> Salin Rute</button>
           </div>
           <pre style="padding:10px 14px;font-size:12px"><code>@app.route('/login', methods=['GET', 'POST'])
@@ -1350,9 +1598,9 @@ def login():
     return render_template('login.html', aktif='login')</code></pre>
         </div>
 
-        <div class="cbox">
+        <div id="tabContentHtml" class="cbox" style="display:none">
           <div class="cbox-head">
-            <span class="cbox-title">2. templates/login.html (File Baru)</span>
+            <span class="cbox-title">templates/login.html</span>
             <button class="copy-btn" data-copy="{% extends 'base.html' %}&#10;&#10;{% block title %}Login Autentikasi{% endblock %}&#10;&#10;{% block content %}&#10;<section class=&quot;section&quot;>&#10;    <div class=&quot;login-wrapper&quot;>&#10;        <h3 class=&quot;section-title&quot;>Formulir Login Sederhana</h3>&#10;        <div class=&quot;login-card&quot;>&#10;            <form action=&quot;{{ url_for('login') }}&quot; method=&quot;POST&quot;>&#10;                <div class=&quot;form-group&quot;>&#10;                    <label for=&quot;username&quot;>Username</label>&#10;                    <input type=&quot;text&quot; id=&quot;username&quot; name=&quot;username&quot; placeholder=&quot;admin&quot; required autofocus>&#10;                </div>&#10;                <div class=&quot;form-group&quot;>&#10;                    <label for=&quot;password&quot;>Password</label>&#10;                    <input type=&quot;password&quot; id=&quot;password&quot; name=&quot;password&quot; placeholder=&quot;12345&quot; required>&#10;                </div>&#10;                <button type=&quot;submit&quot; class=&quot;btn btn-primary&quot; style=&quot;width:100%&quot;>Masuk (Login)</button>&#10;            </form>&#10;        </div>&#10;    </div>&#10;</section>&#10;{% endblock %}"><i data-lucide="copy"></i> Salin HTML</button>
           </div>
           <pre style="padding:10px 14px;font-size:12px"><code>{% extends 'base.html' %}
@@ -1369,20 +1617,21 @@ def login():
 {% endblock %}</code></pre>
         </div>
 
-        <div class="check-result-box">
+        <div class="check-result-box" style="margin-top:10px">
           <i data-lucide="check-circle-2"></i>
           <div>
             <strong>Cara Cek Hasil:</strong> Buka <code>http://127.0.0.1:5000/login</code>.
-            <div>• Password salah &rarr; Notifikasi merah (<em>flash danger</em>).</div>
-            <div>• Username <code>admin</code> &amp; password <code>12345</code> &rarr; Redirect ke beranda dengan notifikasi hijau (<em>flash success</em>)!</div>
+            <div>• Password salah &rarr; Notifikasi merah (<em>flash-danger</em>).</div>
+            <div>• Username <code>admin</code> &amp; password <code>12345</code> &rarr; Redirect ke beranda dengan notifikasi hijau (<em>flash-success</em>)!</div>
           </div>
         </div>
-      </div>
-      <div class="shotcard" data-shot="render-p05-flash-danger.png">
-        <img src="img/render-p05-flash-danger.png" alt="Render Login Alert">
-        <div class="shotcard-bar">
-          <span class="shotcard-title">Live Alert Notifikasi Gagal</span>
-          <span class="shotcard-hint"><i data-lucide="zoom-in"></i> Zoom</span>
+
+        <div class="shotcard" data-shot="render-p05-flash-danger.png" style="margin-top:10px">
+          <img src="img/render-p05-flash-danger.png" alt="Render Login Alert">
+          <div class="shotcard-bar">
+            <span class="shotcard-title">Live Alert Notifikasi Gagal</span>
+            <span class="shotcard-hint"><i data-lucide="zoom-in"></i> Zoom</span>
+          </div>
         </div>
       </div>
     </div>
@@ -1680,6 +1929,34 @@ if(btnSimGet && btnSimPost){
   };
 }
 
+/* LOGIN CODE TABS (s15) */
+const tabApp = $('#tabBtnApp');
+const tabHtml = $('#tabBtnHtml');
+const contentApp = $('#tabContentApp');
+const contentHtml = $('#tabContentHtml');
+if(tabApp && tabHtml){
+  tabApp.onclick = () => {
+    tabApp.style.background = 'var(--accent)';
+    tabApp.style.color = '#FFFFFF';
+    tabApp.style.border = 'none';
+    tabHtml.style.background = '#F1F5F9';
+    tabHtml.style.color = 'var(--dim)';
+    tabHtml.style.border = '1px solid #CBD5E1';
+    contentApp.style.display = 'block';
+    contentHtml.style.display = 'none';
+  };
+  tabHtml.onclick = () => {
+    tabHtml.style.background = 'var(--accent)';
+    tabHtml.style.color = '#FFFFFF';
+    tabHtml.style.border = 'none';
+    tabApp.style.background = '#F1F5F9';
+    tabApp.style.color = 'var(--dim)';
+    tabApp.style.border = '1px solid #CBD5E1';
+    contentHtml.style.display = 'block';
+    contentApp.style.display = 'none';
+  };
+}
+
 /* RUBRIC ACCORDION (s18) */
 $$('#rubric .rrow').forEach(row => {
   row.onclick = () => {
@@ -1812,6 +2089,11 @@ if(window.location.hash){
   if(found !== -1) startIdx = found;
 }
 show(startIdx);
+
+window.addEventListener('hashchange', () => {
+  const found = slides.findIndex(s => '#' + s.id === window.location.hash);
+  if(found !== -1 && found !== curSlide) show(found);
+});
 </script>
 </body>
 </html>
