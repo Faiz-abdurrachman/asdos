@@ -17,3 +17,11 @@ docs/
 # Backup directories
 *-bak/
 *backup*/
+
+# Panduan, Ringkasan & Dokumen Presentasi (Internal Asdos)
+*PANDUAN*.md
+*panduan*.md
+*PRESENTASI*.md
+*presentasi*.md
+*-RINGKASAN.md
+*ringkasan*.md
