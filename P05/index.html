@@ -213,122 +213,118 @@ h2{
 }
 .copy-btn:hover{background:var(--accent);color:#fff}
 .cbox pre{
-  padding:16px 18px;font:400 13px/1.65 var(--mono);color:#F8FAFC;overflow-x:auto;
+  padding:10px 14px;font:400 11.5px/1.45 var(--mono);color:#F8FAFC;overflow-x:auto;max-height:280px;overflow-y:auto;
 }
 .cbox pre code{font-family:inherit}
 
-/* MOCKUP SHOTCARD */
+/* MOCKUP SHOTCARD (COMPACT PREVIEW BAR) */
 .shotcard{
-  background:#FFFFFF;border:1px solid #E2E8F0;border-radius:var(--rad);
-  overflow:hidden;box-shadow:var(--shadow);cursor:zoom-in;position:relative;
-  transition:transform .2s,border-color .2s;
+  background:#FFFFFF;border:1px solid #CBD5E1;border-radius:8px;
+  padding:6px 12px;display:flex;align-items:center;gap:12px;
+  box-shadow:0 1px 3px rgba(15,23,42,0.04);cursor:zoom-in;
+  transition:all .15s ease;margin-top:10px;
 }
-.shotcard:hover{transform:translateY(-2px);border-color:var(--accent)}
-.shotcard img{width:100%;height:auto;display:block}
+.shotcard:hover{border-color:var(--accent);background:#F8FAFC}
+.shotcard img{
+  width:64px;height:40px;object-fit:cover;border-radius:4px;
+  border:1px solid #E2E8F0;flex:none;display:block;
+}
 .shotcard-bar{
-  height:34px;background:#F8FAFC;display:flex;align-items:center;justify-content:space-between;
-  padding:0 14px;border-top:1px solid #E2E8F0;
+  display:flex;align-items:center;justify-content:space-between;
+  width:100%;border:none;background:transparent;padding:0;height:auto;
 }
-.shotcard-title{font:600 11.5px/1 var(--mono);color:var(--dim)}
-.shotcard-hint{font:600 10.5px/1 var(--mono);color:var(--accent);display:inline-flex;align-items:center;gap:4px}
+.shotcard-title{font:600 12px/1.3 var(--mono);color:#334155}
+.shotcard-hint{font:600 11px/1 var(--mono);color:var(--accent);display:inline-flex;align-items:center;gap:4px}
 
 /* STEP GUIDE BAR (PEMULA-FRIENDLY DIRECTIVE) */
 .step-guide-bar{
   display:inline-flex;flex-wrap:wrap;align-items:center;gap:8px;
-  margin:8px 0 16px;background:rgba(255,255,255,0.92);
-  border:1.5px solid #CBD5E1;border-radius:10px;padding:6px 12px;
-  box-shadow:0 2px 6px rgba(15,23,42,0.04);
+  margin:6px 0 14px;background:rgba(255,255,255,0.92);
+  border:1px solid #CBD5E1;border-radius:8px;padding:5px 12px;
+  box-shadow:0 1px 3px rgba(15,23,42,0.04);
 }
 .guide-tag{
-  font:600 11.5px/1 var(--mono);display:inline-flex;align-items:center;gap:6px;
-  padding:4px 10px;border-radius:6px;
+  font:600 11px/1 var(--mono);display:inline-flex;align-items:center;gap:6px;
+  padding:4px 8px;border-radius:5px;
 }
 .guide-tag svg{width:13px;height:13px}
 .guide-tag.file{background:#0F172A;color:#F8FAFC}
-.guide-tag.loc{background:rgba(2,132,199,0.12);color:var(--accent);border:1px solid rgba(2,132,199,0.25)}
-.guide-tag.act{background:rgba(5,150,105,0.12);color:#047857;border:1px solid rgba(5,150,105,0.25)}
-.guide-tag.check{background:rgba(217,119,6,0.12);color:#B45309;border:1px solid rgba(217,119,6,0.25)}
+.guide-tag.loc{background:rgba(2,132,199,0.08);color:var(--accent);border:1px solid rgba(2,132,199,0.2)}
+.guide-tag.act{background:rgba(5,150,105,0.08);color:#047857;border:1px solid rgba(5,150,105,0.2)}
+.guide-tag.check{background:rgba(217,119,6,0.08);color:#B45309;border:1px solid rgba(217,119,6,0.2)}
 
 /* CHECK RESULT BOX (IMMEDIATE FEEDBACK FOR STUDENTS) */
 .check-result-box{
-  margin-top:12px;padding:10px 14px;border-radius:8px;
-  background:rgba(240,253,244,0.95);border:1.5px solid #86EFAC;
-  font:500 12.5px/1.5 var(--sans);color:#166534;
+  margin-top:10px;padding:9px 13px;border-radius:8px;
+  background:#F0FDF4;border:1px solid #BBF7D0;
+  font:500 12px/1.5 var(--sans);color:#166534;
   display:flex;align-items:flex-start;gap:10px;
 }
 .check-result-box.blue{
-  background:rgba(240,249,255,0.95);border-color:#BAE6FD;color:#0369A1;
+  background:#F0F9FF;border-color:#BAE6FD;color:#0369A1;
 }
-.check-result-box svg{width:16px;height:16px;flex:none;margin-top:2px}
+.check-result-box svg{width:15px;height:15px;flex:none;margin-top:2px}
 .check-result-box strong{font-weight:700;color:#14532D}
 .check-result-box.blue strong{color:#0C4A6E}
 .check-result-box code{
   background:rgba(255,255,255,0.9);border:1px solid rgba(0,0,0,0.1);
-  padding:2px 6px;border-radius:4px;font-family:var(--mono);font-size:11.5px;
+  padding:1px 5px;border-radius:4px;font-family:var(--mono);font-size:11px;
   font-weight:600;color:#0F172A;
 }
 
-/* TUTORIAL CARD & COMPARISON STYLES (3 PILAR EDUKASI) */
-.tut-item {
-  margin-top: 12px;
+/* TUTORIAL CARD & COMPARISON STYLES (CLEAN TECH DOCS STYLE) */
+.tut-item{
+  margin-top:11px;
 }
-.tut-header {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font: 700 11px/1 var(--mono);
-  text-transform: uppercase;
-  letter-spacing: .04em;
-  padding: 4px 8px;
-  border-radius: 4px;
-  margin-bottom: 6px;
+.tut-item:first-child{
+  margin-top:0;
 }
-.tut-header.what { background: rgba(99, 102, 241, 0.12); color: #4F46E5; }
-.tut-header.why { background: rgba(2, 132, 199, 0.12); color: var(--accent); }
-.tut-header.diff { background: rgba(16, 185, 129, 0.12); color: #047857; }
-.tut-header.analogy { background: rgba(245, 158, 11, 0.12); color: #B45309; }
-
-.analogy-box {
-  background: rgba(245, 158, 11, 0.08);
-  border-left: 3px solid #F59E0B;
-  padding: 7px 10px;
-  border-radius: 0 6px 6px 0;
-  font-size: 11.5px;
-  line-height: 1.45;
-  color: #78350F;
-  margin-top: 8px;
+.tut-label{
+  display:inline-flex;align-items:center;gap:7px;
+  font:700 11px/1 var(--mono);text-transform:uppercase;
+  letter-spacing:.05em;color:#475569;margin-bottom:4px;
 }
-.analogy-box strong {
-  color: #B45309;
+.tut-num{
+  font-size:10px;font-weight:800;color:var(--accent);
+  background:rgba(2,132,199,0.08);border:1px solid rgba(2,132,199,0.2);
+  padding:2px 5px;border-radius:4px;
+}
+.tut-item p{
+  font:400 12.5px/1.55 var(--sans);color:#334155;margin:0;
 }
 
-.compare-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
-  margin-top: 6px;
+.compare-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px;
 }
-.compare-box {
-  padding: 8px 10px;
-  border-radius: 6px;
-  font-size: 12px;
-  line-height: 1.45;
+.compare-box{
+  padding:8px 10px;border-radius:6px;font-size:11.5px;line-height:1.45;
+  border:1px solid #E2E8F0;
 }
-.compare-box.bad {
-  background: rgba(239, 68, 68, 0.08);
-  border: 1px solid rgba(239, 68, 68, 0.25);
-  color: #991B1B;
+.compare-box.bad{
+  background:#F8FAFC;color:#475569;border-color:#E2E8F0;
 }
-.compare-box.good {
-  background: rgba(16, 185, 129, 0.08);
-  border: 1px solid rgba(16, 185, 129, 0.25);
-  color: #065F46;
+.compare-box.good{
+  background:#F0FDF4;color:#166534;border-color:#BBF7D0;
 }
-.compare-box strong {
-  display: block;
-  font-family: var(--mono);
-  font-size: 11px;
-  margin-bottom: 3px;
+.compare-tag{
+  display:block;font-family:var(--mono);font-size:10px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.04em;margin-bottom:3px;
+}
+.compare-tag.bad{color:#64748B}
+.compare-tag.good{color:#15803D}
+
+.analogy-box{
+  background:#F8FAFC;border:1px solid #E2E8F0;border-left:3px solid #0284C7;
+  padding:8px 12px;border-radius:0 6px 6px 0;margin-top:9px;
+}
+.analogy-header{
+  display:inline-flex;align-items:center;gap:6px;
+  font:700 10.5px/1 var(--mono);text-transform:uppercase;
+  letter-spacing:.05em;color:var(--accent);margin-bottom:3px;
+}
+.analogy-header svg{width:12px;height:12px}
+.analogy-box p{
+  font-size:11.5px;line-height:1.5;color:#334155;margin:0;
 }
 
 /* TITLE SLIDE */
@@ -449,6 +445,23 @@ h2{
 .qopt.wrong{background:rgba(220,38,38,0.12);border-color:#DC2626;color:#991B1B;font-weight:600}
 .qopt.wrong .qopt-letter{background:#DC2626;border-color:#DC2626;color:#FFFFFF}
 .qopt.wrong .qopt-text{color:#991B1B;font-weight:600}
+
+/* CHECKLIST (DEADLINE EVALUATION) */
+.checklist-items{list-style:none;display:grid;gap:8px;padding:0;margin:0}
+.chk{
+  display:flex;align-items:center;gap:12px;padding:8px 12px;border-radius:8px;
+  border:1px solid #E2E8F0;background:#F8FAFC;cursor:pointer;transition:all .15s ease;
+  font-size:12.5px;color:#334155;
+}
+.chk:hover{background:#FFFFFF;border-color:var(--accent)}
+.chk-box{
+  width:18px;height:18px;border-radius:4px;border:1.5px solid #CBD5E1;
+  display:grid;place-items:center;flex:none;background:#FFFFFF;transition:all .15s ease;
+}
+.chk-box svg{width:12px;height:12px;color:#FFFFFF;opacity:0;transition:opacity .15s ease}
+.chk.done{background:#F0FDF4;border-color:#BBF7D0;color:#166534}
+.chk.done .chk-box{background:#16A34A;border-color:#16A34A}
+.chk.done .chk-box svg{opacity:1}
 
 /* ========================================================
    SCROLLBAR & RESPONSIVE DESIGN BREAKPOINTS
@@ -742,9 +755,9 @@ h2{
     <h2>Kenapa Butuh Dynamic Routing?</h2>
     <p class="sub">Bayangkan jika website portofolio Anda nantinya memiliki 100 catatan blog atau artikel teknis:</p>
     <div class="cols c2 slide-body">
-      <div class="pcard" style="border-color:rgba(220,38,38,0.3);background:rgba(220,38,38,0.03)">
-        <h3 style="color:#B91C1C">❌ Cara Statis (Tanpa Dynamic Route)</h3>
-        <p style="margin-bottom:12px">Anda harus membuat 100 fungsi route berbeda di <code>app.py</code> dan 100 file HTML manual:</p>
+      <div class="pcard" style="border-color:#E2E8F0;background:#F8FAFC">
+        <h3 style="color:#475569">Pendekatan Statis (Tanpa Dynamic Route)</h3>
+        <p style="margin-bottom:12px">Harus membuat puluhan hingga ratusan rute berbeda di <code>app.py</code> secara manual:</p>
         <div class="cbox">
           <pre><code>@app.route('/blog/artikel-1')
 def blog1():
@@ -753,16 +766,16 @@ def blog1():
 @app.route('/blog/artikel-2')
 def blog2():
     return render_template('blog2.html')
-# ... diulang sampai 100 kali! 😱</code></pre>
+# ... diulang manual untuk setiap artikel baru</code></pre>
         </div>
       </div>
-      <div class="pcard" style="border-color:rgba(5,150,105,0.3);background:rgba(5,150,105,0.03)">
-        <h3 style="color:#047857">✅ Cara Cerdas (Variable Rules)</h3>
-        <p style="margin-bottom:12px">Cukup <strong>1 Rute Dinamis</strong> di Flask untuk melayani jutaan artikel sekaligus:</p>
+      <div class="pcard" style="border-color:#BBF7D0;background:#F0FDF4">
+        <h3 style="color:#15803D">Pendekatan Dinamis (Variable Rules)</h3>
+        <p style="margin-bottom:12px">Cukup <strong>1 Rute Dinamis</strong> di Flask untuk melayani ribuan artikel sekaligus:</p>
         <div class="cbox">
           <pre><code>@app.route('/blog/&lt;int:post_id&gt;')
 def blog_detail(post_id):
-    # post_id ditangkap dari URL
+    # post_id otomatis diekstrak dari URL
     artikel = cari_artikel(post_id)
     return render_template(
         'blog_detail.html',
@@ -877,11 +890,9 @@ def blog_detail(post_id):
           </ol>
         </div>
 
-        <div class="check-result-box" style="margin-top:0">
-          <i data-lucide="check-circle-2"></i>
-          <div>
-            <strong>🎭 Analoginya:</strong> Virtual Environment (<code>.venv</code>) itu ibarat <strong>"Kotak Perkakas Pribadi di Lab"</strong>. Daripada menaruh obeng campur aduk di meja umum lab (sistem laptop), kamu punya koper sendiri agar modul Flask tidak bentrok dengan mata kuliah lain!
-          </div>
+        <div class="analogy-box" style="margin-top:0">
+          <div class="analogy-header"><i data-lucide="compass"></i> Analogi Virtual Environment</div>
+          <p>Virtual Environment (<code>.venv</code>) itu ibarat <strong>kotak perkakas pribadi di lab</strong>. Daripada menaruh perkakas bercampur di meja umum sistem laptop, kamu memiliki koper sendiri agar pustaka Flask tidak bentrok dengan mata kuliah lain.</p>
         </div>
       </div>
 
@@ -939,32 +950,33 @@ code .</code></pre>
     <div class="cols c2 slide-body">
       <!-- KOLOM KIRI: TUTORIAL KONSEPTUAL -->
       <div class="pcard">
-        <div class="tut-item" style="margin-top:0">
-          <span class="tut-header what"><i data-lucide="book-open"></i> 1. Sebenarnya Ini Apa?</span>
+        <div class="tut-item">
+          <div class="tut-label"><span class="tut-num">01</span> Konsep Dasar</div>
           <p>Inisialisasi 4 fungsi inti Flask untuk formulir (<code>request</code>, <code>redirect</code>, <code>url_for</code>, <code>flash</code>) serta kunci kriptografi rahasia (<code>app.secret_key</code>) di backend.</p>
         </div>
 
         <div class="tut-item">
-          <span class="tut-header why"><i data-lucide="lightbulb"></i> 2. Fungsinya Buat Apa?</span>
-          <p>Menangkap data masukan pengunjung, mengalihkan rute halaman, dan mengamankan session cookie agar notifikasi pop-up tidak bisa dimanipulasi dari Inspect Element.</p>
+          <div class="tut-label"><span class="tut-num">02</span> Fungsi &amp; Kegunaan</div>
+          <p>Menangkap data formulir pengunjung, mengalihkan rute halaman, dan mengenkripsi session cookie agar isi notifikasi pop-up tidak bisa dimanipulasi dari peramban.</p>
         </div>
 
         <div class="tut-item">
-          <span class="tut-header diff"><i data-lucide="scale"></i> 3. Kenapa Harus Pakai Ini?</span>
+          <div class="tut-label"><span class="tut-num">03</span> Kenapa Harus Pakai Ini?</div>
           <div class="compare-grid">
             <div class="compare-box bad">
-              <strong>❌ Tanpa secret_key</strong>
-              Memanggil <code>flash()</code> langsung bikin web crash total: <em>RuntimeError: session unavailable</em>.
+              <span class="compare-tag bad">Tanpa secret_key</span>
+              Memanggil <code>flash()</code> memicu crash server: <em>RuntimeError: session unavailable</em>.
             </div>
             <div class="compare-box good">
-              <strong>✅ Dengan secret_key</strong>
-              Fitur Session &amp; Flash Alert aktif 100%, siap menampilkan notifikasi hijau/merah secara aman!
+              <span class="compare-tag good">Dengan secret_key</span>
+              Fitur Session &amp; Flash Alert aktif 100%, siap menampilkan status feedback secara aman.
             </div>
           </div>
         </div>
 
         <div class="analogy-box">
-          <strong>🎭 Analoginya (Biar Gampang Ingat):</strong> <code>secret_key</code> itu ibarat <strong>"Stempel Segel Lilin Cap Raja"</strong> pada amplop rahasia. Saat Flask menitipkan pesan alert ke saku browser (cookie session), Flask menempelkan stempel segel ini. Jika isi cookie diotak-atik lewat Inspect Element, segelnya rusak dan server langsung menolaknya!
+          <div class="analogy-header"><i data-lucide="compass"></i> Analogi Dunia Nyata</div>
+          <p><code>secret_key</code> itu ibarat <strong>stempel segel lilin cap raja</strong> pada amplop surat rahasia. Saat Flask menitipkan pesan alert ke cookie browser pengunjung, Flask menempelkan stempel segel ini. Jika isi cookie diubah secara ilegal, segelnya rusak dan server langsung menolaknya.</p>
         </div>
       </div>
 
@@ -984,7 +996,7 @@ app = Flask(__name__)
 app.secret_key = 'kunci-rahasia-portofolio-faiz'
 
 <span style="color:#64748B"># ========================================================
-# 👇 KODE LAMA DARI P-04 TETAP DI BAWAH INI (JANGAN DIHAPUS):
+# KODE LAMA DARI P-04 TETAP DI BAWAH INI (JANGAN DIHAPUS):
 # - profil = { "nama": "Faiz", "umur": 20, ... }
 # - skills = [ {"nama": "HTML &amp; CSS", ...}, ... ]
 # - rute '/', '/about', '/skills', '/projects', dll.
@@ -1022,32 +1034,33 @@ app.secret_key = 'kunci-rahasia-portofolio-faiz'
     <div class="cols c2 slide-body">
       <!-- KOLOM KIRI: TUTORIAL KONSEPTUAL -->
       <div class="pcard">
-        <div class="tut-item" style="margin-top:0">
-          <span class="tut-header what"><i data-lucide="book-open"></i> 1. Sebenarnya Ini Apa?</span>
+        <div class="tut-item">
+          <div class="tut-label"><span class="tut-num">01</span> Konsep Dasar</div>
           <p>Fitur Flask untuk menangkap variabel dinamis dari URL menggunakan <em>converter</em> (<code>&lt;int:post_id&gt;</code> &amp; <code>&lt;nama&gt;</code>) serta database tiruan (<em>mock database</em>) <code>data_blog</code>.</p>
         </div>
 
         <div class="tut-item">
-          <span class="tut-header why"><i data-lucide="lightbulb"></i> 2. Fungsinya Buat Apa?</span>
+          <div class="tut-label"><span class="tut-num">02</span> Fungsi &amp; Kegunaan</div>
           <p>Menangkap nilai dari URL browser secara otomatis dan mengirimkannya ke fungsi Python (<code>blog_detail</code>) untuk mencari artikel yang cocok tanpa membuat ratusan fungsi terpisah.</p>
         </div>
 
         <div class="tut-item">
-          <span class="tut-header diff"><i data-lucide="scale"></i> 3. Kenapa Harus Pakai Ini?</span>
+          <div class="tut-label"><span class="tut-num">03</span> Kenapa Harus Pakai Ini?</div>
           <div class="compare-grid">
             <div class="compare-box bad">
-              <strong>❌ Routing Statis</strong>
-              Harus membuat ratusan fungsi manual untuk ratusan artikel (<code>/blog1</code>, <code>/blog2</code>... mimpi buruk!).
+              <span class="compare-tag bad">Routing Statis</span>
+              Harus membuat ratusan fungsi manual untuk ratusan artikel (<code>/blog1</code>, <code>/blog2</code>... tidak efisien).
             </div>
             <div class="compare-box good">
-              <strong>✅ Dynamic Routing</strong>
-              Cukup 1 fungsi untuk jutaan artikel! Converter <code>&lt;int:&gt;</code> otomatis menolak teks non-angka dengan respon 404.
+              <span class="compare-tag good">Dynamic Routing</span>
+              Cukup 1 fungsi untuk jutaan artikel. Converter <code>&lt;int:&gt;</code> otomatis menolak non-angka dengan respon 404.
             </div>
           </div>
         </div>
 
         <div class="analogy-box">
-          <strong>🎭 Analoginya (Biar Gampang Ingat):</strong> Dynamic Routing itu ibarat <strong>"Sistem Nomor Antrean Bank atau Resi Paket"</strong>. Bank tidak membangun 1.000 pintu untuk 1.000 nasabah. Cukup <strong>1 loket serbaguna</strong> ber-scanner nomor antrean! Berapa pun nomor tiketmu (<code>/blog/1</code> atau <code>/blog/99</code>), loket langsung mengambilkan berkas yang tepat.
+          <div class="analogy-header"><i data-lucide="compass"></i> Analogi Dunia Nyata</div>
+          <p>Dynamic Routing itu ibarat <strong>sistem nomor antrean bank atau nomor resi paket</strong>. Bank tidak membangun 1.000 loket untuk 1.000 nasabah. Cukup 1 loket serbaguna ber-scanner nomor antrean. Berapa pun nomor tiketmu (<code>/blog/1</code> atau <code>/blog/99</code>), loket langsung mengambilkan berkas yang tepat.</p>
         </div>
       </div>
 
@@ -1112,32 +1125,33 @@ def user_greeting(nama):
     <div class="cols c2 slide-body">
       <!-- KOLOM KIRI: TUTORIAL KONSEPTUAL -->
       <div class="pcard">
-        <div class="tut-item" style="margin-top:0">
-          <span class="tut-header what"><i data-lucide="book-open"></i> 1. Sebenarnya Ini Apa?</span>
+        <div class="tut-item">
+          <div class="tut-label"><span class="tut-num">01</span> Konsep Dasar</div>
           <p>Integrasi template engine Jinja2 (<code>{% for %}</code>) dengan fungsi generator URL otomatis Flask yaitu <code>url_for('nama_fungsi', argumen)</code> di dalam file <code>templates/blog.html</code>.</p>
         </div>
 
         <div class="tut-item">
-          <span class="tut-header why"><i data-lucide="lightbulb"></i> 2. Fungsinya Buat Apa?</span>
+          <div class="tut-label"><span class="tut-num">02</span> Fungsi &amp; Kegunaan</div>
           <p>Mengganti kartu HTML statis menjadi perulangan dinamis, serta membuat link tombol <em>"Baca Selengkapnya"</em> yang otomatis terhubung ke detail masing-masing ID artikel (<code>/blog/1</code>, <code>/blog/2</code>, dst).</p>
         </div>
 
         <div class="tut-item">
-          <span class="tut-header diff"><i data-lucide="scale"></i> 3. Kenapa Harus Pakai Ini?</span>
+          <div class="tut-label"><span class="tut-num">03</span> Kenapa Harus Pakai Ini?</div>
           <div class="compare-grid">
             <div class="compare-box bad">
-              <strong>❌ Link Manual (href="/blog/1")</strong>
-              Jika nama rute di backend diubah jadi <code>/artikel/</code>, Anda wajib mengedit puluhan tag <code>&lt;a&gt;</code> manual satu per satu di HTML.
+              <span class="compare-tag bad">Link Manual (href)</span>
+              Jika nama rute di backend diubah jadi <code>/artikel/</code>, Anda wajib mengedit puluhan tag link satu per satu.
             </div>
             <div class="compare-box good">
-              <strong>✅ url_for('blog_detail', ...)</strong>
-              Prinsip DRY: Jika nama rute di <code>app.py</code> diganti, seluruh link di template otomatis menyesuaikan tanpa menyentuh HTML!
+              <span class="compare-tag good">url_for() Dinamis</span>
+              Prinsip DRY: Jika nama rute di <code>app.py</code> diganti, seluruh link di template otomatis menyesuaikan.
             </div>
           </div>
         </div>
 
         <div class="analogy-box">
-          <strong>🎭 Analoginya (Biar Gampang Ingat):</strong> Fungsi <code>url_for()</code> itu ibarat <strong>"Buku Kontak di HP"</strong>. Kamu simpan nomor temanmu dengan nama kontak *"Budi"*, bukan menghafal 12 digit nomornya setiap kali menelepon. Jika nomor HP Budi ganti (rute URL diubah), cukup ubah di satu tempat tanpa perlu merombak seluruh HP!
+          <div class="analogy-header"><i data-lucide="compass"></i> Analogi Dunia Nyata</div>
+          <p>Fungsi <code>url_for()</code> itu ibarat <strong>buku kontak di smartphone</strong>. Kamu menghubungi teman dengan memilih nama kontak, bukan mengetik ulang 12 digit nomornya setiap saat. Jika nomornya berganti (rute URL diubah), cukup ubah di satu tempat.</p>
         </div>
       </div>
 
@@ -1194,32 +1208,33 @@ def user_greeting(nama):
     <div class="cols c2 slide-body">
       <!-- KOLOM KIRI: TUTORIAL KONSEPTUAL -->
       <div class="pcard">
-        <div class="tut-item" style="margin-top:0">
-          <span class="tut-header what"><i data-lucide="book-open"></i> 1. Sebenarnya Ini Apa?</span>
+        <div class="tut-item">
+          <div class="tut-label"><span class="tut-num">01</span> Konsep Dasar</div>
           <p>Template halaman tunggal Jinja2 yang mewarisi layout induk (<code>{% extends 'base.html' %}</code>) dan dilengkapi pengkondisian logika <code>{% if artikel %} ... {% else %}</code>.</p>
         </div>
 
         <div class="tut-item">
-          <span class="tut-header why"><i data-lucide="lightbulb"></i> 2. Fungsinya Buat Apa?</span>
-          <p>Menampilkan isi lengkap sebuah artikel saat ID ditemukan di database, atau menyajikan tampilan ramah <em>(Empty State)</em> jika ID artikel tidak ada tanpa membuat web mengalami crash.</p>
+          <div class="tut-label"><span class="tut-num">02</span> Fungsi &amp; Kegunaan</div>
+          <p>Menampilkan isi lengkap sebuah artikel saat ID ditemukan di database, atau menyajikan tampilan <em>Empty State</em> jika ID tidak tersedia tanpa membuat web crash.</p>
         </div>
 
         <div class="tut-item">
-          <span class="tut-header diff"><i data-lucide="scale"></i> 3. Kenapa Harus Pakai Ini?</span>
+          <div class="tut-label"><span class="tut-num">03</span> Kenapa Harus Pakai Ini?</div>
           <div class="compare-grid">
             <div class="compare-box bad">
-              <strong>❌ Tanpa {% if artikel %}</strong>
-              Jinja mencari atribut pada data <code>None</code>. Web langsung crash: <em>UndefinedError: 'None' has no attribute</em>.
+              <span class="compare-tag bad">Tanpa {% if %}</span>
+              Jinja mencari atribut pada nilai <code>None</code>. Web langsung error: <em>UndefinedError</em>.
             </div>
             <div class="compare-box good">
-              <strong>✅ Dengan Proteksi &amp; Empty State</strong>
-              Tampilan profesional (UX modern), web tetap utuh, dan user dipandu tombol kembali ke daftar artikel.
+              <span class="compare-tag good">Dengan Proteksi IF</span>
+              Tampilan profesional (UX bersih), web tetap utuh dengan panduan tombol kembali yang jelas.
             </div>
           </div>
         </div>
 
         <div class="analogy-box">
-          <strong>🎭 Analoginya (Biar Gampang Ingat):</strong> Template dinamis &amp; Empty State itu ibarat <strong>"Layar Mesin ATM"</strong>. Bank cuma bikin 1 desain layar untuk jutaan nasabah. Kalau kamu mengetik nomor rekening yang salah, ATM tidak akan meledak atau mati mendadak, tapi ramah menampilkan: <em>"Rekening Tidak Ditemukan"</em>.
+          <div class="analogy-header"><i data-lucide="compass"></i> Analogi Dunia Nyata</div>
+          <p>Template dinamis dan Empty State itu ibarat <strong>layar mesin ATM</strong>. Bank hanya mendesain 1 tampilan untuk jutaan nasabah. Jika nasabah salah mengetik nomor rekening, layar dengan sopan menampilkan: <em>"Rekening Tidak Ditemukan"</em>, tanpa membuat sistem ATM rusak.</p>
         </div>
       </div>
 
@@ -1228,7 +1243,7 @@ def user_greeting(nama):
         <div class="cbox">
           <div class="cbox-head">
             <span class="cbox-title">templates/blog_detail.html</span>
-            <button class="copy-btn" data-copy="{% extends 'base.html' %}&#10;&#10;{% block title %}{{ artikel.judul if artikel else 'Artikel Tidak Ditemukan' }}{% endblock %}&#10;&#10;{% block content %}&#10;<section class=&quot;section&quot;>&#10;    <div class=&quot;article-container&quot;>&#10;        <a href=&quot;{{ url_for('blog') }}&quot; class=&quot;back-link&quot;>&larr; Kembali ke Semua Artikel</a>&#10;&#10;        {% if artikel %}&#10;            <article class=&quot;article-content&quot;>&#10;                <div class=&quot;article-meta&quot;>&#10;                    <span class=&quot;tag&quot;>{{ artikel.kategori }}</span>&#10;                    <span class=&quot;date&quot;>{{ artikel.tanggal }}</span>&#10;                    <span class=&quot;badge badge-route&quot;>Route: /blog/{{ post_id }}</span>&#10;                </div>&#10;&#10;                <h1 class=&quot;article-title&quot;>{{ artikel.judul }}</h1>&#10;                <p class=&quot;article-lead&quot;>{{ artikel.ringkasan }}</p>&#10;&#10;                <div class=&quot;article-divider&quot;></div>&#10;&#10;                <div class=&quot;article-body&quot;>&#10;                    <p>{{ artikel.konten }}</p>&#10;                </div>&#10;            </article>&#10;        {% else %}&#10;            <div class=&quot;empty-state&quot;>&#10;                <div class=&quot;empty-icon&quot;>⚠️</div>&#10;                <h2>Artikel Tidak Ditemukan</h2>&#10;                <p class=&quot;text-muted&quot;>Maaf, artikel dengan ID <code>#{{ post_id }}</code> tidak tersedia.</p>&#10;                <a href=&quot;{{ url_for('blog') }}&quot; class=&quot;btn&quot;>Lihat Daftar Artikel</a>&#10;            </div>&#10;        {% endif %}&#10;    </div>&#10;</section>&#10;{% endblock %}"><i data-lucide="copy"></i> Salin</button>
+            <button class="copy-btn" data-copy="{% extends 'base.html' %}&#10;&#10;{% block title %}{{ artikel.judul if artikel else 'Artikel Tidak Ditemukan' }}{% endblock %}&#10;&#10;{% block content %}&#10;<section class=&quot;section&quot;>&#10;    <div class=&quot;article-container&quot;>&#10;        <a href=&quot;{{ url_for('blog') }}&quot; class=&quot;back-link&quot;>&larr; Kembali ke Semua Artikel</a>&#10;&#10;        {% if artikel %}&#10;            <article class=&quot;article-content&quot;>&#10;                <div class=&quot;article-meta&quot;>&#10;                    <span class=&quot;tag&quot;>{{ artikel.kategori }}</span>&#10;                    <span class=&quot;date&quot;>{{ artikel.tanggal }}</span>&#10;                    <span class=&quot;badge badge-route&quot;>Route: /blog/{{ post_id }}</span>&#10;                </div>&#10;&#10;                <h1 class=&quot;article-title&quot;>{{ artikel.judul }}</h1>&#10;                <p class=&quot;article-lead&quot;>{{ artikel.ringkasan }}</p>&#10;&#10;                <div class=&quot;article-divider&quot;></div>&#10;&#10;                <div class=&quot;article-body&quot;>&#10;                    <p>{{ artikel.konten }}</p>&#10;                </div>&#10;            </article>&#10;        {% else %}&#10;            <div class=&quot;empty-state&quot;>&#10;                <h2>Artikel Tidak Ditemukan</h2>&#10;                <p class=&quot;text-muted&quot;>Maaf, artikel dengan ID <code>#{{ post_id }}</code> tidak tersedia.</p>&#10;                <a href=&quot;{{ url_for('blog') }}&quot; class=&quot;btn&quot;>Lihat Daftar Artikel</a>&#10;            </div>&#10;        {% endif %}&#10;    </div>&#10;</section>&#10;{% endblock %}"><i data-lucide="copy"></i> Salin</button>
           </div>
           <pre><code>{% extends 'base.html' %}
 
@@ -1326,7 +1341,7 @@ def user_greeting(nama):
         <div class="sim-input-row" style="margin-top:10px;background:#F8FAFC">
           <span style="font:600 13px/1 var(--mono);color:var(--ink)">GET /contact?name=Budi&amp;email=budi@gmail.com HTTP/1.1</span>
         </div>
-        <p style="font-size:13px;color:#B91C1C;margin-top:10px">⚠️ Perhatikan: Data nama dan email terpampang jelas di URL address bar peramban!</p>
+        <p style="font-size:12.5px;color:#991B1B;margin-top:10px;font-weight:500">Catatan: Parameter nama dan email terpampang di URL address bar peramban.</p>
       </div>
     </div>
   </div>
@@ -1346,32 +1361,33 @@ def user_greeting(nama):
     <div class="cols c2 slide-body">
       <!-- KOLOM KIRI: TUTORIAL KONSEPTUAL -->
       <div class="pcard">
-        <div class="tut-item" style="margin-top:0">
-          <span class="tut-header what"><i data-lucide="book-open"></i> 1. Sebenarnya Ini Apa?</span>
+        <div class="tut-item">
+          <div class="tut-label"><span class="tut-num">01</span> Konsep Dasar</div>
           <p>Pengaturan formulir frontend HTML dengan protokol pengiriman <code>method="POST"</code> dan atribut penamaan data <code>name="..."</code> pada setiap kolom input.</p>
         </div>
 
         <div class="tut-item">
-          <span class="tut-header why"><i data-lucide="lightbulb"></i> 2. Fungsinya Buat Apa?</span>
+          <div class="tut-label"><span class="tut-num">02</span> Fungsi &amp; Kegunaan</div>
           <p>Mengirimkan data masukan pengunjung (nama, email, pesan) ke backend di dalam payload <em>Request Body</em> yang tertutup, sekaligus memberi kunci pemanggil agar Flask bisa membaca isi tiap kolom.</p>
         </div>
 
         <div class="tut-item">
-          <span class="tut-header diff"><i data-lucide="scale"></i> 3. Kenapa Harus Pakai Ini?</span>
+          <div class="tut-label"><span class="tut-num">03</span> Kenapa Harus Pakai Ini?</div>
           <div class="compare-grid">
             <div class="compare-box bad">
-              <strong>❌ Form Method GET</strong>
+              <span class="compare-tag bad">Metode GET</span>
               Data pribadi terpampang telanjang di address bar URL: <code>/contact?name=Budi&amp;email=...</code>.
             </div>
             <div class="compare-box good">
-              <strong>✅ Form Method POST</strong>
-              URL bersih rapi <code>/contact</code>, data tertutup aman. <em>Ingat:</em> Tanpa atribut <code>name</code>, Flask akan menerima nilai <code>None</code>!
+              <span class="compare-tag good">Metode POST</span>
+              URL bersih rapi <code>/contact</code>, data tertutup aman. Tanpa atribut <code>name</code>, Flask menerima <code>None</code>.
             </div>
           </div>
         </div>
 
         <div class="analogy-box">
-          <strong>🎭 Analoginya (Biar Gampang Ingat):</strong> Pengiriman form GET vs POST itu persis seperti <strong>"Kartu Pos Terbuka vs Surat dalam Amplop Tertutup dan Dilem"</strong>. Kartu pos (<code>GET</code>) isinya terbaca oleh siapapun di jalan (URL bar). Sedangkan amplop tertutup (<code>POST</code>) menyembunyikan rapat surat rahasiamu di badan amplop (Request Body).
+          <div class="analogy-header"><i data-lucide="compass"></i> Analogi Dunia Nyata</div>
+          <p>Pengiriman form GET vs POST itu persis seperti <strong>kartu pos terbuka vs surat dalam amplop tertutup</strong>. Kartu pos (GET) isinya terbaca oleh siapapun di jalan (URL bar). Sedangkan amplop tertutup (POST) menyembunyikan rapat surat rahasiamu di badan amplop (Request Body).</p>
         </div>
       </div>
 
@@ -1430,32 +1446,33 @@ def user_greeting(nama):
     <div class="cols c2 slide-body">
       <!-- KOLOM KIRI: TUTORIAL KONSEPTUAL -->
       <div class="pcard">
-        <div class="tut-item" style="margin-top:0">
-          <span class="tut-header what"><i data-lucide="book-open"></i> 1. Sebenarnya Ini Apa?</span>
+        <div class="tut-item">
+          <div class="tut-label"><span class="tut-num">01</span> Konsep Dasar</div>
           <p>Pola arsitektur standar web <strong>Post/Redirect/Get (PRG)</strong> di backend Flask untuk memisahkan proses penerimaan data formulir dengan proses penampilan halaman.</p>
         </div>
 
         <div class="tut-item">
-          <span class="tut-header why"><i data-lucide="lightbulb"></i> 2. Fungsinya Buat Apa?</span>
+          <div class="tut-label"><span class="tut-num">02</span> Fungsi &amp; Kegunaan</div>
           <p>Menangkap data kiriman form via <code>request.form.get()</code>, membuat flash message, lalu mengalihkan peramban (HTTP 302 Redirect) kembali ke method GET agar halaman bersih.</p>
         </div>
 
         <div class="tut-item">
-          <span class="tut-header diff"><i data-lucide="scale"></i> 3. Kenapa Harus Pakai Ini?</span>
+          <div class="tut-label"><span class="tut-num">03</span> Kenapa Harus Pakai Ini?</div>
           <div class="compare-grid">
             <div class="compare-box bad">
-              <strong>❌ Langsung render_template()</strong>
-              Saat user menekan tombol Refresh (F5), muncul dialog peringatan: <em>"Confirm Form Resubmission"</em> dan pesan terkirim dobel!
+              <span class="compare-tag bad">Langsung Render</span>
+              Saat user menekan F5/Refresh, browser memunculkan dialog resubmission dan pesan terkirim dobel.
             </div>
             <div class="compare-box good">
-              <strong>✅ Menerapkan Pola PRG</strong>
-              Browser dialihkan ke rute GET murni. Mau ditekan Refresh (F5) berkali-kali pun aman 100%, pesan tidak akan terkirim ganda!
+              <span class="compare-tag good">Pola PRG</span>
+              Browser dialihkan ke rute GET bersih. Ditekan refresh berkali-kali pun transaksi tetap aman.
             </div>
           </div>
         </div>
 
         <div class="analogy-box">
-          <strong>🎭 Analoginya (Biar Gampang Ingat):</strong> Pola PRG itu ibarat <strong>"Kasir Bioskop yang Memberi Tiket lalu Menyuruhmu Melangkah ke Pintu Masuk Teater"</strong>. Setelah uangmu diterima (POST), kasir menyuruhmu pindah antrean ke pintu studio (Redirect ke GET). Jika kamu bingung menoleh ke belakang (tekan tombol F5/Refresh), tiketmu tidak akan dipotong atau ditagih dua kali!
+          <div class="analogy-header"><i data-lucide="compass"></i> Analogi Dunia Nyata</div>
+          <p>Pola PRG itu ibarat <strong>kasir bioskop yang menyerahkan tiket lalu menyuruhmu melangkah ke pintu masuk teater</strong>. Setelah pembayaran diterima (POST), kasir mengarahkanmu ke lorong masuk (Redirect ke GET). Jika kamu bingung menoleh ke belakang (tekan F5), tiketmu tidak akan dipotong atau ditagih dua kali.</p>
         </div>
       </div>
 
@@ -1512,32 +1529,33 @@ def contact():
     <div class="cols c2 slide-body">
       <!-- KOLOM KIRI: TUTORIAL KONSEPTUAL -->
       <div class="pcard">
-        <div class="tut-item" style="margin-top:0">
-          <span class="tut-header what"><i data-lucide="book-open"></i> 1. Sebenarnya Ini Apa?</span>
+        <div class="tut-item">
+          <div class="tut-label"><span class="tut-num">01</span> Konsep Dasar</div>
           <p>Komponen antarmuka global berupa wadah alert satu kali tayang (<em>one-time notification</em>) di file template induk <code>templates/base.html</code>.</p>
         </div>
 
         <div class="tut-item">
-          <span class="tut-header why"><i data-lucide="lightbulb"></i> 2. Fungsinya Buat Apa?</span>
+          <div class="tut-label"><span class="tut-num">02</span> Fungsi &amp; Kegunaan</div>
           <p>Mengambil antrean notifikasi dari session Flask via <code>get_flashed_messages(with_categories=true)</code>, merendernya sebagai banner pop-up melayang di layar, lalu otomatis membersihkan memori session.</p>
         </div>
 
         <div class="tut-item">
-          <span class="tut-header diff"><i data-lucide="scale"></i> 3. Kenapa Harus Pakai Ini?</span>
+          <div class="tut-label"><span class="tut-num">03</span> Kenapa Harus Pakai Ini?</div>
           <div class="compare-grid">
             <div class="compare-box bad">
-              <strong>❌ Wadah Manual per File</strong>
-              Harus copy-paste kode alert di <code>contact.html</code>, <code>login.html</code>, dst. Boros baris kode dan rawan lupa stylingnya.
+              <span class="compare-tag bad">Wadah Manual</span>
+              Harus menyalin kode alert di setiap template terpisah (boros baris kode dan inkonsisten).
             </div>
             <div class="compare-box good">
-              <strong>✅ Wadah Terpusat di base.html</strong>
-              Cukup 1 kali pasang di layout induk, seluruh 6+ halaman website otomatis punya fitur notifikasi alert melayang yang konsisten!
+              <span class="compare-tag good">Terpusat di base.html</span>
+              Cukup 1 kali pasang di layout induk, seluruh 6+ rute website otomatis memiliki notifikasi melayang yang seragam.
             </div>
           </div>
         </div>
 
         <div class="analogy-box">
-          <strong>🎭 Analoginya (Biar Gampang Ingat):</strong> Flash message di <code>base.html</code> itu ibarat <strong>"Papan Reklame LED Pengumuman di Gerbang Utama Kampus"</strong>. Pihak kampus tidak perlu memasang speaker di tiap ruangan kelas satu per satu. Pasang 1 papan di gerbang utama, semua orang membaca pesan yang sama, dan setelah dibaca pengumuman itu otomatis berganti/lenyap!
+          <div class="analogy-header"><i data-lucide="compass"></i> Analogi Dunia Nyata</div>
+          <p>Flash message di <code>base.html</code> itu ibarat <strong>papan reklame LED pengumuman di gerbang utama kampus</strong>. Kampus tidak perlu memasang pengeras suara di setiap kelas satu per satu. Pasang 1 papan di pintu gerbang utama, semua orang membaca pesan yang sama, dan setelah dibaca papan langsung berganti.</p>
         </div>
       </div>
 
@@ -1592,32 +1610,33 @@ def contact():
     <div class="cols c2 slide-body">
       <!-- KOLOM KIRI: TUTORIAL KONSEPTUAL -->
       <div class="pcard">
-        <div class="tut-item" style="margin-top:0">
-          <span class="tut-header what"><i data-lucide="book-open"></i> 1. Sebenarnya Ini Apa?</span>
+        <div class="tut-item">
+          <div class="tut-label"><span class="tut-num">01</span> Konsep Dasar</div>
           <p>Fitur autentikasi kredensial pengguna yang menggabungkan seluruh materi P-05: Dynamic Routing, HTTP POST, Form Handling, dan <em>Flash Categories</em> (status respon).</p>
         </div>
 
         <div class="tut-item">
-          <span class="tut-header why"><i data-lucide="lightbulb"></i> 2. Fungsinya Buat Apa?</span>
-          <p>Mengecek keabsahan input username dan password (simulasi <code>admin</code> / <code>12345</code>), lalu menyajikan respons visual: pop-up merah jika gagal atau pop-up hijau jika berhasil.</p>
+          <div class="tut-label"><span class="tut-num">02</span> Fungsi &amp; Kegunaan</div>
+          <p>Mengecek keabsahan input username dan password (simulasi <code>admin</code> / <code>12345</code>), lalu menyajikan respons visual: notifikasi merah jika gagal atau pop-up hijau jika berhasil.</p>
         </div>
 
         <div class="tut-item">
-          <span class="tut-header diff"><i data-lucide="scale"></i> 3. Kenapa Harus Pakai Ini?</span>
+          <div class="tut-label"><span class="tut-num">03</span> Kenapa Harus Pakai Ini?</div>
           <div class="compare-grid">
             <div class="compare-box bad">
-              <strong>❌ Alert Polos</strong>
+              <span class="compare-tag bad">Alert Polos</span>
               User kebingungan memahami status aksi karena notifikasi sukses dan pesan kesalahan warnanya sama persis.
             </div>
             <div class="compare-box good">
-              <strong>✅ Flash Categories</strong>
-              Feedback instan &amp; jelas: Hijau menenangkan untuk login sukses, merah tegas untuk peringatan password salah.
+              <span class="compare-tag good">Flash Categories</span>
+              Feedback instan dan jelas: Hijau untuk login sukses, merah tegas untuk peringatan password salah.
             </div>
           </div>
         </div>
 
         <div class="analogy-box">
-          <strong>🎭 Analoginya (Biar Gampang Ingat):</strong> Flash Categories itu ibarat <strong>"Lampu Indikator Pintu Akses RFID Gedung"</strong>. Tempelkan kartu dan ketik PIN: jika benar, <strong>lampu hijau menyala ramah</strong> dan pintu terbuka (<code>success</code>); jika salah, <strong>lampu merah berbunyi tegas</strong> melarang masuk (<code>danger</code>).
+          <div class="analogy-header"><i data-lucide="compass"></i> Analogi Dunia Nyata</div>
+          <p>Flash Categories itu ibarat <strong>lampu indikator pintu akses RFID gedung</strong>. Tempelkan kartu dan ketik PIN: jika benar, lampu hijau menyala dan pintu terbuka (<code>success</code>); jika salah, lampu merah menyala melarang akses (<code>danger</code>).</p>
         </div>
       </div>
 
@@ -1820,12 +1839,12 @@ def login():
       </div>
       <div class="pcard">
         <h3>Daftar Periksa Mahasiswa</h3>
-        <ul style="list-style:none;display:grid;gap:10px;font-size:13.5px;color:var(--dim)">
-          <li class="chk" style="cursor:pointer">🔘 <code>app.secret_key</code> sudah terpasang di <code>app.py</code></li>
-          <li class="chk" style="cursor:pointer">🔘 Dynamic route <code>/blog/&lt;int:post_id&gt;</code> berfungsi dengan baik</li>
-          <li class="chk" style="cursor:pointer">🔘 Form kontak menggunakan <code>method="POST"</code> dan atribut <code>name</code></li>
-          <li class="chk" style="cursor:pointer">🔘 Flash messages tampil rapi di <code>templates/base.html</code></li>
-          <li class="chk" style="cursor:pointer">🔘 Kode sudah di-commit dan di-push ke repository GitHub Anda</li>
+        <ul class="checklist-items">
+          <li class="chk"><span class="chk-box"><i data-lucide="check"></i></span> <span><code>app.secret_key</code> sudah terpasang di <code>app.py</code></span></li>
+          <li class="chk"><span class="chk-box"><i data-lucide="check"></i></span> <span>Dynamic route <code>/blog/&lt;int:post_id&gt;</code> berfungsi dengan baik</span></li>
+          <li class="chk"><span class="chk-box"><i data-lucide="check"></i></span> <span>Form kontak menggunakan <code>method="POST"</code> dan atribut <code>name</code></span></li>
+          <li class="chk"><span class="chk-box"><i data-lucide="check"></i></span> <span>Flash messages tampil rapi di <code>templates/base.html</code></span></li>
+          <li class="chk"><span class="chk-box"><i data-lucide="check"></i></span> <span>Kode sudah di-commit dan di-push ke repository GitHub Anda</span></li>
         </ul>
       </div>
     </div>
@@ -1963,7 +1982,7 @@ if(btnSimGet && btnSimPost){
     btnSimPost.style.background = '#F1F5F9';
     btnSimPost.style.color = 'var(--dim)';
     btnSimPost.style.border = '1px solid #CBD5E1';
-    methodView.innerHTML = '<span style="font:700 11.5px/1 var(--mono);color:var(--accent);text-transform:uppercase">Format Request GET:</span><div class="sim-input-row" style="margin-top:10px;background:#F8FAFC"><span style="font:600 13px/1 var(--mono);color:var(--ink)">GET /contact?name=Budi&amp;email=budi@gmail.com HTTP/1.1</span></div><p style="font-size:13px;color:#B91C1C;margin-top:10px">⚠️ Data formulir terpampang di URL address bar browser dan tersimpan di riwayat browsing.</p>';
+    methodView.innerHTML = '<span style="font:700 11.5px/1 var(--mono);color:var(--accent);text-transform:uppercase">Format Request GET:</span><div class="sim-input-row" style="margin-top:10px;background:#F8FAFC"><span style="font:600 13px/1 var(--mono);color:var(--ink)">GET /contact?name=Budi&amp;email=budi@gmail.com HTTP/1.1</span></div><p style="font-size:12.5px;color:#991B1B;margin-top:10px;font-weight:500">Catatan: Data formulir terpampang di URL address bar browser dan tersimpan di riwayat browsing.</p>';
   };
   btnSimPost.onclick = () => {
     btnSimPost.style.background = 'var(--green)';
@@ -1972,7 +1991,7 @@ if(btnSimGet && btnSimPost){
     btnSimGet.style.background = '#F1F5F9';
     btnSimGet.style.color = 'var(--dim)';
     btnSimGet.style.border = '1px solid #CBD5E1';
-    methodView.innerHTML = '<span style="font:700 11.5px/1 var(--mono);color:var(--green);text-transform:uppercase">Format Request POST:</span><div class="sim-input-row" style="margin-top:10px;background:#F8FAFC"><span style="font:600 13px/1 var(--mono);color:var(--ink)">POST /contact HTTP/1.1 &bull; Content-Type: application/x-www-form-urlencoded</span></div><div class="cbox" style="margin-top:10px;padding:10px 14px"><pre style="padding:0"><code>[Request Body Tertutup]&#10;name=Budi&amp;email=budi@gmail.com&amp;message=Halo+Faiz</code></pre></div><p style="font-size:13px;color:#047857;margin-top:10px">✅ URL tetap bersih <code>/contact</code>. Seluruh data dikemas aman di dalam Request Body!</p>';
+    methodView.innerHTML = '<span style="font:700 11.5px/1 var(--mono);color:var(--green);text-transform:uppercase">Format Request POST:</span><div class="sim-input-row" style="margin-top:10px;background:#F8FAFC"><span style="font:600 13px/1 var(--mono);color:var(--ink)">POST /contact HTTP/1.1 &bull; Content-Type: application/x-www-form-urlencoded</span></div><div class="cbox" style="margin-top:10px;padding:10px 14px"><pre style="padding:0"><code>[Request Body Tertutup]&#10;name=Budi&amp;email=budi@gmail.com&amp;message=Halo+Faiz</code></pre></div><p style="font-size:12.5px;color:#047857;margin-top:10px;font-weight:500">Keterangan: URL tetap bersih <code>/contact</code>. Seluruh data dikemas aman di dalam Request Body.</p>';
   };
 }
 
@@ -2016,14 +2035,7 @@ $$('#rubric .rrow').forEach(row => {
 /* CHECKLIST TOGGLE */
 $$('.chk').forEach(c => {
   c.onclick = () => {
-    const isDone = c.innerHTML.includes('✅');
-    if(isDone){
-      c.innerHTML = c.innerHTML.replace('✅', '🔘');
-      c.style.color = 'var(--dim)';
-    } else {
-      c.innerHTML = c.innerHTML.replace('🔘', '✅');
-      c.style.color = '#059669';
-    }
+    c.classList.toggle('done');
   };
 });
 
