@@ -272,6 +272,23 @@ h2{
   font-weight:600;color:#0F172A;
 }
 
+/* PROGRESSIVE DISCLOSURE TABS (CARD TUTORIAL) */
+.pcard-tabs{
+  display:inline-flex;gap:4px;background:#F1F5F9;padding:3px;
+  border-radius:7px;margin-bottom:12px;border:1px solid #E2E8F0;
+}
+.ptab-btn{
+  background:transparent;border:none;font:600 11px/1 var(--mono);
+  color:#64748B;padding:5px 11px;border-radius:5px;cursor:pointer;
+  transition:all .15s ease;display:inline-flex;align-items:center;gap:5px;
+}
+.ptab-btn:hover{color:var(--ink)}
+.ptab-btn.on{
+  background:#FFFFFF;color:var(--accent);box-shadow:0 1px 3px rgba(15,23,42,0.08);
+}
+.ptab-pane{display:none}
+.ptab-pane.on{display:block}
+
 /* TUTORIAL CARD & COMPARISON STYLES (CLEAN TECH DOCS STYLE) */
 .tut-item{
   margin-top:11px;
@@ -948,35 +965,50 @@ code .</code></pre>
       <span class="guide-tag act"><i data-lucide="edit"></i> Edit Baris 1 &amp; Sisipkan secret_key</span>
     </div>
     <div class="cols c2 slide-body">
-      <!-- KOLOM KIRI: TUTORIAL KONSEPTUAL -->
+      <!-- KOLOM KIRI: TUTORIAL KONSEPTUAL (PROGRESSIVE DISCLOSURE) -->
       <div class="pcard">
-        <div class="tut-item">
-          <div class="tut-label"><span class="tut-num">01</span> Konsep Dasar</div>
-          <p>Inisialisasi 4 fungsi inti Flask untuk formulir (<code>request</code>, <code>redirect</code>, <code>url_for</code>, <code>flash</code>) serta kunci kriptografi rahasia (<code>app.secret_key</code>) di backend.</p>
+        <div class="pcard-tabs">
+          <button type="button" class="ptab-btn on" data-target="tab-core-s6"><i data-lucide="layers"></i> Ringkasan Inti</button>
+          <button type="button" class="ptab-btn" data-target="tab-detail-s6"><i data-lucide="compass"></i> Analogi &amp; Detail</button>
         </div>
 
-        <div class="tut-item">
-          <div class="tut-label"><span class="tut-num">02</span> Fungsi &amp; Kegunaan</div>
-          <p>Menangkap data formulir pengunjung, mengalihkan rute halaman, dan mengenkripsi session cookie agar isi notifikasi pop-up tidak bisa dimanipulasi dari peramban.</p>
-        </div>
+        <!-- TAB 1: RINGKASAN INTI (DEFAULT, RINGKAS & LEGA) -->
+        <div id="tab-core-s6" class="ptab-pane on">
+          <div class="tut-item">
+            <div class="tut-label"><span class="tut-num">01</span> Konsep Dasar</div>
+            <p>Inisialisasi 4 fungsi form Flask (<code>request</code>, <code>redirect</code>, <code>url_for</code>, <code>flash</code>) dan kunci kriptografi <code>app.secret_key</code>.</p>
+          </div>
 
-        <div class="tut-item">
-          <div class="tut-label"><span class="tut-num">03</span> Kenapa Harus Pakai Ini?</div>
-          <div class="compare-grid">
-            <div class="compare-box bad">
-              <span class="compare-tag bad">Tanpa secret_key</span>
-              Memanggil <code>flash()</code> memicu crash server: <em>RuntimeError: session unavailable</em>.
-            </div>
-            <div class="compare-box good">
-              <span class="compare-tag good">Dengan secret_key</span>
-              Fitur Session &amp; Flash Alert aktif 100%, siap menampilkan status feedback secara aman.
+          <div class="tut-item">
+            <div class="tut-label"><span class="tut-num">02</span> Fungsi Utama</div>
+            <p>Menangkap data input, mengalihkan rute, dan mengamankan cookie session agar pop-up alert tidak dapat dimanipulasi.</p>
+          </div>
+
+          <div class="tut-item">
+            <div class="tut-label"><span class="tut-num">03</span> Kenapa Harus Pakai Ini?</div>
+            <div class="compare-grid">
+              <div class="compare-box bad">
+                <span class="compare-tag bad">Tanpa secret_key</span>
+                Panggil <code>flash()</code> langsung crash server: <em>RuntimeError</em>.
+              </div>
+              <div class="compare-box good">
+                <span class="compare-tag good">Dengan secret_key</span>
+                Session &amp; Flash Alert aktif 100%, siap menampilkan status.
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="analogy-box">
-          <div class="analogy-header"><i data-lucide="compass"></i> Analogi Dunia Nyata</div>
-          <p><code>secret_key</code> itu ibarat <strong>stempel segel lilin cap raja</strong> pada amplop surat rahasia. Saat Flask menitipkan pesan alert ke cookie browser pengunjung, Flask menempelkan stempel segel ini. Jika isi cookie diubah secara ilegal, segelnya rusak dan server langsung menolaknya.</p>
+        <!-- TAB 2: ANALOGI & DETAIL (MENDALAM & MENARIK) -->
+        <div id="tab-detail-s6" class="ptab-pane">
+          <div class="analogy-box" style="margin-top:0">
+            <div class="analogy-header"><i data-lucide="compass"></i> Analogi Dunia Nyata</div>
+            <p><code>secret_key</code> itu ibarat <strong>stempel segel lilin cap raja</strong> pada amplop surat rahasia. Saat Flask menitipkan pesan alert ke cookie browser pengunjung, Flask menempelkan stempel segel ini. Jika isi cookie diubah di peramban, segelnya rusak dan server langsung menolaknya.</p>
+          </div>
+          <div class="tut-item" style="margin-top:10px">
+            <div class="tut-label"><span class="tut-num">INFO</span> Penjelasan Teknis</div>
+            <p>Kunci rahasia ini digunakan Flask untuk menandatangani (<em>cryptographic signing</em>) cookie session secara simetris, mencegah serangan <em>tampering</em> atau manipulasi variabel sesi oleh pihak luar.</p>
+          </div>
         </div>
       </div>
 
@@ -1032,35 +1064,50 @@ app.secret_key = 'kunci-rahasia-portofolio-faiz'
       <span class="guide-tag act"><i data-lucide="code"></i> Tambah data_blog &amp; Rute Dinamis</span>
     </div>
     <div class="cols c2 slide-body">
-      <!-- KOLOM KIRI: TUTORIAL KONSEPTUAL -->
+      <!-- KOLOM KIRI: TUTORIAL KONSEPTUAL (PROGRESSIVE DISCLOSURE) -->
       <div class="pcard">
-        <div class="tut-item">
-          <div class="tut-label"><span class="tut-num">01</span> Konsep Dasar</div>
-          <p>Fitur Flask untuk menangkap variabel dinamis dari URL menggunakan <em>converter</em> (<code>&lt;int:post_id&gt;</code> &amp; <code>&lt;nama&gt;</code>) serta database tiruan (<em>mock database</em>) <code>data_blog</code>.</p>
+        <div class="pcard-tabs">
+          <button type="button" class="ptab-btn on" data-target="tab-core-s7"><i data-lucide="layers"></i> Ringkasan Inti</button>
+          <button type="button" class="ptab-btn" data-target="tab-detail-s7"><i data-lucide="compass"></i> Analogi &amp; Detail</button>
         </div>
 
-        <div class="tut-item">
-          <div class="tut-label"><span class="tut-num">02</span> Fungsi &amp; Kegunaan</div>
-          <p>Menangkap nilai dari URL browser secara otomatis dan mengirimkannya ke fungsi Python (<code>blog_detail</code>) untuk mencari artikel yang cocok tanpa membuat ratusan fungsi terpisah.</p>
-        </div>
+        <!-- TAB 1: RINGKASAN INTI (DEFAULT, RINGKAS & LEGA) -->
+        <div id="tab-core-s7" class="ptab-pane on">
+          <div class="tut-item">
+            <div class="tut-label"><span class="tut-num">01</span> Konsep Dasar</div>
+            <p>Menerima variabel dinamis dari URL via converter <code>&lt;int:post_id&gt;</code> dan <code>&lt;nama&gt;</code> ke fungsi backend.</p>
+          </div>
 
-        <div class="tut-item">
-          <div class="tut-label"><span class="tut-num">03</span> Kenapa Harus Pakai Ini?</div>
-          <div class="compare-grid">
-            <div class="compare-box bad">
-              <span class="compare-tag bad">Routing Statis</span>
-              Harus membuat ratusan fungsi manual untuk ratusan artikel (<code>/blog1</code>, <code>/blog2</code>... tidak efisien).
-            </div>
-            <div class="compare-box good">
-              <span class="compare-tag good">Dynamic Routing</span>
-              Cukup 1 fungsi untuk jutaan artikel. Converter <code>&lt;int:&gt;</code> otomatis menolak non-angka dengan respon 404.
+          <div class="tut-item">
+            <div class="tut-label"><span class="tut-num">02</span> Alur Eksekusi</div>
+            <p>Ambil ID dari URL &rarr; Cari artikel cocok di <code>data_blog</code> &rarr; Kirim ke template Jinja2.</p>
+          </div>
+
+          <div class="tut-item">
+            <div class="tut-label"><span class="tut-num">03</span> Kenapa Harus Pakai Ini?</div>
+            <div class="compare-grid">
+              <div class="compare-box bad">
+                <span class="compare-tag bad">Routing Statis</span>
+                Butuh 100 fungsi manual untuk 100 artikel.
+              </div>
+              <div class="compare-box good">
+                <span class="compare-tag good">Dynamic Routing</span>
+                Cukup 1 fungsi menangani jutaan artikel + filter 404.
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="analogy-box">
-          <div class="analogy-header"><i data-lucide="compass"></i> Analogi Dunia Nyata</div>
-          <p>Dynamic Routing itu ibarat <strong>sistem nomor antrean bank atau nomor resi paket</strong>. Bank tidak membangun 1.000 loket untuk 1.000 nasabah. Cukup 1 loket serbaguna ber-scanner nomor antrean. Berapa pun nomor tiketmu (<code>/blog/1</code> atau <code>/blog/99</code>), loket langsung mengambilkan berkas yang tepat.</p>
+        <!-- TAB 2: ANALOGI & DETAIL (MENDALAM & MENARIK) -->
+        <div id="tab-detail-s7" class="ptab-pane">
+          <div class="analogy-box" style="margin-top:0">
+            <div class="analogy-header"><i data-lucide="compass"></i> Analogi Dunia Nyata</div>
+            <p>Dynamic Routing itu ibarat <strong>sistem nomor antrean bank atau resi paket</strong>. Bank tidak membangun 1.000 loket untuk 1.000 nasabah. Cukup 1 loket serbaguna ber-scanner nomor antrean. Berapa pun nomor tiketmu (<code>/blog/1</code> atau <code>/blog/99</code>), loket langsung mengambilkan berkas yang tepat.</p>
+          </div>
+          <div class="tut-item" style="margin-top:10px">
+            <div class="tut-label"><span class="tut-num">INFO</span> Converter Types</div>
+            <p>Flask mendukung beberapa tipe converter: <code>&lt;int:&gt;</code> untuk bilangan bulat, <code>&lt;string:&gt;</code> (default) untuk teks tanpa slash, dan <code>&lt;path:&gt;</code> untuk menerima slash URL.</p>
+          </div>
         </div>
       </div>
 
@@ -1123,35 +1170,50 @@ def user_greeting(nama):
       <span class="guide-tag act"><i data-lucide="code"></i> Ganti 6 Kartu Statis dengan Loop Jinja</span>
     </div>
     <div class="cols c2 slide-body">
-      <!-- KOLOM KIRI: TUTORIAL KONSEPTUAL -->
+      <!-- KOLOM KIRI: TUTORIAL KONSEPTUAL (PROGRESSIVE DISCLOSURE) -->
       <div class="pcard">
-        <div class="tut-item">
-          <div class="tut-label"><span class="tut-num">01</span> Konsep Dasar</div>
-          <p>Integrasi template engine Jinja2 (<code>{% for %}</code>) dengan fungsi generator URL otomatis Flask yaitu <code>url_for('nama_fungsi', argumen)</code> di dalam file <code>templates/blog.html</code>.</p>
+        <div class="pcard-tabs">
+          <button type="button" class="ptab-btn on" data-target="tab-core-s8"><i data-lucide="layers"></i> Ringkasan Inti</button>
+          <button type="button" class="ptab-btn" data-target="tab-detail-s8"><i data-lucide="compass"></i> Analogi &amp; Detail</button>
         </div>
 
-        <div class="tut-item">
-          <div class="tut-label"><span class="tut-num">02</span> Fungsi &amp; Kegunaan</div>
-          <p>Mengganti kartu HTML statis menjadi perulangan dinamis, serta membuat link tombol <em>"Baca Selengkapnya"</em> yang otomatis terhubung ke detail masing-masing ID artikel (<code>/blog/1</code>, <code>/blog/2</code>, dst).</p>
-        </div>
+        <!-- TAB 1: RINGKASAN INTI (DEFAULT, RINGKAS & LEGA) -->
+        <div id="tab-core-s8" class="ptab-pane on">
+          <div class="tut-item">
+            <div class="tut-label"><span class="tut-num">01</span> Konsep Dasar</div>
+            <p>Integrasi loop Jinja2 <code>{% for %}</code> dengan generator URL otomatis Flask <code>url_for()</code>.</p>
+          </div>
 
-        <div class="tut-item">
-          <div class="tut-label"><span class="tut-num">03</span> Kenapa Harus Pakai Ini?</div>
-          <div class="compare-grid">
-            <div class="compare-box bad">
-              <span class="compare-tag bad">Link Manual (href)</span>
-              Jika nama rute di backend diubah jadi <code>/artikel/</code>, Anda wajib mengedit puluhan tag link satu per satu.
-            </div>
-            <div class="compare-box good">
-              <span class="compare-tag good">url_for() Dinamis</span>
-              Prinsip DRY: Jika nama rute di <code>app.py</code> diganti, seluruh link di template otomatis menyesuaikan.
+          <div class="tut-item">
+            <div class="tut-label"><span class="tut-num">02</span> Fungsi Utama</div>
+            <p>Mengubah kartu HTML statis menjadi dinamis, serta mengaitkan tombol ke rute detail tiap ID artikel.</p>
+          </div>
+
+          <div class="tut-item">
+            <div class="tut-label"><span class="tut-num">03</span> Kenapa Harus Pakai Ini?</div>
+            <div class="compare-grid">
+              <div class="compare-box bad">
+                <span class="compare-tag bad">Link Manual (href)</span>
+                Jika nama rute diubah, wajib edit puluhan file HTML manual.
+              </div>
+              <div class="compare-box good">
+                <span class="compare-tag good">url_for() Dinamis</span>
+                Prinsip DRY: Seluruh link otomatis sinkron dengan backend.
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="analogy-box">
-          <div class="analogy-header"><i data-lucide="compass"></i> Analogi Dunia Nyata</div>
-          <p>Fungsi <code>url_for()</code> itu ibarat <strong>buku kontak di smartphone</strong>. Kamu menghubungi teman dengan memilih nama kontak, bukan mengetik ulang 12 digit nomornya setiap saat. Jika nomornya berganti (rute URL diubah), cukup ubah di satu tempat.</p>
+        <!-- TAB 2: ANALOGI & DETAIL (MENDALAM & MENARIK) -->
+        <div id="tab-detail-s8" class="ptab-pane">
+          <div class="analogy-box" style="margin-top:0">
+            <div class="analogy-header"><i data-lucide="compass"></i> Analogi Dunia Nyata</div>
+            <p>Fungsi <code>url_for()</code> itu ibarat <strong>buku kontak di smartphone</strong>. Kamu menghubungi teman dengan memilih nama kontak, bukan mengetik ulang 12 digit nomornya setiap saat. Jika nomornya berganti (rute URL diubah), cukup ubah di satu tempat.</p>
+          </div>
+          <div class="tut-item" style="margin-top:10px">
+            <div class="tut-label"><span class="tut-num">INFO</span> Sintaks Penulisan</div>
+            <p>Argumen pertama adalah <strong>nama fungsi view</strong> di Python (<code>'blog_detail'</code>), diikuti argumen variabel (<code>post_id=item.id</code>). Jangan gunakan nama path URL mentah!</p>
+          </div>
         </div>
       </div>
 
@@ -1206,35 +1268,50 @@ def user_greeting(nama):
       <span class="guide-tag act" style="background:rgba(217,119,6,0.12);color:#B45309;border-color:rgba(217,119,6,0.25)"><i data-lucide="sparkles"></i> Buat File Baru</span>
     </div>
     <div class="cols c2 slide-body">
-      <!-- KOLOM KIRI: TUTORIAL KONSEPTUAL -->
+      <!-- KOLOM KIRI: TUTORIAL KONSEPTUAL (PROGRESSIVE DISCLOSURE) -->
       <div class="pcard">
-        <div class="tut-item">
-          <div class="tut-label"><span class="tut-num">01</span> Konsep Dasar</div>
-          <p>Template halaman tunggal Jinja2 yang mewarisi layout induk (<code>{% extends 'base.html' %}</code>) dan dilengkapi pengkondisian logika <code>{% if artikel %} ... {% else %}</code>.</p>
+        <div class="pcard-tabs">
+          <button type="button" class="ptab-btn on" data-target="tab-core-s9"><i data-lucide="layers"></i> Ringkasan Inti</button>
+          <button type="button" class="ptab-btn" data-target="tab-detail-s9"><i data-lucide="compass"></i> Analogi &amp; Detail</button>
         </div>
 
-        <div class="tut-item">
-          <div class="tut-label"><span class="tut-num">02</span> Fungsi &amp; Kegunaan</div>
-          <p>Menampilkan isi lengkap sebuah artikel saat ID ditemukan di database, atau menyajikan tampilan <em>Empty State</em> jika ID tidak tersedia tanpa membuat web crash.</p>
-        </div>
+        <!-- TAB 1: RINGKASAN INTI (DEFAULT, RINGKAS & LEGA) -->
+        <div id="tab-core-s9" class="ptab-pane on">
+          <div class="tut-item">
+            <div class="tut-label"><span class="tut-num">01</span> Konsep Dasar</div>
+            <p>Template detail Jinja2 (<code>extends 'base.html'</code>) dengan percabangan <code>{% if artikel %}</code>.</p>
+          </div>
 
-        <div class="tut-item">
-          <div class="tut-label"><span class="tut-num">03</span> Kenapa Harus Pakai Ini?</div>
-          <div class="compare-grid">
-            <div class="compare-box bad">
-              <span class="compare-tag bad">Tanpa {% if %}</span>
-              Jinja mencari atribut pada nilai <code>None</code>. Web langsung error: <em>UndefinedError</em>.
-            </div>
-            <div class="compare-box good">
-              <span class="compare-tag good">Dengan Proteksi IF</span>
-              Tampilan profesional (UX bersih), web tetap utuh dengan panduan tombol kembali yang jelas.
+          <div class="tut-item">
+            <div class="tut-label"><span class="tut-num">02</span> Fungsi Utama</div>
+            <p>Menampilkan konten artikel jika ID valid, atau memunculkan <em>Empty State</em> jika ID tidak ada.</p>
+          </div>
+
+          <div class="tut-item">
+            <div class="tut-label"><span class="tut-num">03</span> Kenapa Harus Pakai Ini?</div>
+            <div class="compare-grid">
+              <div class="compare-box bad">
+                <span class="compare-tag bad">Tanpa IF</span>
+                Web crash: <em>UndefinedError</em> saat ID tidak ditemukan.
+              </div>
+              <div class="compare-box good">
+                <span class="compare-tag good">Proteksi IF</span>
+                Web tetap utuh &amp; menampilkan pesan ramah bagi pengguna.
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="analogy-box">
-          <div class="analogy-header"><i data-lucide="compass"></i> Analogi Dunia Nyata</div>
-          <p>Template dinamis dan Empty State itu ibarat <strong>layar mesin ATM</strong>. Bank hanya mendesain 1 tampilan untuk jutaan nasabah. Jika nasabah salah mengetik nomor rekening, layar dengan sopan menampilkan: <em>"Rekening Tidak Ditemukan"</em>, tanpa membuat sistem ATM rusak.</p>
+        <!-- TAB 2: ANALOGI & DETAIL (MENDALAM & MENARIK) -->
+        <div id="tab-detail-s9" class="ptab-pane">
+          <div class="analogy-box" style="margin-top:0">
+            <div class="analogy-header"><i data-lucide="compass"></i> Analogi Dunia Nyata</div>
+            <p>Template dinamis dan Empty State itu ibarat <strong>layar mesin ATM</strong>. Bank hanya mendesain 1 tampilan untuk jutaan nasabah. Jika nasabah salah mengetik nomor rekening, layar dengan sopan menampilkan: <em>"Rekening Tidak Ditemukan"</em>, tanpa membuat sistem ATM rusak.</p>
+          </div>
+          <div class="tut-item" style="margin-top:10px">
+            <div class="tut-label"><span class="tut-num">INFO</span> Best Practice UX</div>
+            <p>Empty state wajib menyertakan <strong>Call to Action (CTA)</strong>, seperti tombol <em>"&larr; Kembali ke Daftar Artikel"</em> agar pengunjung tidak tersesat atau menekan tombol back berulang kali.</p>
+          </div>
         </div>
       </div>
 
@@ -1359,35 +1436,50 @@ def user_greeting(nama):
       <span class="guide-tag act"><i data-lucide="code"></i> Pasang method="POST" &amp; Atribut name</span>
     </div>
     <div class="cols c2 slide-body">
-      <!-- KOLOM KIRI: TUTORIAL KONSEPTUAL -->
+      <!-- KOLOM KIRI: TUTORIAL KONSEPTUAL (PROGRESSIVE DISCLOSURE) -->
       <div class="pcard">
-        <div class="tut-item">
-          <div class="tut-label"><span class="tut-num">01</span> Konsep Dasar</div>
-          <p>Pengaturan formulir frontend HTML dengan protokol pengiriman <code>method="POST"</code> dan atribut penamaan data <code>name="..."</code> pada setiap kolom input.</p>
+        <div class="pcard-tabs">
+          <button type="button" class="ptab-btn on" data-target="tab-core-s12"><i data-lucide="layers"></i> Ringkasan Inti</button>
+          <button type="button" class="ptab-btn" data-target="tab-detail-s12"><i data-lucide="compass"></i> Analogi &amp; Detail</button>
         </div>
 
-        <div class="tut-item">
-          <div class="tut-label"><span class="tut-num">02</span> Fungsi &amp; Kegunaan</div>
-          <p>Mengirimkan data masukan pengunjung (nama, email, pesan) ke backend di dalam payload <em>Request Body</em> yang tertutup, sekaligus memberi kunci pemanggil agar Flask bisa membaca isi tiap kolom.</p>
-        </div>
+        <!-- TAB 1: RINGKASAN INTI (DEFAULT, RINGKAS & LEGA) -->
+        <div id="tab-core-s12" class="ptab-pane on">
+          <div class="tut-item">
+            <div class="tut-label"><span class="tut-num">01</span> Konsep Dasar</div>
+            <p>Formulir HTML dengan <code>method="POST"</code> dan atribut penamaan <code>name="..."</code> pada setiap input.</p>
+          </div>
 
-        <div class="tut-item">
-          <div class="tut-label"><span class="tut-num">03</span> Kenapa Harus Pakai Ini?</div>
-          <div class="compare-grid">
-            <div class="compare-box bad">
-              <span class="compare-tag bad">Metode GET</span>
-              Data pribadi terpampang telanjang di address bar URL: <code>/contact?name=Budi&amp;email=...</code>.
-            </div>
-            <div class="compare-box good">
-              <span class="compare-tag good">Metode POST</span>
-              URL bersih rapi <code>/contact</code>, data tertutup aman. Tanpa atribut <code>name</code>, Flask menerima <code>None</code>.
+          <div class="tut-item">
+            <div class="tut-label"><span class="tut-num">02</span> Fungsi Utama</div>
+            <p>Mengirim data via <em>Request Body</em> tertutup dan memberi key agar Flask bisa membaca isi tiap kolom.</p>
+          </div>
+
+          <div class="tut-item">
+            <div class="tut-label"><span class="tut-num">03</span> Kenapa Harus Pakai Ini?</div>
+            <div class="compare-grid">
+              <div class="compare-box bad">
+                <span class="compare-tag bad">Metode GET</span>
+                Data terpampang di URL bar: <code>/contact?name=...</code>.
+              </div>
+              <div class="compare-box good">
+                <span class="compare-tag good">Metode POST</span>
+                URL bersih <code>/contact</code>, data tertutup aman di body.
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="analogy-box">
-          <div class="analogy-header"><i data-lucide="compass"></i> Analogi Dunia Nyata</div>
-          <p>Pengiriman form GET vs POST itu persis seperti <strong>kartu pos terbuka vs surat dalam amplop tertutup</strong>. Kartu pos (GET) isinya terbaca oleh siapapun di jalan (URL bar). Sedangkan amplop tertutup (POST) menyembunyikan rapat surat rahasiamu di badan amplop (Request Body).</p>
+        <!-- TAB 2: ANALOGI & DETAIL (MENDALAM & MENARIK) -->
+        <div id="tab-detail-s12" class="ptab-pane">
+          <div class="analogy-box" style="margin-top:0">
+            <div class="analogy-header"><i data-lucide="compass"></i> Analogi Dunia Nyata</div>
+            <p>Pengiriman form GET vs POST itu persis seperti <strong>kartu pos terbuka vs surat dalam amplop tertutup</strong>. Kartu pos (GET) isinya terbaca oleh siapapun di jalan (URL bar). Sedangkan amplop tertutup (POST) menyembunyikan rapat surat rahasiamu di badan amplop (Request Body).</p>
+          </div>
+          <div class="tut-item" style="margin-top:10px">
+            <div class="tut-label"><span class="tut-num">INFO</span> Atribut name vs id</div>
+            <p>Flask <strong>hanya</strong> membaca nilai input berdasarkan atribut <code>name</code> (melalui <code>request.form['nama']</code>). Atribut <code>id</code> hanya berguna untuk selector CSS dan JavaScript di sisi browser!</p>
+          </div>
         </div>
       </div>
 
@@ -1444,35 +1536,50 @@ def user_greeting(nama):
       <span class="guide-tag act"><i data-lucide="edit"></i> Modifikasi def contact() Lama</span>
     </div>
     <div class="cols c2 slide-body">
-      <!-- KOLOM KIRI: TUTORIAL KONSEPTUAL -->
+      <!-- KOLOM KIRI: TUTORIAL KONSEPTUAL (PROGRESSIVE DISCLOSURE) -->
       <div class="pcard">
-        <div class="tut-item">
-          <div class="tut-label"><span class="tut-num">01</span> Konsep Dasar</div>
-          <p>Pola arsitektur standar web <strong>Post/Redirect/Get (PRG)</strong> di backend Flask untuk memisahkan proses penerimaan data formulir dengan proses penampilan halaman.</p>
+        <div class="pcard-tabs">
+          <button type="button" class="ptab-btn on" data-target="tab-core-s13"><i data-lucide="layers"></i> Ringkasan Inti</button>
+          <button type="button" class="ptab-btn" data-target="tab-detail-s13"><i data-lucide="compass"></i> Analogi &amp; Detail</button>
         </div>
 
-        <div class="tut-item">
-          <div class="tut-label"><span class="tut-num">02</span> Fungsi &amp; Kegunaan</div>
-          <p>Menangkap data kiriman form via <code>request.form.get()</code>, membuat flash message, lalu mengalihkan peramban (HTTP 302 Redirect) kembali ke method GET agar halaman bersih.</p>
-        </div>
+        <!-- TAB 1: RINGKASAN INTI (DEFAULT, RINGKAS & LEGA) -->
+        <div id="tab-core-s13" class="ptab-pane on">
+          <div class="tut-item">
+            <div class="tut-label"><span class="tut-num">01</span> Konsep Dasar</div>
+            <p>Pola arsitektur standar web <strong>Post/Redirect/Get (PRG)</strong> untuk memisahkan pengiriman data dengan rendering halaman.</p>
+          </div>
 
-        <div class="tut-item">
-          <div class="tut-label"><span class="tut-num">03</span> Kenapa Harus Pakai Ini?</div>
-          <div class="compare-grid">
-            <div class="compare-box bad">
-              <span class="compare-tag bad">Langsung Render</span>
-              Saat user menekan F5/Refresh, browser memunculkan dialog resubmission dan pesan terkirim dobel.
-            </div>
-            <div class="compare-box good">
-              <span class="compare-tag good">Pola PRG</span>
-              Browser dialihkan ke rute GET bersih. Ditekan refresh berkali-kali pun transaksi tetap aman.
+          <div class="tut-item">
+            <div class="tut-label"><span class="tut-num">02</span> Fungsi Utama</div>
+            <p>Membaca <code>request.form</code>, memicu <code>flash()</code>, lalu mengalihkan browser (HTTP 302) kembali ke method GET.</p>
+          </div>
+
+          <div class="tut-item">
+            <div class="tut-label"><span class="tut-num">03</span> Kenapa Harus Pakai Ini?</div>
+            <div class="compare-grid">
+              <div class="compare-box bad">
+                <span class="compare-tag bad">Langsung Render</span>
+                Tekan F5 memicu resubmission form &amp; data terkirim ganda.
+              </div>
+              <div class="compare-box good">
+                <span class="compare-tag good">Pola PRG</span>
+                Dialihkan ke GET bersih. Refresh berkali-kali tetap aman.
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="analogy-box">
-          <div class="analogy-header"><i data-lucide="compass"></i> Analogi Dunia Nyata</div>
-          <p>Pola PRG itu ibarat <strong>kasir bioskop yang menyerahkan tiket lalu menyuruhmu melangkah ke pintu masuk teater</strong>. Setelah pembayaran diterima (POST), kasir mengarahkanmu ke lorong masuk (Redirect ke GET). Jika kamu bingung menoleh ke belakang (tekan F5), tiketmu tidak akan dipotong atau ditagih dua kali.</p>
+        <!-- TAB 2: ANALOGI & DETAIL (MENDALAM & MENARIK) -->
+        <div id="tab-detail-s13" class="ptab-pane">
+          <div class="analogy-box" style="margin-top:0">
+            <div class="analogy-header"><i data-lucide="compass"></i> Analogi Dunia Nyata</div>
+            <p>Pola PRG itu ibarat <strong>kasir bioskop yang menyerahkan tiket lalu menyuruhmu melangkah ke pintu teater</strong>. Setelah pembayaran diterima (POST), kasir mengarahkanmu ke lorong masuk (Redirect ke GET). Jika kamu bingung menoleh ke belakang (tekan F5), tiketmu tidak akan dipotong atau ditagih dua kali.</p>
+          </div>
+          <div class="tut-item" style="margin-top:10px">
+            <div class="tut-label"><span class="tut-num">INFO</span> Alur HTTP 302 Redirect</div>
+            <p>Fungsi <code>redirect(url_for('contact'))</code> mengirim status HTTP <code>302 Found</code> ke browser bersama header <code>Location</code>. Browser seketika membuat request baru <code>GET /contact</code>, sehingga form input dikosongkan kembali.</p>
+          </div>
         </div>
       </div>
 
@@ -1527,35 +1634,50 @@ def contact():
       <span class="guide-tag act"><i data-lucide="code"></i> Pasang Wadah get_flashed_messages</span>
     </div>
     <div class="cols c2 slide-body">
-      <!-- KOLOM KIRI: TUTORIAL KONSEPTUAL -->
+      <!-- KOLOM KIRI: TUTORIAL KONSEPTUAL (PROGRESSIVE DISCLOSURE) -->
       <div class="pcard">
-        <div class="tut-item">
-          <div class="tut-label"><span class="tut-num">01</span> Konsep Dasar</div>
-          <p>Komponen antarmuka global berupa wadah alert satu kali tayang (<em>one-time notification</em>) di file template induk <code>templates/base.html</code>.</p>
+        <div class="pcard-tabs">
+          <button type="button" class="ptab-btn on" data-target="tab-core-s14"><i data-lucide="layers"></i> Ringkasan Inti</button>
+          <button type="button" class="ptab-btn" data-target="tab-detail-s14"><i data-lucide="compass"></i> Analogi &amp; Detail</button>
         </div>
 
-        <div class="tut-item">
-          <div class="tut-label"><span class="tut-num">02</span> Fungsi &amp; Kegunaan</div>
-          <p>Mengambil antrean notifikasi dari session Flask via <code>get_flashed_messages(with_categories=true)</code>, merendernya sebagai banner pop-up melayang di layar, lalu otomatis membersihkan memori session.</p>
-        </div>
+        <!-- TAB 1: RINGKASAN INTI (DEFAULT, RINGKAS & LEGA) -->
+        <div id="tab-core-s14" class="ptab-pane on">
+          <div class="tut-item">
+            <div class="tut-label"><span class="tut-num">01</span> Konsep Dasar</div>
+            <p>Wadah notifikasi satu kali tayang (<em>one-time alert</em>) terpusat di layout induk <code>templates/base.html</code>.</p>
+          </div>
 
-        <div class="tut-item">
-          <div class="tut-label"><span class="tut-num">03</span> Kenapa Harus Pakai Ini?</div>
-          <div class="compare-grid">
-            <div class="compare-box bad">
-              <span class="compare-tag bad">Wadah Manual</span>
-              Harus menyalin kode alert di setiap template terpisah (boros baris kode dan inkonsisten).
-            </div>
-            <div class="compare-box good">
-              <span class="compare-tag good">Terpusat di base.html</span>
-              Cukup 1 kali pasang di layout induk, seluruh 6+ rute website otomatis memiliki notifikasi melayang yang seragam.
+          <div class="tut-item">
+            <div class="tut-label"><span class="tut-num">02</span> Fungsi Utama</div>
+            <p>Mengambil antrean flash via <code>get_flashed_messages()</code>, menampilkannya, lalu membersihkan session.</p>
+          </div>
+
+          <div class="tut-item">
+            <div class="tut-label"><span class="tut-num">03</span> Kenapa Harus Pakai Ini?</div>
+            <div class="compare-grid">
+              <div class="compare-box bad">
+                <span class="compare-tag bad">Wadah Manual</span>
+                Menyalin kode alert di setiap template terpisah (boros &amp; tidak seragam).
+              </div>
+              <div class="compare-box good">
+                <span class="compare-tag good">Terpusat di base.html</span>
+                1 kali pasang di induk, seluruh rute website otomatis memiliki alert siap pakai.
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="analogy-box">
-          <div class="analogy-header"><i data-lucide="compass"></i> Analogi Dunia Nyata</div>
-          <p>Flash message di <code>base.html</code> itu ibarat <strong>papan reklame LED pengumuman di gerbang utama kampus</strong>. Kampus tidak perlu memasang pengeras suara di setiap kelas satu per satu. Pasang 1 papan di pintu gerbang utama, semua orang membaca pesan yang sama, dan setelah dibaca papan langsung berganti.</p>
+        <!-- TAB 2: ANALOGI & DETAIL (MENDALAM & MENARIK) -->
+        <div id="tab-detail-s14" class="ptab-pane">
+          <div class="analogy-box" style="margin-top:0">
+            <div class="analogy-header"><i data-lucide="compass"></i> Analogi Dunia Nyata</div>
+            <p>Flash message di <code>base.html</code> itu ibarat <strong>papan reklame LED di gerbang utama kampus</strong>. Kampus tidak perlu memasang pengeras suara di setiap kelas satu per satu. Cukup pasang 1 papan di gerbang utama, semua orang membaca pesan yang sama, dan setelah dibaca papan langsung berganti.</p>
+          </div>
+          <div class="tut-item" style="margin-top:10px">
+            <div class="tut-label"><span class="tut-num">INFO</span> Siklus Hidup Pesan Flash</div>
+            <p>Begitu fungsi <code>get_flashed_messages()</code> selesai dipanggil oleh Jinja2, Flask seketika menghapus pesan tersebut dari <em>signed session cookie</em>. Jika halaman di-refresh, pesan otomatis lenyap tanpa meninggalkan jejak.</p>
+          </div>
         </div>
       </div>
 
@@ -1608,35 +1730,50 @@ def contact():
       <span class="guide-tag act" style="background:rgba(217,119,6,0.12);color:#B45309;border-color:rgba(217,119,6,0.25)"><i data-lucide="sparkles"></i> Latihan Mandiri Modul</span>
     </div>
     <div class="cols c2 slide-body">
-      <!-- KOLOM KIRI: TUTORIAL KONSEPTUAL -->
+      <!-- KOLOM KIRI: TUTORIAL KONSEPTUAL (PROGRESSIVE DISCLOSURE) -->
       <div class="pcard">
-        <div class="tut-item">
-          <div class="tut-label"><span class="tut-num">01</span> Konsep Dasar</div>
-          <p>Fitur autentikasi kredensial pengguna yang menggabungkan seluruh materi P-05: Dynamic Routing, HTTP POST, Form Handling, dan <em>Flash Categories</em> (status respon).</p>
+        <div class="pcard-tabs">
+          <button type="button" class="ptab-btn on" data-target="tab-core-s15"><i data-lucide="layers"></i> Ringkasan Inti</button>
+          <button type="button" class="ptab-btn" data-target="tab-detail-s15"><i data-lucide="compass"></i> Analogi &amp; Detail</button>
         </div>
 
-        <div class="tut-item">
-          <div class="tut-label"><span class="tut-num">02</span> Fungsi &amp; Kegunaan</div>
-          <p>Mengecek keabsahan input username dan password (simulasi <code>admin</code> / <code>12345</code>), lalu menyajikan respons visual: notifikasi merah jika gagal atau pop-up hijau jika berhasil.</p>
-        </div>
+        <!-- TAB 1: RINGKASAN INTI (DEFAULT, RINGKAS & LEGA) -->
+        <div id="tab-core-s15" class="ptab-pane on">
+          <div class="tut-item">
+            <div class="tut-label"><span class="tut-num">01</span> Konsep Dasar</div>
+            <p>Fitur autentikasi form: validasi kredensial simulasi dan pemberian respon status via <em>Flash Categories</em>.</p>
+          </div>
 
-        <div class="tut-item">
-          <div class="tut-label"><span class="tut-num">03</span> Kenapa Harus Pakai Ini?</div>
-          <div class="compare-grid">
-            <div class="compare-box bad">
-              <span class="compare-tag bad">Alert Polos</span>
-              User kebingungan memahami status aksi karena notifikasi sukses dan pesan kesalahan warnanya sama persis.
-            </div>
-            <div class="compare-box good">
-              <span class="compare-tag good">Flash Categories</span>
-              Feedback instan dan jelas: Hijau untuk login sukses, merah tegas untuk peringatan password salah.
+          <div class="tut-item">
+            <div class="tut-label"><span class="tut-num">02</span> Fungsi Utama</div>
+            <p>Mengecek user &amp; password (<code>admin</code> / <code>12345</code>), lalu menyajikan visual hijau (sukses) atau merah (gagal).</p>
+          </div>
+
+          <div class="tut-item">
+            <div class="tut-label"><span class="tut-num">03</span> Kenapa Harus Pakai Ini?</div>
+            <div class="compare-grid">
+              <div class="compare-box bad">
+                <span class="compare-tag bad">Alert Polos</span>
+                Warna sama, user sulit membedakan sukses vs error fatal.
+              </div>
+              <div class="compare-box good">
+                <span class="compare-tag good">Flash Categories</span>
+                Warna tegas: hijau sukses login vs merah jika salah password.
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="analogy-box">
-          <div class="analogy-header"><i data-lucide="compass"></i> Analogi Dunia Nyata</div>
-          <p>Flash Categories itu ibarat <strong>lampu indikator pintu akses RFID gedung</strong>. Tempelkan kartu dan ketik PIN: jika benar, lampu hijau menyala dan pintu terbuka (<code>success</code>); jika salah, lampu merah menyala melarang akses (<code>danger</code>).</p>
+        <!-- TAB 2: ANALOGI & DETAIL (MENDALAM & MENARIK) -->
+        <div id="tab-detail-s15" class="ptab-pane">
+          <div class="analogy-box" style="margin-top:0">
+            <div class="analogy-header"><i data-lucide="compass"></i> Analogi Dunia Nyata</div>
+            <p>Flash Categories itu ibarat <strong>lampu indikator pintu akses RFID gedung</strong>. Tempelkan kartu dan ketik PIN: jika benar, lampu hijau menyala dan pintu terbuka (<code>success</code>); jika salah, lampu merah menyala melarang akses (<code>danger</code>).</p>
+          </div>
+          <div class="tut-item" style="margin-top:10px">
+            <div class="tut-label"><span class="tut-num">INFO</span> Integrasi CSS Otomatis</div>
+            <p>Nama kategori pada <code>flash(..., 'danger')</code> dipetakan langsung ke class CSS HTML <code>.flash-danger</code> yang memberi warna latar merah transparan dan border tegas secara otomatis.</p>
+          </div>
         </div>
       </div>
 
@@ -2037,6 +2174,17 @@ $$('.chk').forEach(c => {
   c.onclick = () => {
     c.classList.toggle('done');
   };
+});
+
+/* PROGRESSIVE DISCLOSURE TABS */
+document.addEventListener('click', e => {
+  const btn = e.target.closest('.ptab-btn');
+  if(!btn) return;
+  const card = btn.closest('.pcard');
+  if(!card) return;
+  const targetId = btn.dataset.target;
+  card.querySelectorAll('.ptab-btn').forEach(b => b.classList.toggle('on', b === btn));
+  card.querySelectorAll('.ptab-pane').forEach(p => p.classList.toggle('on', p.id === targetId));
 });
 
 /* DEADLINE TIMER */
