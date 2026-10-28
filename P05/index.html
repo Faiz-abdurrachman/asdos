@@ -770,33 +770,33 @@ h2{
   <div class="content">
     <span class="kick"><i data-lucide="alert-triangle"></i> Masalah Nyata</span>
     <h2>Kenapa Butuh Dynamic Routing?</h2>
-    <p class="sub">Bayangkan jika website Anda nantinya memiliki puluhan artikel atau catatan perkuliahan:</p>
+    <p class="sub">Bayangkan jika website kantin kampus memiliki puluhan hingga ratusan menu makanan &amp; minuman:</p>
     <div class="cols c2 slide-body">
       <div class="pcard" style="border-color:#E2E8F0;background:#F8FAFC">
         <h3 style="color:#475569">Pendekatan Statis (Tanpa Dynamic Route)</h3>
         <p style="margin-bottom:12px">Harus membuat puluhan hingga ratusan rute berbeda di <code>app.py</code> secara manual:</p>
         <div class="cbox">
-          <pre><code>@app.route('/artikel/1')
-def art1():
-    return render_template('art1.html')
+          <pre><code>@app.route('/menu/1')
+def m1():
+    return render_template('m1.html')
 
-@app.route('/artikel/2')
-def art2():
-    return render_template('art2.html')
-# ... diulang manual untuk setiap artikel baru</code></pre>
+@app.route('/menu/2')
+def m2():
+    return render_template('m2.html')
+# ... diulang manual untuk setiap menu baru</code></pre>
         </div>
       </div>
       <div class="pcard" style="border-color:#BBF7D0;background:#F0FDF4">
         <h3 style="color:#15803D">Pendekatan Dinamis (Variable Rules)</h3>
-        <p style="margin-bottom:12px">Cukup <strong>1 Rute Dinamis</strong> di Flask untuk melayani ribuan artikel sekaligus:</p>
+        <p style="margin-bottom:12px">Cukup <strong>1 Rute Dinamis</strong> di Flask untuk melayani ratusan menu sekaligus:</p>
         <div class="cbox">
-          <pre><code>@app.route('/artikel/&lt;int:id&gt;')
-def detail_artikel(id):
+          <pre><code>@app.route('/menu/&lt;int:id&gt;')
+def detail_menu(id):
     # id otomatis diekstrak dari URL
-    artikel = cari_artikel(id)
+    menu = cari_menu(id)
     return render_template(
         'detail.html',
-        artikel=artikel,
+        menu=menu,
         id=id
     )</code></pre>
         </div>
@@ -829,7 +829,7 @@ def detail_artikel(id):
             </tr>
             <tr style="border-bottom:1px solid #F1F5F9">
               <td style="padding:10px 6px"><code>int</code></td>
-              <td style="padding:10px 6px"><code>/artikel/&lt;int:id&gt;</code></td>
+              <td style="padding:10px 6px"><code>/menu/&lt;int:id&gt;</code></td>
               <td style="padding:10px 6px;color:var(--dim)">Hanya menerima bilangan bulat positif (angka 0-9)</td>
             </tr>
             <tr style="border-bottom:1px solid #F1F5F9">
@@ -865,7 +865,7 @@ def detail_artikel(id):
     <div class="sim-box slide-body">
       <label style="font:600 13px/1 var(--sans);color:var(--dim)">Ketik URL yang ingin Anda kunjungi:</label>
       <div class="sim-input-row">
-        <span class="sim-prefix">http://127.0.0.1:5000/artikel/</span>
+        <span class="sim-prefix">http://127.0.0.1:5000/menu/</span>
         <input type="text" id="simUrlInput" class="sim-input" value="1" placeholder="ketik angka misal 1, 2 atau huruf 'flask'">
       </div>
       <div id="simFeedback" class="sim-result sim-ok">
@@ -1048,7 +1048,7 @@ app.secret_key = 'kunci-rahasia-kita'</code></pre>
     <div class="step-guide-bar">
       <span class="guide-tag file"><i data-lucide="file"></i> app.py</span>
       <span class="guide-tag loc"><i data-lucide="terminal"></i> Paling Bawah File</span>
-      <span class="guide-tag act"><i data-lucide="code"></i> Tambah Rute /artikel/&lt;int:id&gt; &amp; /halo/&lt;nama&gt;</span>
+      <span class="guide-tag act"><i data-lucide="code"></i> Tambah Rute /menu/&lt;int:id&gt; &amp; /halo/&lt;nama&gt;</span>
     </div>
     <div class="cols c2 slide-body">
       <!-- KOLOM KIRI: TUTORIAL KONSEPTUAL (PROGRESSIVE DISCLOSURE) -->
@@ -1067,7 +1067,7 @@ app.secret_key = 'kunci-rahasia-kita'</code></pre>
 
           <div class="tut-item">
             <div class="tut-label"><span class="tut-num">02</span> Alur Eksekusi</div>
-            <p>Ambil ID dari URL &rarr; Cari artikel cocok di <code>artikel_list</code> &rarr; Kirim ke template Jinja2.</p>
+            <p>Ambil ID dari URL &rarr; Cari menu cocok di <code>menu_list</code> &rarr; Kirim ke template Jinja2.</p>
           </div>
 
           <div class="tut-item">
@@ -1075,11 +1075,11 @@ app.secret_key = 'kunci-rahasia-kita'</code></pre>
             <div class="compare-grid">
               <div class="compare-box bad">
                 <span class="compare-tag bad">Routing Statis</span>
-                Butuh 100 fungsi manual untuk 100 artikel.
+                Butuh 100 fungsi manual untuk 100 menu kantin.
               </div>
               <div class="compare-box good">
                 <span class="compare-tag good">Dynamic Routing</span>
-                Cukup 1 fungsi menangani jutaan artikel + filter 404.
+                Cukup 1 fungsi menangani ratusan menu kantin + filter 404.
               </div>
             </div>
           </div>
@@ -1089,7 +1089,7 @@ app.secret_key = 'kunci-rahasia-kita'</code></pre>
         <div id="tab-detail-s7" class="ptab-pane">
           <div class="analogy-box" style="margin-top:0">
             <div class="analogy-header"><i data-lucide="compass"></i> Analogi Dunia Nyata</div>
-            <p>Dynamic Routing itu ibarat <strong>sistem nomor antrean bank atau resi paket</strong>. Bank tidak membangun 1.000 loket untuk 1.000 nasabah. Cukup 1 loket serbaguna ber-scanner nomor antrean. Berapa pun nomor tiketmu (<code>/artikel/1</code> atau <code>/artikel/99</code>), loket langsung mengambilkan berkas yang tepat.</p>
+            <p>Dynamic Routing itu ibarat <strong>sistem nomor antrean pemesanan kantin</strong>. Kantin tidak membangun 100 kasir untuk 100 menu. Cukup 1 kasir serbaguna yang membaca nomor pesanan. Berapa pun nomor tiketmu (<code>/menu/1</code> atau <code>/menu/99</code>), sistem langsung menyajikan data menu yang tepat.</p>
           </div>
           <div class="tut-item" style="margin-top:10px">
             <div class="tut-label"><span class="tut-num">INFO</span> Converter Types</div>
@@ -1103,27 +1103,27 @@ app.secret_key = 'kunci-rahasia-kita'</code></pre>
         <div class="cbox">
           <div class="cbox-head">
             <span class="cbox-title">app.py</span>
-            <button class="copy-btn" data-copy="# Tambahkan di PALING BAWAH app.py:&#10;&#10;@app.route('/artikel/<int:id>')&#10;def detail_artikel(id):&#10;    artikel = next((item for item in artikel_list if item['id'] == id), None)&#10;    return render_template('detail.html', artikel=artikel, id=id)&#10;&#10;@app.route('/halo/<nama>')&#10;def sapa_user(nama):&#10;    return f&quot;&lt;h1&gt;Halo, {nama}!&lt;/h1&gt;&lt;p&gt;Selamat datang di web dinamis kita.&lt;/p&gt;&quot;"><i data-lucide="copy"></i> Salin</button>
+            <button class="copy-btn" data-copy="# Tambahkan di PALING BAWAH app.py:&#10;&#10;# 1. Rute Dinamis Detail Menu (Converter Integer: &lt;int:id&gt;)&#10;@app.route('/menu/<int:id>')&#10;def detail_menu(id):&#10;    menu = next((item for item in menu_list if item['id'] == id), None)&#10;    return render_template('detail.html', menu=menu, id=id)&#10;&#10;# 2. Rute Dinamis Salam Pelanggan (Variable Rule String: &lt;nama&gt;)&#10;@app.route('/halo/<nama>')&#10;def sapa_user(nama):&#10;    return f&quot;&lt;h1&gt;Halo, {nama}!&lt;/h1&gt;&lt;p&gt;Selamat datang di Kantin Kampus.&lt;/p&gt;&quot;"><i data-lucide="copy"></i> Salin</button>
           </div>
           <pre><code><span style="color:#047857"># Tambahkan di PALING BAWAH app.py:</span>
 
-<span style="color:#047857"># 1. Rute Dinamis Artikel (Converter Integer: &lt;int:id&gt;)</span>
-@app.route('/artikel/&lt;int:id&gt;')
-def detail_artikel(id):
-    artikel = next((item for item in artikel_list if item["id"] == id), None)
-    return render_template('detail.html', artikel=artikel, id=id)
+<span style="color:#047857"># 1. Rute Dinamis Detail Menu (Converter Integer: &lt;int:id&gt;)</span>
+@app.route('/menu/&lt;int:id&gt;')
+def detail_menu(id):
+    menu = next((item for item in menu_list if item["id"] == id), None)
+    return render_template('detail.html', menu=menu, id=id)
 
-<span style="color:#047857"># 2. Rute Dinamis Salam User (Variable Rule String: &lt;nama&gt;)</span>
+<span style="color:#047857"># 2. Rute Dinamis Salam Pelanggan (Variable Rule String: &lt;nama&gt;)</span>
 @app.route('/halo/&lt;nama&gt;')
 def sapa_user(nama):
-    return f"&lt;h1&gt;Halo, {nama}!&lt;/h1&gt;&lt;p&gt;Selamat datang di web dinamis kita.&lt;/p&gt;"</code></pre>
+    return f"&lt;h1&gt;Halo, {nama}!&lt;/h1&gt;&lt;p&gt;Selamat datang di Kantin Kampus.&lt;/p&gt;"</code></pre>
         </div>
         <div class="check-result-box">
           <i data-lucide="check-circle-2"></i>
           <div>
             <strong>Cara Cek Hasil:</strong>
             <div>1. Buka <code>http://127.0.0.1:5000/halo/Faiz</code> &rarr; Muncul teks dinamis <em>"Halo, Faiz!"</em> langsung di browser!</div>
-            <div style="margin-top:4px;font-size:12px;color:var(--dim)"><em>Catatan: Rute <code>/artikel/1</code> membutuhkan file <code>templates/detail.html</code> yang akan kita buat di Langkah 4 nanti.</em></div>
+            <div style="margin-top:4px;font-size:12px;color:var(--dim)"><em>Catatan: Rute <code>/menu/1</code> membutuhkan file <code>templates/detail.html</code> yang akan kita buat di Langkah 4 nanti.</em></div>
           </div>
         </div>
       </div>
@@ -1136,11 +1136,11 @@ def sapa_user(nama):
   <div class="content">
     <span class="kick"><i data-lucide="layout"></i> Langkah 3 &bull; Frontend</span>
     <h2>Menghubungkan Tombol ke Rute Dinamis</h2>
-    <p class="sub">Di <code>templates/index.html</code>, ubah atribut <code>href="#"</code> pada tombol artikel agar memanggil <code>url_for('detail_artikel', id=item.id)</code>:</p>
+    <p class="sub">Di <code>templates/index.html</code>, ubah atribut <code>href="#"</code> pada tombol menu agar memanggil <code>url_for('detail_menu', id=item.id)</code>:</p>
     <div class="step-guide-bar">
       <span class="guide-tag file"><i data-lucide="file"></i> templates/index.html</span>
       <span class="guide-tag loc"><i data-lucide="terminal"></i> Ganti isi file templates/index.html</span>
-      <span class="guide-tag act"><i data-lucide="code"></i> Pasang url_for('detail_artikel', id=item.id)</span>
+      <span class="guide-tag act"><i data-lucide="code"></i> Pasang url_for('detail_menu', id=item.id)</span>
     </div>
     <div class="cols c2 slide-body">
       <!-- KOLOM KIRI: TUTORIAL KONSEPTUAL (PROGRESSIVE DISCLOSURE) -->
@@ -1159,7 +1159,7 @@ def sapa_user(nama):
 
           <div class="tut-item">
             <div class="tut-label"><span class="tut-num">02</span> Fungsi Utama</div>
-            <p>Mengaitkan tombol tiap kartu artikel ke rute detail sesuai ID-nya masing-masing secara otomatis.</p>
+            <p>Mengaitkan tombol tiap kartu menu ke rute detail sesuai ID-nya masing-masing secara otomatis.</p>
           </div>
 
           <div class="tut-item">
@@ -1185,7 +1185,7 @@ def sapa_user(nama):
           </div>
           <div class="tut-item" style="margin-top:10px">
             <div class="tut-label"><span class="tut-num">INFO</span> Sintaks Penulisan</div>
-            <p>Argumen pertama adalah <strong>nama fungsi view</strong> di Python (<code>'detail_artikel'</code>), diikuti argumen variabelnya (<code>id=item.id</code>). Jangan gunakan nama path URL mentah!</p>
+            <p>Argumen pertama adalah <strong>nama fungsi view</strong> di Python (<code>'detail_menu'</code>), diikuti argumen variabelnya (<code>id=item.id</code>). Jangan gunakan nama path URL mentah!</p>
           </div>
         </div>
       </div>
@@ -1195,23 +1195,23 @@ def sapa_user(nama):
         <div class="cbox">
           <div class="cbox-head">
             <span class="cbox-title">templates/index.html (File Lengkap)</span>
-            <button class="copy-btn" data-copy="{% extends 'base.html' %}&#10;&#10;{% block title %}Beranda Catatan{% endblock %}&#10;&#10;{% block content %}&#10;<h1 class=&quot;page-title&quot;>Daftar Artikel Catatan</h1>&#10;&#10;<div class=&quot;card-grid&quot;>&#10;    {% for item in artikel_list %}&#10;    <div class=&quot;card&quot;>&#10;        <span class=&quot;badge&quot;>Artikel #{{ item.id }}</span>&#10;        <h3>{{ item.judul }}</h3>&#10;        <p>{{ item.ringkasan }}</p>&#10;        <a href=&quot;{{ url_for('detail_artikel', id=item.id) }}&quot; class=&quot;btn&quot;>&#10;            Baca Selengkapnya &rarr;&#10;        </a>&#10;    </div>&#10;    {% endfor %}&#10;</div>&#10;{% endblock %}"><i data-lucide="copy"></i> Salin Seluruh File</button>
+            <button class="copy-btn" data-copy="{% extends 'base.html' %}&#10;&#10;{% block title %}Daftar Menu Kantin{% endblock %}&#10;&#10;{% block content %}&#10;<h1 class=&quot;page-title&quot;>Daftar Menu Kantin Kampus</h1>&#10;&#10;<div class=&quot;card-grid&quot;>&#10;    {% for item in menu_list %}&#10;    <div class=&quot;card&quot;>&#10;        <span class=&quot;badge&quot;>{{ item.kategori }} &bull; {{ item.harga }}</span>&#10;        <h3>{{ item.nama }}</h3>&#10;        <p>{{ item.deskripsi }}</p>&#10;        <a href=&quot;{{ url_for('detail_menu', id=item.id) }}&quot; class=&quot;btn&quot;>&#10;            Lihat Detail Menu &rarr;&#10;        </a>&#10;    </div>&#10;    {% endfor %}&#10;</div>&#10;{% endblock %}"><i data-lucide="copy"></i> Salin Seluruh File</button>
           </div>
           <pre><code>{% extends 'base.html' %}
 
-{% block title %}Beranda Catatan{% endblock %}
+{% block title %}Daftar Menu Kantin{% endblock %}
 
 {% block content %}
-&lt;h1 class="page-title"&gt;Daftar Artikel Catatan&lt;/h1&gt;
+&lt;h1 class="page-title"&gt;Daftar Menu Kantin Kampus&lt;/h1&gt;
 
 &lt;div class="card-grid"&gt;
-    {% for item in artikel_list %}
+    {% for item in menu_list %}
     &lt;div class="card"&gt;
-        &lt;span class="badge"&gt;Artikel #{{ item.id }}&lt;/span&gt;
-        &lt;h3&gt;{{ item.judul }}&lt;/h3&gt;
-        &lt;p&gt;{{ item.ringkasan }}&lt;/p&gt;
-        &lt;a href="{{ url_for('detail_artikel', id=item.id) }}" class="btn"&gt;
-            Baca Selengkapnya &amp;rarr;
+        &lt;span class="badge"&gt;{{ item.kategori }} &amp;bull; {{ item.harga }}&lt;/span&gt;
+        &lt;h3&gt;{{ item.nama }}&lt;/h3&gt;
+        &lt;p&gt;{{ item.deskripsi }}&lt;/p&gt;
+        &lt;a href="{{ url_for('detail_menu', id=item.id) }}" class="btn"&gt;
+            Lihat Detail Menu &amp;rarr;
         &lt;/a&gt;
     &lt;/div&gt;
     {% endfor %}
@@ -1221,7 +1221,7 @@ def sapa_user(nama):
         <div class="check-result-box">
           <i data-lucide="check-circle-2"></i>
           <div>
-            <strong>Cara Cek Hasil:</strong> Simpan file &amp; refresh <code>http://127.0.0.1:5000</code>. Arahkan mouse ke tombol artikel &rarr; URL di pojok kiri bawah browser sekarang mengarah dinamis ke <code>/artikel/1</code>, <code>/artikel/2</code>, dan <code>/artikel/3</code>!
+            <strong>Cara Cek Hasil:</strong> Simpan file &amp; refresh <code>http://127.0.0.1:5000</code>. Arahkan mouse ke tombol kartu menu &rarr; URL di pojok kiri bawah browser sekarang mengarah dinamis ke <code>/menu/1</code>, <code>/menu/2</code>, dan <code>/menu/3</code>!
           </div>
         </div>
       </div>
@@ -1233,8 +1233,8 @@ def sapa_user(nama):
 <section class="slide" data-sec="Babak 2 · Dynamic Routing" id="s9">
   <div class="content">
     <span class="kick"><i data-lucide="file"></i> Langkah 4 &bull; Template Baru</span>
-    <h2>Template Detail Artikel (detail.html)</h2>
-    <p class="sub">Buat file baru <code>templates/detail.html</code> yang mewarisi <code>base.html</code> dan menampilkan konten sesuai ID yang dipilih:</p>
+    <h2>Template Detail Menu (detail.html)</h2>
+    <p class="sub">Buat file baru <code>templates/detail.html</code> yang mewarisi <code>base.html</code> dan menampilkan konten sesuai ID menu yang dipilih:</p>
     <div class="step-guide-bar">
       <span class="guide-tag file"><i data-lucide="file"></i> templates/detail.html</span>
       <span class="guide-tag loc"><i data-lucide="folder"></i> Folder templates/</span>
@@ -1252,12 +1252,12 @@ def sapa_user(nama):
         <div id="tab-core-s9" class="ptab-pane on">
           <div class="tut-item">
             <div class="tut-label"><span class="tut-num">01</span> Konsep Dasar</div>
-            <p>Template detail Jinja2 (<code>extends 'base.html'</code>) dengan percabangan <code>{% if artikel %}</code>.</p>
+            <p>Template detail Jinja2 (<code>extends 'base.html'</code>) dengan percabangan <code>{% if menu %}</code>.</p>
           </div>
 
           <div class="tut-item">
             <div class="tut-label"><span class="tut-num">02</span> Fungsi Utama</div>
-            <p>Menampilkan konten artikel jika ID valid, atau memunculkan <em>Empty State</em> jika ID tidak ditemukan.</p>
+            <p>Menampilkan info menu jika ID valid, atau memunculkan <em>Empty State</em> jika ID tidak ditemukan.</p>
           </div>
 
           <div class="tut-item">
@@ -1265,7 +1265,7 @@ def sapa_user(nama):
             <div class="compare-grid">
               <div class="compare-box bad">
                 <span class="compare-tag bad">Tanpa IF</span>
-                Web crash: <em>UndefinedError</em> saat ID artikel tidak ditemukan di list.
+                Web crash: <em>UndefinedError</em> saat ID menu tidak ditemukan di list.
               </div>
               <div class="compare-box good">
                 <span class="compare-tag good">Proteksi IF</span>
@@ -1279,11 +1279,11 @@ def sapa_user(nama):
         <div id="tab-detail-s9" class="ptab-pane">
           <div class="analogy-box" style="margin-top:0">
             <div class="analogy-header"><i data-lucide="compass"></i> Analogi Dunia Nyata</div>
-            <p>Template dinamis dan Empty State itu ibarat <strong>layar mesin ATM</strong>. Bank hanya mendesain 1 tampilan untuk semua nasabah. Jika nasabah salah mengetik nomor rekening, layar dengan sopan menampilkan: <em>"Rekening Tidak Ditemukan"</em>, tanpa membuat sistem ATM rusak.</p>
+            <p>Template dinamis dan Empty State itu ibarat <strong>layar mesin ATM atau pemesanan mandiri</strong>. Sistem hanya mendesain 1 tampilan untuk semua menu. Jika pengunjung salah mengetik nomor menu, layar menampilkan: <em>"Menu Tidak Ditemukan"</em>, tanpa sistem web error.</p>
           </div>
           <div class="tut-item" style="margin-top:10px">
             <div class="tut-label"><span class="tut-num">INFO</span> Best Practice UX</div>
-            <p>Empty state wajib menyertakan tombol <code>&larr; Kembali ke Beranda</code> agar pengunjung tidak tersesat atau menekan tombol back berulang kali.</p>
+            <p>Empty state wajib menyertakan tombol <code>&larr; Kembali ke Daftar Menu</code> agar pengunjung tidak tersesat atau menekan tombol back berulang kali.</p>
           </div>
         </div>
       </div>
@@ -1293,27 +1293,27 @@ def sapa_user(nama):
         <div class="cbox">
           <div class="cbox-head">
             <span class="cbox-title">templates/detail.html (File Lengkap)</span>
-            <button class="copy-btn" data-copy="{% extends 'base.html' %}&#10;&#10;{% block title %}{{ artikel.judul if artikel else 'Artikel Tidak Ditemukan' }}{% endblock %}&#10;&#10;{% block content %}&#10;<a href=&quot;{{ url_for('home') }}&quot; class=&quot;back-link&quot;>&larr; Kembali ke Beranda</a>&#10;&#10;{% if artikel %}&#10;    <div class=&quot;detail-box&quot;>&#10;        <span class=&quot;badge&quot;>ID #{{ id }}</span>&#10;        <h1>{{ artikel.judul }}</h1>&#10;        <p class=&quot;lead&quot;>{{ artikel.ringkasan }}</p>&#10;        <hr>&#10;        <p>{{ artikel.konten }}</p>&#10;    </div>&#10;{% else %}&#10;    <div class=&quot;empty-box&quot;>&#10;        <h2>Artikel Tidak Ditemukan!</h2>&#10;        <p>Maaf, artikel dengan ID #{{ id }} tidak tersedia di sistem.</p>&#10;    </div>&#10;{% endif %}&#10;{% endblock %}"><i data-lucide="copy"></i> Salin Seluruh File</button>
+            <button class="copy-btn" data-copy="{% extends 'base.html' %}&#10;&#10;{% block title %}{{ menu.nama if menu else 'Menu Tidak Ditemukan' }}{% endblock %}&#10;&#10;{% block content %}&#10;<a href=&quot;{{ url_for('home') }}&quot; class=&quot;back-link&quot;>&larr; Kembali ke Daftar Menu</a>&#10;&#10;{% if menu %}&#10;    <div class=&quot;detail-box&quot;>&#10;        <span class=&quot;badge&quot;>{{ menu.kategori }}</span>&#10;        <h1>{{ menu.nama }}</h1>&#10;        <p class=&quot;lead&quot;>Harga: <strong>{{ menu.harga }}</strong></p>&#10;        <hr>&#10;        <p>{{ menu.deskripsi }}</p>&#10;    </div>&#10;{% else %}&#10;    <div class=&quot;empty-box&quot;>&#10;        <h2>Menu Tidak Ditemukan!</h2>&#10;        <p>Maaf, menu dengan ID #{{ id }} tidak tersedia di kantin.</p>&#10;    </div>&#10;{% endif %}&#10;{% endblock %}"><i data-lucide="copy"></i> Salin Seluruh File</button>
           </div>
           <pre><code>{% extends 'base.html' %}
 
-{% block title %}{{ artikel.judul if artikel else 'Artikel Tidak Ditemukan' }}{% endblock %}
+{% block title %}{{ menu.nama if menu else 'Menu Tidak Ditemukan' }}{% endblock %}
 
 {% block content %}
-&lt;a href="{{ url_for('home') }}" class="back-link"&gt;&amp;larr; Kembali ke Beranda&lt;/a&gt;
+&lt;a href="{{ url_for('home') }}" class="back-link"&gt;&amp;larr; Kembali ke Daftar Menu&lt;/a&gt;
 
-{% if artikel %}
+{% if menu %}
     &lt;div class="detail-box"&gt;
-        &lt;span class="badge"&gt;ID #{{ id }}&lt;/span&gt;
-        &lt;h1&gt;{{ artikel.judul }}&lt;/h1&gt;
-        &lt;p class="lead"&gt;{{ artikel.ringkasan }}&lt;/p&gt;
+        &lt;span class="badge"&gt;{{ menu.kategori }}&lt;/span&gt;
+        &lt;h1&gt;{{ menu.nama }}&lt;/h1&gt;
+        &lt;p class="lead"&gt;Harga: &lt;strong&gt;{{ menu.harga }}&lt;/strong&gt;&lt;/p&gt;
         &lt;hr&gt;
-        &lt;p&gt;{{ artikel.konten }}&lt;/p&gt;
+        &lt;p&gt;{{ menu.deskripsi }}&lt;/p&gt;
     &lt;/div&gt;
 {% else %}
     &lt;div class="empty-box"&gt;
-        &lt;h2&gt;Artikel Tidak Ditemukan!&lt;/h2&gt;
-        &lt;p&gt;Maaf, artikel dengan ID #{{ id }} tidak tersedia di sistem.&lt;/p&gt;
+        &lt;h2&gt;Menu Tidak Ditemukan!&lt;/h2&gt;
+        &lt;p&gt;Maaf, menu dengan ID #{{ id }} tidak tersedia di kantin.&lt;/p&gt;
     &lt;/div&gt;
 {% endif %}
 {% endblock %}</code></pre>
@@ -1322,8 +1322,8 @@ def sapa_user(nama):
           <i data-lucide="check-circle-2"></i>
           <div>
             <strong>Cara Cek Hasil:</strong>
-            <div>1. Buka <code>http://127.0.0.1:5000/artikel/1</code> &rarr; Konten artikel tampil lengkap!</div>
-            <div>2. Buka <code>http://127.0.0.1:5000/artikel/999</code> &rarr; Tampil kotak merah ramah <em>"Artikel Tidak Ditemukan!"</em> tanpa error.</div>
+            <div>1. Buka <code>http://127.0.0.1:5000/menu/1</code> &rarr; Info menu Nasi Goreng tampil lengkap!</div>
+            <div>2. Buka <code>http://127.0.0.1:5000/menu/999</code> &rarr; Tampil kotak merah ramah <em>"Menu Tidak Ditemukan!"</em> tanpa error.</div>
           </div>
         </div>
       </div>
@@ -1378,7 +1378,7 @@ def sapa_user(nama):
       <div id="methodView" class="pcard" style="background:#FFFFFF;border:1.5px solid #CBD5E1">
         <span style="font:700 11.5px/1 var(--mono);color:var(--accent);text-transform:uppercase">Format Request GET:</span>
         <div class="sim-input-row" style="margin-top:10px;background:#F8FAFC">
-          <span style="font:600 13px/1 var(--mono);color:var(--ink)">GET /kontak?nama=Budi&amp;pesan=Halo+Faiz HTTP/1.1</span>
+          <span style="font:600 13px/1 var(--mono);color:var(--ink)">GET /kontak?nama=Budi&amp;pesan=Saran+Kantin HTTP/1.1</span>
         </div>
         <p style="font-size:12.5px;color:#991B1B;margin-top:10px;font-weight:500">Catatan: Parameter nama dan pesan terpampang di URL address bar peramban.</p>
       </div>
@@ -1390,8 +1390,8 @@ def sapa_user(nama):
 <section class="slide" data-sec="Babak 3 · HTTP Methods &amp; Form" id="s12">
   <div class="content">
     <span class="kick"><i data-lucide="layout"></i> Langkah 5 &bull; Frontend</span>
-    <h2>Membuat Template Formulir (kontak.html)</h2>
-    <p class="sub">Buat file baru <code>templates/kontak.html</code> dengan formulir <code>method="POST"</code> dan atribut <code>name</code> pada tiap input:</p>
+    <h2>Membuat Template Formulir Masukan (kontak.html)</h2>
+    <p class="sub">Buat file baru <code>templates/kontak.html</code> dengan formulir <code>method="POST"</code> untuk mengirim masukan menu kantin:</p>
     <div class="step-guide-bar">
       <span class="guide-tag file"><i data-lucide="file"></i> templates/kontak.html</span>
       <span class="guide-tag loc"><i data-lucide="folder"></i> Folder templates/</span>
@@ -1450,14 +1450,14 @@ def sapa_user(nama):
         <div class="cbox">
           <div class="cbox-head">
             <span class="cbox-title">templates/kontak.html (File Lengkap)</span>
-            <button class="copy-btn" data-copy="{% extends 'base.html' %}&#10;&#10;{% block title %}Hubungi Kami{% endblock %}&#10;&#10;{% block content %}&#10;<h1 class=&quot;page-title&quot;>Kirim Pesan</h1>&#10;&#10;<div class=&quot;form-card&quot;>&#10;    <form action=&quot;{{ url_for('kontak') }}&quot; method=&quot;POST&quot;>&#10;        <div class=&quot;form-group&quot;>&#10;        <label for=&quot;nama&quot;>Nama Lengkap</label>&#10;        <input type=&quot;text&quot; id=&quot;nama&quot; name=&quot;nama&quot; placeholder=&quot;Contoh: Faiz&quot; required>&#10;    </div>&#10;    <div class=&quot;form-group&quot;>&#10;        <label for=&quot;pesan&quot;>Pesan Anda</label>&#10;        <textarea id=&quot;pesan&quot; name=&quot;pesan&quot; placeholder=&quot;Tulis pesan...&quot; required></textarea>&#10;    </div>&#10;    <button type=&quot;submit&quot; class=&quot;btn&quot;>Kirim Pesan via POST</button>&#10;    </form>&#10;</div>&#10;{% endblock %}"><i data-lucide="copy"></i> Salin Seluruh File</button>
+            <button class="copy-btn" data-copy="{% extends 'base.html' %}&#10;&#10;{% block title %}Masukan &amp; Saran Kantin{% endblock %}&#10;&#10;{% block content %}&#10;&lt;h1 class=&quot;page-title&quot;&gt;Kirim Masukan &amp; Saran&lt;/h1&gt;&#10;&#10;&lt;div class=&quot;form-card&quot;&gt;&#10;    &lt;form action=&quot;{{ url_for('kontak') }}&quot; method=&quot;POST&quot;&gt;&#10;        &lt;div class=&quot;form-group&quot;&gt;&#10;            &lt;label for=&quot;nama&quot;&gt;Nama Lengkap&lt;/label&gt;&#10;            &lt;input type=&quot;text&quot; id=&quot;nama&quot; name=&quot;nama&quot; placeholder=&quot;Contoh: Faiz&quot; required&gt;&#10;        &lt;/div&gt;&#10;        &lt;div class=&quot;form-group&quot;&gt;&#10;            &lt;label for=&quot;pesan&quot;&gt;Pesan atau Masukan Menu&lt;/label&gt;&#10;            &lt;textarea id=&quot;pesan&quot; name=&quot;pesan&quot; placeholder=&quot;Tuliskan masukan untuk kantin kampus...&quot; required&gt;&lt;/textarea&gt;&#10;        &lt;/div&gt;&#10;        &lt;button type=&quot;submit&quot; class=&quot;btn&quot;&gt;Kirim Masukan via POST&lt;/button&gt;&#10;    &lt;/form&gt;&#10;&lt;/div&gt;&#10;{% endblock %}"><i data-lucide="copy"></i> Salin Seluruh File</button>
           </div>
           <pre><code>{% extends 'base.html' %}
 
-{% block title %}Hubungi Kami{% endblock %}
+{% block title %}Masukan &amp; Saran Kantin{% endblock %}
 
 {% block content %}
-&lt;h1 class="page-title"&gt;Kirim Pesan&lt;/h1&gt;
+&lt;h1 class="page-title"&gt;Kirim Masukan &amp; Saran&lt;/h1&gt;
 
 &lt;div class="form-card"&gt;
     &lt;form action="{{ url_for('kontak') }}" method="POST"&gt;
@@ -1466,10 +1466,10 @@ def sapa_user(nama):
             &lt;input type="text" id="nama" name="nama" placeholder="Contoh: Faiz" required&gt;
         &lt;/div&gt;
         &lt;div class="form-group"&gt;
-            &lt;label for="pesan"&gt;Pesan Anda&lt;/label&gt;
-            &lt;textarea id="pesan" name="pesan" placeholder="Tulis pesan..." required&gt;&lt;/textarea&gt;
+            &lt;label for="pesan"&gt;Pesan atau Masukan Menu&lt;/label&gt;
+            &lt;textarea id="pesan" name="pesan" placeholder="Tuliskan masukan untuk kantin kampus..." required&gt;&lt;/textarea&gt;
         &lt;/div&gt;
-        &lt;button type="submit" class="btn"&gt;Kirim Pesan via POST&lt;/button&gt;
+        &lt;button type="submit" class="btn"&gt;Kirim Masukan via POST&lt;/button&gt;
     &lt;/form&gt;
 &lt;/div&gt;
 {% endblock %}</code></pre>
@@ -1549,7 +1549,7 @@ def sapa_user(nama):
         <div class="cbox">
           <div class="cbox-head">
             <span class="cbox-title">app.py (Tambahkan di Paling Bawah)</span>
-            <button class="copy-btn" data-copy="@app.route('/kontak', methods=['GET', 'POST'])&#10;def kontak():&#10;    if request.method == 'POST':&#10;        nama = request.form.get('nama')&#10;        pesan = request.form.get('pesan')&#10;        flash(f'Terima kasih, {nama}! Pesan berhasil dikirim.', 'success')&#10;        return redirect(url_for('kontak'))&#10;    return render_template('kontak.html')"><i data-lucide="copy"></i> Salin Kode Rute</button>
+            <button class="copy-btn" data-copy="@app.route('/kontak', methods=['GET', 'POST'])&#10;def kontak():&#10;    if request.method == 'POST':&#10;        nama = request.form.get('nama')&#10;        pesan = request.form.get('pesan')&#10;        flash(f'Terima kasih, {nama}! Masukan Anda telah berhasil dikirim.', 'success')&#10;        return redirect(url_for('kontak'))&#10;    return render_template('kontak.html')"><i data-lucide="copy"></i> Salin Kode Rute</button>
           </div>
           <pre><code><span style="color:#047857"># Tambahkan di baris paling bawah app.py:</span>
 @app.route('/kontak', methods=['GET', 'POST'])
@@ -1557,7 +1557,7 @@ def kontak():
     if request.method == 'POST':
         nama = request.form.get('nama')
         pesan = request.form.get('pesan')
-        flash(f'Terima kasih, {nama}! Pesan berhasil dikirim.', 'success')
+        flash(f'Terima kasih, {nama}! Masukan Anda telah berhasil dikirim.', 'success')
         # Pola PRG: Selalu redirect setelah POST!
         return redirect(url_for('kontak'))
         
@@ -1566,7 +1566,7 @@ def kontak():
         <div class="check-result-box">
           <i data-lucide="check-circle-2"></i>
           <div>
-            <strong>Cara Cek Hasil:</strong> Simpan <code>app.py</code> &amp; buka <code>http://127.0.0.1:5000/kontak</code> di browser. Isi nama dan pesan, klik kirim &rarr; Halaman tidak error 405 dan otomatis me-redirect ke <code>/kontak</code>!
+            <strong>Cara Cek Hasil:</strong> Simpan <code>app.py</code> &amp; buka <code>http://127.0.0.1:5000/kontak</code> di browser. Isi nama dan saran menu, klik kirim &rarr; Halaman tidak error 405 dan otomatis me-redirect ke <code>/kontak</code>!
           </div>
         </div>
       </div>
@@ -1579,7 +1579,7 @@ def kontak():
   <div class="content">
     <span class="kick"><i data-lucide="sparkles"></i> Langkah 7 &bull; Global Alert</span>
     <h2>Wadah Flash Messages &amp; Navigasi di base.html</h2>
-    <p class="sub">Perbarui file <code>templates/base.html</code> agar menampilkan alert notifikasi dan menambahkan link menu Kontak &amp; Login:</p>
+    <p class="sub">Perbarui file <code>templates/base.html</code> agar menampilkan alert notifikasi dan menambahkan link menu Beranda, Masukan &amp; Login Admin:</p>
     <div class="step-guide-bar">
       <span class="guide-tag file"><i data-lucide="file"></i> templates/base.html</span>
       <span class="guide-tag loc"><i data-lucide="terminal"></i> Ganti Seluruh Isi File (Ctrl+A &amp; Ctrl+V)</span>
@@ -1638,22 +1638,22 @@ def kontak():
         <div class="cbox">
           <div class="cbox-head">
             <span class="cbox-title">templates/base.html (File Lengkap)</span>
-            <button class="copy-btn" data-copy="&lt;!DOCTYPE html&gt;&#10;&lt;html lang=&quot;id&quot;&gt;&#10;&lt;head&gt;&#10;    &lt;meta charset=&quot;UTF-8&quot;&gt;&#10;    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;&#10;    &lt;title&gt;{% block title %}Praktikum P05{% endblock %}&lt;/title&gt;&#10;    &lt;link rel=&quot;stylesheet&quot; href=&quot;{{ url_for('static', filename='style.css') }}&quot;&gt;&#10;&lt;/head&gt;&#10;&lt;body&gt;&#10;    &lt;nav class=&quot;navbar&quot;&gt;&#10;        &lt;a href=&quot;{{ url_for('home') }}&quot; class=&quot;brand&quot;&gt;Pemweb P05&lt;/a&gt;&#10;        &lt;div class=&quot;nav-links&quot;&gt;&#10;            &lt;a href=&quot;{{ url_for('home') }}&quot;&gt;Beranda&lt;/a&gt;&#10;            &lt;a href=&quot;{{ url_for('kontak') }}&quot;&gt;Kontak&lt;/a&gt;&#10;            &lt;a href=&quot;{{ url_for('login') }}&quot;&gt;Login&lt;/a&gt;&#10;        &lt;/div&gt;&#10;    &lt;/nav&gt;&#10;&#10;    &lt;main class=&quot;container&quot;&gt;&#10;        {% with messages = get_flashed_messages(with_categories=true) %}&#10;            {% if messages %}&#10;                {% for category, message in messages %}&#10;                    &lt;div class=&quot;alert alert-{{ category }}&quot;&gt;&#10;                        {{ message }}&#10;                    &lt;/div&gt;&#10;                {% endfor %}&#10;            {% endif %}&#10;        {% endwith %}&#10;&#10;        {% block content %}{% endblock %}&#10;    &lt;/main&gt;&#10;&lt;/body&gt;&#10;&lt;/html&gt;"><i data-lucide="copy"></i> Salin Seluruh File</button>
+            <button class="copy-btn" data-copy="&lt;!DOCTYPE html&gt;&#10;&lt;html lang=&quot;id&quot;&gt;&#10;&lt;head&gt;&#10;    &lt;meta charset=&quot;UTF-8&quot;&gt;&#10;    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;&#10;    &lt;title&gt;{% block title %}Kantin Kampus{% endblock %}&lt;/title&gt;&#10;    &lt;link rel=&quot;stylesheet&quot; href=&quot;{{ url_for('static', filename='style.css') }}&quot;&gt;&#10;&lt;/head&gt;&#10;&lt;body&gt;&#10;    &lt;nav class=&quot;navbar&quot;&gt;&#10;        &lt;a href=&quot;{{ url_for('home') }}&quot; class=&quot;brand&quot;&gt;Kantin Kampus&lt;/a&gt;&#10;        &lt;div class=&quot;nav-links&quot;&gt;&#10;            &lt;a href=&quot;{{ url_for('home') }}&quot;&gt;Beranda&lt;/a&gt;&#10;            &lt;a href=&quot;{{ url_for('kontak') }}&quot;&gt;Masukan&lt;/a&gt;&#10;            &lt;a href=&quot;{{ url_for('login') }}&quot;&gt;Login Admin&lt;/a&gt;&#10;        &lt;/div&gt;&#10;    &lt;/nav&gt;&#10;&#10;    &lt;main class=&quot;container&quot;&gt;&#10;        {% with messages = get_flashed_messages(with_categories=true) %}&#10;            {% if messages %}&#10;                {% for category, message in messages %}&#10;                    &lt;div class=&quot;alert alert-{{ category }}&quot;&gt;&#10;                        {{ message }}&#10;                    &lt;/div&gt;&#10;                {% endfor %}&#10;            {% endif %}&#10;        {% endwith %}&#10;&#10;        {% block content %}{% endblock %}&#10;    &lt;/main&gt;&#10;&lt;/body&gt;&#10;&lt;/html&gt;"><i data-lucide="copy"></i> Salin Seluruh File</button>
           </div>
           <pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang="id"&gt;
 &lt;head&gt;
     &lt;meta charset="UTF-8"&gt;
-    &lt;title&gt;{% block title %}Praktikum P05{% endblock %}&lt;/title&gt;
+    &lt;title&gt;{% block title %}Kantin Kampus{% endblock %}&lt;/title&gt;
     &lt;link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"&gt;
 &lt;/head&gt;
 &lt;body&gt;
     &lt;nav class="navbar"&gt;
-        &lt;a href="{{ url_for('home') }}" class="brand"&gt;Pemweb P05&lt;/a&gt;
+        &lt;a href="{{ url_for('home') }}" class="brand"&gt;Kantin Kampus&lt;/a&gt;
         &lt;div class="nav-links"&gt;
             &lt;a href="{{ url_for('home') }}"&gt;Beranda&lt;/a&gt;
-            &lt;a href="{{ url_for('kontak') }}"&gt;Kontak&lt;/a&gt;
-            &lt;a href="{{ url_for('login') }}"&gt;Login&lt;/a&gt;
+            &lt;a href="{{ url_for('kontak') }}"&gt;Masukan&lt;/a&gt;
+            &lt;a href="{{ url_for('login') }}"&gt;Login Admin&lt;/a&gt;
         &lt;/div&gt;
     &lt;/nav&gt;
 
@@ -1676,7 +1676,7 @@ def kontak():
         <div class="check-result-box">
           <i data-lucide="check-circle-2"></i>
           <div>
-            <strong>Cara Cek Hasil:</strong> Kirim form kontak di <code>http://127.0.0.1:5000/kontak</code> lagi &rarr; Alert hijau <code>.alert-success</code> sekarang langsung muncul di atas formulir: <em>"Terima kasih! Pesan berhasil dikirim."</em>
+            <strong>Cara Cek Hasil:</strong> Kirim form masukan di <code>http://127.0.0.1:5000/kontak</code> lagi &rarr; Alert hijau <code>.alert-success</code> sekarang langsung muncul di atas formulir: <em>"Terima kasih, Faiz! Masukan Anda telah berhasil dikirim."</em>
           </div>
         </div>
       </div>
@@ -1688,7 +1688,7 @@ def kontak():
 <section class="slide" data-sec="Babak 4 · Flash &amp; Latihan Modul" id="s15">
   <div class="content">
     <span class="kick"><i data-lucide="lock"></i> Latihan Modul Perkuliahan</span>
-    <h2>Formulir Login Sederhana (/login)</h2>
+    <h2>Formulir Login Admin Kantin (/login)</h2>
     <p class="sub">Implementasi tugas resmi modul: autentikasi kredensial simulasi menggunakan Flash Danger dan Flash Success:</p>
     <div class="step-guide-bar">
       <span class="guide-tag file"><i data-lucide="file"></i> app.py &amp; templates/login.html</span>
@@ -1753,7 +1753,7 @@ def kontak():
         <div id="tabContentApp" class="cbox">
           <div class="cbox-head">
             <span class="cbox-title">app.py (Tambahkan di Paling Bawah)</span>
-            <button class="copy-btn" data-copy="@app.route('/login', methods=['GET', 'POST'])&#10;def login():&#10;    if request.method == 'POST':&#10;        u = request.form.get('username')&#10;        p = request.form.get('password')&#10;        if u == 'admin' and p == '12345':&#10;            flash('Login berhasil! Selamat datang, Admin.', 'success')&#10;            return redirect(url_for('home'))&#10;        flash('Username atau password salah! Coba lagi.', 'danger')&#10;        return redirect(url_for('login'))&#10;    return render_template('login.html')"><i data-lucide="copy"></i> Salin Rute</button>
+            <button class="copy-btn" data-copy="@app.route('/login', methods=['GET', 'POST'])&#10;def login():&#10;    if request.method == 'POST':&#10;        u = request.form.get('username')&#10;        p = request.form.get('password')&#10;        if u == 'admin' and p == '12345':&#10;            flash('Login berhasil! Selamat datang, Admin Kantin.', 'success')&#10;            return redirect(url_for('home'))&#10;        flash('Username atau password salah! Coba lagi.', 'danger')&#10;        return redirect(url_for('login'))&#10;    return render_template('login.html')"><i data-lucide="copy"></i> Salin Rute</button>
           </div>
           <pre style="padding:10px 14px;font-size:12px"><code><span style="color:#047857"># Tambahkan di baris paling bawah app.py:</span>
 @app.route('/login', methods=['GET', 'POST'])
@@ -1762,7 +1762,7 @@ def login():
         u = request.form.get('username')
         p = request.form.get('password')
         if u == 'admin' and p == '12345':
-            flash('Login berhasil! Selamat datang, Admin.', 'success')
+            flash('Login berhasil! Selamat datang, Admin Kantin.', 'success')
             return redirect(url_for('home'))
         flash('Username atau password salah! Coba lagi.', 'danger')
         return redirect(url_for('login'))
@@ -1772,14 +1772,14 @@ def login():
         <div id="tabContentHtml" class="cbox" style="display:none">
           <div class="cbox-head">
             <span class="cbox-title">templates/login.html (File Lengkap)</span>
-            <button class="copy-btn" data-copy="{% extends 'base.html' %}&#10;&#10;{% block title %}Login Autentikasi{% endblock %}&#10;&#10;{% block content %}&#10;<h1 class=&quot;page-title&quot;>Login Autentikasi</h1>&#10;&#10;<div class=&quot;form-card&quot;>&#10;    <form action=&quot;{{ url_for('login') }}&quot; method=&quot;POST&quot;>&#10;        <div class=&quot;form-group&quot;>&#10;            <label for=&quot;username&quot;>Username</label>&#10;            <input type=&quot;text&quot; id=&quot;username&quot; name=&quot;username&quot; placeholder=&quot;Masukkan username&quot; required autofocus>&#10;        </div>&#10;        <div class=&quot;form-group&quot;>&#10;            <label for=&quot;password&quot;>Password</label>&#10;            <input type=&quot;password&quot; id=&quot;password&quot; name=&quot;password&quot; placeholder=&quot;Masukkan password&quot; required>&#10;        </div>&#10;        <button type=&quot;submit&quot; class=&quot;btn&quot; style=&quot;width:100%&quot;>Masuk (Login)</button>&#10;    </form>&#10;</div>&#10;{% endblock %}"><i data-lucide="copy"></i> Salin Seluruh File</button>
+            <button class="copy-btn" data-copy="{% extends 'base.html' %}&#10;&#10;{% block title %}Login Admin Kantin{% endblock %}&#10;&#10;{% block content %}&#10;<h1 class=&quot;page-title&quot;>Login Admin Kantin</h1>&#10;&#10;<div class=&quot;form-card&quot;>&#10;    <form action=&quot;{{ url_for('login') }}&quot; method=&quot;POST&quot;>&#10;        <div class=&quot;form-group&quot;>&#10;            <label for=&quot;username&quot;>Username</label>&#10;            <input type=&quot;text&quot; id=&quot;username&quot; name=&quot;username&quot; placeholder=&quot;Masukkan username&quot; required autofocus>&#10;        </div>&#10;        <div class=&quot;form-group&quot;>&#10;            <label for=&quot;password&quot;>Password</label>&#10;            <input type=&quot;password&quot; id=&quot;password&quot; name=&quot;password&quot; placeholder=&quot;Masukkan password&quot; required>&#10;        </div>&#10;        <button type=&quot;submit&quot; class=&quot;btn&quot; style=&quot;width:100%&quot;>Masuk (Login)</button>&#10;    </form>&#10;</div>&#10;{% endblock %}"><i data-lucide="copy"></i> Salin Seluruh File</button>
           </div>
           <pre style="padding:10px 14px;font-size:12px"><code>{% extends 'base.html' %}
 
-{% block title %}Login Autentikasi{% endblock %}
+{% block title %}Login Admin Kantin{% endblock %}
 
 {% block content %}
-&lt;h1 class="page-title"&gt;Login Autentikasi&lt;/h1&gt;
+&lt;h1 class="page-title"&gt;Login Admin Kantin&lt;/h1&gt;
 
 &lt;div class="form-card"&gt;
     &lt;form action="{{ url_for('login') }}" method="POST"&gt;
@@ -1802,7 +1802,7 @@ def login():
           <div>
             <strong>Cara Cek Hasil:</strong> Buka <code>http://127.0.0.1:5000/login</code> di browser:
             <div>&bull; Password salah &rarr; Notifikasi merah (<em>.alert-danger</em>) tetap di <code>/login</code>.</div>
-            <div>&bull; Username <code>admin</code> &amp; password <code>12345</code> &rarr; Redirect ke Beranda dengan notifikasi hijau (<em>.alert-success</em>)!</div>
+            <div>&bull; Username <code>admin</code> &amp; password <code>12345</code> &rarr; Redirect ke Beranda dengan notifikasi hijau (<em>.alert-success</em>): <em>"Login berhasil! Selamat datang, Admin Kantin."</em></div>
           </div>
         </div>
       </div>
@@ -1842,9 +1842,9 @@ def login():
             <td style="padding:12px 8px;color:var(--dim)">Beri atribut <code>name="nama_field"</code> pada setiap input HTML</td>
           </tr>
           <tr style="border-bottom:1px solid #F1F5F9">
-            <td style="padding:12px 8px;color:#B91C1C;font-weight:600"><code>404 Not Found</code> pada rute artikel</td>
+            <td style="padding:12px 8px;color:#B91C1C;font-weight:600"><code>404 Not Found</code> pada rute menu</td>
             <td style="padding:12px 8px">Ketik huruf ke rute berconverter <code>&lt;int:id&gt;</code></td>
-            <td style="padding:12px 8px;color:var(--dim)">Pastikan URL diisi angka bilangan bulat murni (contoh: <code>/artikel/1</code>)</td>
+            <td style="padding:12px 8px;color:var(--dim)">Pastikan URL diisi angka bilangan bulat murni (contoh: <code>/menu/1</code>)</td>
           </tr>
           <tr style="border-bottom:1px solid #F1F5F9">
             <td style="padding:12px 8px;color:#B91C1C;font-weight:600">Popup "Confirm Form Resubmission"</td>
@@ -1871,32 +1871,32 @@ def login():
     <div id="routeList" class="cols c3 slide-body">
       <div class="pcard rrow" style="cursor:pointer">
         <h4 style="font:600 14px/1 var(--mono);color:var(--accent)">GET /</h4>
-        <p style="font-size:12.5px;color:var(--dim)">Beranda Catatan</p>
+        <p style="font-size:12.5px;color:var(--dim)">Beranda Menu Kantin</p>
         <span class="rtbadge" style="display:inline-block;margin-top:8px;font:700 11px/1 var(--mono);color:#059669">200 OK</span>
       </div>
       <div class="pcard rrow" style="cursor:pointer">
-        <h4 style="font:600 14px/1 var(--mono);color:var(--accent)">GET /artikel/1</h4>
-        <p style="font-size:12.5px;color:var(--dim)">Detail Rute Dinamis Int</p>
+        <h4 style="font:600 14px/1 var(--mono);color:var(--accent)">GET /menu/1</h4>
+        <p style="font-size:12.5px;color:var(--dim)">Detail Menu Dinamis Int</p>
         <span class="rtbadge" style="display:inline-block;margin-top:8px;font:700 11px/1 var(--mono);color:#059669">200 OK</span>
       </div>
       <div class="pcard rrow" style="cursor:pointer">
-        <h4 style="font:600 14px/1 var(--mono);color:var(--accent)">GET /artikel/999</h4>
+        <h4 style="font:600 14px/1 var(--mono);color:var(--accent)">GET /menu/999</h4>
         <p style="font-size:12.5px;color:var(--dim)">Empty State Handled</p>
         <span class="rtbadge" style="display:inline-block;margin-top:8px;font:700 11px/1 var(--mono);color:#059669">200 OK</span>
       </div>
       <div class="pcard rrow" style="cursor:pointer">
         <h4 style="font:600 14px/1 var(--mono);color:var(--accent)">GET /halo/Faiz</h4>
-        <p style="font-size:12.5px;color:var(--dim)">Dynamic Rule String</p>
+        <p style="font-size:12.5px;color:var(--dim)">Salam Pelanggan String</p>
         <span class="rtbadge" style="display:inline-block;margin-top:8px;font:700 11px/1 var(--mono);color:#059669">200 OK</span>
       </div>
       <div class="pcard rrow" style="cursor:pointer">
         <h4 style="font:600 14px/1 var(--mono);color:var(--accent)">POST /kontak</h4>
-        <p style="font-size:12.5px;color:var(--dim)">Form Pesan &amp; Flash</p>
+        <p style="font-size:12.5px;color:var(--dim)">Form Masukan &amp; Flash</p>
         <span class="rtbadge" style="display:inline-block;margin-top:8px;font:700 11px/1 var(--mono);color:#059669">302 &rarr; 200</span>
       </div>
       <div class="pcard rrow" style="cursor:pointer">
         <h4 style="font:600 14px/1 var(--mono);color:var(--accent)">POST /login</h4>
-        <p style="font-size:12.5px;color:var(--dim)">Validasi &amp; Flash Alert</p>
+        <p style="font-size:12.5px;color:var(--dim)">Login Admin Kantin</p>
         <span class="rtbadge" style="display:inline-block;margin-top:8px;font:700 11px/1 var(--mono);color:#059669">302 &rarr; 200</span>
       </div>
     </div>
@@ -1912,11 +1912,11 @@ def login():
     <div id="rubric" class="slide-body">
       <div class="rrow open">
         <div class="rhead"><span>1. Variable Rules &amp; Converter Types (25 Poin)</span><span style="color:var(--accent)">25%</span></div>
-        <div class="rdesc">Mengimplementasikan minimal 2 rute dinamis di <code>app.py</code>: satu menggunakan converter integer <code>&lt;int:id&gt;</code> dan satu menggunakan string <code>&lt;nama&gt;</code>. Menolak input teks non-angka pada converter integer dengan respon 404 yang tepat.</div>
+        <div class="rdesc">Mengimplementasikan minimal 2 rute dinamis di <code>app.py</code>: satu menggunakan converter integer <code>&lt;int:id&gt;</code> (/menu/&lt;int:id&gt;) dan satu menggunakan string <code>&lt;nama&gt;</code> (/halo/&lt;nama&gt;). Menolak input teks non-angka pada converter integer dengan respon 404 yang tepat.</div>
       </div>
       <div class="rrow">
         <div class="rhead"><span>2. Dynamic URL Building dengan url_for() (20 Poin)</span><span style="color:var(--accent)">20%</span></div>
-        <div class="rdesc">Seluruh link navigasi tombol antar kartu artikel di <code>templates/index.html</code> menuju ke detail menggunakan generator Jinja2 <code>url_for('detail_artikel', id=item.id)</code> tanpa hardcode URL string statis.</div>
+        <div class="rdesc">Seluruh link navigasi tombol antar kartu menu di <code>templates/index.html</code> menuju ke detail menggunakan generator Jinja2 <code>url_for('detail_menu', id=item.id)</code> tanpa hardcode URL string statis.</div>
       </div>
       <div class="rrow">
         <div class="rhead"><span>3. HTTP Methods (GET &amp; POST) (25 Poin)</span><span style="color:var(--accent)">25%</span></div>
@@ -1947,8 +1947,8 @@ def login():
         <h3>Daftar Periksa Mahasiswa</h3>
         <ul class="checklist-items">
           <li class="chk"><span class="chk-box"><i data-lucide="check"></i></span> <span><code>app.secret_key</code> sudah terpasang di <code>app.py</code></span></li>
-          <li class="chk"><span class="chk-box"><i data-lucide="check"></i></span> <span>Dynamic route <code>/artikel/&lt;int:id&gt;</code> &amp; <code>/halo/&lt;nama&gt;</code> berfungsi baik</span></li>
-          <li class="chk"><span class="chk-box"><i data-lucide="check"></i></span> <span>Form kontak &amp; login menggunakan <code>method="POST"</code> dan atribut <code>name</code></span></li>
+          <li class="chk"><span class="chk-box"><i data-lucide="check"></i></span> <span>Dynamic route <code>/menu/&lt;int:id&gt;</code> &amp; <code>/halo/&lt;nama&gt;</code> berfungsi baik</span></li>
+          <li class="chk"><span class="chk-box"><i data-lucide="check"></i></span> <span>Form masukan &amp; login menggunakan <code>method="POST"</code> dan atribut <code>name</code></span></li>
           <li class="chk"><span class="chk-box"><i data-lucide="check"></i></span> <span>Flash messages tampil rapi di <code>templates/base.html</code></span></li>
           <li class="chk"><span class="chk-box"><i data-lucide="check"></i></span> <span>Kode sudah di-commit dan di-push ke repository GitHub Anda</span></li>
         </ul>
@@ -2088,7 +2088,7 @@ if(btnSimGet && btnSimPost){
     btnSimPost.style.background = '#F1F5F9';
     btnSimPost.style.color = 'var(--dim)';
     btnSimPost.style.border = '1px solid #CBD5E1';
-    methodView.innerHTML = '<span style="font:700 11.5px/1 var(--mono);color:var(--accent);text-transform:uppercase">Format Request GET:</span><div class="sim-input-row" style="margin-top:10px;background:#F8FAFC"><span style="font:600 13px/1 var(--mono);color:var(--ink)">GET /kontak?nama=Budi&amp;pesan=Halo+Faiz HTTP/1.1</span></div><p style="font-size:12.5px;color:#991B1B;margin-top:10px;font-weight:500">Catatan: Parameter nama dan pesan terpampang di URL address bar peramban.</p>';
+    methodView.innerHTML = '<span style="font:700 11.5px/1 var(--mono);color:var(--accent);text-transform:uppercase">Format Request GET:</span><div class="sim-input-row" style="margin-top:10px;background:#F8FAFC"><span style="font:600 13px/1 var(--mono);color:var(--ink)">GET /kontak?nama=Budi&amp;pesan=Saran+Kantin HTTP/1.1</span></div><p style="font-size:12.5px;color:#991B1B;margin-top:10px;font-weight:500">Catatan: Parameter nama dan pesan terpampang di URL address bar peramban.</p>';
   };
   btnSimPost.onclick = () => {
     btnSimPost.style.background = 'var(--green)';
@@ -2097,7 +2097,7 @@ if(btnSimGet && btnSimPost){
     btnSimGet.style.background = '#F1F5F9';
     btnSimGet.style.color = 'var(--dim)';
     btnSimGet.style.border = '1px solid #CBD5E1';
-    methodView.innerHTML = '<span style="font:700 11.5px/1 var(--mono);color:var(--green);text-transform:uppercase">Format Request POST:</span><div class="sim-input-row" style="margin-top:10px;background:#F8FAFC"><span style="font:600 13px/1 var(--mono);color:var(--ink)">POST /kontak HTTP/1.1 &bull; Content-Type: application/x-www-form-urlencoded</span></div><div class="cbox" style="margin-top:10px;padding:10px 14px"><pre style="padding:0"><code>[Request Body Tertutup]&#10;nama=Budi&amp;pesan=Halo+Faiz</code></pre></div><p style="font-size:12.5px;color:#047857;margin-top:10px;font-weight:500">Keterangan: URL tetap bersih <code>/kontak</code>. Seluruh data dikemas aman di dalam Request Body.</p>';
+    methodView.innerHTML = '<span style="font:700 11.5px/1 var(--mono);color:var(--green);text-transform:uppercase">Format Request POST:</span><div class="sim-input-row" style="margin-top:10px;background:#F8FAFC"><span style="font:600 13px/1 var(--mono);color:var(--ink)">POST /kontak HTTP/1.1 &bull; Content-Type: application/x-www-form-urlencoded</span></div><div class="cbox" style="margin-top:10px;padding:10px 14px"><pre style="padding:0"><code>[Request Body Tertutup]&#10;nama=Budi&amp;pesan=Saran+Kantin</code></pre></div><p style="font-size:12.5px;color:#047857;margin-top:10px;font-weight:500">Keterangan: URL tetap bersih <code>/kontak</code>. Seluruh data dikemas aman di dalam Request Body.</p>';
   };
 }
 
