@@ -1,6 +1,6 @@
 # P05 — Routing Dinamis, HTTP Methods (GET & POST), dan Formulir Interaktif
 
-_Ringkasan isi deck P05 (20 slide interaktif). Deck mandiri (self-contained) di `P05/index.html` + aset gambar hasil render di `P05/img/`._
+_Ringkasan isi deck P05 (21 slide interaktif). Deck mandiri (self-contained) di `P05/index.html` + aset gambar hasil render di `P05/img/`._
 
 **Basis Materi:** Codebase portofolio 6 halaman otentik dari `asdos/praktikum-p05` (Flask + Jinja2 + HTML5/CSS modern).  
 **Konsep Pembelajaran:** Mengubah website statis P-04 menjadi aplikasi interaktif dinamis dengan menangkap parameter URL menggunakan *Variable Rules* & *Converters* (`<int:post_id>`, `<nama>`), membedakan HTTP Methods (GET vs POST), memproses masukan formulir via `request.form.get()`, mengamankan session dengan `app.secret_key`, menerapkan notifikasi umpan balik *Flash Messages*, dan mengadopsi arsitektur *Post/Redirect/Get (PRG)*.  
@@ -8,7 +8,7 @@ _Ringkasan isi deck P05 (20 slide interaktif). Deck mandiri (self-contained) di 
 
 ---
 
-## Daftar Isi Slide (20 Slide Terstruktur)
+## Daftar Isi Slide (21 Slide Terstruktur)
 
 ### Babak 1 · Orientasi & Variable Rules (Slide 1–5)
 - **Slide 1**: Routing Dinamis & Formulir Interaktif *(Cover Kelas & Meta Praktikum)*
@@ -17,28 +17,29 @@ _Ringkasan isi deck P05 (20 slide interaktif). Deck mandiri (self-contained) di 
 - **Slide 4**: Anatomi Variable Rules & Converter Types *(string, int, float, path, uuid)*
 - **Slide 5**: Simulator Converter Interaktif *(Widget uji URL: validasi angka vs huruf real-time)*
 
-### Babak 2 · Backend Dynamic Routing & Template Detail (Slide 6–9)
-- **Slide 6**: Langkah 1: Setup Import Flask & `app.secret_key` *(Mengapa butuh secret key?)*
-- **Slide 7**: Langkah 2: Rute Dinamis `@app.route('/blog/<int:post_id>')` & `/user/<nama>`
-- **Slide 8**: Langkah 3: Menghubungkan Daftar Blog dengan `url_for('blog_detail', post_id=item.id)`
-- **Slide 9**: Langkah 4: Template Baru `templates/blog_detail.html` *(Handling Data & 404 Empty State)*
+### Babak 2 · Backend Dynamic Routing & Template Detail (Slide 6–10)
+- **Slide 6**: Langkah 0: Workspace Setup — Opsi A (Tugas Mandiri) vs Opsi B (Clone Starter Kit GitHub)
+- **Slide 7**: Langkah 1: Setup Import Flask & `app.secret_key` *(Mengapa butuh secret key?)*
+- **Slide 8**: Langkah 2: Rute Dinamis `@app.route('/blog/<int:post_id>')` & `/user/<nama>`
+- **Slide 9**: Langkah 3: Menghubungkan Daftar Blog dengan `url_for('blog_detail', post_id=item.id)`
+- **Slide 10**: Langkah 4: Template Baru `templates/blog_detail.html` *(Handling Data & 404 Empty State)*
 
-### Babak 3 · HTTP Methods & Form Handling (Slide 10–13)
-- **Slide 10**: Teori HTTP Methods: Analogi Kartu Pos (GET) vs Surat Tertutup Amplop (POST)
-- **Slide 11**: Simulator HTTP Methods Interaktif *(Bandingkan URL Query String vs Request Body)*
-- **Slide 12**: Langkah 5: Mengaktifkan Formulir Kontak (`method="POST"` & pentingnya atribut `name`)
-- **Slide 13**: Langkah 6: Backend Form Handling (`request.form.get`) & Pola Post/Redirect/Get (PRG)
+### Babak 3 · HTTP Methods & Form Handling (Slide 11–14)
+- **Slide 11**: Teori HTTP Methods: Analogi Kartu Pos (GET) vs Surat Tertutup Amplop (POST)
+- **Slide 12**: Simulator HTTP Methods Interaktif *(Bandingkan URL Query String vs Request Body)*
+- **Slide 13**: Langkah 5: Mengaktifkan Formulir Kontak (`method="POST"` & pentingnya atribut `name`)
+- **Slide 14**: Langkah 6: Backend Form Handling (`request.form.get`) & Pola Post/Redirect/Get (PRG)
 
-### Babak 4 · Notifikasi Flash & Latihan Modul (Slide 14–15)
-- **Slide 14**: Langkah 7: Wadah Notifikasi Global di `templates/base.html` *(Alert Sukses & Bahaya)*
-- **Slide 15**: Latihan Modul: Sistem Login Sederhana (`/login`, validasi admin/12345 & Flash Message)
+### Babak 4 · Notifikasi Flash & Latihan Modul (Slide 15–16)
+- **Slide 15**: Langkah 7: Wadah Notifikasi Global di `templates/base.html` *(Alert Sukses & Bahaya)*
+- **Slide 16**: Latihan Modul: Sistem Login Sederhana (`/login`, validasi admin/12345 & Flash Message)
 
-### Babak 5 · Evaluasi, Rubrik & Kuis (Slide 16–20)
-- **Slide 16**: Freshmen Shield: Panduan Solusi 6 Eror Terpopuler Pemula
-- **Slide 17**: Verifikasi Rute Praktikum *(Interactive Route Checker 200 OK)*
-- **Slide 18**: Rubrik Penilaian Tugas Modul P05 (Total 100 Poin)
-- **Slide 19**: Checklist Tugas & Countdown Timer Pengumpulan
-- **Slide 20**: Kuis Interaktif Pemahaman P-05 (5 Soal Pilihan Ganda dengan Skor Otomatis)
+### Babak 5 · Evaluasi, Rubrik & Kuis (Slide 17–21)
+- **Slide 17**: Freshmen Shield: Panduan Solusi 6 Eror Terpopuler Pemula
+- **Slide 18**: Verifikasi Rute Praktikum *(Interactive Route Checker 200 OK)*
+- **Slide 19**: Rubrik Penilaian Tugas Modul P05 (Total 100 Poin)
+- **Slide 20**: Checklist Tugas & Countdown Timer Pengumpulan
+- **Slide 21**: Kuis Interaktif Pemahaman P-05 (5 Soal Pilihan Ganda dengan Skor Otomatis)
 
 ---
 

@@ -785,6 +785,83 @@ def blog_detail(post_id):
   </div>
 </section>
 
+<!-- ========================= SLIDE PREPARATION (LANGKAH 0) ========================= -->
+<section class="slide" data-sec="Babak 2 · Dynamic Routing" id="s-prep">
+  <div class="content">
+    <span class="kick"><i data-lucide="terminal"></i> Langkah 0 &bull; Workspace Setup</span>
+    <h2>Pilih Basis Kode: Tugas P-04 vs Clone GitHub</h2>
+    <p class="sub">Sebelum mulai koding di Langkah 1, pastikan folder proyek Anda sudah terbuka di VS Code. Pilih salah satu dari dua jalur berikut:</p>
+    <div class="cols c2 slide-body">
+      <!-- OPSI A -->
+      <div class="pcard" style="border-color:rgba(5,150,105,0.4);background:rgba(5,150,105,0.03)">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+          <span style="background:#059669;color:#fff;font:700 11px/1 var(--mono);padding:4px 8px;border-radius:4px">OPSI A</span>
+          <h3 style="margin:0;color:#047857">Pakai Tugas Mandiri P-04</h3>
+        </div>
+        <p style="margin-bottom:12px;font-size:13px">Gunakan opsi ini jika tugas P-04 Anda kemarin sudah selesai dan berjalan normal tanpa error.</p>
+        
+        <div style="background:#FFFFFF;border:1.5px solid #CBD5E1;border-radius:var(--rad-sm);padding:14px;font-size:12.5px;line-height:1.6;margin-bottom:12px">
+          <div style="font-weight:700;color:var(--ink);margin-bottom:8px;font-family:var(--mono);font-size:11.5px">CARA BUKA DI TERMINAL:</div>
+          <ol style="padding-left:18px;margin:0;color:var(--dim)">
+            <li style="margin-bottom:6px">Buka aplikasi terminal di laptop Anda.</li>
+            <li style="margin-bottom:6px">Arahkan ke folder tugas P-04:
+              <br><code style="font-size:11.5px;color:var(--accent);font-weight:600">cd path/ke/folder-tugas-p04</code>
+            </li>
+            <li style="margin-bottom:6px">Buka editor VS Code:
+              <br><code style="font-size:11.5px;color:var(--accent);font-weight:600">code .</code>
+            </li>
+            <li>Pastikan file <code>app.py</code> dan folder <code>templates/</code> siap diedit.</li>
+          </ol>
+        </div>
+
+        <div class="check-result-box" style="margin-top:0">
+          <i data-lucide="check-circle-2"></i>
+          <div>
+            <strong>Garansi Aman:</strong> Seluruh kodingan P-04 Anda tetap utuh. Di modul P-05 ini kita hanya menyambung fitur baru di atasnya!
+          </div>
+        </div>
+      </div>
+
+      <!-- OPSI B -->
+      <div class="pcard" style="border-color:rgba(2,132,199,0.4);background:rgba(2,132,199,0.03)">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+          <span style="background:var(--accent);color:#fff;font:700 11px/1 var(--mono);padding:4px 8px;border-radius:4px">OPSI B</span>
+          <h3 style="margin:0;color:var(--accent)">Clone Starter Kit P-04 (GitHub)</h3>
+        </div>
+        <p style="margin-bottom:12px;font-size:13px">Sangat dianjurkan jika tugas kemarin error, belum tuntas, atau ingin mulai dari kode bersih yang teruji.</p>
+
+        <div class="cbox">
+          <div class="cbox-head">
+            <span class="cbox-title"><i data-lucide="terminal"></i> Terminal / Bash</span>
+            <button class="copy-btn" data-copy="git clone https://github.com/Faiz-abdurrachman/pertemuan_04_pemweb.git praktikum-p05&#10;cd praktikum-p05&#10;python3 -m venv .venv&#10;source .venv/bin/activate&#10;pip install flask&#10;code ."><i data-lucide="copy"></i> Salin Perintah</button>
+          </div>
+          <pre style="padding:12px 14px;font-size:11.5px;line-height:1.6"><code><span style="color:#64748B"># 1. Clone starter kit resmi ke folder praktikum-p05:</span>
+git clone https://github.com/Faiz-abdurrachman/pertemuan_04_pemweb.git praktikum-p05
+
+<span style="color:#64748B"># 2. Masuk ke direktori hasil clone:</span>
+cd praktikum-p05
+
+<span style="color:#64748B"># 3. Buat &amp; aktifkan virtual environment (pilih sesuai OS):</span>
+python3 -m venv .venv
+source .venv/bin/activate   <span style="color:#64748B"># macOS / Linux</span>
+<span style="color:#64748B"># .venv\Scripts\activate    # Windows</span>
+
+<span style="color:#64748B"># 4. Install Flask &amp; buka di VS Code:</span>
+pip install flask
+code .</code></pre>
+        </div>
+
+        <div class="check-result-box blue" style="margin-top:10px">
+          <i data-lucide="check-circle-2"></i>
+          <div>
+            <strong>Hasil:</strong> Jendela VS Code otomatis terbuka dengan struktur <code>app.py</code>, <code>templates/</code>, dan <code>static/</code> yang 100% siap untuk Langkah 1!
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ========================= SLIDE 6 ========================= -->
 <section class="slide" data-sec="Babak 2 · Dynamic Routing" id="s6">
   <div class="content">
@@ -1481,7 +1558,7 @@ def login():
 <nav class="dock">
   <button class="dock-btn" id="prevBtn" title="Slide Sebelumnya (Panah Kiri)"><i data-lucide="chevron-left"></i></button>
   <div class="slide-count">
-    <span id="curNum">01</span> / <span id="totNum">20</span>
+    <span id="curNum">01</span> / <span id="totNum">21</span>
     <span class="seclabel" id="secLabel">Orientasi</span>
   </div>
   <button class="dock-btn" id="nextBtn" title="Slide Selanjutnya (Panah Kanan)"><i data-lucide="chevron-right"></i></button>
