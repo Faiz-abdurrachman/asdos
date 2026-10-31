@@ -41,7 +41,13 @@ const ICONS={
   "globe":"<circle cx='12' cy='12' r='10'/><line x1='2' y1='12' x2='22' y2='12'/><path d='M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z'/>",
   "alert-triangle":"<path d='m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z'/><line x1='12' y1='9' x2='12' y2='13'/><line x1='12' y1='17' x2='12.01' y2='17'/>",
   "sliders":"<line x1='4' x2='4' y1='21' y2='14'/><line x1='4' x2='4' y1='10' y2='3'/><line x1='12' x2='12' y1='21' y2='12'/><line x1='12' x2='12' y1='8' y2='3'/><line x1='20' x2='20' y1='21' y2='16'/><line x1='20' x2='20' y1='12' y2='3'/><line x1='1' x2='7' y1='14' y2='14'/><line x1='9' x2='15' y1='8' y2='8'/><line x1='17' x2='23' y1='16' y2='16'/>",
-  "check-square":"<polyline points='9 11 12 14 22 4'/><path d='M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11'/>"
+  "check-square":"<polyline points='9 11 12 14 22 4'/><path d='M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11'/>",
+  "play":"<polygon points='5 3 19 12 5 21 5 3'/>",
+  "arrow-right":"<path d='M5 12h14'/><path d='m12 5 7 7-7 7'/>",
+  "clock":"<circle cx='12' cy='12' r='10'/><polyline points='12 6 12 12 16 14'/>",
+  "info":"<circle cx='12' cy='12' r='10'/><path d='M12 16v-4'/><path d='M12 8h.01'/>",
+  "file-plus":"<path d='M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z'/><path d='M14 2v4a2 2 0 0 0 2 2h4'/><path d='M9 15h6'/><path d='M12 12v6'/>",
+  "list-checks":"<path d='M13 5h8'/><path d='M13 12h8'/><path d='M13 19h8'/><path d='m3 17 2 2 4-4'/><path d='m3 7 2 2 4-4'/>"
 };
 window.lucide={createIcons:function(){
 document.querySelectorAll('i[data-lucide]').forEach(function(el){
@@ -62,22 +68,26 @@ el.replaceWith(svg);
 </script>
 <style>
 /* ========================================================
-   THEME ROYAL VIOLET & INDIGO (P06: VALIDASI & KEAMANAN DATA)
+   THEME ROYAL VIOLET & INDIGO — SOP GLASSMORPHISM LIGHT BASE
    ======================================================== */
 :root{
   --disp:'Unbounded',sans-serif;
   --sans:'IBM Plex Sans',system-ui,sans-serif;
   --mono:'IBM Plex Mono',monospace;
   --bg-body:#F5EEFD;
-  --bg-card:linear-gradient(155deg, rgba(255,255,255,0.97), rgba(255,255,255,0.88));
-  --glass-bd:rgba(255,255,255,0.98);
-  --glass-bd-subtle:rgba(196,181,253,0.55);
+  --grad-glass:linear-gradient(160deg, rgba(255,255,255,0.92), rgba(255,255,255,0.68));
+  --spec-top:linear-gradient(180deg, rgba(255,255,255,0.7), rgba(255,255,255,0) 36%);
+  --inner-light:inset 0 1px 0 rgba(255,255,255,0.95), inset 0 -1px 0 rgba(255,255,255,0.2);
+  --out-sh:0 16px 40px rgba(30,27,75,0.09);
+  --out-sh-lg:0 24px 50px rgba(30,27,75,0.15);
+  --glass-bd:rgba(255,255,255,0.85);
+  --glass-bd-subtle:rgba(196,181,253,0.5);
   --ink:#1E1B4B;
   --dim:#3730A3;
   --faint:#6B7280;
   --accent:#7C3AED;          /* Electric Royal Violet */
-  --accent-light:rgba(124,58,237,0.12);
-  --accent-border:rgba(124,58,237,0.35);
+  --accent-light:rgba(124,58,237,0.10);
+  --accent-border:rgba(124,58,237,0.30);
   --blue:#4F46E5;
   --blue-light:rgba(79,70,229,0.10);
   --green:#16A34A;
@@ -85,12 +95,11 @@ el.replaceWith(svg);
   --red:#DC2626;
   --red-light:rgba(220,38,38,0.12);
   --amber:#D97706;
+  --amber-light:rgba(217,119,6,0.12);
   --rad:18px;
   --rad-sm:10px;
   --rad-lg:24px;
   --blur:blur(20px) saturate(160%);
-  --shadow:0 12px 32px -6px rgba(30,27,75,0.08), 0 2px 6px rgba(30,27,75,0.03);
-  --shadow-lg:0 20px 48px -10px rgba(30,27,75,0.15);
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{
@@ -99,111 +108,203 @@ html,body{
   font:400 15px/1.6 var(--sans);
   -webkit-font-smoothing:antialiased;
 }
-.bg-blobs{
+.blobs{
   position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;
 }
-.blob{
-  position:absolute;border-radius:50%;filter:blur(100px);opacity:0.12;
-  animation:drift 20s ease-in-out infinite alternate;
+.blobs::before,.blobs::after{
+  content:"";position:absolute;border-radius:50%;filter:blur(90px);opacity:0.14;
+  animation:driftA 26s ease-in-out infinite alternate;
 }
-.b1{width:440px;height:440px;background:#DDD6FE;top:-120px;left:-80px}
-.b2{width:480px;height:480px;background:#FBCFE8;bottom:-150px;right:-100px;animation-delay:-6s}
-.b3{width:340px;height:340px;background:#C7D2FE;bottom:10%;left:25%;animation-delay:-12s}
-@keyframes drift{
+.blobs::before{
+  width:520px;height:520px;background:#C4B5FD;top:-120px;left:-80px;
+}
+.blobs::after{
+  width:560px;height:560px;background:#FBCFE8;bottom:-150px;right:-100px;
+  animation:driftB 32s ease-in-out infinite alternate;
+}
+@keyframes driftA{
   0%{transform:translate(0,0) scale(1)}
-  100%{transform:translate(40px,30px) scale(1.08)}
+  100%{transform:translate(40px,30px) scale(1.06)}
+}
+@keyframes driftB{
+  0%{transform:translate(0,0) scale(1)}
+  100%{transform:translate(-35px,-25px) scale(1.08)}
 }
 
-/* TOP PROGRESS BAR */
-#pbar{
-  position:fixed;top:0;left:0;height:4px;background:linear-gradient(90deg,var(--accent),#EC4899);
-  width:0%;z-index:100;transition:width .25s ease;
+/* STAGE ENGINE 100DVH */
+.stage{
+  position:relative;width:100vw;height:100vh;height:100dvh;
+  z-index:1;overflow:hidden;display:grid;place-items:center;
+}
+.bar{
+  position:absolute;top:0;left:0;right:0;height:4px;
+  background:linear-gradient(90deg,var(--accent),#EC4899);
+  transform-origin:left;transition:width .25s ease;z-index:100;
+  width:0%;
 }
 
-/* HEADER DOCK */
-.top-dock{
-  position:fixed;top:16px;left:24px;right:24px;z-index:50;
-  display:flex;align-items:center;justify-content:space-between;
-}
+/* TOP-LEFT BRAND */
 .brand{
-  display:flex;align-items:center;gap:10px;
-  background:rgba(255,255,255,0.85);backdrop-filter:var(--blur);
+  position:absolute;top:16px;left:20px;z-index:50;
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--spec-top),var(--grad-glass);
+  backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
   padding:7px 14px;border-radius:999px;border:1px solid var(--glass-bd);
-  box-shadow:var(--shadow);text-decoration:none;color:var(--ink);
+  box-shadow:var(--out-sh),var(--inner-light);
+  text-decoration:none;color:var(--ink);
+  transition:transform .18s;
 }
-.brand-dot{width:10px;height:10px;border-radius:50%;background:var(--accent)}
+.brand:hover{transform:translateY(-1px)}
+.brand-dot{width:9px;height:9px;border-radius:50%;background:var(--accent)}
 .brand-title{font:700 13px/1 var(--disp);letter-spacing:-0.02em}
 .brand-sub{font:500 11px/1 var(--mono);color:var(--faint)}
 
-.dock-actions{
-  display:flex;align-items:center;gap:8px;
-  background:rgba(255,255,255,0.85);backdrop-filter:var(--blur);
-  padding:6px 12px;border-radius:999px;border:1px solid var(--glass-bd);
-  box-shadow:var(--shadow);
+/* TOP-RIGHT BUTTONS (FULLSCREEN & PDF) */
+.fsbtn{
+  position:absolute;top:16px;right:18px;z-index:50;
+  width:38px;height:38px;border-radius:12px;
+  border:1px solid var(--glass-bd);
+  background:var(--spec-top),var(--grad-glass);
+  backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
+  box-shadow:var(--out-sh),var(--inner-light);
+  display:grid;place-items:center;cursor:pointer;color:var(--ink);
+  transition:transform .2s,box-shadow .2s;
+}
+.fsbtn:hover{transform:translateY(-2px);box-shadow:var(--out-sh-lg),var(--inner-light)}
+.fsbtn:active{transform:scale(.94)}
+.fsbtn svg{width:16px;height:16px}
+.fsbtn.pdfbtn{right:66px}
+
+/* CANONICAL FLOATING GLASS DOCK (STANDAR SOP) */
+.dock{
+  position:absolute;bottom:calc(16px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);z-index:50;
+  display:flex;align-items:center;gap:10px;
+  padding:7px 14px;border-radius:999px;
+  border:1px solid var(--glass-bd);
+  background:var(--spec-top),var(--grad-glass);
+  backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
+  box-shadow:var(--out-sh),var(--inner-light);
 }
 .dock-btn{
-  background:none;border:none;cursor:pointer;color:var(--dim);
-  display:inline-flex;align-items:center;justify-content:center;
-  width:32px;height:32px;border-radius:50%;transition:.15s ease;
+  width:34px;height:34px;border-radius:50%;
+  border:1px solid rgba(255,255,255,.9);
+  background:linear-gradient(180deg,rgba(255,255,255,.95),rgba(255,255,255,.65));
+  display:grid;place-items:center;cursor:pointer;color:var(--ink);
+  transition:transform .18s,box-shadow .18s;
+  box-shadow:0 4px 10px rgba(30,27,75,.08);
 }
-.dock-btn:hover{background:rgba(15,23,42,0.06);color:var(--ink)}
-.scounter{font:600 12px/1 var(--mono);padding:0 8px;color:var(--faint)}
-
-/* BOTTOM NAV BAR */
-.bot-dock{
-  position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:50;
-  display:flex;align-items:center;gap:8px;
-  background:rgba(255,255,255,0.9);backdrop-filter:var(--blur);
-  padding:6px 14px;border-radius:999px;border:1px solid var(--glass-bd);
-  box-shadow:var(--shadow);
+.dock-btn:hover{transform:scale(1.08);box-shadow:0 6px 14px rgba(30,27,75,.14)}
+.dock-btn:active{transform:scale(.92)}
+.dock-btn svg{width:16px;height:16px}
+.count{
+  font:600 12px/1 var(--mono);color:var(--dim);
+  padding:0 8px;min-width:76px;text-align:center;letter-spacing:.02em;
 }
-.nav-btn{
-  background:none;border:none;cursor:pointer;color:var(--dim);
-  display:inline-flex;align-items:center;gap:6px;padding:6px 14px;
-  border-radius:999px;font:600 13px/1 var(--sans);transition:.15s ease;
-}
-.nav-btn:hover{background:var(--accent-light);color:var(--accent)}
-.nav-btn svg{width:16px;height:16px}
-.nav-kbd{
-  display:inline-block;padding:2px 6px;border-radius:4px;
-  background:rgba(15,23,42,0.06);font:600 10px/1 var(--mono);color:var(--faint);
+.count .seclabel{
+  display:block;margin-top:3px;
+  font:600 10px/1 var(--sans);color:var(--faint);letter-spacing:.02em;
+  text-transform:uppercase;
 }
 
-/* SLIDES VIEWPORT */
-#deck{
-  position:relative;width:100%;height:100%;
-  display:flex;align-items:center;justify-content:center;z-index:1;
+/* HINT CHIP (POJOK KANAN BAWAH) */
+.hintchip{
+  position:absolute;bottom:calc(20px + env(safe-area-inset-bottom));right:22px;z-index:50;
+  font:500 11.5px/1 var(--mono);color:var(--faint);
+  border:1px solid var(--glass-bd);border-radius:999px;padding:6px 12px;
+  background:var(--spec-top),var(--grad-glass);
+  backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
+  box-shadow:var(--out-sh),var(--inner-light);
+  transition:opacity .4s;
 }
+
+/* SLIDE CONTAINERS */
 .slide{
-  position:absolute;inset:0;padding:80px 48px 80px 48px;
-  display:none;opacity:0;transform:translateY(12px) scale(0.99);
-  transition:opacity .3s ease, transform .3s ease;
-  overflow-y:auto;overflow-x:hidden;
+  position:absolute;inset:0;z-index:1;
+  display:flex;align-items:center;justify-content:center;
+  padding:50px 32px 76px;
+  opacity:0;visibility:hidden;
+  transition:opacity .3s ease,visibility .3s;
+  pointer-events:none;
 }
-.slide.active{
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  opacity:1;transform:translateY(0) scale(1);
-}
-.slide-wrap{
-  width:100%;max-width:1100px;margin:auto;
+.slide.on{opacity:1;visibility:visible;pointer-events:auto;z-index:2}
+.content{
+  position:relative;width:100%;max-width:1080px;
+  text-align:left;margin:auto;
 }
 
-/* ACTION BANNERS FOR LIVE CODING */
-.action-banner{
+/* TYPOGRAPHY & CHIPS */
+.kick{
   display:inline-flex;align-items:center;gap:8px;
-  padding:6px 14px;border-radius:8px;font:700 12px/1 var(--mono);
-  letter-spacing:0.04em;text-transform:uppercase;margin-bottom:12px;
-  box-shadow:0 1px 3px rgba(0,0,0,0.06);
+  font:700 11px/1 var(--mono);text-transform:uppercase;letter-spacing:.06em;
+  color:var(--accent);background:var(--accent-light);
+  border:1px solid var(--accent-border);
+  border-radius:999px;padding:5px 12px;margin-bottom:10px;
 }
-.banner-new{background:#DCFCE7;color:#166534;border:1px solid #4ADE80}
-.banner-edit{background:#DBEAFE;color:#1E40AF;border:1px solid #60A5FA}
-.banner-append{background:#FEF3C7;color:#92400E;border:1px solid #FBBF24}
-.banner-clone{background:#F3E8FF;color:#6B21A8;border:1px solid #C084FC}
+h2{
+  font:700 clamp(20px,3vw,34px)/1.15 var(--disp);
+  letter-spacing:-.015em;margin-bottom:6px;color:var(--ink);
+}
+h2 code{
+  font-family:var(--mono);font-size:0.86em;
+  color:var(--accent);background:var(--accent-light);
+  padding:2px 8px;border-radius:6px;
+}
+.sub{color:var(--dim);font-size:clamp(12.5px,1.3vw,15.5px);max-width:68ch;line-height:1.5}
+.slide-body{margin-top:16px}
 
-/* STEP GUIDE BAR & TAGS (PEMULA-FRIENDLY DIRECTIVES) */
+/* COLS GRID */
+.cols{display:grid;gap:18px;align-items:start}
+.cols>*{min-width:0}
+.cols.c2{grid-template-columns:1fr 1fr}
+.cols.c2-1{grid-template-columns:1.3fr 1fr}
+.cols.c1-2{grid-template-columns:1fr 1.3fr}
+.cols.c3{grid-template-columns:repeat(3,1fr)}
+.cols.c4{grid-template-columns:repeat(4,1fr)}
+
+/* CARDS & PANELS */
+.pcard{
+  background:var(--spec-top),var(--grad-glass);
+  backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
+  border:1px solid var(--glass-bd);border-radius:var(--rad);
+  padding:20px 22px;box-shadow:var(--out-sh),var(--inner-light);
+  position:relative;overflow:hidden;
+}
+.pcard .ic{
+  width:38px;height:38px;border-radius:12px;
+  display:grid;place-items:center;margin-bottom:12px;
+  background:#FFFFFF;border:1px solid rgba(255,255,255,.9);
+  box-shadow:0 4px 12px rgba(30,27,75,.06);color:var(--accent);
+}
+.pcard .ic svg{width:18px;height:18px}
+.pcard h3{font:700 16px/1.3 var(--sans);margin-bottom:6px;color:var(--ink)}
+.pcard p{font-size:13px;line-height:1.5;color:var(--dim)}
+
+/* TITLE SLIDE SPECIAL */
+.title-slide .content{max-width:880px;text-align:center}
+.title-slide h1{
+  font:800 clamp(30px,5vw,52px)/1.08 var(--disp);
+  letter-spacing:-.025em;margin:14px 0 16px;color:var(--ink);
+}
+.title-slide h1 span{color:var(--accent)}
+.title-slide .typeline{
+  display:inline-flex;align-items:center;gap:8px;
+  font:600 12.5px/1 var(--mono);
+  color:var(--accent);background:var(--accent-light);
+  border:1px solid var(--accent-border);
+  padding:8px 16px;border-radius:999px;margin-bottom:14px;
+}
+.title-slide .t-sub{
+  font-size:clamp(14px,1.6vw,17px);line-height:1.6;
+  color:var(--dim);max-width:62ch;margin:0 auto 20px;
+}
+.title-slide .credit{
+  font:500 12px/1 var(--mono);color:var(--faint);letter-spacing:.02em;
+}
+
+/* STEP GUIDE BAR & TAGS */
 .step-guide-bar{
   display:inline-flex;flex-wrap:wrap;align-items:center;gap:8px;
-  margin:0 0 14px;background:rgba(255,255,255,0.95);
+  margin:0 0 12px;background:rgba(255,255,255,0.92);
   border:1px solid #CBD5E1;border-radius:8px;padding:6px 12px;
   box-shadow:0 1px 3px rgba(15,23,42,0.04);
 }
@@ -216,7 +317,7 @@ html,body{
 .guide-tag.act{background:rgba(22,163,74,0.1);color:#16A34A;border:1px solid rgba(22,163,74,0.25)}
 .guide-tag.check{background:rgba(217,119,6,0.1);color:#B45309;border:1px solid rgba(217,119,6,0.25)}
 
-/* CHECK RESULT BOX (IMMEDIATE VERIFICATION) */
+/* CHECK RESULT BOX */
 .check-result-box{
   margin-top:12px;padding:10px 14px;border-radius:8px;
   background:#F0FDF4;border:1px solid #BBF7D0;
@@ -227,10 +328,64 @@ html,body{
 .check-result-box strong{font-weight:700;color:#14532D}
 .check-result-box code{background:rgba(255,255,255,0.9);padding:1px 5px;border-radius:4px;border:1px solid rgba(0,0,0,0.1)}
 
-/* PROGRESSIVE DISCLOSURE TABS */
+/* ACTION BANNER */
+.action-banner{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:5px 12px;border-radius:6px;font:700 11.5px/1 var(--mono);
+  letter-spacing:0.04em;text-transform:uppercase;margin-bottom:10px;
+}
+.banner-new{background:#DCFCE7;color:#166534;border:1px solid #4ADE80}
+.banner-edit{background:#DBEAFE;color:#1E40AF;border:1px solid #60A5FA}
+.banner-append{background:#FEF3C7;color:#92400E;border:1px solid #FBBF24}
+.banner-clone{background:#F3E8FF;color:#6B21A8;border:1px solid #C084FC}
+
+/* CODEBOX MIDNIGHT VIOLET */
+.codebox{
+  background:#130E26;border-radius:14px;overflow:hidden;
+  border:1px solid rgba(139,92,246,0.32);margin:12px 0;
+  box-shadow:0 14px 36px -6px rgba(19,14,38,0.55);
+}
+.codehead{
+  background:#1E163F;padding:9px 14px;
+  display:flex;align-items:center;justify-content:space-between;
+  border-bottom:1px solid rgba(139,92,246,0.22);
+}
+.codehead-left{display:flex;align-items:center;gap:10px}
+.mac-dots{display:flex;align-items:center;gap:6px}
+.mac-dot{width:10px;height:10px;border-radius:50%;display:inline-block}
+.dot-red{background:#FF5F56}
+.dot-yellow{background:#FFBD2E}
+.dot-green{background:#27C93F}
+.codehead-file{font:600 12px/1 var(--mono);color:#DDD6FE;display:flex;align-items:center;gap:6px}
+.codehead-copy{
+  background:rgba(124,58,237,0.22);border:1px solid rgba(196,181,253,0.35);
+  cursor:pointer;color:#F3E8FF;display:inline-flex;align-items:center;gap:6px;
+  font:600 11px/1 var(--sans);padding:4px 10px;border-radius:6px;transition:.15s ease;
+}
+.codehead-copy:hover{background:#7C3AED;color:#FFFFFF}
+pre.codebody{
+  padding:12px 16px;overflow-x:auto;overflow-y:auto;
+  max-height:clamp(200px, 36vh, 290px);
+  font:400 12.5px/1.6 var(--mono);
+  color:#F8FAFC;margin:0;tab-size:4;
+}
+#s13 pre.codebody{
+  max-height:clamp(240px, 42vh, 340px);
+}
+.kw{color:#FB7185;font-weight:600}
+.fn{color:#38BDF8;font-weight:500}
+.str{color:#34D399}
+.cm{color:#A5B4FC;font-style:italic}
+.num{color:#FBBF24;font-weight:600}
+.hl-line{
+  background:rgba(124,58,237,0.28);display:block;
+  margin:0 -16px;padding:0 16px;border-left:3.5px solid #A855F7;
+}
+
+/* PROGRESSIVE TABS */
 .pcard-tabs{
   display:inline-flex;gap:4px;background:#F1F5F9;padding:3px;
-  border-radius:8px;margin-bottom:12px;border:1px solid #CBD5E1;
+  border-radius:8px;margin-bottom:10px;border:1px solid #CBD5E1;
 }
 .ptab-btn{
   background:transparent;border:none;font:600 11.5px/1 var(--mono);
@@ -238,471 +393,373 @@ html,body{
   transition:all .15s ease;display:inline-flex;align-items:center;gap:6px;
 }
 .ptab-btn:hover{color:var(--ink)}
-.ptab-btn.on{
-  background:#FFFFFF;color:var(--accent);box-shadow:0 1px 3px rgba(15,23,42,0.1);
-}
+.ptab-btn.on{background:#FFFFFF;color:var(--accent);box-shadow:0 1px 3px rgba(15,23,42,0.1)}
 .ptab-pane{display:none}
 .ptab-pane.on{display:block}
 
-/* CARD LAYOUTS */
-.card{
-  background:var(--bg-card);backdrop-filter:var(--blur);
-  border:1px solid var(--glass-bd);border-radius:var(--rad);
-  padding:28px 32px;box-shadow:var(--shadow);position:relative;
-}
-.card-head{
-  display:flex;align-items:center;justify-content:space-between;
-  margin-bottom:20px;padding-bottom:14px;border-bottom:1px solid var(--glass-bd-subtle);
-}
-.card-title{font:700 22px/1.2 var(--disp);color:var(--ink);display:flex;align-items:center;gap:10px}
-.card-sub{font:400 14px/1.5 var(--sans);color:var(--faint);margin-top:4px}
-.badge{
-  display:inline-flex;align-items:center;gap:6px;
-  padding:4px 10px;border-radius:999px;font:600 11px/1 var(--mono);
-  background:var(--accent-light);color:var(--accent);border:1px solid var(--accent-border);
-}
-
-/* CODE VIEW BOX & TERMINAL (ROYAL VIOLET THEMED + HIGH CONTRAST) */
-.codebox{
-  background:#130E26;
-  border-radius:14px;
-  overflow:hidden;
-  border:1px solid rgba(139,92,246,0.32);
-  margin:14px 0;
-  box-shadow:0 14px 36px -6px rgba(19,14,38,0.55), 0 0 0 1px rgba(124,58,237,0.22);
-}
-.codehead{
-  background:#1E163F;
-  padding:10px 16px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  border-bottom:1px solid rgba(139,92,246,0.22);
-}
-.codehead-left{
-  display:flex;
-  align-items:center;
-  gap:12px;
-}
-.mac-dots{
-  display:flex;
-  align-items:center;
-  gap:6px;
-}
-.mac-dot{
-  width:10px;
-  height:10px;
-  border-radius:50%;
-  display:inline-block;
-}
-.dot-red{background:#FF5F56;box-shadow:0 0 5px rgba(255,95,86,0.5)}
-.dot-yellow{background:#FFBD2E;box-shadow:0 0 5px rgba(255,189,46,0.5)}
-.dot-green{background:#27C93F;box-shadow:0 0 5px rgba(39,201,63,0.5)}
-.codehead-file{
-  font:600 12.5px/1 var(--mono);
-  color:#DDD6FE;
-  display:flex;
-  align-items:center;
-  gap:6px;
-}
-.codehead-copy{
-  background:rgba(124,58,237,0.22);
-  border:1px solid rgba(196,181,253,0.35);
-  cursor:pointer;
-  color:#F3E8FF;
-  display:inline-flex;
-  align-items:center;
-  gap:6px;
-  font:600 11.5px/1 var(--sans);
-  padding:5px 12px;
-  border-radius:6px;
-  transition:.15s ease;
-}
-.codehead-copy:hover{
-  background:#7C3AED;
-  border-color:#7C3AED;
-  color:#FFFFFF;
-  box-shadow:0 2px 8px rgba(124,58,237,0.4);
-}
-pre.codebody{
-  padding:16px 18px;
-  overflow-x:auto;
-  font:400 13.5px/1.65 var(--mono);
-  color:#F8FAFC;
-  margin:0;
-  tab-size:4;
-  -webkit-font-smoothing:antialiased;
-}
-/* HIGH CONTRAST SYNTAX HIGHLIGHTING */
-.kw{color:#FB7185;font-weight:600}           /* Rose / Neon Pink */
-.fn{color:#38BDF8;font-weight:500}           /* Electric Sky Blue */
-.str{color:#34D399}                          /* Vivid Neon Mint */
-.cm{color:#A5B4FC;font-style:italic}         /* Readable Lilac Slate */
-.num{color:#FBBF24;font-weight:600}          /* Radiant Amber */
-.hl-line{
-  background:rgba(124,58,237,0.30);
-  display:block;
-  margin:0 -18px;
-  padding:0 18px;
-  border-left:3.5px solid #A855F7;
-  color:#FFFFFF;
-}
-
-/* GRID HELPERS */
-.g2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-
-/* COVER SPECIAL */
-.cover-hero{
-  text-align:center;max-width:880px;margin:0 auto;
-}
-.cover-badge{
-  display:inline-flex;align-items:center;gap:8px;
-  padding:6px 16px;border-radius:999px;font:700 12px/1 var(--disp);
-  background:var(--accent-light);color:var(--accent);border:1px solid var(--accent-border);
-  margin-bottom:18px;
-}
-.cover-title{
-  font:800 42px/1.15 var(--disp);color:var(--ink);letter-spacing:-0.03em;
-  margin-bottom:16px;
-}
-.cover-title span{color:var(--accent)}
-.cover-desc{
-  font:400 16px/1.6 var(--sans);color:var(--dim);max-width:720px;margin:0 auto 28px;
-}
-.cover-stats{
-  display:flex;justify-content:center;gap:24px;margin-top:20px;
-}
-.stat-pill{
-  background:rgba(255,255,255,0.7);backdrop-filter:var(--blur);
-  padding:10px 18px;border-radius:12px;border:1px solid var(--glass-bd);
-  text-align:left;min-width:140px;
-}
-.stat-num{font:700 20px/1 var(--disp);color:var(--accent)}
-.stat-lbl{font:500 11px/1 var(--sans);color:var(--faint);margin-top:4px}
-
-/* INTERACTIVE VALIDATION SIMULATOR (SLIDE 5) */
+/* SIMULATOR INTERAKTIF */
 .sim-box{
   background:#FFFFFF;border-radius:14px;border:1.5px solid #CBD5E1;
-  padding:20px;box-shadow:0 4px 12px rgba(0,0,0,0.05);
+  padding:18px;box-shadow:0 4px 12px rgba(0,0,0,0.05);
 }
-.sim-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-.sim-input-group{margin-bottom:12px}
-.sim-input-group label{display:block;font:600 12px/1.4 var(--sans);color:#334155;margin-bottom:4px}
+.sim-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.sim-input-group{margin-bottom:10px}
+.sim-input-group label{display:block;font:600 11.5px/1.4 var(--sans);color:#334155;margin-bottom:3px}
 .sim-input{
-  width:100%;padding:8px 12px;border:1.5px solid #CBD5E1;border-radius:6px;
-  font:400 13px/1 var(--sans);color:#1E293B;transition:.15s;
+  width:100%;padding:7px 10px;border:1.5px solid #CBD5E1;border-radius:6px;
+  font:400 12.5px/1 var(--sans);color:#1E293B;transition:.15s;
 }
 .sim-input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(124,58,237,0.2)}
 .sim-btn{
-  width:100%;padding:10px;background:var(--accent);color:#FFFFFF;border:none;
-  border-radius:6px;font:700 13px/1 var(--sans);cursor:pointer;transition:.15s;margin-top:6px;
+  width:100%;padding:9px;background:var(--accent);color:#FFFFFF;border:none;
+  border-radius:6px;font:700 12.5px/1 var(--sans);cursor:pointer;transition:.15s;margin-top:4px;
 }
 .sim-btn:hover{background:#6D28D9}
 .sim-screen{
-  background:#F8FAFC;border:1.5px dashed #CBD5E1;border-radius:8px;padding:16px;
-  min-height:220px;display:flex;flex-direction:column;justify-content:flex-start;
+  background:#F8FAFC;border:1.5px dashed #CBD5E1;border-radius:8px;padding:14px;
+  min-height:210px;display:flex;flex-direction:column;justify-content:flex-start;
 }
-.sim-screen-title{font:700 11px/1 var(--mono);color:#64748B;text-transform:uppercase;margin-bottom:10px}
+.sim-screen-title{font:700 10.5px/1 var(--mono);color:#64748B;text-transform:uppercase;margin-bottom:8px}
 .sim-alert{
-  padding:8px 12px;border-radius:6px;font:500 12px/1.4 var(--sans);margin-bottom:6px;
-  animation:fadeIn 0.25s ease;
+  padding:7px 10px;border-radius:6px;font:500 11.5px/1.4 var(--sans);margin-bottom:6px;
 }
 .sim-alert-danger{background:#FEE2E2;color:#991B1B;border:1px solid #F87171}
 .sim-alert-success{background:#DCFCE7;color:#166534;border:1px solid #4ADE80}
 
-/* QUIZ STYLES */
-.qopt{
-  display:flex;align-items:center;gap:12px;width:100%;padding:12px 16px;
-  margin-bottom:8px;background:rgba(255,255,255,0.7);border:1.5px solid var(--glass-bd-subtle);
-  border-radius:10px;cursor:pointer;text-align:left;font:500 14px/1.4 var(--sans);
-  color:var(--ink);transition:.15s;
-}
-.qopt:hover:not(:disabled){background:#FFFFFF;border-color:var(--accent);transform:translateX(4px)}
-.qopt-letter{
-  width:26px;height:26px;border-radius:50%;background:rgba(15,23,42,0.06);
-  display:inline-flex;align-items:center;justify-content:center;font:700 11px/1 var(--mono);
-}
-.qopt.right{background:#DCFCE7;border-color:#16A34A;color:#166534}
-.qopt.wrong{background:#FEE2E2;border-color:#DC2626;color:#991B1B}
-
-/* FRESHMEN SHIELD */
-.shield-card{
-  background:#FFFFFF;border-radius:12px;border:1px solid #E2E8F0;
-  padding:16px;margin-bottom:12px;box-shadow:0 2px 4px rgba(0,0,0,0.03);
-}
-.shield-err{font:700 13px/1.3 var(--mono);color:#DC2626;margin-bottom:4px}
-.shield-why{font:400 12px/1.4 var(--sans);color:#475569;margin-bottom:6px}
-.shield-fix{
-  font:600 12px/1.4 var(--mono);color:#166534;background:#DCFCE7;
-  padding:4px 8px;border-radius:4px;display:inline-block;
-}
-
-/* CHECKLIST */
-.chk-item{
-  display:flex;align-items:flex-start;gap:12px;padding:12px 14px;
-  background:#FFFFFF;border-radius:8px;border:1px solid #E2E8F0;margin-bottom:8px;
-  cursor:pointer;transition:.15s;
-}
-.chk-item:hover{border-color:var(--accent)}
-.chk-box{
-  width:20px;height:20px;border-radius:4px;border:2px solid #94A3B8;
-  display:flex;align-items:center;justify-content:center;margin-top:2px;
-}
-.chk-item.done .chk-box{background:var(--accent);border-color:var(--accent);color:#FFFFFF}
-.chk-item.done .chk-title{text-decoration:line-through;color:#94A3B8}
-
-/* KEYNOTE CALLOUT */
+/* CALLOUTS */
 .callout{
-  padding:14px 18px;border-radius:10px;font:500 13px/1.5 var(--sans);
-  margin:12px 0;display:flex;align-items:flex-start;gap:10px;
+  padding:12px 16px;border-radius:10px;font:500 12.5px/1.5 var(--sans);
+  margin:10px 0;display:flex;align-items:flex-start;gap:10px;
 }
 .callout-info{background:#EFF6FF;color:#1E40AF;border-left:4px solid #3B82F6}
 .callout-warn{background:#FEF3C7;color:#92400E;border-left:4px solid #F59E0B}
 .callout-success{background:#ECFDF5;color:#065F46;border-left:4px solid #10B981}
 
-/* RESPONSIVE */
-@media (max-width:860px){
-  .g2,.sim-grid{grid-template-columns:1fr}
-  .cover-title{font-size:28px}
-  .slide{padding:70px 20px}
+/* QUIZ STYLES */
+.quizbox{
+  background:var(--spec-top),var(--grad-glass);border:1px solid var(--glass-bd);
+  border-radius:var(--rad);padding:22px 26px;box-shadow:var(--out-sh),var(--inner-light);
+  max-width:840px;margin:0 auto;text-align:left;
+}
+.qmeta{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.qno{font:700 12px/1 var(--mono);color:var(--accent);letter-spacing:.04em}
+.qdots{display:flex;gap:6px}
+.qdots span{display:inline-block;width:8px;height:8px;border-radius:50%;background:#CBD5E1;transition:.2s}
+.qq{font:600 clamp(15px,1.8vw,20px)/1.35 var(--sans);color:var(--ink);margin-bottom:16px;min-height:2.4em}
+.qopts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.qopt{
+  display:flex;align-items:center;gap:10px;padding:10px 14px;
+  background:rgba(255,255,255,0.85);border:1px solid var(--glass-bd-subtle);
+  border-radius:10px;cursor:pointer;text-align:left;font:500 13px/1.4 var(--sans);
+  color:var(--ink);transition:.15s;box-shadow:0 2px 6px rgba(30,27,75,0.04);
+}
+.qopt:hover:not(:disabled){background:#FFFFFF;border-color:var(--accent);transform:translateY(-1px)}
+.qopt-letter{
+  width:24px;height:24px;border-radius:50%;background:rgba(15,23,42,0.06);
+  display:inline-flex;align-items:center;justify-content:center;font:700 11px/1 var(--mono);flex:none;
+}
+.qopt.right{background:#DCFCE7;border-color:#16A34A;color:#166534}
+.qopt.wrong{background:#FEE2E2;border-color:#DC2626;color:#991B1B}
+.tbtn{
+  font:600 12px/1 var(--sans);padding:9px 16px;border-radius:999px;
+  background:var(--accent);color:#FFFFFF;border:none;cursor:pointer;
+  display:inline-flex;align-items:center;gap:6px;transition:.15s;
+}
+.tbtn:hover{background:#6D28D9}
+
+/* CHECKLIST & TIMERS */
+.chk-item{
+  display:flex;align-items:flex-start;gap:12px;padding:11px 14px;
+  background:#FFFFFF;border-radius:8px;border:1px solid #E2E8F0;margin-bottom:7px;
+  cursor:pointer;transition:.15s;
+}
+.chk-item:hover{border-color:var(--accent)}
+.chk-box{
+  width:18px;height:18px;border-radius:4px;border:2px solid #94A3B8;
+  display:flex;align-items:center;justify-content:center;margin-top:2px;flex:none;
+}
+.chk-item.done .chk-box{background:var(--accent);border-color:var(--accent);color:#FFFFFF}
+.chk-item.done .chk-title{text-decoration:line-through;color:#94A3B8}
+
+/* FRESHMEN SHIELD */
+.shield-card{
+  background:#FFFFFF;border-radius:10px;border:1px solid #E2E8F0;
+  padding:12px 14px;margin-bottom:8px;box-shadow:0 2px 4px rgba(0,0,0,0.02);
+}
+.shield-err{font:700 12px/1.3 var(--mono);color:#DC2626;margin-bottom:3px}
+.shield-why{font:400 11.5px/1.4 var(--sans);color:#475569;margin-bottom:4px}
+.shield-fix{
+  font:600 11.5px/1.4 var(--mono);color:#166534;background:#DCFCE7;
+  padding:3px 7px;border-radius:4px;display:inline-block;
+}
+
+/* PRINT-TO-PDF STYLING (STANDAR SOP 16:9) */
+@page{
+  size:297mm 167mm;
+  margin:0;
+}
+@media print{
+  html,body{background:#fff!important;overflow:visible!important;display:block!important;height:auto!important}
+  *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+  .stage{width:297mm!important;height:auto!important;background:#fff!important;display:block!important;overflow:visible!important}
+  .blobs,.bar,.fsbtn,.dock,.hintchip{display:none!important}
+  .slide{
+    position:static!important;inset:auto!important;opacity:1!important;visibility:visible!important;
+    display:flex!important;width:297mm!important;height:167mm!important;
+    page-break-after:always!important;page-break-inside:avoid!important;
+    padding:16mm 20mm 14mm!important;box-sizing:border-box!important;
+    background:#fff!important;overflow:hidden!important;
+  }
+  .content{max-width:100%!important;margin:auto 0!important;zoom:1!important}
+  .codebox{box-shadow:none!important;border:1px solid #130E26!important;break-inside:avoid!important}
+  .pcard,.sim-box,.quizbox{box-shadow:none!important;border:1px solid #CBD5E1!important;background:#FAFAF7!important}
+}
+
+/* RESPONSIVE VIEWPORTS */
+@media (max-width:900px){
+  .slide{padding:64px 18px 80px;overflow-y:auto}
+  .cols.c2,.cols.c2-1,.cols.c1-2,.cols.c3,.cols.c4,.sim-grid,.qopts{grid-template-columns:1fr}
+  .brand-sub{display:none}
+  .hintchip{display:none}
+}
+@media (max-width:640px){
+  .fsbtn{top:12px;width:34px;height:34px}
+  .fsbtn.pdfbtn{right:54px}
+  .dock{bottom:10px;padding:5px 8px}
+  .dock-btn{width:32px;height:32px}
+  .count{font-size:11px;min-width:60px}
 }
 </style>
 </head>
 <body>
 
-<div class="bg-blobs" aria-hidden="true">
-  <div class="blob b1"></div>
-  <div class="blob b2"></div>
-  <div class="blob b3"></div>
-</div>
+<div class="blobs" aria-hidden="true"></div>
 
-<div id="pbar"></div>
+<main class="stage" id="stage">
+  <div class="bar" id="progressBar"></div>
 
-<!-- HEADER DOCK -->
-<header class="top-dock">
-  <a href="/" class="brand">
+  <!-- TOP-LEFT BRAND -->
+  <a href="/" class="brand" title="Kembali ke Portal Web Perkuliahan">
     <div class="brand-dot"></div>
     <span class="brand-title">P06</span>
     <span class="brand-sub">Form Handling &amp; Validasi Sisi Server</span>
   </a>
-  <div class="dock-actions">
-    <span class="scounter" id="slide-num">01 / 20</span>
-    <button class="dock-btn" id="btn-fullscreen" title="Layar Penuh (F)"><i data-lucide="maximize-2"></i></button>
-  </div>
-</header>
 
-<!-- SLIDES VIEWPORT -->
-<main id="deck">
+  <!-- TOP-RIGHT ACTIONS (FULLSCREEN & PDF) -->
+  <button class="fsbtn pdfbtn" id="pdfBtn" title="Ekspor Slide ke PDF" onclick="window.print()" aria-label="Ekspor ke PDF"><i data-lucide="printer"></i></button>
+  <button class="fsbtn" id="fsBtn" title="Layar Penuh (F)" onclick="toggleFullscreen()" aria-label="Layar penuh"><i data-lucide="maximize-2"></i></button>
 
-  <!-- ==========================================
-       SLIDE 1: COVER
-       ========================================== -->
-  <section class="slide active" id="s01">
-    <div class="slide-wrap cover-hero">
-      <div class="cover-badge">
-        <i data-lucide="shield-check" style="width:14px;height:14px"></i>
-        Praktikum Pemrograman Web &bull; Pertemuan 06
-      </div>
-      <h1 class="cover-title">
-        Form Handling, Sanitasi Data, &amp;<br>
-        <span>Validasi Sisi Server (Server-Side)</span>
-      </h1>
-      <p class="cover-desc">
-        Mengapa HTML5 <code>required</code> saja tidak aman? Hari ini kita pelajari cara menangkap data formulir, membersihkan spasi kosong dengan <code>.strip()</code>, menguji 4 aturan validasi di Python Flask, menampilkan notifikasi Flash ber-kategori, dan menerapkan <b>Sticky Form UX</b>.
+  <!-- CANONICAL FLOATING GLASS DOCK (STANDAR SOP) -->
+  <nav class="dock" aria-label="Navigasi slide">
+    <button class="dock-btn" id="prevBtn" title="Slide Sebelumnya (Panah Kiri)" aria-label="Slide sebelumnya">
+      <i data-lucide="chevron-left"></i>
+    </button>
+    <div class="count">
+      <span id="curNum">01</span> / <span id="totNum">24</span>
+      <span class="seclabel" id="secLabel">Babak 1 · Orientasi</span>
+    </div>
+    <button class="dock-btn" id="nextBtn" title="Slide Selanjutnya (Panah Kanan)" aria-label="Slide berikutnya">
+      <i data-lucide="chevron-right"></i>
+    </button>
+  </nav>
+
+  <!-- HINT CHIP -->
+  <div class="hintchip" id="hintchip">panah &#8592; &#8594; pindah slide &bull; F layar penuh</div>
+
+  <!-- ========================================================
+       BABAK 1: ORIENTASI & REALITY CHECK (Slide 1 – 5)
+       ======================================================== -->
+
+  <!-- SLIDE 1: COVER -->
+  <section class="slide title-slide on" data-sec="Babak 1 · Orientasi" id="s1">
+    <div class="content">
+      <div class="typeline"><i data-lucide="shield-check" style="width:14px;height:14px"></i> Praktikum Pemrograman Web &bull; Pertemuan 06</div>
+      <h1>Form Handling, Sanitasi Data, &amp;<br><span>Validasi Sisi Server (Server-Side)</span></h1>
+      <p class="t-sub">
+        Mengapa HTML5 <code>required</code> saja tidak aman? Hari ini kamu belajar menangkap data formulir, membersihkan spasi tipuan dengan <code>.strip()</code>, menguji 4 aturan validasi di Python Flask, serta memberikan feedback profesional dengan <b>Sticky Form</b>.
       </p>
-      <div class="cover-stats">
-        <div class="stat-pill">
-          <div class="stat-num">4</div>
-          <div class="stat-lbl">Aturan Validasi Wajib</div>
+      <div style="display:flex;justify-content:center;gap:18px;margin-top:16px">
+        <div style="background:rgba(255,255,255,0.7);padding:8px 16px;border-radius:10px;border:1px solid var(--glass-bd)">
+          <div style="font:700 18px/1 var(--disp);color:var(--accent)">4</div>
+          <div style="font:500 10.5px/1 var(--sans);color:var(--faint);margin-top:3px">Aturan Validasi Wajib</div>
         </div>
-        <div class="stat-pill">
-          <div class="stat-num">2</div>
-          <div class="stat-lbl">Kategori Flash (danger / success)</div>
+        <div style="background:rgba(255,255,255,0.7);padding:8px 16px;border-radius:10px;border:1px solid var(--glass-bd)">
+          <div style="font:700 18px/1 var(--disp);color:var(--green)">2</div>
+          <div style="font:500 10.5px/1 var(--sans);color:var(--faint);margin-top:3px">Kategori Flash (danger / success)</div>
         </div>
-        <div class="stat-pill">
-          <div class="stat-num">100%</div>
-          <div class="stat-lbl">Aman dari Bypass Browser</div>
+        <div style="background:rgba(255,255,255,0.7);padding:8px 16px;border-radius:10px;border:1px solid var(--glass-bd)">
+          <div style="font:700 18px/1 var(--disp);color:var(--blue)">100%</div>
+          <div style="font:500 10.5px/1 var(--sans);color:var(--faint);margin-top:3px">Aman dari Bypass Browser</div>
+        </div>
+      </div>
+      <div class="credit" style="margin-top:20px">Faiz &bull; Asisten Dosen Praktikum Pemrograman Web &bull; 2026</div>
+    </div>
+  </section>
+
+  <!-- SLIDE 2: RUN OF SHOW (ALUR 100 MENIT PRAKTIKUM) -->
+  <section class="slide" data-sec="Babak 1 · Orientasi" id="s2">
+    <div class="content">
+      <div class="kick"><i data-lucide="clock" style="width:13px;height:13px"></i> Run of Show</div>
+      <h2>Alur Pertemuan Hari Ini (100 Menit)</h2>
+      <p class="sub">Waktu praktikum dirancang bertahap agar kamu paham tuntas konsep dan kodingannya tanpa terburu-buru.</p>
+      <div class="slide-body cols c4">
+        <div class="pcard">
+          <span style="font:700 20px/1 var(--disp);color:var(--accent)">20'</span>
+          <h3 style="margin:8px 0 4px">1. Konsep &amp; Reality</h3>
+          <p>Kelemahan HTML5 browser, prinsip <i>Never Trust Client Input</i>, dan 3 pilar validasi server.</p>
+        </div>
+        <div class="pcard">
+          <span style="font:700 20px/1 var(--disp);color:var(--blue)">45'</span>
+          <h3 style="margin:8px 0 4px">2. Live Coding Form</h3>
+          <p>Langkah 0–5: Rute GET/POST, form HTML, sanitasi <code>.strip()</code>, 4 validasi, &amp; sticky input.</p>
+        </div>
+        <div class="pcard">
+          <span style="font:700 20px/1 var(--disp);color:var(--green)">25'</span>
+          <h3 style="margin:8px 0 4px">3. Praktik Mandiri</h3>
+          <p>Uji skenario input di browser pribadimu dan selesaikan 4 poin checklist penugasan.</p>
+        </div>
+        <div class="pcard">
+          <span style="font:700 20px/1 var(--disp);color:var(--amber)">10'</span>
+          <h3 style="margin:8px 0 4px">4. Evaluasi &amp; Kuis</h3>
+          <p>Kuis interaktif pemahaman materi dan panduan pengumpulan file ZIP di LMS kampus.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ==========================================
-       SLIDE 2: ROADMAP PERJALANAN
-       ========================================== -->
-  <section class="slide" id="s02">
-    <div class="slide-wrap">
-      <div class="card">
-        <div class="card-head">
-          <div>
-            <div class="badge">Peta Perjalanan Belajar</div>
-            <h2 class="card-title">Roadmap Praktikum Web Semester Ini</h2>
+  <!-- SLIDE 3: PROBLEM STATEMENT (THE SHOCK MOMENT) -->
+  <section class="slide" data-sec="Babak 1 · Orientasi" id="s3">
+    <div class="content">
+      <div class="kick" style="background:#FEE2E2;color:#991B1B;border-color:#F87171"><i data-lucide="shield-alert" style="width:13px;height:13px"></i> The Shock Moment</div>
+      <h2>Mengapa HTML5 <code>required</code> Saja Tidak Cukup?</h2>
+      <p class="sub">Banyak developer pemula mengira validasi browser sudah cukup aman. Mari kita buktikan celahnya!</p>
+      <div class="slide-body cols c2">
+        <div class="pcard" style="border:1.5px solid #FCA5A5">
+          <div class="ic" style="color:#DC2626"><i data-lucide="shield-alert"></i></div>
+          <h3 style="color:#DC2626">Validasi Client-Side (Browser HTML5)</h3>
+          <p style="margin-bottom:10px">Memberikan atribut <code>&lt;input required type="email"&gt;</code> di file HTML.</p>
+          <div class="callout callout-warn" style="font-size:12px;margin:8px 0">
+            <b>Celah Keamanan Fatal:</b> Siapapun bisa klik kanan &rarr; <i>Inspect Element</i> &rarr; hapus tulisan <code>required</code> dalam 3 detik, lalu submit. Data kosong pun lolos terkirim ke server!
           </div>
+          <p style="font-size:11.5px;color:#64748B">Tujuan asli Client-Side hanyalah kenyamanan visual (UX) agar pengguna tahu ada typo tanpa menunggu loading.</p>
         </div>
-        <div class="g3">
-          <div style="background:#FFFFFF;padding:16px;border-radius:10px;border:1px solid #E2E8F0">
-            <span style="font:700 11px/1 var(--mono);color:#94A3B8">P-01 &bull; P-02</span>
-            <h3 style="font:700 15px/1.3 var(--sans);color:var(--ink);margin:6px 0">Lingkungan &amp; Git</h3>
-            <p style="font:400 12px/1.5 var(--faint)">Setup Python, venv, Flask dasar, dan version control Git/GitHub.</p>
+        <div class="pcard" style="border:1.5px solid #86EFAC">
+          <div class="ic" style="color:#16A34A"><i data-lucide="shield-check"></i></div>
+          <h3 style="color:#166534">Validasi Server-Side (Python Flask)</h3>
+          <p style="margin-bottom:10px">Memeriksa nilai variabel di backend Python dengan logika <code>if-else</code> sebelum data diterima.</p>
+          <div class="callout callout-success" style="font-size:12px;margin:8px 0">
+            <b>Pertahanan Mutlak:</b> Logika Python dieksekusi di server pribadimu. Pengguna sama sekali TIDAK BISA memanipulasi kode server melalui browser!
           </div>
-          <div style="background:#FFFFFF;padding:16px;border-radius:10px;border:1px solid #E2E8F0">
-            <span style="font:700 11px/1 var(--mono);color:#94A3B8">P-03 &bull; P-04</span>
-            <h3 style="font:700 15px/1.3 var(--sans);color:var(--ink);margin:6px 0">UI &amp; Jinja2 Layout</h3>
-            <p style="font:400 12px/1.5 var(--faint)">HTML5 semantik, CSS modern, dan template inheritance <code>base.html</code>.</p>
-          </div>
-          <div style="background:#FFFFFF;padding:16px;border-radius:10px;border:1px solid #E2E8F0">
-            <span style="font:700 11px/1 var(--mono);color:#94A3B8">P-05</span>
-            <h3 style="font:700 15px/1.3 var(--sans);color:var(--ink);margin:6px 0">Routing &amp; HTTP POST</h3>
-            <p style="font:400 12px/1.5 var(--faint)">Variable rules, converter, HTTP GET vs POST, dan flash message awal.</p>
-          </div>
-        </div>
-        <div style="background:var(--accent-light);border:1.5px solid var(--accent);padding:18px;border-radius:12px;margin-top:20px">
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
-            <span style="background:var(--accent);color:#FFF;padding:3px 8px;border-radius:4px;font:700 11px/1 var(--mono)">SEKARANG &bull; P-06</span>
-            <h3 style="font:700 16px/1.2 var(--disp);color:var(--ink)">Form Handling &amp; Validasi Sisi Server</h3>
-          </div>
-          <p style="font:400 13px/1.6 var(--sans);color:var(--dim)">
-            Di P-05 kita menerima input apa adanya. Di P-06, kita memasang <b>"Satpam Digital"</b>: data diperiksa secara ketat di server Flask sebelum diterima. Menjamin data bersih, tidak kosong, dan sesuai format keamanan!
-          </p>
+          <p style="font-size:11.5px;color:#64748B"><b>Prinsip Emas Keamanan:</b> <i>"Never Trust User Input."</i> Selalu verifikasi data di sisi server.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ==========================================
-       SLIDE 3: PROBLEM STATEMENT
-       ========================================== -->
-  <section class="slide" id="s03">
-    <div class="slide-wrap">
-      <div class="card">
-        <div class="card-head">
-          <div>
-            <div class="badge" style="background:#FEE2E2;color:#991B1B;border-color:#F87171">Reality Check Keamanan</div>
-            <h2 class="card-title">Mengapa HTML5 <code>required</code> Saja TIDAK CUKUP?</h2>
+  <!-- SLIDE 4: 3 PILAR VALIDASI SISI SERVER -->
+  <section class="slide" data-sec="Babak 1 · Orientasi" id="s4">
+    <div class="content">
+      <div class="kick"><i data-lucide="layers" style="width:13px;height:13px"></i> Pondasi Backend</div>
+      <h2>3 Pilar Validasi Sisi Server di Flask</h2>
+      <p class="sub">Tiga teknik inti yang mengubah formulir biasa menjadi sistem penerimaan data yang aman dan profesional.</p>
+      <div class="slide-body cols c3">
+        <div class="pcard">
+          <span style="font:700 22px/1 var(--disp);color:var(--accent)">01</span>
+          <h3 style="margin:8px 0 4px">Sanitasi Input (.strip())</h3>
+          <p>Memotong spasi kosong tak terlihat di awal &amp; akhir string. Mencegah input tipuan <code>"   "</code> (hanya tombol spasi) yang dianggap sah oleh validasi panjang string.</p>
+        </div>
+        <div class="pcard">
+          <span style="font:700 22px/1 var(--disp);color:var(--blue)">02</span>
+          <h3 style="margin:8px 0 4px">Error Collector (errors = [])</h3>
+          <p>Mengumpulkan semua kesalahan ke dalam satu wadah list. Jika pengguna membuat 3 kesalahan sekaligus, seluruh pesan error muncul bersamaan tanpa perlu klik berulang kali.</p>
+        </div>
+        <div class="pcard">
+          <span style="font:700 22px/1 var(--disp);color:var(--green)">03</span>
+          <h3 style="margin:8px 0 4px">Flash Kategori &amp; Sticky Form</h3>
+          <p>Jika gagal: kirim flash <code>danger</code> dan pertahankan nama/email lama. Jika lolos: kirim flash <code>success</code> dan redirect ke halaman beranda (Pola PRG).</p>
+        </div>
+      </div>
+      <div class="callout callout-info" style="margin-top:16px">
+        <i data-lucide="sparkles" style="width:16px;height:16px"></i>
+        <div><b>4 Aturan Validasi Modul P06:</b> (1) Nama &ge; 3 huruf &bull; (2) Email berformat valid (@ dan domain .) &bull; (3) Password &ge; 6 huruf &bull; (4) Konfirmasi password cocok persis.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 5: DIAGRAM ARSITEKTUR DATA (MENTAL MODEL) -->
+  <section class="slide" data-sec="Babak 1 · Orientasi" id="s5">
+    <div class="content">
+      <div class="kick"><i data-lucide="sliders" style="width:13px;height:13px"></i> Mental Model</div>
+      <h2>Alur Data: Browser &harr; Server Flask (Pola PRG)</h2>
+      <p class="sub">Pahami bagaimana data registrasi member mengalir dari formulir hingga tersimpan aman.</p>
+      <div class="slide-body">
+        <div class="cols c4">
+          <div style="background:#FFFFFF;padding:16px;border-radius:12px;border:1.5px solid #CBD5E1">
+            <span style="font:700 11px/1 var(--mono);color:var(--accent)">TAHAP 1: FORM GET</span>
+            <h4 style="margin:6px 0 4px;font-size:14px">Browser Meminta Form</h4>
+            <p style="font-size:12px;color:#64748B">User membuka URL <code>/register</code> dengan metode GET &rarr; Flask merender <code>register.html</code>.</p>
+          </div>
+          <div style="background:#FFFFFF;padding:16px;border-radius:12px;border:1.5px solid #CBD5E1">
+            <span style="font:700 11px/1 var(--mono);color:var(--blue)">TAHAP 2: KIRIM POST</span>
+            <h4 style="margin:6px 0 4px;font-size:14px">Form Dikirim ke Server</h4>
+            <p style="font-size:12px;color:#64748B">User klik Daftar &rarr; Browser mengirim paket POST &rarr; Flask menangkap nilai via <code>request.form</code>.</p>
+          </div>
+          <div style="background:#FFFFFF;padding:16px;border-radius:12px;border:1.5px solid #CBD5E1">
+            <span style="font:700 11px/1 var(--mono);color:#D97706">TAHAP 3: EVALUASI</span>
+            <h4 style="margin:6px 0 4px;font-size:14px">Uji 4 Aturan Server</h4>
+            <p style="font-size:12px;color:#64748B">Sanitasi <code>.strip()</code> lalu periksa nama, email, password, match &rarr; tampung eror di <code>errors = []</code>.</p>
+          </div>
+          <div style="background:#FFFFFF;padding:16px;border-radius:12px;border:1.5px solid #CBD5E1">
+            <span style="font:700 11px/1 var(--mono);color:var(--green)">TAHAP 4: KEPUTUSAN</span>
+            <h4 style="margin:6px 0 4px;font-size:14px">Flash &amp; Redirect (PRG)</h4>
+            <p style="font-size:12px;color:#64748B">Jika salah: flash danger &amp; sticky form. Jika valid: flash success &rarr; redirect ke beranda!</p>
           </div>
         </div>
-        <div class="g2">
-          <div style="background:#FFFFFF;padding:20px;border-radius:12px;border:1px solid #E2E8F0">
-            <h3 style="font:700 15px/1.3 var(--disp);color:#DC2626;margin-bottom:10px;display:flex;align-items:center;gap:6px">
-              <i data-lucide="shield-alert" style="width:18px;height:18px"></i> Validasi Client-Side (Browser)
-            </h3>
-            <p style="font:400 13px/1.5 var(--sans);color:#475569;margin-bottom:12px">
-              Memberikan atribut <code>&lt;input required minlength="6"&gt;</code> di HTML.
-            </p>
-            <div class="callout callout-warn" style="font-size:12px">
-              <b>Kelemahan Fatal:</b> Siapapun bisa klik kanan &rarr; <i>Inspect Element</i> &rarr; hapus tulisan <code>required</code>, lalu klik submit. Data kosong pun lolos terkirim!
+        <div class="callout callout-info" style="margin-top:14px">
+          <i data-lucide="info" style="width:16px;height:16px"></i>
+          <div><b>Mengapa Pola PRG (Post/Redirect/Get)?</b> Saat data valid, kita melakukan <code>redirect()</code> ke rute GET agar saat user menekan F5 (refresh), tidak muncul dialog browser <i>"Confirm Form Resubmission"</i> yang mengganggu!</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       BABAK 2: SIMULATOR & PERSIAPAN CODING (Slide 6 – 8)
+       ======================================================== -->
+
+  <!-- SLIDE 6: LIVE SIMULATOR VALIDASI -->
+  <section class="slide" data-sec="Babak 2 · Simulator" id="s6">
+    <div class="content">
+      <div class="kick"><i data-lucide="play" style="width:13px;height:13px"></i> Live Simulator</div>
+      <h2>Simulator Validasi Realtime Sisi Server</h2>
+      <p class="sub">Coba masukkan berbagai variasi input dan lihat bagaimana logika server merespons secara langsung!</p>
+      <div class="slide-body sim-box">
+        <div class="sim-grid">
+          <div>
+            <div class="sim-input-group">
+              <label for="sim-nama">Nama Lengkap (min 3 huruf):</label>
+              <input type="text" id="sim-nama" class="sim-input" value="Al" placeholder="Contoh: Budi Santoso">
             </div>
-            <p style="font:400 12px/1.5 var(--sans);color:#64748B">
-              Tujuan Client-Side: <i>User Experience (UX)</i> agar pengguna tidak perlu menunggu loading untuk typo kecil.
-            </p>
-          </div>
-          <div style="background:#FFFFFF;padding:20px;border-radius:12px;border:1.5px solid var(--accent)">
-            <h3 style="font:700 15px/1.3 var(--disp);color:var(--accent);margin-bottom:10px;display:flex;align-items:center;gap:6px">
-              <i data-lucide="shield-check" style="width:18px;height:18px"></i> Validasi Server-Side (Python Flask)
-            </h3>
-            <p style="font:400 13px/1.5 var(--sans);color:#475569;margin-bottom:12px">
-              Memeriksa data di backend Python dengan logika <code>if-else</code> sebelum diproses.
-            </p>
-            <div class="callout callout-success" style="font-size:12px">
-              <b>Pertahanan Mutlak:</b> Kode Python dieksekusi di server kita sendiri. Pengguna TIDAK BISA memodifikasi atau menembusnya melalui browser!
+            <div class="sim-input-group">
+              <label for="sim-email">Email (wajib ada @ dan domain .):</label>
+              <input type="text" id="sim-email" class="sim-input" value="budi-tanpa-domain" placeholder="Contoh: budi@kampus.ac.id">
             </div>
-            <p style="font:400 12px/1.5 var(--sans);color:#64748B">
-              <b>Prinsip Emas:</b> <i>"Never Trust User Input."</i> Validasi server adalah garda terdepan keamanan web.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==========================================
-       SLIDE 4: ANATOMI VALIDASI SERVER
-       ========================================== -->
-  <section class="slide" id="s04">
-    <div class="slide-wrap">
-      <div class="card">
-        <div class="card-head">
-          <div>
-            <div class="badge">Konsep Utama</div>
-            <h2 class="card-title">3 Pilar Validasi Sisi Server di Flask</h2>
-          </div>
-        </div>
-        <div class="g3">
-          <div style="background:#FFFFFF;padding:18px;border-radius:12px;border:1px solid #E2E8F0">
-            <span style="font:700 24px/1 var(--disp);color:var(--accent)">01</span>
-            <h3 style="font:700 14px/1.3 var(--sans);color:var(--ink);margin:8px 0 6px">Sanitasi Input (.strip())</h3>
-            <p style="font:400 12px/1.5 var(--faint)">
-              Memotong spasi kosong di awal dan akhir string. Mencegah input tipuan seperti <code>"   "</code> (hanya spasi bar) yang dianggap lolos validasi panjang.
-            </p>
-          </div>
-          <div style="background:#FFFFFF;padding:18px;border-radius:12px;border:1px solid #E2E8F0">
-            <span style="font:700 24px/1 var(--disp);color:var(--blue)">02</span>
-            <h3 style="font:700 14px/1.3 var(--sans);color:var(--ink);margin:8px 0 6px">Error Collector (errors = [])</h3>
-            <p style="font:400 12px/1.5 var(--faint)">
-              Menampung semua pelanggaran aturan ke dalam satu list. Jika pengguna membuat 3 kesalahan, semua pesan error muncul sekaligus, bukan satu per satu.
-            </p>
-          </div>
-          <div style="background:#FFFFFF;padding:18px;border-radius:12px;border:1px solid #E2E8F0">
-            <span style="font:700 24px/1 var(--disp);color:var(--green)">03</span>
-            <h3 style="font:700 14px/1.3 var(--sans);color:var(--ink);margin:8px 0 6px">Flash &amp; Sticky Form</h3>
-            <p style="font:400 12px/1.5 var(--faint)">
-              Jika gagal: kirim flash <code>danger</code> dan pertahankan isi input lama. Jika sukses: kirim flash <code>success</code> dan redirect ke tujuan.
-            </p>
-          </div>
-        </div>
-        <div class="callout callout-info" style="margin-top:20px">
-          <i data-lucide="sparkles" style="width:18px;height:18px"></i>
-          <div>
-            <b>4 Aturan Validasi Modul P06:</b> (1) Nama &ge; 3 karakter &bull; (2) Email ada <code>@</code> dan <code>.</code> &bull; (3) Password &ge; 6 karakter &bull; (4) Konfirmasi password cocok.
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==========================================
-       SLIDE 5: INTERACTIVE VALIDATION SIMULATOR
-       ========================================== -->
-  <section class="slide" id="s05">
-    <div class="slide-wrap">
-      <div class="card">
-        <div class="card-head">
-          <div>
-            <div class="badge">Simulator Interaktif</div>
-            <h2 class="card-title">Live Test: Simulator Validasi Server P06</h2>
-            <p class="card-sub">Coba masukkan data sembarang dan lihat bagaimana logika server merespons!</p>
-          </div>
-        </div>
-        <div class="sim-box">
-          <div class="sim-grid">
-            <div>
-              <div class="sim-input-group">
-                <label for="sim-nama">Nama Lengkap (min 3 huruf)</label>
-                <input type="text" id="sim-nama" class="sim-input" placeholder="Misal: Al atau Budi Santoso" value="Al">
-              </div>
-              <div class="sim-input-group">
-                <label for="sim-email">Email (wajib ada @ dan .)</label>
-                <input type="text" id="sim-email" class="sim-input" placeholder="Misal: budi-tanpa-domain" value="budi-salah">
-              </div>
-              <div class="sim-input-group">
-                <label for="sim-pass">Password (min 6 karakter)</label>
-                <input type="password" id="sim-pass" class="sim-input" placeholder="Misal: 123" value="123">
-              </div>
-              <div class="sim-input-group">
-                <label for="sim-conf">Konfirmasi Password</label>
-                <input type="password" id="sim-conf" class="sim-input" placeholder="Ketik ulang password" value="999">
-              </div>
-              <button type="button" class="sim-btn" id="btn-run-sim">Kirim Form (POST) &rarr;</button>
+            <div class="sim-input-group">
+              <label for="sim-pass">Password (min 6 karakter):</label>
+              <input type="password" id="sim-pass" class="sim-input" value="123" placeholder="Minimal 6 karakter">
             </div>
-            <div>
-              <div class="sim-screen" id="sim-screen">
-                <div class="sim-screen-title">Respon Flash Messages Server:</div>
-                <div id="sim-output">
-                  <div style="font-size:12px;color:#94A3B8;text-align:center;margin-top:40px">
-                    Klik tombol <b>Kirim Form</b> untuk menguji validasi server.
-                  </div>
+            <div class="sim-input-group">
+              <label for="sim-conf">Konfirmasi Password:</label>
+              <input type="password" id="sim-conf" class="sim-input" value="999" placeholder="Ketik ulang password">
+            </div>
+            <button type="button" class="sim-btn" id="btn-run-sim">Kirim Form (POST) &rarr;</button>
+          </div>
+          <div>
+            <div class="sim-screen">
+              <div class="sim-screen-title">Respon Flash Messages Server:</div>
+              <div id="sim-output">
+                <div style="font-size:12px;color:#94A3B8;text-align:center;margin-top:35px">
+                  Klik tombol <b>Kirim Form</b> untuk menguji respon validasi backend.
                 </div>
               </div>
             </div>
@@ -712,40 +769,26 @@ pre.codebody{
     </div>
   </section>
 
-  <!-- ==========================================
-       SLIDE 6: LANGKAH 0: WORKSPACE & CLONE
-       ========================================== -->
-  <section class="slide" id="s06">
-    <div class="slide-wrap">
-      <div class="card">
-        <div class="action-banner banner-clone">
-          <i data-lucide="terminal" style="width:14px;height:14px"></i>
-          Langkah 0: Clone Starter Kit dari GitHub
-        </div>
-        <div class="step-guide-bar">
-          <span class="guide-tag file"><i data-lucide="terminal"></i> Terminal</span>
-          <span class="guide-tag act"><i data-lucide="play"></i> Aksi: Clone &amp; Run</span>
-          <span class="guide-tag check"><i data-lucide="globe"></i> Uji: http://127.0.0.1:5000</span>
-        </div>
-        <div class="card-head">
-          <div>
-            <h2 class="card-title">Persiapan Workspace Praktikum P06</h2>
-            <p class="card-sub">Buka terminal atau VS Code, lalu clone starter kit yang sudah disiapkan.</p>
+  <!-- SLIDE 7: LANGKAH 0: WORKSPACE & CLONE -->
+  <section class="slide" data-sec="Babak 2 · Langkah 0" id="s7">
+    <div class="content">
+      <div class="action-banner banner-clone"><i data-lucide="terminal" style="width:13px;height:13px"></i> Langkah 0: Clone Starter Kit</div>
+      <div class="step-guide-bar">
+        <span class="guide-tag file"><i data-lucide="terminal"></i> Terminal / VS Code</span>
+        <span class="guide-tag act"><i data-lucide="play"></i> Aksi: Clone &amp; Jalankan</span>
+        <span class="guide-tag check"><i data-lucide="globe"></i> Uji: http://127.0.0.1:5000</span>
+      </div>
+      <h2>Persiapan Workspace Praktikum P06</h2>
+      <p class="sub">Buka terminal di laptopmu, lalu clone starter kit yang sudah disiapkan untuk pertemuan hari ini.</p>
+      <div class="codebox">
+        <div class="codehead">
+          <div class="codehead-left">
+            <div class="mac-dots"><span class="mac-dot dot-red"></span><span class="mac-dot dot-yellow"></span><span class="mac-dot dot-green"></span></div>
+            <span class="codehead-file"><i data-lucide="terminal" style="width:13px;height:13px"></i>Terminal / Bash</span>
           </div>
+          <button class="codehead-copy" type="button" onclick="copyCode(this)"><i data-lucide="copy" style="width:11px;height:11px"></i>Salin Perintah</button>
         </div>
-        <div class="codebox">
-          <div class="codehead">
-            <div class="codehead-left">
-              <div class="mac-dots">
-                <span class="mac-dot dot-red"></span>
-                <span class="mac-dot dot-yellow"></span>
-                <span class="mac-dot dot-green"></span>
-              </div>
-              <span class="codehead-file"><i data-lucide="terminal" style="width:14px;height:14px"></i>Terminal / Bash</span>
-            </div>
-            <button class="codehead-copy" type="button" onclick="copyCode(this)"><i data-lucide="copy" style="width:12px;height:12px"></i>Salin</button>
-          </div>
-          <pre class="codebody"><span class="cm"># 1. Clone repositori starter kit pertemuan 06</span>
+        <pre class="codebody"><span class="cm"># 1. Clone repositori starter kit pertemuan 06</span>
 git clone https://github.com/Faiz-abdurrachman/pertemuan_06_pemweb.git
 
 <span class="cm"># 2. Masuk ke dalam folder project</span>
@@ -753,96 +796,70 @@ cd pertemuan_06_pemweb
 
 <span class="cm"># 3. Jalankan aplikasi Flask</span>
 python app.py</pre>
-        </div>
-        <div class="check-result-box">
-          <i data-lucide="circle-check"></i>
-          <div><strong>Hasil Langkah 0:</strong> Buka browser di alamat <code>http://127.0.0.1:5000</code>. Halaman Beranda Kantin Kampus langsung tampil rapi dan siap dikembangkan!</div>
-        </div>
+      </div>
+      <div class="check-result-box">
+        <i data-lucide="circle-check"></i>
+        <div><strong>Hasil Langkah 0:</strong> Buka browsermu di <code>http://127.0.0.1:5000</code>. Halaman Beranda Kantin Kampus langsung tampil rapi dan bebas eror!</div>
       </div>
     </div>
   </section>
 
-  <!-- ==========================================
-       SLIDE 7: LANGKAH 1: ROUTE REGISTRASI
-       ========================================== -->
-  <section class="slide" id="s07">
-    <div class="slide-wrap">
-      <div class="card">
-        <div class="action-banner banner-edit">
-          <i data-lucide="file" style="width:14px;height:14px"></i>
-          Langkah 1: Edit File &bull; app.py
-        </div>
-        <div class="step-guide-bar">
-          <span class="guide-tag file"><i data-lucide="file"></i> File: app.py</span>
-          <span class="guide-tag loc"><i data-lucide="sliders"></i> Posisi: Di bawah fungsi home()</span>
-          <span class="guide-tag act"><i data-lucide="code"></i> Aksi: Tambah route /register (GET)</span>
-        </div>
-        <div class="card-head">
-          <div>
-            <h2 class="card-title">Menambahkan Route Registrasi (/register)</h2>
-            <p class="card-sub">Tambahkan rute baru dengan decorator <code>methods=['GET', 'POST']</code>.</p>
+  <!-- SLIDE 8: LANGKAH 1: MENAMBAHKAN ROUTE REGISTER (GET) -->
+  <section class="slide" data-sec="Babak 2 · Langkah 1" id="s8">
+    <div class="content">
+      <div class="action-banner banner-edit"><i data-lucide="file" style="width:13px;height:13px"></i> Langkah 1: Edit File &bull; app.py</div>
+      <div class="step-guide-bar">
+        <span class="guide-tag file"><i data-lucide="file"></i> File: app.py</span>
+        <span class="guide-tag loc"><i data-lucide="sliders"></i> Posisi: Di bawah fungsi home()</span>
+        <span class="guide-tag act"><i data-lucide="code"></i> Aksi: Tambah decorator route /register</span>
+      </div>
+      <h2>Menyiapkan Route Registrasi (/register)</h2>
+      <p class="sub">Buka file <code>app.py</code> dan tambahkan fungsi rute baru dengan parameter <code>methods=['GET', 'POST']</code>.</p>
+      <div class="codebox">
+        <div class="codehead">
+          <div class="codehead-left">
+            <div class="mac-dots"><span class="mac-dot dot-red"></span><span class="mac-dot dot-yellow"></span><span class="mac-dot dot-green"></span></div>
+            <span class="codehead-file"><i data-lucide="file" style="width:13px;height:13px"></i>app.py &bull; def register()</span>
           </div>
+          <button class="codehead-copy" type="button" onclick="copyCode(this)"><i data-lucide="copy" style="width:11px;height:11px"></i>Salin Kode</button>
         </div>
-        <div class="codebox">
-          <div class="codehead">
-            <div class="codehead-left">
-              <div class="mac-dots">
-                <span class="mac-dot dot-red"></span>
-                <span class="mac-dot dot-yellow"></span>
-                <span class="mac-dot dot-green"></span>
-              </div>
-              <span class="codehead-file"><i data-lucide="file" style="width:14px;height:14px"></i>app.py</span>
-            </div>
-            <button class="codehead-copy" type="button" onclick="copyCode(this)"><i data-lucide="copy" style="width:12px;height:12px"></i>Salin</button>
-          </div>
-          <pre class="codebody"><span class="cm"># Tambahkan route registrasi di bawah route home</span>
+        <pre class="codebody"><span class="cm"># Tambahkan route registrasi di bawah route home</span>
 <span class="fn">@app.route</span>(<span class="str">'/register'</span>, methods=[<span class="str">'GET'</span>, <span class="str">'POST'</span>])
 <span class="kw">def</span> <span class="fn">register</span>():
-    <span class="cm"># Jika metode GET: tampilkan form registrasi</span>
+    <span class="cm"># Jika metode GET: tampilkan form HTML registrasi</span>
     <span class="kw">return</span> <span class="fn">render_template</span>(<span class="str">'register.html'</span>)</pre>
-        </div>
-        <div class="check-result-box" style="background:#EFF6FF;border-color:#BFDBFE;color:#1E40AF">
-          <i data-lucide="info"></i>
-          <div><strong>Catatan:</strong> Parameter <code>methods=['GET', 'POST']</code> wajib disertakan agar Flask menerima pengiriman formulir POST di langkah selanjutnya.</div>
-        </div>
+      </div>
+      <div class="check-result-box" style="background:#EFF6FF;border-color:#BFDBFE;color:#1E40AF">
+        <i data-lucide="info"></i>
+        <div><strong>Catatan Kunci:</strong> Parameter <code>methods=['GET', 'POST']</code> wajib disertakan agar Flask mengizinkan pengiriman data form dengan metode POST di langkah berikutnya.</div>
       </div>
     </div>
   </section>
 
-  <!-- ==========================================
-       SLIDE 8: LANGKAH 2: TEMPLATE REGISTER.HTML
-       ========================================== -->
-  <section class="slide" id="s08">
-    <div class="slide-wrap">
-      <div class="card">
-        <div class="action-banner banner-new">
-          <i data-lucide="file" style="width:14px;height:14px"></i>
-          Langkah 2: Buat File Baru &bull; templates/register.html
-        </div>
-        <div class="step-guide-bar">
-          <span class="guide-tag file"><i data-lucide="folder"></i> File: templates/register.html</span>
-          <span class="guide-tag act"><i data-lucide="file-plus"></i> Aksi: Buat file baru &amp; tempel form</span>
-          <span class="guide-tag check"><i data-lucide="globe"></i> Uji: Refresh /register</span>
-        </div>
-        <div class="card-head">
-          <div>
-            <h2 class="card-title">Membuat Form HTML Registrasi Member</h2>
-            <p class="card-sub">Buat file baru di dalam folder <code>templates/</code> dengan 4 input field.</p>
+  <!-- ========================================================
+       BABAK 3: LIVE CODING FORM & BACKEND (Slide 9 – 14)
+       ======================================================== -->
+
+  <!-- SLIDE 9: LANGKAH 2: MERANCANG FORM HTML -->
+  <section class="slide" data-sec="Babak 3 · Langkah 2" id="s9">
+    <div class="content">
+      <div class="action-banner banner-new"><i data-lucide="file" style="width:13px;height:13px"></i> Langkah 2: Buat File Baru &bull; templates/register.html</div>
+      <div class="step-guide-bar">
+        <span class="guide-tag file"><i data-lucide="folder"></i> File: templates/register.html</span>
+        <span class="guide-tag act"><i data-lucide="file-plus"></i> Aksi: Buat file baru &amp; tempel form</span>
+        <span class="guide-tag check"><i data-lucide="globe"></i> Uji: Refresh /register</span>
+      </div>
+      <h2>Merancang Form HTML Registrasi Member</h2>
+      <p class="sub">Buat file baru di dalam folder <code>templates/</code> dengan 4 input: nama, email, password, dan confirm.</p>
+      <div class="codebox">
+        <div class="codehead">
+          <div class="codehead-left">
+            <div class="mac-dots"><span class="mac-dot dot-red"></span><span class="mac-dot dot-yellow"></span><span class="mac-dot dot-green"></span></div>
+            <span class="codehead-file"><i data-lucide="file" style="width:13px;height:13px"></i>templates/register.html</span>
           </div>
+          <button class="codehead-copy" type="button" onclick="copyCode(this)"><i data-lucide="copy" style="width:11px;height:11px"></i>Salin Template</button>
         </div>
-        <div class="codebox">
-          <div class="codehead">
-            <div class="codehead-left">
-              <div class="mac-dots">
-                <span class="mac-dot dot-red"></span>
-                <span class="mac-dot dot-yellow"></span>
-                <span class="mac-dot dot-green"></span>
-              </div>
-              <span class="codehead-file"><i data-lucide="file" style="width:14px;height:14px"></i>templates/register.html</span>
-            </div>
-            <button class="codehead-copy" type="button" onclick="copyCode(this)"><i data-lucide="copy" style="width:12px;height:12px"></i>Salin</button>
-          </div>
-          <pre class="codebody">{% <span class="kw">extends</span> <span class="str">'base.html'</span> %}
+        <pre class="codebody">{% <span class="kw">extends</span> <span class="str">'base.html'</span> %}
 {% <span class="kw">block</span> title %}Daftar Member Kantin{% <span class="kw">endblock</span> %}
 
 {% <span class="kw">block</span> content %}
@@ -850,9 +867,8 @@ python app.py</pre>
     &lt;<span class="fn">div</span> class=<span class="str">"auth-card"</span>&gt;
         &lt;<span class="fn">div</span> class=<span class="str">"auth-header"</span>&gt;
             &lt;<span class="fn">h2</span>&gt;Daftar Member Kantin&lt;/<span class="fn">h2</span>&gt;
-            &lt;<span class="fn">p</span>&gt;Dapatkan diskon 15% setiap pembelian menu favorit Anda!&lt;/<span class="fn">p</span>&gt;
+            &lt;<span class="fn">p</span>&gt;Dapatkan diskon 15% setiap pembelian menu favoritmu!&lt;/<span class="fn">p</span>&gt;
         &lt;/<span class="fn">div</span>&gt;
-
         &lt;<span class="fn">form</span> action=<span class="str">"/register"</span> method=<span class="str">"POST"</span>&gt;
             &lt;<span class="fn">div</span> class=<span class="str">"form-group"</span>&gt;
                 &lt;<span class="fn">label</span> for=<span class="str">"nama"</span>&gt;Nama Lengkap&lt;/<span class="fn">label</span>&gt;
@@ -875,49 +891,34 @@ python app.py</pre>
     &lt;/<span class="fn">div</span>&gt;
 &lt;/<span class="fn">div</span>&gt;
 {% <span class="kw">endblock</span> %}</pre>
-        </div>
-        <div class="check-result-box">
-          <i data-lucide="circle-check"></i>
-          <div><strong>Hasil Langkah 2:</strong> Buka <code>http://127.0.0.1:5000/register</code> di browser. Formulir registrasi 4 kolom sekarang sudah muncul rapi di layar!</div>
-        </div>
+      </div>
+      <div class="check-result-box">
+        <i data-lucide="circle-check"></i>
+        <div><strong>Hasil Langkah 2:</strong> Buka <code>http://127.0.0.1:5000/register</code> di browsermu. Formulir registrasi 4 kolom sekarang sudah muncul rapi di layar!</div>
       </div>
     </div>
   </section>
 
-  <!-- ==========================================
-       SLIDE 9: LANGKAH 3A: SANITASI INPUT
-       ========================================== -->
-  <section class="slide" id="s09">
-    <div class="slide-wrap">
-      <div class="card">
-        <div class="action-banner banner-edit">
-          <i data-lucide="file" style="width:14px;height:14px"></i>
-          Langkah 3A: Edit File &bull; app.py
-        </div>
-        <div class="step-guide-bar">
-          <span class="guide-tag file"><i data-lucide="file"></i> File: app.py</span>
-          <span class="guide-tag loc"><i data-lucide="sliders"></i> Posisi: Di dalam fungsi register()</span>
-          <span class="guide-tag act"><i data-lucide="code"></i> Aksi: Tangkap POST &amp; potong spasi .strip()</span>
-        </div>
-        <div class="card-head">
-          <div>
-            <h2 class="card-title">Menangkap Input &amp; Sanitasi dengan .strip()</h2>
-            <p class="card-sub">Perbarui fungsi <code>register()</code> untuk menangkap request POST.</p>
+  <!-- SLIDE 10: LANGKAH 3A: SANITASI INPUT -->
+  <section class="slide" data-sec="Babak 3 · Langkah 3A" id="s10">
+    <div class="content">
+      <div class="action-banner banner-edit"><i data-lucide="file" style="width:13px;height:13px"></i> Langkah 3A: Edit File &bull; app.py</div>
+      <div class="step-guide-bar">
+        <span class="guide-tag file"><i data-lucide="file"></i> File: app.py</span>
+        <span class="guide-tag loc"><i data-lucide="sliders"></i> Posisi: Di dalam fungsi register()</span>
+        <span class="guide-tag act"><i data-lucide="code"></i> Aksi: Tangkap POST &amp; potong spasi .strip()</span>
+      </div>
+      <h2>Menangkap Input &amp; Sanitasi dengan .strip()</h2>
+      <p class="sub">Perbarui fungsi <code>register()</code> di <code>app.py</code> untuk menangkap data kiriman formulir POST.</p>
+      <div class="codebox">
+        <div class="codehead">
+          <div class="codehead-left">
+            <div class="mac-dots"><span class="mac-dot dot-red"></span><span class="mac-dot dot-yellow"></span><span class="mac-dot dot-green"></span></div>
+            <span class="codehead-file"><i data-lucide="file" style="width:13px;height:13px"></i>app.py &bull; def register()</span>
           </div>
+          <button class="codehead-copy" type="button" onclick="copyCode(this)"><i data-lucide="copy" style="width:11px;height:11px"></i>Salin Kode</button>
         </div>
-        <div class="codebox">
-          <div class="codehead">
-            <div class="codehead-left">
-              <div class="mac-dots">
-                <span class="mac-dot dot-red"></span>
-                <span class="mac-dot dot-yellow"></span>
-                <span class="mac-dot dot-green"></span>
-              </div>
-              <span class="codehead-file"><i data-lucide="file" style="width:14px;height:14px"></i>app.py &bull; def register()</span>
-            </div>
-            <button class="codehead-copy" type="button" onclick="copyCode(this)"><i data-lucide="copy" style="width:12px;height:12px"></i>Salin</button>
-          </div>
-          <pre class="codebody"><span class="fn">@app.route</span>(<span class="str">'/register'</span>, methods=[<span class="str">'GET'</span>, <span class="str">'POST'</span>])
+        <pre class="codebody"><span class="fn">@app.route</span>(<span class="str">'/register'</span>, methods=[<span class="str">'GET'</span>, <span class="str">'POST'</span>])
 <span class="kw">def</span> <span class="fn">register</span>():
     <span class="kw">if</span> request.method == <span class="str">'POST'</span>:
         <span class="cm"># 1. Menangkap input dan memotong spasi kosong di awal/akhir string</span>
@@ -926,52 +927,37 @@ python app.py</pre>
 <span class="hl-line">        password = request.form.get(<span class="str">'password'</span>, <span class="str">''</span>).strip()</span>
 <span class="hl-line">        confirm = request.form.get(<span class="str">'confirm'</span>, <span class="str">''</span>).strip()</span>
         
-        <span class="cm"># Lanjut ke langkah 3B (validasi)</span>
+        <span class="cm"># Lanjut ke langkah 3B (evaluasi 4 aturan validasi)</span>
         
     <span class="kw">return</span> <span class="fn">render_template</span>(<span class="str">'register.html'</span>)</pre>
-        </div>
-        <div class="check-result-box">
-          <i data-lucide="circle-check"></i>
-          <div><strong>Mengapa Wajib .strip()?</strong> String <code>"   "</code> (hanya 3 spasi kosong) memiliki panjang <code>len() == 3</code>. Tanpa <code>.strip()</code>, validasi nama kosong akan tertipu dan menganggap nama sah! Fungsi <code>.strip()</code> memangkas spasi tak terlihat di awal &amp; akhir.</div>
-        </div>
+      </div>
+      <div class="check-result-box">
+        <i data-lucide="circle-check"></i>
+        <div><strong>Mengapa Wajib .strip()?</strong> Karakter spasi <code>"   "</code> (tiga spasi kosong) memiliki panjang <code>len() == 3</code>. Tanpa <code>.strip()</code>, validasi nama kosong akan tertipu dan meloloskannya! Fungsi <code>.strip()</code> memotong spasi tak terlihat itu.</div>
       </div>
     </div>
   </section>
 
-  <!-- ==========================================
-       SLIDE 10: LANGKAH 3B: 4 ATURAN VALIDASI
-       ========================================== -->
-  <section class="slide" id="s10">
-    <div class="slide-wrap">
-      <div class="card">
-        <div class="action-banner banner-append">
-          <i data-lucide="file" style="width:14px;height:14px"></i>
-          Langkah 3B: Tempel di Dalam &bull; if request.method == 'POST':
-        </div>
-        <div class="step-guide-bar">
-          <span class="guide-tag file"><i data-lucide="file"></i> File: app.py</span>
-          <span class="guide-tag loc"><i data-lucide="sliders"></i> Posisi: Di bawah variabel confirm</span>
-          <span class="guide-tag act"><i data-lucide="list-checks"></i> Aksi: Buat errors = [] &amp; 4 kondisi if-elif</span>
-        </div>
-        <div class="card-head">
-          <div>
-            <h2 class="card-title">Menerapkan 4 Aturan Validasi Sisi Server</h2>
-            <p class="card-sub">Gunakan pola Error Collector List <code>errors = []</code>.</p>
+  <!-- SLIDE 11: LANGKAH 3B: 4 ATURAN VALIDASI -->
+  <section class="slide" data-sec="Babak 3 · Langkah 3B" id="s11">
+    <div class="content">
+      <div class="action-banner banner-append"><i data-lucide="file" style="width:13px;height:13px"></i> Langkah 3B: Tempel di Bawah confirm</div>
+      <div class="step-guide-bar">
+        <span class="guide-tag file"><i data-lucide="file"></i> File: app.py</span>
+        <span class="guide-tag loc"><i data-lucide="sliders"></i> Posisi: Di bawah variabel confirm</span>
+        <span class="guide-tag act"><i data-lucide="list-checks"></i> Aksi: Buat errors = [] &amp; 4 kondisi if-elif</span>
+      </div>
+      <h2>Menerapkan 4 Aturan Validasi Sisi Server</h2>
+      <p class="sub">Gunakan pola <b>Error Collector List</b> <code>errors = []</code> untuk menampung seluruh pelanggaran.</p>
+      <div class="codebox">
+        <div class="codehead">
+          <div class="codehead-left">
+            <div class="mac-dots"><span class="mac-dot dot-red"></span><span class="mac-dot dot-yellow"></span><span class="mac-dot dot-green"></span></div>
+            <span class="codehead-file"><i data-lucide="file" style="width:13px;height:13px"></i>app.py &bull; Logika 4 Aturan Validasi</span>
           </div>
+          <button class="codehead-copy" type="button" onclick="copyCode(this)"><i data-lucide="copy" style="width:11px;height:11px"></i>Salin Aturan</button>
         </div>
-        <div class="codebox">
-          <div class="codehead">
-            <div class="codehead-left">
-              <div class="mac-dots">
-                <span class="mac-dot dot-red"></span>
-                <span class="mac-dot dot-yellow"></span>
-                <span class="mac-dot dot-green"></span>
-              </div>
-              <span class="codehead-file"><i data-lucide="file" style="width:14px;height:14px"></i>app.py &bull; Logika 4 Aturan Validasi</span>
-            </div>
-            <button class="codehead-copy" type="button" onclick="copyCode(this)"><i data-lucide="copy" style="width:12px;height:12px"></i>Salin</button>
-          </div>
-          <pre class="codebody">        <span class="cm"># 2. Wadah penampung pesan kesalahan</span>
+        <pre class="codebody">        <span class="cm"># 2. Wadah penampung pesan kesalahan</span>
         errors = []
 
         <span class="cm"># ATURAN 1: Nama minimal 3 karakter</span>
@@ -995,58 +981,35 @@ python app.py</pre>
         <span class="cm"># ATURAN 4: Konfirmasi password cocok</span>
         <span class="kw">if</span> password != confirm:
             errors.append(<span class="str">'Konfirmasi kata sandi tidak cocok!'</span>)</pre>
-        </div>
-        <div class="check-result-box">
-          <i data-lucide="circle-check"></i>
-          <div><strong>Keuntungan Pola List errors:</strong> Seluruh kesalahan dikumpulkan ke dalam list. Jika pengguna membuat 3 kesalahan sekaligus, pengguna akan langsung melihat ke-3 error tersebut dalam 1 kali pengiriman tanpa perlu klik berkali-kali!</div>
-        </div>
+      </div>
+      <div class="check-result-box">
+        <i data-lucide="circle-check"></i>
+        <div><strong>Keuntungan Pola List errors:</strong> Seluruh kesalahan dikumpulkan ke dalam list. Jika pengguna membuat 3 kesalahan sekaligus, pengguna akan langsung melihat ke-3 error tersebut dalam 1 kali kirim tanpa perlu klik berulang kali!</div>
       </div>
     </div>
   </section>
 
-  <!-- ==========================================
-       SLIDE 11: LANGKAH 4: FLASH & REDIRECT
-       ========================================== -->
-  <section class="slide" id="s11">
-    <div class="slide-wrap">
-      <div class="card">
-        <div class="action-banner banner-append">
-          <i data-lucide="file" style="width:14px;height:14px"></i>
-          Langkah 4: Tempel di Bawah Pengecekan Aturan &bull; app.py
-        </div>
-        <div class="step-guide-bar">
-          <span class="guide-tag file"><i data-lucide="file"></i> File: app.py</span>
-          <span class="guide-tag loc"><i data-lucide="sliders"></i> Posisi: Di bawah Aturan 4</span>
-          <span class="guide-tag act"><i data-lucide="code"></i> Aksi: Kirim Flash &amp; Redirect PRG</span>
-          <span class="guide-tag check"><i data-lucide="globe"></i> Uji: Submit form kosong</span>
-        </div>
-        <div class="card-head">
-          <div>
-            <h2 class="card-title">Flash Messages (Danger vs Success) &amp; PRG</h2>
-            <p class="card-sub">Memberikan umpan balik visual yang jelas ke pengguna.</p>
+  <!-- SLIDE 12: LANGKAH 4: FLASH MESSAGES & PRG -->
+  <section class="slide" data-sec="Babak 3 · Langkah 4" id="s12">
+    <div class="content">
+      <div class="action-banner banner-append"><i data-lucide="file" style="width:13px;height:13px"></i> Langkah 4: Tempel di Bawah Aturan 4</div>
+      <div class="step-guide-bar">
+        <span class="guide-tag file"><i data-lucide="file"></i> File: app.py</span>
+        <span class="guide-tag loc"><i data-lucide="sliders"></i> Posisi: Di bawah pengecekan Aturan 4</span>
+        <span class="guide-tag act"><i data-lucide="code"></i> Aksi: Kirim Flash &amp; Redirect PRG</span>
+        <span class="guide-tag check"><i data-lucide="globe"></i> Uji: Submit form kosong</span>
+      </div>
+      <h2>Flash Messages (Danger vs Success) &amp; Pola PRG</h2>
+      <p class="sub">Berikan umpan balik visual yang jelas ke pengguna berdasarkan hasil evaluasi validasi.</p>
+      <div class="codebox">
+        <div class="codehead">
+          <div class="codehead-left">
+            <div class="mac-dots"><span class="mac-dot dot-red"></span><span class="mac-dot dot-yellow"></span><span class="mac-dot dot-green"></span></div>
+            <span class="codehead-file"><i data-lucide="file" style="width:13px;height:13px"></i>app.py &bull; Keputusan Validasi</span>
           </div>
+          <button class="codehead-copy" type="button" onclick="copyCode(this)"><i data-lucide="copy" style="width:11px;height:11px"></i>Salin Keputusan</button>
         </div>
-
-        <div class="pcard-tabs">
-          <button class="ptab-btn on" data-target="tab-step4-part" type="button"><i data-lucide="code"></i> Potongan Langkah 4</button>
-          <button class="ptab-btn" data-target="tab-step4-full" type="button"><i data-lucide="check"></i> Kode Utuh def register() (Anti-Salah Indentasi)</button>
-        </div>
-
-        <!-- TAB 1: POTONGAN LANGKAH 4 -->
-        <div class="ptab-pane on" id="tab-step4-part">
-          <div class="codebox">
-            <div class="codehead">
-              <div class="codehead-left">
-                <div class="mac-dots">
-                  <span class="mac-dot dot-red"></span>
-                  <span class="mac-dot dot-yellow"></span>
-                  <span class="mac-dot dot-green"></span>
-                </div>
-                <span class="codehead-file"><i data-lucide="file" style="width:14px;height:14px"></i>app.py &bull; Potongan Langkah 4 (Evaluasi Validasi)</span>
-              </div>
-              <button class="codehead-copy" type="button" onclick="copyCode(this)"><i data-lucide="copy" style="width:12px;height:12px"></i>Salin</button>
-            </div>
-            <pre class="codebody">        <span class="cm"># 3. Evaluasi Hasil Validasi</span>
+        <pre class="codebody">        <span class="cm"># 3. Evaluasi Hasil Validasi</span>
         <span class="kw">if</span> errors:
             <span class="cm"># Jika ada error: kirim flash danger lalu render ulang form</span>
             <span class="kw">for</span> err <span class="kw">in</span> errors:
@@ -1056,24 +1019,29 @@ python app.py</pre>
         <span class="cm"># Jika LOLOS SEMUA validasi: kirim flash success &amp; redirect ke beranda (PRG)</span>
         <span class="fn">flash</span>(<span class="str">f'Selamat datang, {nama}! Pendaftaran member kantin berhasil.'</span>, <span class="str">'success'</span>)
         <span class="kw">return</span> <span class="fn">redirect</span>(<span class="fn">url_for</span>(<span class="str">'home'</span>))</pre>
-          </div>
-        </div>
+      </div>
+      <div class="check-result-box">
+        <i data-lucide="circle-check"></i>
+        <div><strong>Uji di Browser:</strong> Buka <code>http://127.0.0.1:5000/register</code> di browsermu. Langsung klik tombol <b>Daftar Member Sekarang</b> tanpa mengisi form &rarr; 3 kotak merah pesan error (alert danger) langsung muncul berurutan di layar!</div>
+      </div>
+    </div>
+  </section>
 
-        <!-- TAB 2: KODE UTUH DEF REGISTER() -->
-        <div class="ptab-pane" id="tab-step4-full">
-          <div class="codebox">
-            <div class="codehead">
-              <div class="codehead-left">
-                <div class="mac-dots">
-                  <span class="mac-dot dot-red"></span>
-                  <span class="mac-dot dot-yellow"></span>
-                  <span class="mac-dot dot-green"></span>
-                </div>
-                <span class="codehead-file"><i data-lucide="file" style="width:14px;height:14px"></i>app.py &bull; Kode Utuh def register()</span>
-              </div>
-              <button class="codehead-copy" type="button" onclick="copyCode(this)"><i data-lucide="copy" style="width:12px;height:12px"></i>Salin Utuh</button>
-            </div>
-            <pre class="codebody"><span class="fn">@app.route</span>(<span class="str">'/register'</span>, methods=[<span class="str">'GET'</span>, <span class="str">'POST'</span>])
+  <!-- SLIDE 13: KODE UTUH DEF REGISTER() (ANTI-SALAH INDENTASI) -->
+  <section class="slide" data-sec="Babak 3 · Kode Utuh" id="s13">
+    <div class="content">
+      <div class="kick" style="background:#DCFCE7;color:#166534;border-color:#4ADE80"><i data-lucide="check" style="width:13px;height:13px"></i> Anti-Salah Indentasi</div>
+      <h2>Kode Utuh Fungsi <code>def register()</code> di app.py</h2>
+      <p class="sub">Jika kamu terkena <code>IndentationError</code> di Python, cocokkan kodinganmu dengan versi utuh 25 baris ini.</p>
+      <div class="codebox">
+        <div class="codehead">
+          <div class="codehead-left">
+            <div class="mac-dots"><span class="mac-dot dot-red"></span><span class="mac-dot dot-yellow"></span><span class="mac-dot dot-green"></span></div>
+            <span class="codehead-file"><i data-lucide="file" style="width:13px;height:13px"></i>app.py &bull; def register() Utuh Tanpa Bingung</span>
+          </div>
+          <button class="codehead-copy" type="button" onclick="copyCode(this)"><i data-lucide="copy" style="width:11px;height:11px"></i>Salin Fungsi Utuh</button>
+        </div>
+        <pre class="codebody"><span class="fn">@app.route</span>(<span class="str">'/register'</span>, methods=[<span class="str">'GET'</span>, <span class="str">'POST'</span>])
 <span class="kw">def</span> <span class="fn">register</span>():
     <span class="kw">if</span> request.method == <span class="str">'POST'</span>:
         <span class="cm"># 1. Tangkap &amp; Sanitasi input</span>
@@ -1113,52 +1081,30 @@ python app.py</pre>
         <span class="kw">return</span> <span class="fn">redirect</span>(<span class="fn">url_for</span>(<span class="str">'home'</span>))
 
     <span class="kw">return</span> <span class="fn">render_template</span>(<span class="str">'register.html'</span>)</pre>
-          </div>
-        </div>
-
-        <div class="check-result-box">
-          <i data-lucide="circle-check"></i>
-          <div><strong>Uji di Browser:</strong> Buka <code>http://127.0.0.1:5000/register</code> di browser. Langsung klik tombol <b>Daftar Member Sekarang</b> tanpa mengisi formulir &rarr; 3 kotak merah pesan error (alert danger) langsung muncul berurutan di layar!</div>
-        </div>
       </div>
     </div>
   </section>
 
-  <!-- ==========================================
-       SLIDE 12: LANGKAH 5: STICKY FORM UX
-       ========================================== -->
-  <section class="slide" id="s12">
-    <div class="slide-wrap">
-      <div class="card">
-        <div class="action-banner banner-edit">
-          <i data-lucide="file" style="width:14px;height:14px"></i>
-          Langkah 5 (UX Pro): Edit File &bull; templates/register.html
-        </div>
-        <div class="step-guide-bar">
-          <span class="guide-tag file"><i data-lucide="file"></i> File: templates/register.html</span>
-          <span class="guide-tag loc"><i data-lucide="sliders"></i> Posisi: Di tag &lt;input id="nama"&gt; dan &lt;input id="email"&gt;</span>
-          <span class="guide-tag act"><i data-lucide="code"></i> Aksi: Tambah atribut value="{{ request.form.get(...) }}"</span>
-          <span class="guide-tag check"><i data-lucide="globe"></i> Uji: Coba submit salah</span>
-        </div>
-        <div class="card-head">
-          <div>
-            <h2 class="card-title">Sentuhan UX Profesional: Sticky Form</h2>
-            <p class="card-sub">Jangan buat pengguna mengetik ulang nama dan email jika password typo!</p>
+  <!-- SLIDE 14: LANGKAH 5: SENTUHAN UX PRO STICKY FORM -->
+  <section class="slide" data-sec="Babak 3 · Langkah 5" id="s14">
+    <div class="content">
+      <div class="action-banner banner-edit"><i data-lucide="file" style="width:13px;height:13px"></i> Langkah 5 (UX Pro): Edit File &bull; templates/register.html</div>
+      <div class="step-guide-bar">
+        <span class="guide-tag file"><i data-lucide="file"></i> File: templates/register.html</span>
+        <span class="guide-tag loc"><i data-lucide="sliders"></i> Posisi: Di tag &lt;input id="nama"&gt; dan &lt;input id="email"&gt;</span>
+        <span class="guide-tag act"><i data-lucide="code"></i> Aksi: Tambah atribut value="{{ request.form.get(...) }}"</span>
+      </div>
+      <h2>Sentuhan UX Profesional: Sticky Form</h2>
+      <p class="sub">Jangan buat pengguna mengetik ulang nama dan email jika password typo saat mendaftar!</p>
+      <div class="codebox">
+        <div class="codehead">
+          <div class="codehead-left">
+            <div class="mac-dots"><span class="mac-dot dot-red"></span><span class="mac-dot dot-yellow"></span><span class="mac-dot dot-green"></span></div>
+            <span class="codehead-file"><i data-lucide="file" style="width:13px;height:13px"></i>templates/register.html (Tambahkan atribut value)</span>
           </div>
+          <button class="codehead-copy" type="button" onclick="copyCode(this)"><i data-lucide="copy" style="width:11px;height:11px"></i>Salin Sticky Atribut</button>
         </div>
-        <div class="codebox">
-          <div class="codehead">
-            <div class="codehead-left">
-              <div class="mac-dots">
-                <span class="mac-dot dot-red"></span>
-                <span class="mac-dot dot-yellow"></span>
-                <span class="mac-dot dot-green"></span>
-              </div>
-              <span class="codehead-file"><i data-lucide="file" style="width:14px;height:14px"></i>templates/register.html (Tambahkan atribut value)</span>
-            </div>
-            <button class="codehead-copy" type="button" onclick="copyCode(this)"><i data-lucide="copy" style="width:12px;height:12px"></i>Salin</button>
-          </div>
-          <pre class="codebody">&lt;<span class="fn">div</span> class=<span class="str">"form-group"</span>&gt;
+        <pre class="codebody">&lt;<span class="fn">div</span> class=<span class="str">"form-group"</span>&gt;
     &lt;<span class="fn">label</span> for=<span class="str">"nama"</span>&gt;Nama Lengkap&lt;/<span class="fn">label</span>&gt;
 <span class="hl-line">    &lt;<span class="fn">input</span> type=<span class="str">"text"</span> id=<span class="str">"nama"</span> name=<span class="str">"nama"</span> class=<span class="str">"form-control"</span> </span>
 <span class="hl-line">           value=<span class="str">"{{ request.form.get('nama', '') }}"</span> placeholder=<span class="str">"Contoh: Budi Santoso"</span>&gt;</span>
@@ -1169,62 +1115,81 @@ python app.py</pre>
 <span class="hl-line">    &lt;<span class="fn">input</span> type=<span class="str">"text"</span> id=<span class="str">"email"</span> name=<span class="str">"email"</span> class=<span class="str">"form-control"</span> </span>
 <span class="hl-line">           value=<span class="str">"{{ request.form.get('email', '') }}"</span> placeholder=<span class="str">"Contoh: budi@kampus.ac.id"</span>&gt;</span>
 &lt;/<span class="fn">div</span>&gt;</pre>
+      </div>
+      <div class="check-result-box">
+        <i data-lucide="circle-check"></i>
+        <div><strong>Uji di Browser:</strong> Isi nama <code>Budi Santoso</code> dan email <code>budi@kampus.ac.id</code>, tapi isi password <code>123</code> (sengaja salah). Klik Daftar &rarr; Pesan error password muncul, tapi teks Nama dan Email <b>tetap tersimpan rapi</b> tanpa perlu diketik ulang!</div>
+      </div>
+      <div class="callout callout-warn">
+        <i data-lucide="lock" style="width:16px;height:16px"></i>
+        <div><b>Catatan Keamanan Asdos:</b> Kolom Password dan Konfirmasi Password sengaja <b>TIDAK</b> dibuat sticky (tetap dikosongkan) demi mencegah kebocoran kredensial jika laptop ditinggalkan pengguna di kantin/lab!</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       BABAK 4: EVALUASI & WAWASAN INDUSTRI (Slide 15 – 18)
+       ======================================================== -->
+
+  <!-- SLIDE 15: TRANSFORMASI SEBELUM VS SESUDAH (P05 VS P06) -->
+  <section class="slide" data-sec="Babak 4 · Evaluasi" id="s15">
+    <div class="content">
+      <div class="kick"><i data-lucide="refresh-cw" style="width:13px;height:13px"></i> Transformasi Kode</div>
+      <h2>Sebelum vs Sesudah: Evolusi P-05 Menuju P-06</h2>
+      <p class="sub">Lihat bagaimana formulir aplikasimu bertransformasi dari sekadar menerima data menjadi sistem yang tangguh.</p>
+      <div class="slide-body cols c2">
+        <div class="pcard" style="border:1.5px solid #FCA5A5">
+          <span style="font:700 11px/1 var(--mono);color:#DC2626">PERTEMUAN 05 (SEBELUM)</span>
+          <h3 style="margin:8px 0 6px">Server "Percaya Buta"</h3>
+          <ul style="font-size:12.5px;color:#64748B;padding-left:18px;line-height:1.6">
+            <li>Input kosong tetap diterima server tanpa peringatan.</li>
+            <li>Spasi <code>"   "</code> dianggap nama sah.</li>
+            <li>Password 1 huruf dan konfirmasi berbeda tetap lolos.</li>
+            <li>Jika salah isi, semua kolom form langsung terhapus bersih.</li>
+            <li>Tekan F5 memicu dialog error <i>Resubmission Form</i>.</li>
+          </ul>
         </div>
-        <div class="check-result-box">
-          <i data-lucide="circle-check"></i>
-          <div><strong>Uji di Browser:</strong> Isi nama <code>Budi Santoso</code> dan email <code>budi@kampus.ac.id</code>, tapi isi password <code>123</code> (sengaja salah). Klik Daftar &rarr; Pesan error password muncul, tapi teks Nama dan Email Anda <b>tetap tersimpan rapi</b> tanpa perlu diketik ulang!</div>
-        </div>
-        <div class="callout callout-warn">
-          <i data-lucide="lock" style="width:16px;height:16px"></i>
-          <div>
-            <b>Catatan Keamanan Asdos:</b> Kolom Password dan Konfirmasi Password sengaja <b>TIDAK</b> dibuat sticky (tetap dikosongkan) demi mencegah kebocoran kredensial jika laptop ditinggalkan pengguna di kantin/lab!
-          </div>
+        <div class="pcard" style="border:1.5px solid #86EFAC">
+          <span style="font:700 11px/1 var(--mono);color:#16A34A">PERTEMUAN 06 (SEKARANG)</span>
+          <h3 style="margin:8px 0 6px">Server "Verifikasi Ketat"</h3>
+          <ul style="font-size:12.5px;color:#166534;padding-left:18px;line-height:1.6">
+            <li>Sanitasi spasi <code>.strip()</code> memotong input tipuan.</li>
+            <li>4 aturan validasi memeriksa integritas format data.</li>
+            <li>Pola list <code>errors = []</code> mengumpulkan pesan sekaligus.</li>
+            <li>Sticky Form menjaga nama &amp; email tetap tersimpan.</li>
+            <li>Pola PRG membuat refresh halaman tetap aman dan bersih.</li>
+          </ul>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ==========================================
-       SLIDE 13: WAWASAN INDUSTRI WTFORMS
-       ========================================== -->
-  <section class="slide" id="s13">
-    <div class="slide-wrap">
-      <div class="card">
-        <div class="card-head">
-          <div>
-            <div class="badge">Wawasan Industri (Opsional)</div>
-            <h2 class="card-title">Mengapa Industri Menggunakan WTForms?</h2>
-            <p class="card-sub">Komparasi: Validasi Manual vs Deklaratif Class WTForms</p>
+  <!-- SLIDE 16: WAWASAN INDUSTRI WTFORMS -->
+  <section class="slide" data-sec="Babak 4 · Industri" id="s16">
+    <div class="content">
+      <div class="kick"><i data-lucide="package" style="width:13px;height:13px"></i> Wawasan Industri</div>
+      <h2>Mengapa Industri Menggunakan WTForms?</h2>
+      <p class="sub">Komparasi: Validasi Manual <code>if-else</code> vs Deklaratif Class WTForms di proyek skala besar.</p>
+      <div class="slide-body cols c2">
+        <div style="background:#FFFFFF;padding:16px;border-radius:12px;border:1px solid #CBD5E1">
+          <h3 style="font:700 14px/1.3 var(--mono);color:var(--dim);margin-bottom:6px">Manual (Yang Kita Pelajari Hari Ini)</h3>
+          <p style="font-size:12px;color:#64748B;margin-bottom:8px">Menggunakan <code>if-else</code> murni di Python. Sangat bagus untuk memahami alur dasar validasi dan 0 dependensi library tambahan.</p>
+          <span style="font:600 11px/1 var(--mono);color:#16A34A">&check; Cocok untuk pemula &bull; Sangat transparan</span>
+        </div>
+        <div style="background:#FFFFFF;padding:16px;border-radius:12px;border:1.5px solid var(--accent)">
+          <h3 style="font:700 14px/1.3 var(--mono);color:var(--accent);margin-bottom:6px">WTForms / Flask-WTF</h3>
+          <p style="font-size:12px;color:#64748B;margin-bottom:8px">Menulis form dalam bentuk Class OOP dengan validator bawaan (<code>Length</code>, <code>Email</code>, <code>EqualTo</code>) serta proteksi CSRF otomatis.</p>
+          <span style="font:600 11px/1 var(--mono);color:var(--accent)">&check; Standar proyek skala menengah-besar</span>
+        </div>
+      </div>
+      <div class="codebox" style="margin-top:14px">
+        <div class="codehead">
+          <div class="codehead-left">
+            <div class="mac-dots"><span class="mac-dot dot-red"></span><span class="mac-dot dot-yellow"></span><span class="mac-dot dot-green"></span></div>
+            <span class="codehead-file"><i data-lucide="code" style="width:13px;height:13px"></i>Contoh Deklarasi Class WTForms (Sekilas Info Industri)</span>
           </div>
         </div>
-        <div class="g2">
-          <div style="background:#FFFFFF;padding:16px;border-radius:10px;border:1px solid #E2E8F0">
-            <h3 style="font:700 14px/1.3 var(--mono);color:var(--dim);margin-bottom:8px">Manual (Yang Kita Pelajari Hari Ini)</h3>
-            <p style="font:400 12px/1.5 var(--sans);color:#64748B;margin-bottom:8px">
-              Menggunakan <code>if-else</code> murni di Python. Sangat bagus untuk memahami alur dasar validasi dan tidak memerlukan instalasi library tambahan.
-            </p>
-            <span style="font:600 11px/1 var(--mono);color:#16A34A">&check; Cocok untuk pemula &bull; 0 Dependencies</span>
-          </div>
-          <div style="background:#FFFFFF;padding:16px;border-radius:10px;border:1.5px solid var(--accent)">
-            <h3 style="font:700 14px/1.3 var(--mono);color:var(--accent);margin-bottom:8px">WTForms / Flask-WTF</h3>
-            <p style="font:400 12px/1.5 var(--sans);color:#64748B;margin-bottom:8px">
-              Menulis form dalam bentuk Class OOP dengan validator bawaan (<code>Length</code>, <code>Email</code>, <code>EqualTo</code>) dan otomatis menyertakan proteksi CSRF.
-            </p>
-            <span style="font:600 11px/1 var(--mono);color:var(--accent)">&check; Standar proyek skala menengah-besar</span>
-          </div>
-        </div>
-        <div class="codebox" style="margin-top:16px">
-          <div class="codehead">
-            <div class="codehead-left">
-              <div class="mac-dots">
-                <span class="mac-dot dot-red"></span>
-                <span class="mac-dot dot-yellow"></span>
-                <span class="mac-dot dot-green"></span>
-              </div>
-              <span class="codehead-file"><i data-lucide="code" style="width:14px;height:14px"></i>Contoh Deklarasi WTForms (Sekilas Info)</span>
-            </div>
-          </div>
-          <pre class="codebody"><span class="kw">from</span> wtforms <span class="kw">import</span> Form, StringField, PasswordField, validators
+        <pre class="codebody"><span class="kw">from</span> wtforms <span class="kw">import</span> Form, StringField, PasswordField, validators
 
 <span class="kw">class</span> <span class="fn">RegistrationForm</span>(Form):
     nama = <span class="fn">StringField</span>(<span class="str">'Nama'</span>, [validators.<span class="fn">Length</span>(min=<span class="num">3</span>, max=<span class="num">50</span>)])
@@ -1234,73 +1199,58 @@ python app.py</pre>
         validators.<span class="fn">EqualTo</span>(<span class="str">'confirm'</span>, message=<span class="str">'Password tidak cocok'</span>)
     ])
     confirm = <span class="fn">PasswordField</span>(<span class="str">'Konfirmasi Password'</span>)</pre>
-        </div>
       </div>
     </div>
   </section>
 
-  <!-- ==========================================
-       SLIDE 14: KEAMANAN CSRF
-       ========================================== -->
-  <section class="slide" id="s14">
-    <div class="slide-wrap">
-      <div class="card">
-        <div class="card-head">
-          <div>
-            <div class="badge" style="background:#FEF3C7;color:#92400E;border-color:#F59E0B">Konsep Keamanan Web</div>
-            <h2 class="card-title">Mengenal Bahaya CSRF (Cross-Site Request Forgery)</h2>
-          </div>
+  <!-- SLIDE 17: KEAMANAN WEB: CSRF TOKEN -->
+  <section class="slide" data-sec="Babak 4 · Industri" id="s17">
+    <div class="content">
+      <div class="kick" style="background:#FEF3C7;color:#92400E;border-color:#F59E0B"><i data-lucide="shield-check" style="width:13px;height:13px"></i> Keamanan Web</div>
+      <h2>Mengenal Bahaya CSRF (Cross-Site Request Forgery)</h2>
+      <p class="sub">Bagaimana penyerang bisa memanipulasi pengiriman formulir dan bagaimana cara mencegahnya.</p>
+      <div class="slide-body cols c2">
+        <div class="pcard">
+          <h3 style="color:#DC2626;margin-bottom:8px">Skenario Serangan CSRF</h3>
+          <p style="font-size:12.5px;color:#475569;line-height:1.55">
+            Penyerang memancing pengguna yang sedang login di website kampus/bank untuk mengklik link palsu di website berbahaya. Browser otomatis mengirimkan cookie sesi pengguna, sehingga server mengira transaksi itu sah dari pengguna!
+          </p>
         </div>
-        <div class="g2">
-          <div style="background:#FFFFFF;padding:18px;border-radius:12px;border:1px solid #E2E8F0">
-            <h3 style="font:700 14px/1.3 var(--sans);color:#DC2626;margin-bottom:8px">Skenario Serangan CSRF</h3>
-            <p style="font:400 12px/1.6 var(--sans);color:#475569">
-              Penyerang memancing pengguna yang sedang login di website bank/kampus untuk mengklik link palsu di website berbahaya. Browser otomatis mengirimkan cookie sesi pengguna, sehingga server mengira transaksi itu sah dari pengguna!
-            </p>
-          </div>
-          <div style="background:#FFFFFF;padding:18px;border-radius:12px;border:1.5px solid var(--accent)">
-            <h3 style="font:700 14px/1.3 var(--sans);color:var(--accent);margin-bottom:8px">Solusi: CSRF Token</h3>
-            <p style="font:400 12px/1.6 var(--sans);color:#475569">
-              Server menyelipkan token acak sekali pakai di tag form: <code>&lt;input type="hidden" name="csrf_token" value="..."&gt;</code>. Saat form di-submit, server mencocokkan token. Website jahat dari luar tidak tahu token ini, sehingga serangan gagal!
-            </p>
-          </div>
+        <div class="pcard" style="border:1.5px solid var(--accent)">
+          <h3 style="color:var(--accent);margin-bottom:8px">Solusi: CSRF Token</h3>
+          <p style="font-size:12.5px;color:#475569;line-height:1.55">
+            Server menyelipkan token acak sekali pakai di tag form: <code>&lt;input type="hidden" name="csrf_token" value="..."&gt;</code>. Saat form di-submit, server mencocokkan token. Website luar tidak tahu token ini, sehingga serangan gagal total!
+          </p>
         </div>
-        <div class="callout callout-info" style="margin-top:16px">
-          <i data-lucide="shield-check" style="width:16px;height:16px"></i>
-          <div>
-            Pada Flask-WTF, proteksi CSRF diaktifkan cukup dengan menulis <code>{{ form.csrf_token }}</code> di dalam form HTML.
-          </div>
-        </div>
+      </div>
+      <div class="callout callout-info" style="margin-top:14px">
+        <i data-lucide="shield-check" style="width:16px;height:16px"></i>
+        <div>Pada Flask-WTF, proteksi CSRF diaktifkan cukup dengan menuliskan tag <code>{{ form.csrf_token }}</code> di dalam form HTML.</div>
       </div>
     </div>
   </section>
 
-  <!-- ==========================================
-       SLIDE 15: FRESHMEN SHIELD
-       ========================================== -->
-  <section class="slide" id="s15">
-    <div class="slide-wrap">
-      <div class="card">
-        <div class="card-head">
-          <div>
-            <div class="badge" style="background:#FEE2E2;color:#991B1B;border-color:#F87171">Freshmen Shield</div>
-            <h2 class="card-title">Panduan Solusi 5 Eror Paling Populer Pemula</h2>
-          </div>
-        </div>
+  <!-- SLIDE 18: FRESHMEN SHIELD (5 EROR PALING POPULER) -->
+  <section class="slide" data-sec="Babak 4 · Shield" id="s18">
+    <div class="content">
+      <div class="kick" style="background:#FEE2E2;color:#991B1B;border-color:#F87171"><i data-lucide="shield-alert" style="width:13px;height:13px"></i> Freshmen Shield</div>
+      <h2>Panduan Solusi 5 Eror Paling Populer Pemula</h2>
+      <p class="sub">Mengalami kendala saat live coding? Cek 5 masalah klasik ini sebelum memanggil asdos!</p>
+      <div class="slide-body">
         <div class="shield-card">
           <div class="shield-err">1. RuntimeError: The session is unavailable because no secret_key was set.</div>
           <div class="shield-why">Penyebab: Lupa menentukan kunci rahasia untuk flash messages di backend Flask.</div>
-          <span class="shield-fix">Solusi: Tambahkan app.secret_key = 'kunci-rahasia-kantin-p06' setelah app = Flask(__name__)</span>
+          <span class="shield-fix">Solusi: Tambahkan app.secret_key = 'kunci-rahasia-kantin-p06' setelah inisialisasi Flask.</span>
         </div>
         <div class="shield-card">
           <div class="shield-err">2. 405 Method Not Allowed</div>
           <div class="shield-why">Penyebab: Form dikirim via POST, tetapi rute @app.route('/register') belum menyertakan methods=['GET', 'POST'].</div>
-          <span class="shield-fix">Solusi: Pastikan parameter methods=['GET', 'POST'] terpasang di decorator rute.</span>
+          <span class="shield-fix">Solusi: Tambahkan parameter methods=['GET', 'POST'] pada decorator rute.</span>
         </div>
         <div class="shield-card">
           <div class="shield-err">3. Nilai input selalu None atau kosong di request.form.get()</div>
           <div class="shield-why">Penyebab: Lupa menambahkan atribut name="..." di tag &lt;input&gt; HTML register.html.</div>
-          <span class="shield-fix">Solusi: Pastikan ada name="nama", name="email", name="password", dan name="confirm".</span>
+          <span class="shield-fix">Solusi: Pastikan name="nama", name="email", name="password", dan name="confirm" terisi cocok.</span>
         </div>
         <div class="shield-card">
           <div class="shield-err">4. NameError: name 'flash' is not defined</div>
@@ -1316,174 +1266,176 @@ python app.py</pre>
     </div>
   </section>
 
-  <!-- ==========================================
-       SLIDE 16: CHECKLIST TUGAS MANDIRI
-       ========================================== -->
-  <section class="slide" id="s16">
-    <div class="slide-wrap">
-      <div class="card">
-        <div class="card-head">
+  <!-- ========================================================
+       BABAK 5: TUGAS, EVALUASI, KUIS, & PENUTUP (Slide 19 – 24)
+       ======================================================== -->
+
+  <!-- SLIDE 19: CHECKLIST TUGAS MANDIRI -->
+  <section class="slide" data-sec="Babak 5 · Tugas" id="s19">
+    <div class="content">
+      <div class="kick"><i data-lucide="check-square" style="width:13px;height:13px"></i> Tugas Praktikum</div>
+      <div style="display:flex;justify-content:space-between;align-items:flex-end">
+        <div>
+          <h2>Checklist Pengerjaan Tugas Mandiri (25 Menit)</h2>
+          <p class="sub">Klik dan centang setiap poin fitur yang sudah kamu selesaikan di komputermu!</p>
+        </div>
+        <div style="text-align:right">
+          <span style="font:600 10.5px/1 var(--mono);color:#94A3B8">DEADLINE PENGUMPULAN</span>
+          <div id="tdigits" style="font:700 16px/1.2 var(--mono);color:var(--accent);margin-top:3px">--h : --j : --m : --d</div>
+        </div>
+      </div>
+      <div class="slide-body">
+        <div class="chk-item" onclick="toggleChk(this)">
+          <div class="chk-box"><i data-lucide="check" style="width:13px;height:13px"></i></div>
           <div>
-            <div class="badge">Tugas Praktikum (30 Menit)</div>
-            <h2 class="card-title">Checklist Pengerjaan Tugas Mandiri</h2>
-            <p class="card-sub">Centang setiap item yang sudah Anda selesaikan di project lokal!</p>
-          </div>
-          <div style="text-align:right">
-            <span style="font:600 11px/1 var(--mono);color:#94A3B8">DEADLINE TUGAS</span>
-            <div id="tdigits" style="font:700 18px/1.2 var(--mono);color:var(--accent);margin-top:4px">--h : --j : --m : --d</div>
+            <h4 class="chk-title" style="font:700 13px/1.3 var(--sans);color:var(--ink)">1. Form Registrasi HTML Lengkap</h4>
+            <p style="font-size:11.5px;color:var(--faint)">Form dengan method="POST" dan 4 input: nama, email, password, confirm.</p>
           </div>
         </div>
         <div class="chk-item" onclick="toggleChk(this)">
-          <div class="chk-box"><i data-lucide="check" style="width:14px;height:14px"></i></div>
+          <div class="chk-box"><i data-lucide="check" style="width:13px;height:13px"></i></div>
           <div>
-            <h4 class="chk-title" style="font:700 14px/1.3 var(--sans);color:var(--ink)">1. Form Registrasi HTML Lengkap</h4>
-            <p style="font:400 12px/1.4 var(--faint)">Form dengan method="POST" dan 4 input field: nama, email, password, confirm.</p>
+            <h4 class="chk-title" style="font:700 13px/1.3 var(--sans);color:var(--ink)">2. Validasi Nama &ge; 3 Karakter &amp; Sanitasi .strip()</h4>
+            <p style="font-size:11.5px;color:var(--faint)">Spasi kosong dipotong, nama tidak boleh kosong dan minimal 3 huruf.</p>
           </div>
         </div>
         <div class="chk-item" onclick="toggleChk(this)">
-          <div class="chk-box"><i data-lucide="check" style="width:14px;height:14px"></i></div>
+          <div class="chk-box"><i data-lucide="check" style="width:13px;height:13px"></i></div>
           <div>
-            <h4 class="chk-title" style="font:700 14px/1.3 var(--sans);color:var(--ink)">2. Validasi Nama &ge; 3 Karakter &amp; Sanitasi .strip()</h4>
-            <p style="font:400 12px/1.4 var(--faint)">Spasi kosong dipotong, nama tidak boleh kosong dan harus minimal 3 huruf.</p>
+            <h4 class="chk-title" style="font:700 13px/1.3 var(--sans);color:var(--ink)">3. Validasi Format Email, Password &ge; 6 Karakter, &amp; Match</h4>
+            <p style="font-size:11.5px;color:var(--faint)">Email memiliki @ dan domain, password &ge; 6 karakter, dan konfirmasi cocok.</p>
           </div>
         </div>
         <div class="chk-item" onclick="toggleChk(this)">
-          <div class="chk-box"><i data-lucide="check" style="width:14px;height:14px"></i></div>
+          <div class="chk-box"><i data-lucide="check" style="width:13px;height:13px"></i></div>
           <div>
-            <h4 class="chk-title" style="font:700 14px/1.3 var(--sans);color:var(--ink)">3. Validasi Format Email, Password &ge; 6, &amp; Match</h4>
-            <p style="font:400 12px/1.4 var(--faint)">Format email mengandung @ dan domain, password &ge; 6 huruf, dan konfirmasi cocok.</p>
-          </div>
-        </div>
-        <div class="chk-item" onclick="toggleChk(this)">
-          <div class="chk-box"><i data-lucide="check" style="width:14px;height:14px"></i></div>
-          <div>
-            <h4 class="chk-title" style="font:700 14px/1.3 var(--sans);color:var(--ink)">4. Flash Messages Ber-kategori &amp; Sticky Form UX</h4>
-            <p style="font:400 12px/1.4 var(--faint)">Alert danger merah jika salah, alert success hijau jika lolos, dan input lama tidak hilang.</p>
+            <h4 class="chk-title" style="font:700 13px/1.3 var(--sans);color:var(--ink)">4. Flash Messages Ber-kategori &amp; Sticky Form UX</h4>
+            <p style="font-size:11.5px;color:var(--faint)">Alert merah jika salah, alert hijau jika berhasil, dan input lama tidak hilang.</p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ==========================================
-       SLIDE 17: RUBRIK PENILAIAN
-       ========================================== -->
-  <section class="slide" id="s17">
-    <div class="slide-wrap">
-      <div class="card">
-        <div class="card-head">
-          <div>
-            <div class="badge">Evaluasi &amp; Grading</div>
-            <h2 class="card-title">Rubrik Penilaian Resmi Praktikum P06 (Total: 100 Poin)</h2>
-          </div>
+  <!-- SLIDE 20: RUBRIK PENILAIAN RESMI -->
+  <section class="slide" data-sec="Babak 5 · Rubrik" id="s20">
+    <div class="content">
+      <div class="kick"><i data-lucide="sliders" style="width:13px;height:13px"></i> Evaluasi &amp; Grading</div>
+      <h2>Rubrik Penilaian Resmi Praktikum P06 (100 Poin)</h2>
+      <p class="sub">Penilaian dinilai secara objektif berdasarkan fungsionalitas backend dan kualitas antarmuka.</p>
+      <div class="slide-body cols c4">
+        <div class="pcard" style="text-align:center">
+          <span style="font:700 24px/1 var(--disp);color:var(--accent)">20%</span>
+          <h4 style="font:700 13px/1.3 var(--sans);margin:8px 0 4px">Form HTML</h4>
+          <p style="font-size:11.5px;color:var(--faint)">Kelengkapan form method POST, 4 input field, label, dan tombol submit.</p>
         </div>
-        <div class="g4">
-          <div style="background:#FFFFFF;padding:16px;border-radius:10px;border:1px solid #E2E8F0;text-align:center">
-            <span style="font:700 24px/1 var(--disp);color:var(--accent)">20%</span>
-            <h4 style="font:700 13px/1.3 var(--sans);color:var(--ink);margin:8px 0 4px">Form HTML</h4>
-            <p style="font:400 11px/1.4 var(--faint)">Kelengkapan form method POST, 4 input field, label, dan button submit.</p>
-          </div>
-          <div style="background:#FFFFFF;padding:16px;border-radius:10px;border:1px solid #E2E8F0;text-align:center">
-            <span style="font:700 24px/1 var(--disp);color:var(--blue)">30%</span>
-            <h4 style="font:700 13px/1.3 var(--sans);color:var(--ink);margin:8px 0 4px">Validasi Sisi Server</h4>
-            <p style="font:400 11px/1.4 var(--faint)">Seluruh 4 aturan validasi berfungsi sempurna di backend Flask.</p>
-          </div>
-          <div style="background:#FFFFFF;padding:16px;border-radius:10px;border:1px solid #E2E8F0;text-align:center">
-            <span style="font:700 24px/1 var(--disp);color:var(--green)">25%</span>
-            <h4 style="font:700 13px/1.3 var(--sans);color:var(--ink);margin:8px 0 4px">Flash Messages</h4>
-            <p style="font:400 11px/1.4 var(--faint)">Pesan error kategori danger dan pesan sukses redirect berfungsi tepat.</p>
-          </div>
-          <div style="background:#FFFFFF;padding:16px;border-radius:10px;border:1px solid #E2E8F0;text-align:center">
-            <span style="font:700 24px/1 var(--disp);color:var(--amber)">25%</span>
-            <h4 style="font:700 13px/1.3 var(--sans);color:var(--ink);margin:8px 0 4px">Styling &amp; UX</h4>
-            <p style="font:400 11px/1.4 var(--faint)">Tampilan alert rapi (merah/hijau), layout card proporsional, dan sticky input.</p>
-          </div>
+        <div class="pcard" style="text-align:center">
+          <span style="font:700 24px/1 var(--disp);color:var(--blue)">30%</span>
+          <h4 style="font:700 13px/1.3 var(--sans);margin:8px 0 4px">Validasi Server</h4>
+          <p style="font-size:11.5px;color:var(--faint)">Seluruh 4 aturan validasi berfungsi sempurna di backend Flask.</p>
+        </div>
+        <div class="pcard" style="text-align:center">
+          <span style="font:700 24px/1 var(--disp);color:var(--green)">25%</span>
+          <h4 style="font:700 13px/1.3 var(--sans);margin:8px 0 4px">Flash Messages</h4>
+          <p style="font-size:11.5px;color:var(--faint)">Pesan error kategori danger dan pesan sukses redirect berfungsi tepat.</p>
+        </div>
+        <div class="pcard" style="text-align:center">
+          <span style="font:700 24px/1 var(--disp);color:var(--amber)">25%</span>
+          <h4 style="font:700 13px/1.3 var(--sans);margin:8px 0 4px">Styling &amp; UX</h4>
+          <p style="font-size:11.5px;color:var(--faint)">Tampilan alert rapi (merah/hijau), layout card proporsional, dan sticky input.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ==========================================
-       SLIDE 18: PENGUMPULAN TUGAS
-       ========================================== -->
-  <section class="slide" id="s18">
-    <div class="slide-wrap">
-      <div class="card">
-        <div class="card-head">
-          <div>
-            <div class="badge">Pengumpulan LMS</div>
-            <h2 class="card-title">Instruksi Pengumpulan Tugas Praktikum</h2>
-          </div>
+  <!-- SLIDE 21: PENGUMPULAN LMS -->
+  <section class="slide" data-sec="Babak 5 · LMS" id="s21">
+    <div class="content">
+      <div class="kick"><i data-lucide="package" style="width:13px;height:13px"></i> Pengumpulan LMS</div>
+      <h2>Instruksi Pengumpulan Tugas Praktikum</h2>
+      <p class="sub">Pastikan file tugasmu diunggah sesuai ketentuan sebelum batas deadline berakhir.</p>
+      <div class="slide-body cols c2">
+        <div class="pcard">
+          <h3 style="margin-bottom:8px">Format File Proyek (.ZIP)</h3>
+          <ul style="font-size:12.5px;color:#475569;line-height:1.6;padding-left:18px">
+            <li>Kompres seluruh folder proyek ke dalam format <b>.ZIP</b>.</li>
+            <li>Hapus folder <code>.venv/</code> atau <code>__pycache__/</code> sebelum di-zip agar ukuran file kecil (&lt; 2 MB).</li>
+            <li>Format penamaan: <code>P06_NIM_NamaLengkap.zip</code>.</li>
+            <li>Unggah file ke form penugasan di LMS kampus.</li>
+          </ul>
         </div>
-        <div class="g2">
-          <div style="background:#FFFFFF;padding:20px;border-radius:12px;border:1px solid #E2E8F0">
-            <h3 style="font:700 15px/1.3 var(--sans);color:var(--ink);margin-bottom:10px">Format File Proyek (ZIP)</h3>
-            <ul style="font:400 13px/1.6 var(--sans);color:#475569;padding-left:20px">
-              <li>Kompres seluruh folder project ke dalam format <b>.ZIP</b>.</li>
-              <li>Hapus folder <code>.venv/</code> atau <code>__pycache__/</code> sebelum di-zip agar ukuran file kecil (&lt; 2 MB).</li>
-              <li>Format nama file: <code>P06_NIM_NamaLengkap.zip</code>.</li>
-              <li>Unggah file ke form penugasan di LMS sebelum deadline.</li>
-            </ul>
-          </div>
-          <div style="background:#FFFFFF;padding:20px;border-radius:12px;border:1.5px solid var(--accent)">
-            <h3 style="font:700 15px/1.3 var(--sans);color:var(--accent);margin-bottom:10px">Tips Mendapatkan Nilai Maksimal (100)</h3>
-            <ul style="font:400 13px/1.6 var(--sans);color:#475569;padding-left:20px">
-              <li>Uji coba form dengan berbagai kombinasi input salah sebelum mengumpulkan.</li>
-              <li>Pastikan notifikasi sukses muncul saat input benar semua.</li>
-              <li>Pastikan fitur <b>Sticky Form</b> aktif (nama dan email tidak hilang saat password salah).</li>
-            </ul>
-          </div>
+        <div class="pcard" style="border:1.5px solid var(--accent)">
+          <h3 style="color:var(--accent);margin-bottom:8px">Tips Mendapatkan Nilai Penuh (100)</h3>
+          <ul style="font-size:12.5px;color:#475569;line-height:1.6;padding-left:18px">
+            <li>Uji coba form dengan berbagai kombinasi input salah sebelum mengumpulkan.</li>
+            <li>Pastikan pesan sukses hijau muncul saat semua input benar.</li>
+            <li>Pastikan fitur <b>Sticky Form</b> aktif (nama dan email tidak hilang saat password salah).</li>
+          </ul>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ==========================================
-       SLIDE 19: KUIS INTERAKTIF
-       ========================================== -->
-  <section class="slide" id="s19">
-    <div class="slide-wrap">
-      <div class="card">
-        <div class="card-head">
-          <div>
-            <div class="badge">Uji Pemahaman</div>
-            <h2 class="card-title" id="qno">Soal 1 / 5</h2>
-          </div>
-          <div id="qdots" style="display:flex;gap:6px"></div>
+  <!-- SLIDE 22: KUIS INTERAKTIF UJI PEMAHAMAN -->
+  <section class="slide" data-sec="Babak 5 · Kuis" id="s22">
+    <div class="content">
+      <div class="quizbox">
+        <div class="qmeta">
+          <span class="qno" id="qno">Soal 1 / 5</span>
+          <div class="qdots" id="qdots"></div>
         </div>
-        <div style="margin-bottom:20px">
-          <h3 id="qq" style="font:700 17px/1.4 var(--sans);color:var(--ink);min-height:50px">Memuat soal kuis...</h3>
-        </div>
-        <div id="qopts"></div>
-        <div id="qfoot" style="margin-top:16px;text-align:right"></div>
+        <div class="qq" id="qq">Memuat soal kuis...</div>
+        <div class="qopts" id="qopts"></div>
+        <div style="margin-top:14px;text-align:right" id="qfoot"></div>
       </div>
     </div>
   </section>
 
-  <!-- ==========================================
-       SLIDE 20: PENUTUP & NEXT STEP
-       ========================================== -->
-  <section class="slide" id="s20">
-    <div class="slide-wrap cover-hero">
-      <div class="cover-badge" style="background:#DCFCE7;color:#166534;border-color:#4ADE80">
-        <i data-lucide="circle-check" style="width:14px;height:14px"></i>
-        Praktikum P06 Selesai
+  <!-- SLIDE 23: REKAP PRAKTIKUM -->
+  <section class="slide" data-sec="Babak 5 · Rekap" id="s23">
+    <div class="content">
+      <div class="kick"><i data-lucide="check" style="width:13px;height:13px"></i> Rekap Praktikum</div>
+      <h2>4 Kunci Sukses Validasi Sisi Server</h2>
+      <p class="sub">Ringkasan konsep penting yang sudah kamu kuasai di Pertemuan 06 hari ini.</p>
+      <div class="slide-body cols c4">
+        <div class="pcard">
+          <span style="font:700 20px/1 var(--disp);color:var(--accent)">01</span>
+          <h4 style="margin:6px 0 4px">Never Trust Client</h4>
+          <p style="font-size:12px;color:var(--dim)">Validasi HTML5 hanyalah pemanis UX. Server adalah benteng pertahanan mutlak integritas data.</p>
+        </div>
+        <div class="pcard">
+          <span style="font:700 20px/1 var(--disp);color:var(--blue)">02</span>
+          <h4 style="margin:6px 0 4px">Sanitasi Input</h4>
+          <p style="font-size:12px;color:var(--dim)">Gunakan <code>.strip()</code> untuk memangkas karakter spasi tak terlihat di awal &amp; akhir string input.</p>
+        </div>
+        <div class="pcard">
+          <span style="font:700 20px/1 var(--disp);color:var(--green)">03</span>
+          <h4 style="margin:6px 0 4px">Error Collector</h4>
+          <p style="font-size:12px;color:var(--dim)">List <code>errors = []</code> mengumpulkan seluruh kesalahan agar tampil serentak tanpa membuat frustrasi.</p>
+        </div>
+        <div class="pcard">
+          <span style="font:700 20px/1 var(--disp);color:var(--amber)">04</span>
+          <h4 style="margin:6px 0 4px">Sticky &amp; PRG</h4>
+          <p style="font-size:12px;color:var(--dim)">Pertahankan data nama/email lama, dan lakukan <code>redirect()</code> saat sukses untuk mencegah resubmission.</p>
+        </div>
       </div>
-      <h1 class="cover-title">
-        Hebat! Anda Telah Menguasai<br>
-        <span>Validasi Sisi Server &amp; Keamanan Form</span>
-      </h1>
-      <p class="cover-desc">
-        Data formulir sekarang aman, bersih, dan tervalidasi dengan tepat. Tapi data member kita saat ini masih hilang saat server di-restart!
+    </div>
+  </section>
+
+  <!-- SLIDE 24: PENUTUP & JEMBATAN KE P07 -->
+  <section class="slide title-slide" data-sec="Babak 5 · Penutup" id="s24">
+    <div class="content">
+      <div class="typeline" style="background:#DCFCE7;color:#166534;border-color:#4ADE80"><i data-lucide="circle-check" style="width:14px;height:14px"></i> Praktikum Pertemuan 06 Selesai</div>
+      <h1>Hebat! Kamu Telah Menguasai<br><span>Validasi Server &amp; Keamanan Form</span></h1>
+      <p class="t-sub">
+        Data formulir registrasi member kantin sekarang aman, bersih, dan tervalidasi. Tapi saat server Flask di-restart, data member kita masih hilang!
       </p>
-      <div style="background:#FFFFFF;border:1.5px solid var(--accent);padding:20px 24px;border-radius:14px;max-width:680px;margin:0 auto 24px;text-align:left">
+      <div class="pcard" style="max-width:680px;margin:0 auto 20px;text-align:left;border:1.5px solid var(--accent)">
         <span style="font:700 11px/1 var(--mono);color:var(--accent);text-transform:uppercase">Pertemuan Selanjutnya (P-07):</span>
-        <h3 style="font:700 16px/1.3 var(--disp);color:var(--ink);margin:6px 0">Database Relasional &amp; ORM (SQLAlchemy)</h3>
-        <p style="font:400 13px/1.5 var(--sans);color:#64748B">
-          Kita akan menghubungkan data registrasi member ini ke database SQLite / MySQL agar tersimpan secara permanen dan aman selamanya.
-        </p>
+        <h3 style="margin:6px 0 4px">Database Relasional &amp; ORM (SQLAlchemy)</h3>
+        <p style="font-size:12.5px;color:#64748B">Kita akan menghubungkan data registrasi member ini ke basis data SQLite / MySQL agar tersimpan permanen dan siap digunakan untuk fitur transaksi kantin!</p>
       </div>
-      <a href="/" style="display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#FFF;padding:10px 20px;border-radius:999px;font:700 13px/1 var(--sans);text-decoration:none">
+      <a href="/" style="display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#FFF;padding:10px 22px;border-radius:999px;font:700 13px/1 var(--sans);text-decoration:none">
         &larr; Kembali ke Portal Praktikum
       </a>
     </div>
@@ -1491,39 +1443,38 @@ python app.py</pre>
 
 </main>
 
-<!-- BOTTOM DOCK NAV -->
-<footer class="bot-dock">
-  <button class="nav-btn" id="btn-prev"><i data-lucide="chevron-left"></i><span>Sebelumnya</span><span class="nav-kbd">&larr;</span></button>
-  <button class="nav-btn" id="btn-next"><span>Lanjut</span><i data-lucide="chevron-right"></i><span class="nav-kbd">&rarr;</span></button>
-</footer>
-
 <script>
 const $ = s => document.querySelector(s);
 const $$ = s => document.querySelectorAll(s);
 
-const slides = Array.from($$('#deck .slide'));
+const slides = Array.from($$('.slide'));
+const totalSlides = slides.length;
 let curSlide = 0;
 
 function show(idx){
-  if(idx < 0 || idx >= slides.length) return;
-  slides[curSlide].classList.remove('active');
+  if(idx < 0) idx = 0;
+  if(idx >= totalSlides) idx = totalSlides - 1;
+  
+  slides[curSlide].classList.remove('on');
   curSlide = idx;
-  slides[curSlide].classList.add('active');
+  const curEl = slides[curSlide];
+  curEl.classList.add('on');
   
   // Update progress bar
-  const pct = ((curSlide + 1) / slides.length) * 100;
-  $('#pbar').style.width = pct + '%';
+  const pct = ((curSlide + 1) / totalSlides) * 100;
+  $('#progressBar').style.width = pct + '%';
   
-  // Update slide counter
-  const numStr = String(curSlide + 1).padStart(2, '0') + ' / ' + String(slides.length).padStart(2, '0');
-  $('#slide-num').textContent = numStr;
+  // Update canonical dock counter & section label
+  $('#curNum').textContent = String(curSlide + 1).padStart(2, '0');
+  $('#totNum').textContent = String(totalSlides).padStart(2, '0');
+  $('#secLabel').textContent = curEl.dataset.sec || 'Praktikum';
   
   // Update URL hash
-  window.location.hash = slides[curSlide].id;
+  window.location.hash = curEl.id;
 }
 
-$('#btn-next').onclick = () => show(curSlide + 1);
-$('#btn-prev').onclick = () => show(curSlide - 1);
+$('#prevBtn').onclick = () => show(curSlide - 1);
+$('#nextBtn').onclick = () => show(curSlide + 1);
 
 document.addEventListener('keydown', e => {
   if(e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
@@ -1545,7 +1496,6 @@ function toggleFullscreen(){
     document.exitFullscreen();
   }
 }
-$('#btn-fullscreen').onclick = toggleFullscreen;
 
 /* COPY CODE HELPER */
 function copyCode(btn){
@@ -1553,7 +1503,7 @@ function copyCode(btn){
   const code = box.querySelector('.codebody').innerText;
   navigator.clipboard.writeText(code).then(() => {
     const orig = btn.innerHTML;
-    btn.innerHTML = '<i data-lucide="check" style="width:12px;height:12px"></i>Tersalin!';
+    btn.innerHTML = '<i data-lucide="check" style="width:11px;height:11px"></i>Tersalin!';
     lucide.createIcons();
     setTimeout(() => {
       btn.innerHTML = orig;
@@ -1562,7 +1512,7 @@ function copyCode(btn){
   });
 }
 
-/* INTERACTIVE VALIDATION SIMULATOR (SLIDE 5) */
+/* INTERACTIVE VALIDATION SIMULATOR (SLIDE 6) */
 const btnSim = $('#btn-run-sim');
 if(btnSim){
   btnSim.onclick = () => {
@@ -1589,8 +1539,8 @@ if(btnSim){
     } else {
       out.innerHTML = `
         <div class="sim-alert sim-alert-success">&#10003; Selamat datang, ${nama}! Pendaftaran member kantin berhasil. (Redirect to /)</div>
-        <div style="font-size:11px;color:#166534;margin-top:8px;font-family:var(--mono)">
-          HTTP Status: 302 Found &rarr; GET / (Diskon 15% aktif!)
+        <div style="font-size:11px;color:#166534;margin-top:6px;font-family:var(--mono)">
+          HTTP 302 Found &rarr; GET / (Diskon 15% aktif!)
         </div>
       `;
     }
@@ -1602,7 +1552,7 @@ function toggleChk(el){
   el.classList.toggle('done');
 }
 
-/* DEADLINE TIMER (Rabu, 11 November 2026) */
+/* DEADLINE TIMER (Rabu, 11 November 2026, 23.59) */
 const DEADLINE = new Date(2026, 10, 11, 23, 59, 0);
 function updateTimer(){
   let diff = Math.max(0, Math.floor((DEADLINE - Date.now()) / 1000));
@@ -1617,7 +1567,7 @@ function updateTimer(){
 updateTimer();
 setInterval(updateTimer, 1000);
 
-/* QUIZ INTERAKTIF (SLIDE 19) */
+/* QUIZ INTERAKTIF (SLIDE 22) */
 const QUESTIONS = [
   {
     q: 'Mengapa validasi atribut HTML5 (seperti required) saja belum cukup untuk mengamankan data web?',
@@ -1669,9 +1619,9 @@ function renderQuiz(reset){
   if(qIndex >= QUESTIONS.length){
     $('#qno').textContent = 'Hasil Kuis P-06';
     $('#qdots').innerHTML = QUESTIONS.map((_, i) => `<span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${qMarks[i] ? '#16A34A' : '#DC2626'}"></span>`).join('');
-    $('#qq').innerHTML = `<span style="font-size:28px;font-family:var(--disp);color:#16A34A">Skor Anda: ${qScore} / 5</span>`;
-    $('#qopts').innerHTML = `<p style="font-size:14px;color:var(--dim);line-height:1.6">${qScore >= 4 ? 'Luar biasa! Anda telah menguasai konsep sanitasi input, validasi sisi server, dan penanganan feedback flash messages.' : 'Bagus! Coba tinjau kembali materi pada Freshmen Shield di slide 15.'}</p>`;
-    $('#qfoot').innerHTML = '<button class="dock-btn" id="retryQuiz" type="button" style="width:auto;border-radius:8px;padding:8px 18px;background:var(--accent);color:#FFFFFF;font-weight:600">Ulangi Kuis</button>';
+    $('#qq').innerHTML = `<span style="font-size:26px;font-family:var(--disp);color:#16A34A">Skor Kamu: ${qScore} / 5</span>`;
+    $('#qopts').innerHTML = `<p style="font-size:13.5px;color:var(--dim);line-height:1.6">${qScore >= 4 ? 'Luar biasa! Kamu telah menguasai konsep sanitasi input, validasi sisi server, dan penanganan feedback flash messages.' : 'Bagus! Coba tinjau kembali materi pada Freshmen Shield di slide 18.'}</p>`;
+    $('#qfoot').innerHTML = '<button class="tbtn" id="retryQuiz" type="button">Ulangi Kuis</button>';
     $('#retryQuiz').onclick = () => renderQuiz(true);
     return;
   }
@@ -1697,21 +1647,11 @@ function renderQuiz(reset){
         if(j === curQ.a) b.classList.add('right');
       });
       if(!isRight) btn.classList.add('wrong');
-      $('#qfoot').innerHTML = `<button class="dock-btn" id="nextQ" type="button" style="width:auto;border-radius:8px;padding:8px 18px;background:var(--accent);color:#FFFFFF;font-weight:600">${qIndex === QUESTIONS.length - 1 ? 'Lihat Skor' : 'Lanjut &rarr;'}</button>`;
+      $('#qfoot').innerHTML = `<button class="tbtn" id="nextQ" type="button">${qIndex === QUESTIONS.length - 1 ? 'Lihat Skor' : 'Lanjut &rarr;'}</button>`;
       $('#nextQ').onclick = () => { qIndex++; renderQuiz(); };
     };
   });
 }
-/* TAB PROGRESSIVE DISCLOSURE EVENT LISTENER */
-document.addEventListener('click', e => {
-  const btn = e.target.closest('.ptab-btn');
-  if(!btn) return;
-  const card = btn.closest('.card') || btn.closest('.pcard');
-  if(!card) return;
-  const targetId = btn.dataset.target;
-  card.querySelectorAll('.ptab-btn').forEach(b => b.classList.toggle('on', b === btn));
-  card.querySelectorAll('.ptab-pane').forEach(p => p.classList.toggle('on', p.id === targetId));
-});
 
 renderQuiz(true);
 lucide.createIcons();
