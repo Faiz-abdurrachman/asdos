@@ -218,33 +218,91 @@ html,body{
   background:var(--accent-light);color:var(--accent);border:1px solid var(--accent-border);
 }
 
-/* CODE VIEW BOX */
+/* CODE VIEW BOX & TERMINAL (ROYAL VIOLET THEMED + HIGH CONTRAST) */
 .codebox{
-  background:#0B132B;border-radius:var(--rad-sm);overflow:hidden;
-  border:1px solid rgba(255,255,255,0.08);margin:12px 0;
-  box-shadow:0 6px 20px rgba(0,0,0,0.25);
+  background:#130E26;
+  border-radius:14px;
+  overflow:hidden;
+  border:1px solid rgba(139,92,246,0.32);
+  margin:14px 0;
+  box-shadow:0 14px 36px -6px rgba(19,14,38,0.55), 0 0 0 1px rgba(124,58,237,0.22);
 }
 .codehead{
-  background:#141F3C;padding:8px 14px;display:flex;
-  align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.06);
+  background:#1E163F;
+  padding:10px 16px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-bottom:1px solid rgba(139,92,246,0.22);
 }
-.codehead-file{font:600 12px/1 var(--mono);color:#93C5FD;display:flex;align-items:center;gap:6px}
+.codehead-left{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.mac-dots{
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+.mac-dot{
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  display:inline-block;
+}
+.dot-red{background:#FF5F56;box-shadow:0 0 5px rgba(255,95,86,0.5)}
+.dot-yellow{background:#FFBD2E;box-shadow:0 0 5px rgba(255,189,46,0.5)}
+.dot-green{background:#27C93F;box-shadow:0 0 5px rgba(39,201,63,0.5)}
+.codehead-file{
+  font:600 12.5px/1 var(--mono);
+  color:#DDD6FE;
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
 .codehead-copy{
-  background:none;border:none;cursor:pointer;color:#94A3B8;
-  display:inline-flex;align-items:center;gap:4px;font:500 11px/1 var(--sans);
-  padding:4px 8px;border-radius:4px;transition:.15s;
+  background:rgba(124,58,237,0.22);
+  border:1px solid rgba(196,181,253,0.35);
+  cursor:pointer;
+  color:#F3E8FF;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  font:600 11.5px/1 var(--sans);
+  padding:5px 12px;
+  border-radius:6px;
+  transition:.15s ease;
 }
-.codehead-copy:hover{background:rgba(255,255,255,0.1);color:#FFFFFF}
+.codehead-copy:hover{
+  background:#7C3AED;
+  border-color:#7C3AED;
+  color:#FFFFFF;
+  box-shadow:0 2px 8px rgba(124,58,237,0.4);
+}
 pre.codebody{
-  padding:14px 16px;overflow-x:auto;font:400 13px/1.6 var(--mono);
-  color:#E2E8F0;margin:0;tab-size:4;
+  padding:16px 18px;
+  overflow-x:auto;
+  font:400 13.5px/1.65 var(--mono);
+  color:#F8FAFC;
+  margin:0;
+  tab-size:4;
+  -webkit-font-smoothing:antialiased;
 }
-.kw{color:#F472B6;font-weight:600}
-.fn{color:#60A5FA}
-.str{color:#34D399}
-.cm{color:#64748B;font-style:italic}
-.num{color:#FBBF24}
-.hl-line{background:rgba(124,58,237,0.22);display:block;margin:0 -16px;padding:0 16px;border-left:3px solid #7C3AED}
+/* HIGH CONTRAST SYNTAX HIGHLIGHTING */
+.kw{color:#FB7185;font-weight:600}           /* Rose / Neon Pink */
+.fn{color:#38BDF8;font-weight:500}           /* Electric Sky Blue */
+.str{color:#34D399}                          /* Vivid Neon Mint */
+.cm{color:#A5B4FC;font-style:italic}         /* Readable Lilac Slate */
+.num{color:#FBBF24;font-weight:600}          /* Radiant Amber */
+.hl-line{
+  background:rgba(124,58,237,0.30);
+  display:block;
+  margin:0 -18px;
+  padding:0 18px;
+  border-left:3.5px solid #A855F7;
+  color:#FFFFFF;
+}
 
 /* GRID HELPERS */
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
@@ -628,7 +686,14 @@ pre.codebody{
         </div>
         <div class="codebox">
           <div class="codehead">
-            <span class="codehead-file"><i data-lucide="terminal" style="width:14px;height:14px"></i>Terminal / Bash</span>
+            <div class="codehead-left">
+              <div class="mac-dots">
+                <span class="mac-dot dot-red"></span>
+                <span class="mac-dot dot-yellow"></span>
+                <span class="mac-dot dot-green"></span>
+              </div>
+              <span class="codehead-file"><i data-lucide="terminal" style="width:14px;height:14px"></i>Terminal / Bash</span>
+            </div>
             <button class="codehead-copy" type="button" onclick="copyCode(this)"><i data-lucide="copy" style="width:12px;height:12px"></i>Salin</button>
           </div>
           <pre class="codebody"><span class="cm"># 1. Clone repositori starter kit pertemuan 06</span>
@@ -668,7 +733,14 @@ python app.py</pre>
         </div>
         <div class="codebox">
           <div class="codehead">
-            <span class="codehead-file"><i data-lucide="file" style="width:14px;height:14px"></i>app.py</span>
+            <div class="codehead-left">
+              <div class="mac-dots">
+                <span class="mac-dot dot-red"></span>
+                <span class="mac-dot dot-yellow"></span>
+                <span class="mac-dot dot-green"></span>
+              </div>
+              <span class="codehead-file"><i data-lucide="file" style="width:14px;height:14px"></i>app.py</span>
+            </div>
             <button class="codehead-copy" type="button" onclick="copyCode(this)"><i data-lucide="copy" style="width:12px;height:12px"></i>Salin</button>
           </div>
           <pre class="codebody"><span class="cm"># Tambahkan route registrasi di bawah route home</span>
@@ -705,7 +777,14 @@ python app.py</pre>
         </div>
         <div class="codebox">
           <div class="codehead">
-            <span class="codehead-file"><i data-lucide="file" style="width:14px;height:14px"></i>templates/register.html</span>
+            <div class="codehead-left">
+              <div class="mac-dots">
+                <span class="mac-dot dot-red"></span>
+                <span class="mac-dot dot-yellow"></span>
+                <span class="mac-dot dot-green"></span>
+              </div>
+              <span class="codehead-file"><i data-lucide="file" style="width:14px;height:14px"></i>templates/register.html</span>
+            </div>
             <button class="codehead-copy" type="button" onclick="copyCode(this)"><i data-lucide="copy" style="width:12px;height:12px"></i>Salin</button>
           </div>
           <pre class="codebody">{% <span class="kw">extends</span> <span class="str">'base.html'</span> %}
@@ -764,7 +843,14 @@ python app.py</pre>
         </div>
         <div class="codebox">
           <div class="codehead">
-            <span class="codehead-file"><i data-lucide="file" style="width:14px;height:14px"></i>app.py &bull; def register()</span>
+            <div class="codehead-left">
+              <div class="mac-dots">
+                <span class="mac-dot dot-red"></span>
+                <span class="mac-dot dot-yellow"></span>
+                <span class="mac-dot dot-green"></span>
+              </div>
+              <span class="codehead-file"><i data-lucide="file" style="width:14px;height:14px"></i>app.py &bull; def register()</span>
+            </div>
             <button class="codehead-copy" type="button" onclick="copyCode(this)"><i data-lucide="copy" style="width:12px;height:12px"></i>Salin</button>
           </div>
           <pre class="codebody"><span class="fn">@app.route</span>(<span class="str">'/register'</span>, methods=[<span class="str">'GET'</span>, <span class="str">'POST'</span>])
@@ -808,7 +894,14 @@ python app.py</pre>
         </div>
         <div class="codebox">
           <div class="codehead">
-            <span class="codehead-file"><i data-lucide="file" style="width:14px;height:14px"></i>app.py &bull; Logika 4 Aturan Validasi</span>
+            <div class="codehead-left">
+              <div class="mac-dots">
+                <span class="mac-dot dot-red"></span>
+                <span class="mac-dot dot-yellow"></span>
+                <span class="mac-dot dot-green"></span>
+              </div>
+              <span class="codehead-file"><i data-lucide="file" style="width:14px;height:14px"></i>app.py &bull; Logika 4 Aturan Validasi</span>
+            </div>
             <button class="codehead-copy" type="button" onclick="copyCode(this)"><i data-lucide="copy" style="width:12px;height:12px"></i>Salin</button>
           </div>
           <pre class="codebody">        <span class="cm"># 2. Wadah penampung pesan kesalahan</span>
@@ -858,7 +951,14 @@ python app.py</pre>
         </div>
         <div class="codebox">
           <div class="codehead">
-            <span class="codehead-file"><i data-lucide="file" style="width:14px;height:14px"></i>app.py &bull; Pengiriman Flash Messages</span>
+            <div class="codehead-left">
+              <div class="mac-dots">
+                <span class="mac-dot dot-red"></span>
+                <span class="mac-dot dot-yellow"></span>
+                <span class="mac-dot dot-green"></span>
+              </div>
+              <span class="codehead-file"><i data-lucide="file" style="width:14px;height:14px"></i>app.py &bull; Pengiriman Flash Messages</span>
+            </div>
             <button class="codehead-copy" type="button" onclick="copyCode(this)"><i data-lucide="copy" style="width:12px;height:12px"></i>Salin</button>
           </div>
           <pre class="codebody">        <span class="cm"># 3. Evaluasi Hasil Validasi</span>
@@ -900,7 +1000,14 @@ python app.py</pre>
         </div>
         <div class="codebox">
           <div class="codehead">
-            <span class="codehead-file"><i data-lucide="file" style="width:14px;height:14px"></i>templates/register.html (Tambahkan atribut value)</span>
+            <div class="codehead-left">
+              <div class="mac-dots">
+                <span class="mac-dot dot-red"></span>
+                <span class="mac-dot dot-yellow"></span>
+                <span class="mac-dot dot-green"></span>
+              </div>
+              <span class="codehead-file"><i data-lucide="file" style="width:14px;height:14px"></i>templates/register.html (Tambahkan atribut value)</span>
+            </div>
             <button class="codehead-copy" type="button" onclick="copyCode(this)"><i data-lucide="copy" style="width:12px;height:12px"></i>Salin</button>
           </div>
           <pre class="codebody">&lt;<span class="fn">div</span> class=<span class="str">"form-group"</span>&gt;
@@ -956,7 +1063,14 @@ python app.py</pre>
         </div>
         <div class="codebox" style="margin-top:16px">
           <div class="codehead">
-            <span class="codehead-file"><i data-lucide="code" style="width:14px;height:14px"></i>Contoh Deklarasi WTForms (Sekilas Info)</span>
+            <div class="codehead-left">
+              <div class="mac-dots">
+                <span class="mac-dot dot-red"></span>
+                <span class="mac-dot dot-yellow"></span>
+                <span class="mac-dot dot-green"></span>
+              </div>
+              <span class="codehead-file"><i data-lucide="code" style="width:14px;height:14px"></i>Contoh Deklarasi WTForms (Sekilas Info)</span>
+            </div>
           </div>
           <pre class="codebody"><span class="kw">from</span> wtforms <span class="kw">import</span> Form, StringField, PasswordField, validators
 
