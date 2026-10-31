@@ -103,8 +103,8 @@ html,body{
   position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;
 }
 .blob{
-  position:absolute;border-radius:50%;filter:blur(80px);opacity:0.45;
-  animation:drift 18s ease-in-out infinite alternate;
+  position:absolute;border-radius:50%;filter:blur(100px);opacity:0.12;
+  animation:drift 20s ease-in-out infinite alternate;
 }
 .b1{width:440px;height:440px;background:#DDD6FE;top:-120px;left:-80px}
 .b2{width:480px;height:480px;background:#FBCFE8;bottom:-150px;right:-100px;animation-delay:-6s}
@@ -192,13 +192,57 @@ html,body{
 .action-banner{
   display:inline-flex;align-items:center;gap:8px;
   padding:6px 14px;border-radius:8px;font:700 12px/1 var(--mono);
-  letter-spacing:0.04em;text-transform:uppercase;margin-bottom:14px;
+  letter-spacing:0.04em;text-transform:uppercase;margin-bottom:12px;
   box-shadow:0 1px 3px rgba(0,0,0,0.06);
 }
 .banner-new{background:#DCFCE7;color:#166534;border:1px solid #4ADE80}
 .banner-edit{background:#DBEAFE;color:#1E40AF;border:1px solid #60A5FA}
 .banner-append{background:#FEF3C7;color:#92400E;border:1px solid #FBBF24}
 .banner-clone{background:#F3E8FF;color:#6B21A8;border:1px solid #C084FC}
+
+/* STEP GUIDE BAR & TAGS (PEMULA-FRIENDLY DIRECTIVES) */
+.step-guide-bar{
+  display:inline-flex;flex-wrap:wrap;align-items:center;gap:8px;
+  margin:0 0 14px;background:rgba(255,255,255,0.95);
+  border:1px solid #CBD5E1;border-radius:8px;padding:6px 12px;
+  box-shadow:0 1px 3px rgba(15,23,42,0.04);
+}
+.guide-tag{
+  font:600 11px/1 var(--mono);display:inline-flex;align-items:center;gap:6px;
+  padding:4px 8px;border-radius:5px;
+}
+.guide-tag.file{background:#1E163F;color:#F8FAFC}
+.guide-tag.loc{background:rgba(124,58,237,0.1);color:var(--accent);border:1px solid rgba(124,58,237,0.25)}
+.guide-tag.act{background:rgba(22,163,74,0.1);color:#16A34A;border:1px solid rgba(22,163,74,0.25)}
+.guide-tag.check{background:rgba(217,119,6,0.1);color:#B45309;border:1px solid rgba(217,119,6,0.25)}
+
+/* CHECK RESULT BOX (IMMEDIATE VERIFICATION) */
+.check-result-box{
+  margin-top:12px;padding:10px 14px;border-radius:8px;
+  background:#F0FDF4;border:1px solid #BBF7D0;
+  font:500 12.5px/1.5 var(--sans);color:#166534;
+  display:flex;align-items:flex-start;gap:10px;
+}
+.check-result-box svg{width:16px;height:16px;flex:none;margin-top:2px}
+.check-result-box strong{font-weight:700;color:#14532D}
+.check-result-box code{background:rgba(255,255,255,0.9);padding:1px 5px;border-radius:4px;border:1px solid rgba(0,0,0,0.1)}
+
+/* PROGRESSIVE DISCLOSURE TABS */
+.pcard-tabs{
+  display:inline-flex;gap:4px;background:#F1F5F9;padding:3px;
+  border-radius:8px;margin-bottom:12px;border:1px solid #CBD5E1;
+}
+.ptab-btn{
+  background:transparent;border:none;font:600 11.5px/1 var(--mono);
+  color:#64748B;padding:6px 12px;border-radius:6px;cursor:pointer;
+  transition:all .15s ease;display:inline-flex;align-items:center;gap:6px;
+}
+.ptab-btn:hover{color:var(--ink)}
+.ptab-btn.on{
+  background:#FFFFFF;color:var(--accent);box-shadow:0 1px 3px rgba(15,23,42,0.1);
+}
+.ptab-pane{display:none}
+.ptab-pane.on{display:block}
 
 /* CARD LAYOUTS */
 .card{
@@ -678,6 +722,11 @@ pre.codebody{
           <i data-lucide="terminal" style="width:14px;height:14px"></i>
           Langkah 0: Clone Starter Kit dari GitHub
         </div>
+        <div class="step-guide-bar">
+          <span class="guide-tag file"><i data-lucide="terminal"></i> Terminal</span>
+          <span class="guide-tag act"><i data-lucide="play"></i> Aksi: Clone &amp; Run</span>
+          <span class="guide-tag check"><i data-lucide="globe"></i> Uji: http://127.0.0.1:5000</span>
+        </div>
         <div class="card-head">
           <div>
             <h2 class="card-title">Persiapan Workspace Praktikum P06</h2>
@@ -705,11 +754,9 @@ cd pertemuan_06_pemweb
 <span class="cm"># 3. Jalankan aplikasi Flask</span>
 python app.py</pre>
         </div>
-        <div class="callout callout-success">
-          <i data-lucide="check" style="width:16px;height:16px"></i>
-          <div>
-            Buka browser di alamat <code>http://127.0.0.1:5000</code>. Anda akan melihat halaman Beranda Kantin Kampus sudah berjalan rapi!
-          </div>
+        <div class="check-result-box">
+          <i data-lucide="circle-check"></i>
+          <div><strong>Hasil Langkah 0:</strong> Buka browser di alamat <code>http://127.0.0.1:5000</code>. Halaman Beranda Kantin Kampus langsung tampil rapi dan siap dikembangkan!</div>
         </div>
       </div>
     </div>
@@ -724,6 +771,11 @@ python app.py</pre>
         <div class="action-banner banner-edit">
           <i data-lucide="file" style="width:14px;height:14px"></i>
           Langkah 1: Edit File &bull; app.py
+        </div>
+        <div class="step-guide-bar">
+          <span class="guide-tag file"><i data-lucide="file"></i> File: app.py</span>
+          <span class="guide-tag loc"><i data-lucide="sliders"></i> Posisi: Di bawah fungsi home()</span>
+          <span class="guide-tag act"><i data-lucide="code"></i> Aksi: Tambah route /register (GET)</span>
         </div>
         <div class="card-head">
           <div>
@@ -749,11 +801,9 @@ python app.py</pre>
     <span class="cm"># Jika metode GET: tampilkan form registrasi</span>
     <span class="kw">return</span> <span class="fn">render_template</span>(<span class="str">'register.html'</span>)</pre>
         </div>
-        <div class="callout callout-warn">
-          <i data-lucide="alert-triangle" style="width:16px;height:16px"></i>
-          <div>
-            <b>Peringatan:</b> Jika parameter <code>methods=['GET', 'POST']</code> lupa ditulis, default Flask hanya mengizinkan <code>GET</code>, yang akan memicu eror <code>405 Method Not Allowed</code> saat form di-submit!
-          </div>
+        <div class="check-result-box" style="background:#EFF6FF;border-color:#BFDBFE;color:#1E40AF">
+          <i data-lucide="info"></i>
+          <div><strong>Catatan:</strong> Parameter <code>methods=['GET', 'POST']</code> wajib disertakan agar Flask menerima pengiriman formulir POST di langkah selanjutnya.</div>
         </div>
       </div>
     </div>
@@ -768,6 +818,11 @@ python app.py</pre>
         <div class="action-banner banner-new">
           <i data-lucide="file" style="width:14px;height:14px"></i>
           Langkah 2: Buat File Baru &bull; templates/register.html
+        </div>
+        <div class="step-guide-bar">
+          <span class="guide-tag file"><i data-lucide="folder"></i> File: templates/register.html</span>
+          <span class="guide-tag act"><i data-lucide="file-plus"></i> Aksi: Buat file baru &amp; tempel form</span>
+          <span class="guide-tag check"><i data-lucide="globe"></i> Uji: Refresh /register</span>
         </div>
         <div class="card-head">
           <div>
@@ -821,6 +876,10 @@ python app.py</pre>
 &lt;/<span class="fn">div</span>&gt;
 {% <span class="kw">endblock</span> %}</pre>
         </div>
+        <div class="check-result-box">
+          <i data-lucide="circle-check"></i>
+          <div><strong>Hasil Langkah 2:</strong> Buka <code>http://127.0.0.1:5000/register</code> di browser. Formulir registrasi 4 kolom sekarang sudah muncul rapi di layar!</div>
+        </div>
       </div>
     </div>
   </section>
@@ -834,6 +893,11 @@ python app.py</pre>
         <div class="action-banner banner-edit">
           <i data-lucide="file" style="width:14px;height:14px"></i>
           Langkah 3A: Edit File &bull; app.py
+        </div>
+        <div class="step-guide-bar">
+          <span class="guide-tag file"><i data-lucide="file"></i> File: app.py</span>
+          <span class="guide-tag loc"><i data-lucide="sliders"></i> Posisi: Di dalam fungsi register()</span>
+          <span class="guide-tag act"><i data-lucide="code"></i> Aksi: Tangkap POST &amp; potong spasi .strip()</span>
         </div>
         <div class="card-head">
           <div>
@@ -866,11 +930,9 @@ python app.py</pre>
         
     <span class="kw">return</span> <span class="fn">render_template</span>(<span class="str">'register.html'</span>)</pre>
         </div>
-        <div class="callout callout-info">
-          <i data-lucide="help-circle" style="width:16px;height:16px"></i>
-          <div>
-            <b>Mengapa wajib <code>.strip()</code>?</b> String <code>"   "</code> (tiga spasi) memiliki <code>len() == 3</code>. Tanpa <code>.strip()</code>, validasi kosong akan tertipu dan menganggap nama tersebut sah!
-          </div>
+        <div class="check-result-box">
+          <i data-lucide="circle-check"></i>
+          <div><strong>Mengapa Wajib .strip()?</strong> String <code>"   "</code> (hanya 3 spasi kosong) memiliki panjang <code>len() == 3</code>. Tanpa <code>.strip()</code>, validasi nama kosong akan tertipu dan menganggap nama sah! Fungsi <code>.strip()</code> memangkas spasi tak terlihat di awal &amp; akhir.</div>
         </div>
       </div>
     </div>
@@ -885,6 +947,11 @@ python app.py</pre>
         <div class="action-banner banner-append">
           <i data-lucide="file" style="width:14px;height:14px"></i>
           Langkah 3B: Tempel di Dalam &bull; if request.method == 'POST':
+        </div>
+        <div class="step-guide-bar">
+          <span class="guide-tag file"><i data-lucide="file"></i> File: app.py</span>
+          <span class="guide-tag loc"><i data-lucide="sliders"></i> Posisi: Di bawah variabel confirm</span>
+          <span class="guide-tag act"><i data-lucide="list-checks"></i> Aksi: Buat errors = [] &amp; 4 kondisi if-elif</span>
         </div>
         <div class="card-head">
           <div>
@@ -929,6 +996,10 @@ python app.py</pre>
         <span class="kw">if</span> password != confirm:
             errors.append(<span class="str">'Konfirmasi kata sandi tidak cocok!'</span>)</pre>
         </div>
+        <div class="check-result-box">
+          <i data-lucide="circle-check"></i>
+          <div><strong>Keuntungan Pola List errors:</strong> Seluruh kesalahan dikumpulkan ke dalam list. Jika pengguna membuat 3 kesalahan sekaligus, pengguna akan langsung melihat ke-3 error tersebut dalam 1 kali pengiriman tanpa perlu klik berkali-kali!</div>
+        </div>
       </div>
     </div>
   </section>
@@ -943,25 +1014,39 @@ python app.py</pre>
           <i data-lucide="file" style="width:14px;height:14px"></i>
           Langkah 4: Tempel di Bawah Pengecekan Aturan &bull; app.py
         </div>
+        <div class="step-guide-bar">
+          <span class="guide-tag file"><i data-lucide="file"></i> File: app.py</span>
+          <span class="guide-tag loc"><i data-lucide="sliders"></i> Posisi: Di bawah Aturan 4</span>
+          <span class="guide-tag act"><i data-lucide="code"></i> Aksi: Kirim Flash &amp; Redirect PRG</span>
+          <span class="guide-tag check"><i data-lucide="globe"></i> Uji: Submit form kosong</span>
+        </div>
         <div class="card-head">
           <div>
             <h2 class="card-title">Flash Messages (Danger vs Success) &amp; PRG</h2>
             <p class="card-sub">Memberikan umpan balik visual yang jelas ke pengguna.</p>
           </div>
         </div>
-        <div class="codebox">
-          <div class="codehead">
-            <div class="codehead-left">
-              <div class="mac-dots">
-                <span class="mac-dot dot-red"></span>
-                <span class="mac-dot dot-yellow"></span>
-                <span class="mac-dot dot-green"></span>
+
+        <div class="pcard-tabs">
+          <button class="ptab-btn on" data-target="tab-step4-part" type="button"><i data-lucide="code"></i> Potongan Langkah 4</button>
+          <button class="ptab-btn" data-target="tab-step4-full" type="button"><i data-lucide="check"></i> Kode Utuh def register() (Anti-Salah Indentasi)</button>
+        </div>
+
+        <!-- TAB 1: POTONGAN LANGKAH 4 -->
+        <div class="ptab-pane on" id="tab-step4-part">
+          <div class="codebox">
+            <div class="codehead">
+              <div class="codehead-left">
+                <div class="mac-dots">
+                  <span class="mac-dot dot-red"></span>
+                  <span class="mac-dot dot-yellow"></span>
+                  <span class="mac-dot dot-green"></span>
+                </div>
+                <span class="codehead-file"><i data-lucide="file" style="width:14px;height:14px"></i>app.py &bull; Potongan Langkah 4 (Evaluasi Validasi)</span>
               </div>
-              <span class="codehead-file"><i data-lucide="file" style="width:14px;height:14px"></i>app.py &bull; Pengiriman Flash Messages</span>
+              <button class="codehead-copy" type="button" onclick="copyCode(this)"><i data-lucide="copy" style="width:12px;height:12px"></i>Salin</button>
             </div>
-            <button class="codehead-copy" type="button" onclick="copyCode(this)"><i data-lucide="copy" style="width:12px;height:12px"></i>Salin</button>
-          </div>
-          <pre class="codebody">        <span class="cm"># 3. Evaluasi Hasil Validasi</span>
+            <pre class="codebody">        <span class="cm"># 3. Evaluasi Hasil Validasi</span>
         <span class="kw">if</span> errors:
             <span class="cm"># Jika ada error: kirim flash danger lalu render ulang form</span>
             <span class="kw">for</span> err <span class="kw">in</span> errors:
@@ -971,12 +1056,69 @@ python app.py</pre>
         <span class="cm"># Jika LOLOS SEMUA validasi: kirim flash success &amp; redirect ke beranda (PRG)</span>
         <span class="fn">flash</span>(<span class="str">f'Selamat datang, {nama}! Pendaftaran member kantin berhasil.'</span>, <span class="str">'success'</span>)
         <span class="kw">return</span> <span class="fn">redirect</span>(<span class="fn">url_for</span>(<span class="str">'home'</span>))</pre>
-        </div>
-        <div class="callout callout-info">
-          <i data-lucide="sliders" style="width:16px;height:16px"></i>
-          <div>
-            <b>Mengapa Pola PRG (Post/Redirect/Get)?</b> Saat sukses, kita melakukan <code>redirect()</code> ke rute GET agar saat pengguna menekan tombol refresh (F5), tidak muncul dialog browser <i>"Confirm Form Resubmission"</i> yang mengganggu!
           </div>
+        </div>
+
+        <!-- TAB 2: KODE UTUH DEF REGISTER() -->
+        <div class="ptab-pane" id="tab-step4-full">
+          <div class="codebox">
+            <div class="codehead">
+              <div class="codehead-left">
+                <div class="mac-dots">
+                  <span class="mac-dot dot-red"></span>
+                  <span class="mac-dot dot-yellow"></span>
+                  <span class="mac-dot dot-green"></span>
+                </div>
+                <span class="codehead-file"><i data-lucide="file" style="width:14px;height:14px"></i>app.py &bull; Kode Utuh def register()</span>
+              </div>
+              <button class="codehead-copy" type="button" onclick="copyCode(this)"><i data-lucide="copy" style="width:12px;height:12px"></i>Salin Utuh</button>
+            </div>
+            <pre class="codebody"><span class="fn">@app.route</span>(<span class="str">'/register'</span>, methods=[<span class="str">'GET'</span>, <span class="str">'POST'</span>])
+<span class="kw">def</span> <span class="fn">register</span>():
+    <span class="kw">if</span> request.method == <span class="str">'POST'</span>:
+        <span class="cm"># 1. Tangkap &amp; Sanitasi input</span>
+        nama = request.form.get(<span class="str">'nama'</span>, <span class="str">''</span>).strip()
+        email = request.form.get(<span class="str">'email'</span>, <span class="str">''</span>).strip()
+        password = request.form.get(<span class="str">'password'</span>, <span class="str">''</span>).strip()
+        confirm = request.form.get(<span class="str">'confirm'</span>, <span class="str">''</span>).strip()
+
+        <span class="cm"># 2. Wadah Error Collector</span>
+        errors = []
+
+        <span class="kw">if not</span> nama:
+            errors.append(<span class="str">'Nama lengkap wajib diisi!'</span>)
+        <span class="kw">elif len</span>(nama) &lt; <span class="num">3</span>:
+            errors.append(<span class="str">'Nama lengkap terlalu pendek, minimal 3 karakter!'</span>)
+
+        <span class="kw">if not</span> email:
+            errors.append(<span class="str">'Alamat email wajib diisi!'</span>)
+        <span class="kw">elif</span> <span class="str">'@'</span> <span class="kw">not in</span> email <span class="kw">or</span> <span class="str">'.'</span> <span class="kw">not in</span> email:
+            errors.append(<span class="str">'Format email tidak valid (harus mengandung @ dan domain .com/.ac.id)!'</span>)
+
+        <span class="kw">if not</span> password:
+            errors.append(<span class="str">'Kata sandi (password) wajib diisi!'</span>)
+        <span class="kw">elif len</span>(password) &lt; <span class="num">6</span>:
+            errors.append(<span class="str">'Kata sandi terlalu pendek, minimal 6 karakter!'</span>)
+
+        <span class="kw">if</span> password != confirm:
+            errors.append(<span class="str">'Konfirmasi kata sandi tidak cocok!'</span>)
+
+        <span class="cm"># 3. Keputusan Validasi</span>
+        <span class="kw">if</span> errors:
+            <span class="kw">for</span> err <span class="kw">in</span> errors:
+                <span class="fn">flash</span>(err, <span class="str">'danger'</span>)
+            <span class="kw">return</span> <span class="fn">render_template</span>(<span class="str">'register.html'</span>)
+
+        <span class="fn">flash</span>(<span class="str">f'Selamat datang, {nama}! Pendaftaran member kantin berhasil.'</span>, <span class="str">'success'</span>)
+        <span class="kw">return</span> <span class="fn">redirect</span>(<span class="fn">url_for</span>(<span class="str">'home'</span>))
+
+    <span class="kw">return</span> <span class="fn">render_template</span>(<span class="str">'register.html'</span>)</pre>
+          </div>
+        </div>
+
+        <div class="check-result-box">
+          <i data-lucide="circle-check"></i>
+          <div><strong>Uji di Browser:</strong> Buka <code>http://127.0.0.1:5000/register</code> di browser. Langsung klik tombol <b>Daftar Member Sekarang</b> tanpa mengisi formulir &rarr; 3 kotak merah pesan error (alert danger) langsung muncul berurutan di layar!</div>
         </div>
       </div>
     </div>
@@ -991,6 +1133,12 @@ python app.py</pre>
         <div class="action-banner banner-edit">
           <i data-lucide="file" style="width:14px;height:14px"></i>
           Langkah 5 (UX Pro): Edit File &bull; templates/register.html
+        </div>
+        <div class="step-guide-bar">
+          <span class="guide-tag file"><i data-lucide="file"></i> File: templates/register.html</span>
+          <span class="guide-tag loc"><i data-lucide="sliders"></i> Posisi: Di tag &lt;input id="nama"&gt; dan &lt;input id="email"&gt;</span>
+          <span class="guide-tag act"><i data-lucide="code"></i> Aksi: Tambah atribut value="{{ request.form.get(...) }}"</span>
+          <span class="guide-tag check"><i data-lucide="globe"></i> Uji: Coba submit salah</span>
         </div>
         <div class="card-head">
           <div>
@@ -1022,10 +1170,14 @@ python app.py</pre>
 <span class="hl-line">           value=<span class="str">"{{ request.form.get('email', '') }}"</span> placeholder=<span class="str">"Contoh: budi@kampus.ac.id"</span>&gt;</span>
 &lt;/<span class="fn">div</span>&gt;</pre>
         </div>
+        <div class="check-result-box">
+          <i data-lucide="circle-check"></i>
+          <div><strong>Uji di Browser:</strong> Isi nama <code>Budi Santoso</code> dan email <code>budi@kampus.ac.id</code>, tapi isi password <code>123</code> (sengaja salah). Klik Daftar &rarr; Pesan error password muncul, tapi teks Nama dan Email Anda <b>tetap tersimpan rapi</b> tanpa perlu diketik ulang!</div>
+        </div>
         <div class="callout callout-warn">
           <i data-lucide="lock" style="width:16px;height:16px"></i>
           <div>
-            <b>Catatan Keamanan:</b> Kolom Password dan Konfirmasi Password sengaja <b>TIDAK</b> dibuat sticky (tetap dikosongkan) demi mencegah pencurian kata sandi saat layar ditinggalkan!
+            <b>Catatan Keamanan Asdos:</b> Kolom Password dan Konfirmasi Password sengaja <b>TIDAK</b> dibuat sticky (tetap dikosongkan) demi mencegah kebocoran kredensial jika laptop ditinggalkan pengguna di kantin/lab!
           </div>
         </div>
       </div>
@@ -1154,6 +1306,11 @@ python app.py</pre>
           <div class="shield-err">4. NameError: name 'flash' is not defined</div>
           <div class="shield-why">Penyebab: Belum mengimpor fungsi flash atau redirect dari modul flask di baris paling atas app.py.</div>
           <span class="shield-fix">Solusi: from flask import Flask, render_template, request, flash, redirect, url_for</span>
+        </div>
+        <div class="shield-card">
+          <div class="shield-err">5. Pesan flash tidak muncul sama sekali di browser</div>
+          <div class="shield-why">Penyebab: Lupa memasang blok container get_flashed_messages() di dalam template induk base.html.</div>
+          <span class="shield-fix">Solusi: Pastikan ada {% with messages = get_flashed_messages(with_categories=true) %} di base.html</span>
         </div>
       </div>
     </div>
@@ -1545,8 +1702,18 @@ function renderQuiz(reset){
     };
   });
 }
-renderQuiz(true);
+/* TAB PROGRESSIVE DISCLOSURE EVENT LISTENER */
+document.addEventListener('click', e => {
+  const btn = e.target.closest('.ptab-btn');
+  if(!btn) return;
+  const card = btn.closest('.card') || btn.closest('.pcard');
+  if(!card) return;
+  const targetId = btn.dataset.target;
+  card.querySelectorAll('.ptab-btn').forEach(b => b.classList.toggle('on', b === btn));
+  card.querySelectorAll('.ptab-pane').forEach(p => p.classList.toggle('on', p.id === targetId));
+});
 
+renderQuiz(true);
 lucide.createIcons();
 
 // Initialize start slide from hash
