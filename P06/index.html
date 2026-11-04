@@ -1029,11 +1029,11 @@ python app.py</pre>
       <div class="action-banner banner-edit"><i data-lucide="file" style="width:13px;height:13px"></i> Langkah 3A: Edit File &bull; app.py</div>
       <div class="step-guide-bar">
         <span class="guide-tag file"><i data-lucide="file"></i> File: app.py</span>
-        <span class="guide-tag loc"><i data-lucide="sliders"></i> Posisi: Baris 46-50 (di dalam def register())</span>
-        <span class="guide-tag act"><i data-lucide="code"></i> Aksi: Tangkap POST &amp; potong spasi .strip()</span>
+        <span class="guide-tag loc"><i data-lucide="sliders"></i> Posisi: Di dalam def register()</span>
+        <span class="guide-tag act"><i data-lucide="code"></i> Aksi: Tambah if POST &amp; 4 variabel input</span>
       </div>
       <h2>Menangkap Input &amp; Sanitasi dengan .strip()</h2>
-      <p class="sub">Perbarui fungsi <code>register()</code> di <code>app.py</code> untuk menangkap data kiriman formulir POST dan membuang spasi liar.</p>
+      <p class="sub">Buka <code>app.py</code>. Di dalam fungsi <code>register()</code>, tambahkan blok <code>if POST</code> untuk menangkap 4 data form.</p>
       <div class="cols c2">
         <div>
           <div class="codebox">
@@ -1046,6 +1046,7 @@ python app.py</pre>
             </div>
             <pre class="codebody"><span class="fn">@app.route</span>(<span class="str">'/register'</span>, methods=[<span class="str">'GET'</span>, <span class="str">'POST'</span>])
 <span class="kw">def</span> <span class="fn">register</span>():
+    <span class="cm"># TAMBAHKAN BLOK IF POST INI:</span>
     <span class="kw">if</span> request.method == <span class="str">'POST'</span>:
         <span class="cm"># 1. Menangkap input dan memotong spasi kosong</span>
 <span class="hl-line">        nama = request.form.get(<span class="str">'nama'</span>, <span class="str">''</span>).strip()</span>
@@ -1053,8 +1054,9 @@ python app.py</pre>
 <span class="hl-line">        password = request.form.get(<span class="str">'password'</span>, <span class="str">''</span>).strip()</span>
 <span class="hl-line">        confirm = request.form.get(<span class="str">'confirm'</span>, <span class="str">''</span>).strip()</span>
         
-        <span class="cm"># Lanjut ke langkah 3B (evaluasi 4 aturan)</span>
+        <span class="cm"># (Di sini nanti kita taruh 4 aturan di Langkah 3B)</span>
         
+    <span class="cm"># Baris ini TETAP di posisi paling bawah:</span>
     <span class="kw">return</span> <span class="fn">render_template</span>(<span class="str">'register.html'</span>)</pre>
           </div>
           <div class="check-result-box">
@@ -1068,7 +1070,7 @@ python app.py</pre>
             <img src="img/vscode-p06-step-03a-sanitasi.png" alt="VS Code Sanitasi strip app.py">
           </div>
           <div class="shotcap">
-            <span class="stepchip c-amber">Sanitasi di Baris 47-50</span>
+            <span class="stepchip c-amber">Di dalam if POST</span>
             <span class="shottitle">Pemotongan spasi liar di dalam if POST (Klik Zoom)</span>
           </div>
         </div>
@@ -1083,11 +1085,11 @@ python app.py</pre>
       <div class="action-banner banner-append"><i data-lucide="file" style="width:13px;height:13px"></i> Langkah 3B: Tempel di Bawah confirm</div>
       <div class="step-guide-bar">
         <span class="guide-tag file"><i data-lucide="file"></i> File: app.py</span>
-        <span class="guide-tag loc"><i data-lucide="sliders"></i> Posisi: Baris 53-76 (di bawah confirm)</span>
-        <span class="guide-tag act"><i data-lucide="list-checks"></i> Aksi: Buat errors = [] &amp; 4 kondisi if-elif</span>
+        <span class="guide-tag loc"><i data-lucide="sliders"></i> Posisi: Tepat di Bawah confirm = ...</span>
+        <span class="guide-tag act"><i data-lucide="list-checks"></i> Aksi: Sisipkan errors = [] &amp; 4 if-elif</span>
       </div>
       <h2>Menerapkan 4 Aturan Validasi Sisi Server</h2>
-      <p class="sub">Gunakan pola <b>Error Collector List</b> <code>errors = []</code> untuk menampung seluruh pelanggaran.</p>
+      <p class="sub">Sisipkan logika 4 aturan tepat di bawah baris <code>confirm</code> (tanpa menghapus baris lain). Masuk 8 spasi.</p>
       <div class="cols c2">
         <div>
           <div class="codebox">
@@ -1098,7 +1100,10 @@ python app.py</pre>
               </div>
               <button class="codehead-copy" type="button" onclick="copyCode(this)"><i data-lucide="copy" style="width:11px;height:11px"></i>Salin Aturan</button>
             </div>
-            <pre class="codebody">        <span class="cm"># 2. Wadah penampung pesan kesalahan</span>
+            <pre class="codebody">        confirm = request.form.get(<span class="str">'confirm'</span>, <span class="str">''</span>).strip()
+
+        <span class="cm"># === SISIPKAN MULAI DARI SINI (DI BAWAH confirm) ===</span>
+        <span class="cm"># 2. Wadah penampung pesan kesalahan</span>
         errors = []
 
         <span class="cm"># ATURAN 1: Nama minimal 3 karakter</span>
@@ -1138,7 +1143,7 @@ python app.py</pre>
             <img src="img/vscode-p06-step-03b-validasi-aturan.png" alt="VS Code 4 Aturan Validasi">
           </div>
           <div class="shotcap">
-            <span class="stepchip c-purple">4 Aturan di Baris 54-76</span>
+            <span class="stepchip c-purple">Di bawah confirm</span>
             <span class="shottitle">Wadah errors = [] &amp; 4 if-elif validasi (Klik Zoom)</span>
           </div>
         </div>
@@ -1152,12 +1157,12 @@ python app.py</pre>
       <div class="action-banner banner-append"><i data-lucide="file" style="width:13px;height:13px"></i> Langkah 4: Tempel di Bawah Aturan 4</div>
       <div class="step-guide-bar">
         <span class="guide-tag file"><i data-lucide="file"></i> File: app.py</span>
-        <span class="guide-tag loc"><i data-lucide="sliders"></i> Posisi: Baris 78-87 (di bawah Aturan 4)</span>
-        <span class="guide-tag act"><i data-lucide="code"></i> Aksi: Kirim Flash &amp; Redirect PRG</span>
+        <span class="guide-tag loc"><i data-lucide="sliders"></i> Posisi: Di Bawah Aturan 4 (Sebelum return terakhir)</span>
+        <span class="guide-tag act"><i data-lucide="code"></i> Aksi: Tambah evaluasi if errors &amp; redirect</span>
         <span class="guide-tag check"><i data-lucide="globe"></i> Uji: Submit form kosong</span>
       </div>
       <h2>Flash Messages (Danger vs Success) &amp; Pola PRG</h2>
-      <p class="sub">Berikan umpan balik visual yang jelas ke pengguna berdasarkan hasil evaluasi validasi.</p>
+      <p class="sub">Sisipkan logika flash danger dan flash success tepat di bawah Aturan 4. Baris return terakhir tetap ada.</p>
       <div class="cols c2">
         <div>
           <div class="codebox">
@@ -1168,7 +1173,8 @@ python app.py</pre>
               </div>
               <button class="codehead-copy" type="button" onclick="copyCode(this)"><i data-lucide="copy" style="width:11px;height:11px"></i>Salin Keputusan</button>
             </div>
-            <pre class="codebody">        <span class="cm"># 3. Evaluasi Hasil Validasi</span>
+            <pre class="codebody">        <span class="cm"># === SISIPKAN DI BAWAH ATURAN 4 ===</span>
+        <span class="cm"># 3. Evaluasi Hasil Validasi</span>
         <span class="kw">if</span> errors:
             <span class="cm"># Jika ada error: kirim flash danger lalu render ulang form</span>
             <span class="kw">for</span> err <span class="kw">in</span> errors:
@@ -1177,7 +1183,10 @@ python app.py</pre>
 
         <span class="cm"># Jika LOLOS SEMUA validasi: flash success &amp; redirect (PRG)</span>
         <span class="fn">flash</span>(<span class="str">f'Selamat datang, {nama}! Pendaftaran member kantin berhasil.'</span>, <span class="str">'success'</span>)
-        <span class="kw">return</span> <span class="fn">redirect</span>(<span class="fn">url_for</span>(<span class="str">'home'</span>))</pre>
+        <span class="kw">return</span> <span class="fn">redirect</span>(<span class="fn">url_for</span>(<span class="str">'home'</span>))
+
+    <span class="cm"># Baris ini TETAP di posisi paling bawah:</span>
+    <span class="kw">return</span> <span class="fn">render_template</span>(<span class="str">'register.html'</span>)</pre>
           </div>
           <div class="check-result-box">
             <i data-lucide="circle-check"></i>
@@ -1190,7 +1199,7 @@ python app.py</pre>
             <img src="img/vscode-p06-step-04-flash-prg.png" alt="VS Code Flash & PRG">
           </div>
           <div class="shotcap">
-            <span class="stepchip c-green">Flash &amp; PRG di Baris 78-87</span>
+            <span class="stepchip c-green">Di bawah Aturan 4</span>
             <span class="shottitle">danger render_template vs success redirect (Klik Zoom)</span>
           </div>
         </div>
@@ -1202,9 +1211,9 @@ python app.py</pre>
   <!-- SLIDE 13: KODE UTUH DEF REGISTER() (ANTI-SALAH INDENTASI) -->
   <section class="slide" data-sec="Babak 3 · Kode Utuh" id="s13">
     <div class="content">
-      <div class="kick" style="background:#DCFCE7;color:#166534;border-color:#4ADE80"><i data-lucide="check" style="width:13px;height:13px"></i> Anti-Salah Indentasi</div>
+      <div class="kick" style="background:#DCFCE7;color:#166534;border-color:#4ADE80"><i data-lucide="check" style="width:13px;height:13px"></i> Solusi Bebas Bingung &bull; Anti-Salah Indentasi</div>
       <h2>Kode Utuh Fungsi <code>def register()</code> di app.py</h2>
-      <p class="sub">Jika kamu terkena <code>IndentationError</code> di Python, cocokkan kodinganmu dengan versi visual 25 baris ini.</p>
+      <p class="sub">Jika kamu bingung baris mana yang harus diganti: Hapus fungsi <code>register()</code> lama di app.py, lalu timpa dengan 25 baris utuh ini!</p>
       <div class="cols c2">
         <div>
           <div class="codebox">
@@ -1256,6 +1265,10 @@ python app.py</pre>
 
     <span class="kw">return</span> <span class="fn">render_template</span>(<span class="str">'register.html'</span>)</pre>
           </div>
+          <div class="check-result-box">
+            <i data-lucide="circle-check"></i>
+            <div><strong>Solusi Cepat:</strong> Cukup blok fungsi <code>register()</code> lama di app.py, hapus, dan timpa dengan 25 baris kode ini!</div>
+          </div>
         </div>
 
         <div class="shotcard" data-shot="vscode-p06-step-indentasi-full.png">
@@ -1263,7 +1276,7 @@ python app.py</pre>
             <img src="img/vscode-p06-step-indentasi-full.png" alt="VS Code Indentasi Utuh">
           </div>
           <div class="shotcap">
-            <span class="stepchip c-purple">Panduan Indentasi 4 Spasi</span>
+            <span class="stepchip c-purple">Kode Utuh 25 Baris</span>
             <span class="shottitle">Hierarki indentasi def &gt; if &gt; errors (Klik Zoom)</span>
           </div>
         </div>
@@ -1277,11 +1290,11 @@ python app.py</pre>
       <div class="action-banner banner-edit"><i data-lucide="file" style="width:13px;height:13px"></i> Langkah 5 (UX Pro): Edit File &bull; templates/register.html</div>
       <div class="step-guide-bar">
         <span class="guide-tag file"><i data-lucide="file"></i> File: templates/register.html</span>
-        <span class="guide-tag loc"><i data-lucide="sliders"></i> Posisi: Baris 18 &amp; 28 (tag &lt;input&gt;)</span>
-        <span class="guide-tag act"><i data-lucide="code"></i> Aksi: Tambah atribut value="{{ request.form.get(...) }}"</span>
+        <span class="guide-tag loc"><i data-lucide="sliders"></i> Posisi: Tag &lt;input id="nama"&gt; &amp; &lt;input id="email"&gt;</span>
+        <span class="guide-tag act"><i data-lucide="code"></i> Aksi: Tambah atribut value="..."</span>
       </div>
       <h2>Sentuhan UX Profesional: Sticky Form</h2>
-      <p class="sub">Jangan buat pengguna mengetik ulang nama dan email jika password typo saat mendaftar!</p>
+      <p class="sub">Buka <code>templates/register.html</code>. Tambahkan atribut <code>value="..."</code> di tag input nama &amp; email yang sudah ada.</p>
       <div class="cols c2">
         <div>
           <div class="codebox">
@@ -1292,17 +1305,17 @@ python app.py</pre>
               </div>
               <button class="codehead-copy" type="button" onclick="copyCode(this)"><i data-lucide="copy" style="width:11px;height:11px"></i>Salin Atribut</button>
             </div>
-            <pre class="codebody"><span class="cm">&lt;!-- Input Nama dengan Sticky Value --&gt;</span>
+            <pre class="codebody"><span class="cm">&lt;!-- 1. Input Nama: Tambahkan atribut value --&gt;</span>
 &lt;<span class="fn">input</span> type=<span class="str">"text"</span> id=<span class="str">"nama"</span> name=<span class="str">"nama"</span> class=<span class="str">"form-control"</span>
 <span class="hl-line">       value=<span class="str">"&#123;&#123; request.form.get('nama', '') &#125;&#125;"</span></span>
        placeholder=<span class="str">"Contoh: Budi Santoso"</span>&gt;
 
-<span class="cm">&lt;!-- Input Email dengan Sticky Value --&gt;</span>
+<span class="cm">&lt;!-- 2. Input Email: Tambahkan atribut value --&gt;</span>
 &lt;<span class="fn">input</span> type=<span class="str">"text"</span> id=<span class="str">"email"</span> name=<span class="str">"email"</span> class=<span class="str">"form-control"</span>
 <span class="hl-line">       value=<span class="str">"&#123;&#123; request.form.get('email', '') &#125;&#125;"</span></span>
        placeholder=<span class="str">"Contoh: budi@kampus.ac.id"</span>&gt;
 
-<span class="cm">&lt;!-- Password sengaja TIDAK sticky demi keamanan --&gt;</span></pre>
+<span class="cm">&lt;!-- Password &amp; Confirm TETAP (jangan diberi sticky demi keamanan) --&gt;</span></pre>
           </div>
           <div class="check-result-box">
             <i data-lucide="circle-check"></i>
@@ -1315,7 +1328,7 @@ python app.py</pre>
             <img src="img/vscode-p06-step-05-sticky-form.png" alt="VS Code Sticky Form">
           </div>
           <div class="shotcap">
-            <span class="stepchip c-amber">Sticky Form di Baris 18 &amp; 28</span>
+            <span class="stepchip c-amber">Input Nama &amp; Email</span>
             <span class="shottitle">value request.form.get agar data tetap nempel (Klik Zoom)</span>
           </div>
         </div>
@@ -1331,9 +1344,9 @@ python app.py</pre>
   <!-- SLIDE 15: TRANSFORMASI SEBELUM VS SESUDAH (P05 VS P06) -->
   <section class="slide" data-sec="Babak 4 · Evaluasi" id="s15">
     <div class="content">
-      <div class="kick"><i data-lucide="refresh-cw" style="width:13px;height:13px"></i> Transformasi Kode</div>
+      <div class="kick"><i data-lucide="refresh-cw" style="width:13px;height:13px"></i> Evaluasi Konsep &bull; Kodingan Selesai</div>
       <h2>Sebelum vs Sesudah: Evolusi P-05 Menuju P-06</h2>
-      <p class="sub">Lihat bagaimana formulir aplikasimu bertransformasi dari sekadar menerima data menjadi sistem yang tangguh.</p>
+      <p class="sub">Kodingan selesai di Slide 14! Sekarang mari kita bandingkan bagaimana aplikasimu bertransformasi dari sekadar menerima data menjadi sistem yang tangguh.</p>
       <div class="slide-body cols c2">
         <div class="pcard" style="border:1.5px solid #FCA5A5">
           <span style="font:700 11px/1 var(--mono);color:#DC2626">PERTEMUAN 05 (SEBELUM)</span>
