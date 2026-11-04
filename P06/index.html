@@ -683,22 +683,41 @@ pre.codebody{
       <p class="sub">Banyak developer pemula mengira validasi browser sudah cukup aman. Mari kita buktikan celahnya!</p>
       <div class="slide-body cols c2">
         <div class="pcard" style="border:1.5px solid #FCA5A5">
-          <div class="ic" style="color:#DC2626"><i data-lucide="shield-alert"></i></div>
-          <h3 style="color:#DC2626">Validasi Client-Side (Browser HTML5)</h3>
-          <p style="margin-bottom:10px">Memberikan atribut <code>&lt;input required type="email"&gt;</code> di file HTML.</p>
-          <div class="callout callout-warn" style="font-size:12px;margin:8px 0">
-            <b>Celah Keamanan Fatal:</b> Siapapun bisa klik kanan &rarr; <i>Inspect Element</i> &rarr; hapus tulisan <code>required</code> dalam 3 detik, lalu submit. Data kosong pun lolos terkirim ke server!
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px">
+            <div class="ic" style="color:#DC2626;background:#FEE2E2;border-color:#FCA5A5;margin-bottom:0"><i data-lucide="shield-alert"></i></div>
+            <span style="font:700 11px/1 var(--mono);padding:4px 10px;border-radius:999px;background:#FEE2E2;color:#991B1B;border:1px solid #FCA5A5">Mudah Ditembus</span>
           </div>
-          <p style="font-size:11.5px;color:#64748B">Tujuan asli Client-Side hanyalah kenyamanan visual (UX) agar pengguna tahu ada typo tanpa menunggu loading.</p>
+          <h3 style="color:#DC2626;margin-bottom:6px">Validasi Client-Side (Browser HTML5)</h3>
+          <p style="margin-bottom:10px;color:#475569">Memberikan atribut <code>&lt;input required type="email"&gt;</code> di file HTML.</p>
+          <div class="callout callout-warn" style="font-size:12px;margin:10px 0;line-height:1.5">
+            <i data-lucide="alert-triangle" style="width:16px;height:16px;flex:none;margin-top:2px;color:#D97706"></i>
+            <div>
+              <strong style="color:#B45309">Celah Keamanan Fatal:</strong> Siapapun bisa klik kanan &rarr; <em>Inspect Element</em> &rarr; hapus tulisan <code>required</code> dalam 3 detik, lalu submit. Data kosong pun lolos terkirim ke server!
+            </div>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:8px;font-size:11.5px;color:#64748B;line-height:1.45;margin-top:8px">
+            <i data-lucide="info" style="width:14px;height:14px;flex:none;margin-top:1px;color:#94A3B8"></i>
+            <div><strong>Fungsi Sebenarnya:</strong> Hanyalah kenyamanan visual (UX) agar pengguna tahu ada typo tanpa menunggu loading.</div>
+          </div>
         </div>
+
         <div class="pcard" style="border:1.5px solid #86EFAC">
-          <div class="ic" style="color:#16A34A"><i data-lucide="shield-check"></i></div>
-          <h3 style="color:#166534">Validasi Server-Side (Python Flask)</h3>
-          <p style="margin-bottom:10px">Memeriksa nilai variabel di backend Python dengan logika <code>if-else</code> sebelum data diterima.</p>
-          <div class="callout callout-success" style="font-size:12px;margin:8px 0">
-            <b>Pertahanan Mutlak:</b> Logika Python dieksekusi di server pribadimu. Pengguna sama sekali TIDAK BISA memanipulasi kode server melalui browser!
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px">
+            <div class="ic" style="color:#16A34A;background:#DCFCE7;border-color:#86EFAC;margin-bottom:0"><i data-lucide="shield-check"></i></div>
+            <span style="font:700 11px/1 var(--mono);padding:4px 10px;border-radius:999px;background:#DCFCE7;color:#166534;border:1px solid #86EFAC">Aman &amp; Wajib</span>
           </div>
-          <p style="font-size:11.5px;color:#64748B"><b>Prinsip Emas Keamanan:</b> <i>"Never Trust User Input."</i> Selalu verifikasi data di sisi server.</p>
+          <h3 style="color:#166534;margin-bottom:6px">Validasi Server-Side (Python Flask)</h3>
+          <p style="margin-bottom:10px;color:#475569">Memeriksa nilai variabel di backend Python dengan logika <code>if-else</code> sebelum data diterima.</p>
+          <div class="callout callout-success" style="font-size:12px;margin:10px 0;line-height:1.5">
+            <i data-lucide="shield" style="width:16px;height:16px;flex:none;margin-top:2px;color:#16A34A"></i>
+            <div>
+              <strong style="color:#15803D">Pertahanan Mutlak:</strong> Logika Python dieksekusi di server pribadimu. Pengguna sama sekali TIDAK BISA memanipulasi kode server melalui browser!
+            </div>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:8px;font-size:11.5px;color:#64748B;line-height:1.45;margin-top:8px">
+            <i data-lucide="key" style="width:14px;height:14px;flex:none;margin-top:1px;color:#16A34A"></i>
+            <div><strong>Prinsip Emas Keamanan:</strong> <em>"Never Trust User Input."</em> Selalu verifikasi data di sisi server.</div>
+          </div>
         </div>
       </div>
     </div>
