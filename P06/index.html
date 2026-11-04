@@ -709,13 +709,13 @@ pre.codebody{
           <h3 style="color:#166534;margin-bottom:6px">Validasi Server-Side (Python Flask)</h3>
           <p style="margin-bottom:10px;color:#475569">Memeriksa nilai variabel di backend Python dengan logika <code>if-else</code> sebelum data diterima.</p>
           <div class="callout callout-success" style="font-size:12px;margin:10px 0;line-height:1.5">
-            <i data-lucide="shield" style="width:16px;height:16px;flex:none;margin-top:2px;color:#16A34A"></i>
+            <i data-lucide="shield-check" style="width:16px;height:16px;flex:none;margin-top:2px;color:#16A34A"></i>
             <div>
               <strong style="color:#15803D">Pertahanan Mutlak:</strong> Logika Python dieksekusi di server pribadimu. Pengguna sama sekali TIDAK BISA memanipulasi kode server melalui browser!
             </div>
           </div>
           <div style="display:flex;align-items:flex-start;gap:8px;font-size:11.5px;color:#64748B;line-height:1.45;margin-top:8px">
-            <i data-lucide="key" style="width:14px;height:14px;flex:none;margin-top:1px;color:#16A34A"></i>
+            <i data-lucide="lock" style="width:14px;height:14px;flex:none;margin-top:1px;color:#16A34A"></i>
             <div><strong>Prinsip Emas Keamanan:</strong> <em>"Never Trust User Input."</em> Selalu verifikasi data di sisi server.</div>
           </div>
         </div>
@@ -839,14 +839,14 @@ pre.codebody{
   <!-- SLIDE 7: LANGKAH 0: WORKSPACE & CLONE -->
   <section class="slide" data-sec="Babak 2 · Langkah 0" id="s7">
     <div class="content">
-      <div class="action-banner banner-clone"><i data-lucide="terminal" style="width:13px;height:13px"></i> Langkah 0: Clone Starter Kit</div>
+      <div class="action-banner banner-clone"><i data-lucide="terminal" style="width:13px;height:13px"></i> Langkah 0: Clone &amp; Setup Venv</div>
       <div class="step-guide-bar">
         <span class="guide-tag file"><i data-lucide="terminal"></i> Terminal / VS Code</span>
-        <span class="guide-tag act"><i data-lucide="play"></i> Aksi: Clone &amp; Jalankan</span>
+        <span class="guide-tag act"><i data-lucide="play"></i> Aksi: Clone, Venv &amp; Install</span>
         <span class="guide-tag check"><i data-lucide="globe"></i> Uji: http://127.0.0.1:5000</span>
       </div>
-      <h2>Persiapan Workspace Praktikum P06</h2>
-      <p class="sub">Buka terminal di VS Code (<code>Ctrl + ~</code>), clone starter kit, lalu buka foldernya (File &gt; Open Folder).</p>
+      <h2>Persiapan Workspace &amp; Virtual Environment</h2>
+      <p class="sub">Buka terminal di VS Code (<code>Ctrl + ~</code>), clone starter kit, aktifkan <code>.venv</code>, lalu instal Flask.</p>
       <div class="cols c2">
         <div>
           <div class="codebox">
@@ -857,22 +857,26 @@ pre.codebody{
               </div>
               <button class="codehead-copy" type="button" onclick="copyCode(this)"><i data-lucide="copy" style="width:11px;height:11px"></i>Salin Perintah</button>
             </div>
-            <pre class="codebody"><span class="cm"># 1. Clone repositori starter kit pertemuan 06</span>
+            <pre class="codebody"><span class="cm"># 1. Clone starter kit &amp; masuk ke folder</span>
 git clone https://github.com/Faiz-abdurrachman/pertemuan_06_pemweb.git praktikum-p06
-
-<span class="cm"># 2. Masuk ke dalam folder project</span>
 cd praktikum-p06
 
-<span class="cm"># 3. Jalankan server Flask (macOS/Linux: python3 app.py)</span>
+<span class="cm"># 2. Buat &amp; aktifkan virtual environment (.venv)</span>
+python -m venv .venv
+.venv\Scripts\activate        <span class="cm"># Windows (PowerShell/CMD)</span>
+<span class="cm"># source .venv/bin/activate   # macOS / Linux</span>
+
+<span class="cm"># 3. Instal Flask &amp; jalankan aplikasi</span>
+pip install flask
 python app.py</pre>
           </div>
           <div class="check-result-box">
             <i data-lucide="circle-check"></i>
-            <div><strong>Hasil Langkah 0:</strong> Buka <code>http://127.0.0.1:5000</code>. Beranda Kantin Kampus langsung jalan bebas eror!</div>
+            <div><strong>Hasil Langkah 0:</strong> Muncul tanda <code>(.venv)</code> di terminal. Buka <code>http://127.0.0.1:5000</code> &rarr; Beranda Kantin langsung jalan!</div>
           </div>
           <div class="check-result-box" style="margin-top:6px;padding:6px 12px;background:#FFFBEB;border-color:#FDE68A;color:#92400E;font-size:11px">
             <i data-lucide="help-circle" style="width:13px;height:13px;flex:none;margin-top:1px"></i>
-            <div><strong>Bantuan Mandiri:</strong> Jika <code>python</code> gagal, pakai <code>python3 app.py</code>. Jika belum instal Flask: ketik <code>pip install flask</code>.</div>
+            <div><strong>Tips Windows:</strong> Jika muncul error <i>Execution Policy</i> saat aktivasi, ketik: <code>Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass</code> lalu ulangi aktivasi.</div>
           </div>
         </div>
 
