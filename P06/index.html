@@ -25,6 +25,7 @@ const ICONS={
   "chevron-right":"<path d='m9 18 6-6-6-6'/>",
   "chevron-left":"<path d='m15 18-6-6 6-6'/>",
   "maximize-2":"<path d='M15 3h6v6'/><path d='m21 3-7 7'/><path d='m3 21 7-7'/><path d='M9 21H3v-6'/>",
+  "minimize-2":"<path d='M4 14h6v6'/><path d='m3 21 7-7'/><path d='M20 10h-6V4'/><path d='m14 10 7-7'/>",
   "printer":"<path d='M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2'/><path d='M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6'/><rect x='6' y='14' width='12' height='8' rx='1'/>",
   "shield-check":"<path d='M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z'/><path d='m9 12 2 2 4-4'/>",
   "shield-alert":"<path d='M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z'/><path d='M12 8v4'/><path d='M12 16h.01'/>",
@@ -131,9 +132,17 @@ html,body{
   100%{transform:translate(-35px,-25px) scale(1.08)}
 }
 
-/* STAGE ENGINE 100DVH */
+/* STAGE ENGINE 100DVH & FULLSCREEN BACKDROP */
+:fullscreen, :fullscreen body, :-webkit-full-screen, :-webkit-full-screen body{
+  background:var(--bg-body)!important;
+  width:100%!important;
+  height:100%!important;
+}
+::backdrop{
+  background:var(--bg-body)!important;
+}
 .stage{
-  position:relative;width:100vw;height:100vh;height:100dvh;
+  position:relative;width:100%;height:100%;min-height:100vh;min-height:100dvh;
   z-index:1;overflow:hidden;display:grid;place-items:center;
 }
 .bar{
@@ -307,21 +316,25 @@ h2 code{
   margin:0 0 8px;background:rgba(255,255,255,0.88);
   border:1px solid rgba(124,58,237,0.18);border-radius:8px;padding:4px 10px;
   box-shadow:0 1px 3px rgba(30,27,75,0.03);
+  max-width:100%;flex-wrap:wrap;row-gap:4px;
 }
 .step-pill{
   font:700 10.5px/1 var(--mono);text-transform:uppercase;letter-spacing:0.04em;
   background:var(--accent);color:#FFFFFF;padding:4px 8px;border-radius:5px;
+  flex-shrink:0;
 }
 .step-crumb{
   font:600 11px/1 var(--mono);color:#475569;display:inline-flex;align-items:center;gap:5px;
+  min-width:0;
 }
 .step-crumb code{
   font-family:var(--mono);font-size:11px;color:var(--accent);
   background:rgba(124,58,237,0.08);padding:2px 5px;border-radius:4px;
 }
-.step-sep{color:#94A3B8;font-size:10px}
+.step-sep{color:#94A3B8;font-size:10px;flex-shrink:0}
 .step-action{
   font:500 11px/1 var(--sans);color:#1E293B;display:inline-flex;align-items:center;gap:5px;
+  min-width:0;
 }
 
 /* CODEBOX INTEGRATED FOOTER */
@@ -329,6 +342,7 @@ h2 code{
   background:#191236;border-top:1px solid rgba(139,92,246,0.2);
   padding:8px 14px;font:500 11.5px/1.45 var(--sans);color:#CBD5E1;
   display:flex;align-items:flex-start;gap:8px;
+  min-width:0;
 }
 .codefoot svg{width:14px;height:14px;flex:none;margin-top:2px;color:#38BDF8}
 .codefoot strong{color:#F1F5F9;font-weight:600}
@@ -340,6 +354,7 @@ h2 code{
   background:#F0FDF4;border:1px solid #BBF7D0;
   font:500 11.5px/1.45 var(--sans);color:#166534;
   display:flex;align-items:flex-start;gap:8px;
+  min-width:0;
 }
 .check-result-box svg{width:14px;height:14px;flex:none;margin-top:2px}
 .check-result-box strong{font-weight:700;color:#14532D}
@@ -350,23 +365,26 @@ h2 code{
   background:#130E26;border-radius:14px;overflow:hidden;
   border:1px solid rgba(139,92,246,0.32);margin:12px 0;
   box-shadow:0 14px 36px -6px rgba(19,14,38,0.55);
+  min-width:0;max-width:100%;
 }
 .codehead{
   background:#1E163F;padding:9px 14px;
   display:flex;align-items:center;justify-content:space-between;
   border-bottom:1px solid rgba(139,92,246,0.22);
+  flex-wrap:wrap;gap:8px;
 }
-.codehead-left{display:flex;align-items:center;gap:10px}
-.mac-dots{display:flex;align-items:center;gap:6px}
+.codehead-left{display:flex;align-items:center;gap:10px;min-width:0;flex-wrap:wrap}
+.mac-dots{display:flex;align-items:center;gap:6px;flex-shrink:0}
 .mac-dot{width:10px;height:10px;border-radius:50%;display:inline-block}
 .dot-red{background:#FF5F56}
 .dot-yellow{background:#FFBD2E}
 .dot-green{background:#27C93F}
-.codehead-file{font:600 12px/1 var(--mono);color:#DDD6FE;display:flex;align-items:center;gap:6px}
+.codehead-file{font:600 12px/1 var(--mono);color:#DDD6FE;display:flex;align-items:center;gap:6px;min-width:0;word-break:break-word}
 .codehead-copy{
   background:rgba(124,58,237,0.22);border:1px solid rgba(196,181,253,0.35);
   cursor:pointer;color:#F3E8FF;display:inline-flex;align-items:center;gap:6px;
   font:600 11px/1 var(--sans);padding:4px 10px;border-radius:6px;transition:.15s ease;
+  flex-shrink:0;
 }
 .codehead-copy:hover{background:#7C3AED;color:#FFFFFF}
 pre.codebody{
@@ -544,10 +562,12 @@ pre.codebody{
 .shield-grid{
   display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px;
 }
+.shield-grid>*{min-width:0}
 .shield-card{
   background:#FFFFFF;border-radius:10px;border:1px solid rgba(15,23,42,0.08);
   padding:10px 13px;box-shadow:0 2px 6px rgba(30,27,75,0.03);
   transition:transform .15s,border-color .15s;
+  min-width:0;max-width:100%;
 }
 .shield-card:hover{border-color:rgba(124,58,237,0.3);transform:translateY(-1px)}
 .shield-card.span-2{grid-column:span 2}
@@ -556,12 +576,26 @@ pre.codebody{
   font:700 9.5px/1 var(--mono);color:#DC2626;background:#FEE2E2;
   padding:2px 6px;border-radius:4px;
 }
-.shield-err{font:700 11.5px/1.3 var(--mono);color:#1E293B}
-.shield-why{font:400 11px/1.4 var(--sans);color:#64748B;margin:3px 0 5px}
+.shield-err{font:700 11.5px/1.3 var(--mono);color:#1E293B;word-break:break-word}
+.shield-why{font:400 11px/1.4 var(--sans);color:#64748B;margin:3px 0 5px;word-break:break-word}
 .shield-fix{
   font:600 10.5px/1.4 var(--mono);color:#166534;background:#F0FDF4;
-  border:1px solid #BBF7D0;padding:3px 7px;border-radius:4px;display:block;overflow-x:auto;
+  border:1px solid #BBF7D0;padding:3px 7px;border-radius:4px;display:block;overflow-x:auto;max-width:100%;
 }
+
+/* FAUX FULLSCREEN MODE & TOAST (STANDAR SOP P01-P03) */
+.fsmode .hintchip{display:none!important}
+.fstip{
+  position:absolute;left:50%;bottom:calc(88px + env(safe-area-inset-bottom));z-index:70;
+  transform:translateX(-50%) translateY(6px);max-width:min(88vw,420px);text-align:center;
+  font:500 12.5px/1.45 var(--sans);color:var(--dim);
+  background:var(--spec-top),var(--grad-glass);
+  backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
+  border:1px solid var(--glass-bd);border-radius:14px;padding:10px 14px;
+  box-shadow:var(--out-sh),var(--inner-light);
+  opacity:0;transition:opacity .25s,transform .25s;pointer-events:none;
+}
+.fstip.on{opacity:1;transform:translateX(-50%) translateY(0)}
 
 /* PRINT-TO-PDF STYLING (STANDAR SOP 16:9) */
 @page{
@@ -572,7 +606,7 @@ pre.codebody{
   html,body{background:#fff!important;overflow:visible!important;display:block!important;height:auto!important}
   *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
   .stage{width:297mm!important;height:auto!important;background:#fff!important;display:block!important;overflow:visible!important}
-  .blobs,.bar,.fsbtn,.dock,.hintchip{display:none!important}
+  .blobs,.bar,.fsbtn,.dock,.hintchip,.fstip{display:none!important}
   .slide{
     position:static!important;inset:auto!important;opacity:1!important;visibility:visible!important;
     display:flex!important;width:297mm!important;height:167mm!important;
@@ -587,17 +621,29 @@ pre.codebody{
 
 /* RESPONSIVE VIEWPORTS */
 @media (max-width:900px){
-  .slide{padding:64px 18px 80px;overflow-y:auto}
-  .cols.c2,.cols.c2-1,.cols.c1-2,.cols.c3,.cols.c4,.sim-grid,.qopts{grid-template-columns:1fr}
+  .slide{padding:60px 18px 80px;overflow-y:auto;-webkit-overflow-scrolling:touch}
+  .cols.c2,.cols.c2-1,.cols.c1-2,.cols.c3,.cols.c4,.sim-grid,.qopts,.shield-grid{grid-template-columns:1fr}
+  .shield-card.span-2{grid-column:span 1}
   .brand-sub{display:none}
   .hintchip{display:none}
 }
 @media (max-width:640px){
+  :root{--grad-glass:linear-gradient(160deg,rgba(255,255,255,.95) 0%,rgba(255,255,255,.85) 100%)}
+  *{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+  .blobs::before,.blobs::after{animation:none!important}
   .fsbtn{top:12px;width:34px;height:34px}
   .fsbtn.pdfbtn{right:54px}
-  .dock{bottom:10px;padding:5px 8px}
+  .dock{bottom:10px;padding:5px 8px;max-width:calc(100vw - 20px)}
   .dock-btn{width:32px;height:32px}
   .count{font-size:11px;min-width:60px}
+  .step-nav-bar{padding:4px 8px;gap:5px}
+  .step-pill{font-size:9.5px;padding:3px 6px}
+  .step-crumb{font-size:10px}
+  .step-action{font-size:10px}
+  .step-sep{display:none}
+  .codehead{flex-direction:column;align-items:flex-start;gap:6px}
+  .codehead-copy{align-self:flex-end}
+  .shotcard .shotcap{padding:6px 10px;font-size:10px}
 }
 </style>
 </head>
@@ -616,8 +662,9 @@ pre.codebody{
   </a>
 
   <!-- TOP-RIGHT ACTIONS (FULLSCREEN & PDF) -->
-  <button class="fsbtn pdfbtn" id="pdfBtn" title="Ekspor Slide ke PDF" onclick="window.print()" aria-label="Ekspor ke PDF"><i data-lucide="printer"></i></button>
+  <button class="fsbtn pdfbtn" id="pdfBtn" title="Ekspor Slide ke PDF (P)" onclick="window.print()" aria-label="Ekspor ke PDF"><i data-lucide="printer"></i></button>
   <button class="fsbtn" id="fsBtn" title="Layar Penuh (F)" onclick="toggleFullscreen()" aria-label="Layar penuh"><i data-lucide="maximize-2"></i></button>
+  <div class="fstip" id="fstip" role="status" aria-live="polite"></div>
 
   <!-- CANONICAL FLOATING GLASS DOCK (STANDAR SOP) -->
   <nav class="dock" aria-label="Navigasi slide">
@@ -648,7 +695,7 @@ pre.codebody{
       <p class="t-sub">
         Mengapa HTML5 <code>required</code> saja tidak aman? Hari ini kamu belajar menangkap data formulir, membersihkan spasi tipuan dengan <code>.strip()</code>, menguji 4 aturan validasi di Python Flask, serta memberikan feedback profesional dengan <b>Sticky Form</b>.
       </p>
-      <div style="display:flex;justify-content:center;gap:18px;margin-top:16px">
+      <div style="display:flex;justify-content:center;gap:12px;margin-top:16px;flex-wrap:wrap">
         <div style="background:rgba(255,255,255,0.7);padding:8px 16px;border-radius:10px;border:1px solid var(--glass-bd)">
           <div style="font:700 18px/1 var(--disp);color:var(--accent)">4</div>
           <div style="font:500 10.5px/1 var(--sans);color:var(--faint);margin-top:3px">Aturan Validasi Wajib</div>
@@ -1739,6 +1786,33 @@ const slides = Array.from($$('.slide'));
 const totalSlides = slides.length;
 let curSlide = 0;
 
+let fitTimer;
+function fitActive(){
+  const s = document.querySelector('.slide.on');
+  if(!s) return;
+  const c = s.querySelector('.content');
+  if(!c) return;
+  c.style.zoom = '';
+  if(window.innerWidth <= 900) return;
+  const cs = getComputedStyle(s);
+  const availH = s.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
+  const availW = s.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+  const r = c.getBoundingClientRect();
+  if(!r.height || !r.width) return;
+  const z = Math.min(1, (availH - 4) / r.height, (availW - 4) / r.width);
+  if(!isFinite(z) || z >= 0.999) return;
+  c.style.zoom = Math.max(0.55, Math.round(z * 1000) / 1000);
+}
+
+window.addEventListener('resize', () => {
+  clearTimeout(fitTimer);
+  fitTimer = setTimeout(fitActive, 80);
+});
+window.addEventListener('orientationchange', () => {
+  clearTimeout(fitTimer);
+  fitTimer = setTimeout(fitActive, 300);
+});
+
 function show(idx){
   if(idx < 0) idx = 0;
   if(idx >= totalSlides) idx = totalSlides - 1;
@@ -1759,6 +1833,8 @@ function show(idx){
   
   // Update URL hash
   window.location.hash = curEl.id;
+
+  fitActive();
 }
 
 $('#prevBtn').onclick = () => show(curSlide - 1);
@@ -1766,24 +1842,84 @@ $('#nextBtn').onclick = () => show(curSlide + 1);
 
 document.addEventListener('keydown', e => {
   if(e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+  if($('#lightbox') && $('#lightbox').classList.contains('on')) return;
   if(e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') {
     e.preventDefault();
     show(curSlide + 1);
   } else if(e.key === 'ArrowLeft' || e.key === 'PageUp') {
     e.preventDefault();
     show(curSlide - 1);
+  } else if(e.key === 'Home') {
+    e.preventDefault();
+    show(0);
+  } else if(e.key === 'End') {
+    e.preventDefault();
+    show(totalSlides - 1);
   } else if(e.key === 'f' || e.key === 'F') {
     toggleFullscreen();
+  } else if(e.key === 'p' || e.key === 'P') {
+    window.print();
   }
 });
 
-function toggleFullscreen(){
-  if(!document.fullscreenElement){
-    document.documentElement.requestFullscreen();
-  } else {
-    document.exitFullscreen();
-  }
+function isFullscreenActive(){
+  return !!(document.fullscreenElement || document.webkitFullscreenElement || document.body.classList.contains('fsmode'));
 }
+
+function updateFsUI(){
+  const isFS = isFullscreenActive();
+  const btn = $('#fsBtn');
+  if(!btn) return;
+  if(isFS){
+    btn.innerHTML = '<i data-lucide="minimize-2"></i>';
+    btn.title = 'Keluar Layar Penuh (F)';
+    btn.setAttribute('aria-label', 'Keluar layar penuh');
+  } else {
+    btn.innerHTML = '<i data-lucide="maximize-2"></i>';
+    btn.title = 'Layar Penuh (F)';
+    btn.setAttribute('aria-label', 'Layar penuh');
+  }
+  lucide.createIcons();
+  fitActive();
+}
+
+function fauxFS(){
+  document.body.classList.toggle('fsmode');
+  updateFsUI();
+  const t = $('#fstip');
+  if(!t) return;
+  t.textContent = 'Layar penuh tidak didukung browser ini. Di iPhone/iPad: ketuk ikon Bagikan, lalu "Tambahkan ke Home Screen".';
+  t.classList.add('on');
+  clearTimeout(window.__fstipT);
+  window.__fstipT = setTimeout(() => t.classList.remove('on'), 5000);
+}
+
+function toggleFullscreen(){
+  const el = document.documentElement;
+  if(document.fullscreenElement || document.webkitFullscreenElement){
+    const exit = document.exitFullscreen || document.webkitExitFullscreen;
+    if(exit){
+      Promise.resolve(exit.call(document)).catch(fauxFS);
+    } else {
+      fauxFS();
+    }
+    return;
+  }
+  if(document.body.classList.contains('fsmode')){
+    fauxFS();
+    return;
+  }
+  const req = el.requestFullscreen || el.webkitRequestFullscreen;
+  if(!req){
+    fauxFS();
+    return;
+  }
+  Promise.resolve(req.call(el)).catch(fauxFS);
+}
+
+$('#fsBtn').onclick = toggleFullscreen;
+document.addEventListener('fullscreenchange', updateFsUI);
+document.addEventListener('webkitfullscreenchange', updateFsUI);
 
 /* COPY CODE HELPER */
 function copyCode(btn){
