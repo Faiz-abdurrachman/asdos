@@ -827,7 +827,7 @@ pre.codebody{
         <span class="guide-tag check"><i data-lucide="globe"></i> Uji: http://127.0.0.1:5000</span>
       </div>
       <h2>Persiapan Workspace Praktikum P06</h2>
-      <p class="sub">Buka terminal di laptopmu, lalu clone starter kit dan periksa struktur folder di VS Code Explorer.</p>
+      <p class="sub">Buka terminal di VS Code (<code>Ctrl + ~</code>), clone starter kit, lalu buka foldernya (File &gt; Open Folder).</p>
       <div class="cols c2">
         <div>
           <div class="codebox">
@@ -844,12 +844,16 @@ git clone https://github.com/Faiz-abdurrachman/pertemuan_06_pemweb.git praktikum
 <span class="cm"># 2. Masuk ke dalam folder project</span>
 cd praktikum-p06
 
-<span class="cm"># 3. Jalankan aplikasi Flask</span>
+<span class="cm"># 3. Jalankan server Flask (macOS/Linux: python3 app.py)</span>
 python app.py</pre>
           </div>
           <div class="check-result-box">
             <i data-lucide="circle-check"></i>
             <div><strong>Hasil Langkah 0:</strong> Buka <code>http://127.0.0.1:5000</code>. Beranda Kantin Kampus langsung jalan bebas eror!</div>
+          </div>
+          <div class="check-result-box" style="margin-top:6px;padding:6px 12px;background:#FFFBEB;border-color:#FDE68A;color:#92400E;font-size:11px">
+            <i data-lucide="help-circle" style="width:13px;height:13px;flex:none;margin-top:1px"></i>
+            <div><strong>Bantuan Mandiri:</strong> Jika <code>python</code> gagal, pakai <code>python3 app.py</code>. Jika belum instal Flask: ketik <code>pip install flask</code>.</div>
           </div>
         </div>
 
@@ -897,6 +901,10 @@ python app.py</pre>
             <i data-lucide="info"></i>
             <div><strong>Catatan Kunci:</strong> Parameter <code>methods=['GET', 'POST']</code> wajib disertakan agar server menerima pengiriman POST di langkah berikutnya.</div>
           </div>
+          <div class="check-result-box" style="margin-top:6px;padding:6px 12px;background:#FEF2F2;border-color:#FECACA;color:#991B1B;font-size:11px">
+            <i data-lucide="alert-triangle" style="width:13px;height:13px;flex:none;margin-top:1px"></i>
+            <div><strong>Jangan Panik:</strong> Jika membuka <code>/register</code> sekarang muncul error <code>TemplateNotFound</code>, itu wajar! File <code>register.html</code> baru dibuat di Langkah 2.</div>
+          </div>
         </div>
 
         <div class="shotcard" data-shot="vscode-p06-step-01-route-get.png">
@@ -923,11 +931,11 @@ python app.py</pre>
       <div class="action-banner banner-new"><i data-lucide="file" style="width:13px;height:13px"></i> Langkah 2: Buat File Baru &bull; templates/register.html</div>
       <div class="step-guide-bar">
         <span class="guide-tag file"><i data-lucide="folder"></i> File: templates/register.html</span>
-        <span class="guide-tag act"><i data-lucide="file-plus"></i> Aksi: Buat file baru di folder templates/</span>
+        <span class="guide-tag act"><i data-lucide="file-plus"></i> Aksi: Buat di folder templates/</span>
         <span class="guide-tag check"><i data-lucide="globe"></i> Uji: Refresh /register</span>
       </div>
       <h2>Merancang Form HTML Registrasi Member</h2>
-      <p class="sub">Klik kanan folder <code>templates/</code> di VS Code, buat <code>register.html</code>, lalu isi 4 input form pendaftaran.</p>
+      <p class="sub">Klik kanan folder <code>templates/</code> di VS Code, buat <code>register.html</code>, lalu isi 4 input form.</p>
       <div class="cols c2">
         <div>
           <div class="codebox">
@@ -970,7 +978,11 @@ python app.py</pre>
           </div>
           <div class="check-result-box">
             <i data-lucide="circle-check"></i>
-            <div><strong>Hasil Langkah 2:</strong> Buka <code>/register</code> di browsermu. Formulir 4 input sudah muncul rapi di layar!</div>
+            <div><strong>Hasil Langkah 2:</strong> Buka <code>/register</code> di browsermu. Formulir 4 input sudah muncul rapi!</div>
+          </div>
+          <div class="check-result-box" style="margin-top:6px;padding:6px 12px;background:#EFF6FF;border-color:#BFDBFE;color:#1E40AF;font-size:11px">
+            <i data-lucide="folder" style="width:13px;height:13px;flex:none;margin-top:1px"></i>
+            <div><strong>Letak File:</strong> File <code>register.html</code> <b>WAJIB di dalam folder <code>templates/</code></b>, bukan di luar / root folder!</div>
           </div>
         </div>
 
@@ -1089,7 +1101,11 @@ python app.py</pre>
           </div>
           <div class="check-result-box">
             <i data-lucide="circle-check"></i>
-            <div><strong>Keuntungan Pola errors = []:</strong> Seluruh kesalahan dikumpulkan sekaligus. Pengguna langsung melihat ke-3 error dalam 1 kali kirim tanpa perlu bolak-balik submit!</div>
+            <div><strong>Keuntungan Pola errors = []:</strong> Seluruh kesalahan dikumpulkan sekaligus dalam 1 wadah list tanpa bolak-balik submit!</div>
+          </div>
+          <div class="check-result-box" style="margin-top:6px;padding:6px 12px;background:#FAF5FF;border-color:#E9D5FF;color:#6B21A8;font-size:11px">
+            <i data-lucide="sliders" style="width:13px;height:13px;flex:none;margin-top:1px"></i>
+            <div><strong>Panduan Indentasi:</strong> Masuk 8 spasi (2x Tab) di dalam <code>if POST</code>. Jika kena <code>IndentationError</code>, buka <strong>Slide 13</strong>!</div>
           </div>
         </div>
 
@@ -1514,11 +1530,11 @@ python app.py</pre>
       <div class="slide-body cols c2">
         <div class="pcard">
           <h3 style="margin-bottom:8px">Format File Proyek (.ZIP)</h3>
-          <ul style="font-size:12.5px;color:#475569;line-height:1.6;padding-left:18px">
-            <li>Kompres seluruh folder proyek ke dalam format <b>.ZIP</b>.</li>
-            <li>Hapus folder <code>.venv/</code> atau <code>__pycache__/</code> sebelum di-zip agar ukuran file kecil (&lt; 2 MB).</li>
-            <li>Format penamaan: <code>P06_NIM_NamaLengkap.zip</code>.</li>
-            <li>Unggah file ke form penugasan di LMS kampus.</li>
+          <ul style="font-size:12px;color:#475569;line-height:1.55;padding-left:18px">
+            <li><b>Hapus Folder Sampah:</b> Jangan sertakan <code>.venv/</code> atau <code>__pycache__/</code> agar ukuran file &lt; 1 MB.</li>
+            <li><b>Cara Zip di Windows:</b> Klik kanan folder <code>praktikum-p06</code> &rarr; <i>Send to &rarr; Compressed (zipped) folder</i>.</li>
+            <li><b>Cara Zip di Mac/Linux:</b> Klik kanan folder &rarr; <i>Compress</i> (atau terminal: <code>zip -r praktikum-p06.zip .</code>).</li>
+            <li><b>Format Penamaan:</b> <code>P06_NIM_NamaLengkap.zip</code> lalu unggah ke LMS kampus sebelum deadline!</li>
           </ul>
         </div>
         <div class="pcard" style="border:1.5px solid var(--accent)">
