@@ -864,7 +864,7 @@ code .                        <span class="cm"># Buka di VS Code (jika dari term
 
 <span class="cm"># 2. Buat &amp; aktifkan virtual environment (.venv)</span>
 python -m venv .venv
-.venv\Scripts\activate        <span class="cm"># Windows (PowerShell/CMD)</span>
+.venv\Scripts\activate        <span class="cm"># Windows (Run as Administrator)</span>
 <span class="cm"># source .venv/bin/activate   # macOS / Linux</span>
 
 <span class="cm"># 3. Instal Flask &amp; jalankan aplikasi</span>
@@ -877,7 +877,7 @@ python app.py</pre>
           </div>
           <div class="check-result-box" style="margin-top:6px;padding:6px 12px;background:#FFFBEB;border-color:#FDE68A;color:#92400E;font-size:11px">
             <i data-lucide="help-circle" style="width:13px;height:13px;flex:none;margin-top:1px"></i>
-            <div><strong>Tips Windows:</strong> Jika muncul error <i>Execution Policy</i> saat aktivasi, ketik: <code>Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass</code> lalu ulangi aktivasi.</div>
+            <div><strong>Wajib untuk Windows:</strong> Selalu buka VS Code / Terminal dengan <strong>Run as Administrator</strong> agar bebas izin script. Jika aktivasi terblokir: <code>Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass</code>.</div>
           </div>
         </div>
 
