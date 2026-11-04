@@ -435,6 +435,54 @@ pre.codebody{
 .callout-warn{background:#FEF3C7;color:#92400E;border-left:4px solid #F59E0B}
 .callout-success{background:#ECFDF5;color:#065F46;border-left:4px solid #10B981}
 
+/* SHOT CARD (VISUAL VS CODE) */
+.shotcard{
+  background:var(--spec-top),var(--grad-glass);
+  backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
+  border:1px solid var(--glass-bd);border-radius:var(--rad);
+  padding:10px;box-shadow:var(--out-sh),var(--inner-light);
+  cursor:pointer;transition:transform .2s,box-shadow .2s;
+  display:flex;flex-direction:column;
+}
+.shotcard:hover{transform:translateY(-2px);box-shadow:var(--out-sh-lg),var(--inner-light)}
+.shotcard .imgwrap{
+  border-radius:10px;overflow:hidden;background:#0d0e15;
+  border:1px solid rgba(0,0,0,.08);height:clamp(160px, 28vh, 260px);
+  position:relative;
+}
+.shotcard img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+.shotcap{display:flex;align-items:center;gap:8px;margin-top:8px;padding:0 2px}
+.stepchip{
+  font:700 10px/1 var(--mono);border-radius:999px;padding:3px 8px;white-space:nowrap;
+  border:1px solid;background:#fff;
+}
+.stepchip.c-blue{color:#2563eb;border-color:rgba(37,99,235,.4)}
+.stepchip.c-green{color:#16a34a;border-color:rgba(22,163,74,.4)}
+.stepchip.c-amber{color:#d97706;border-color:rgba(217,119,6,.4)}
+.stepchip.c-purple{color:#7c3aed;border-color:rgba(124,58,237,.4)}
+.shottitle{font:600 11.5px/1.3 var(--sans);color:var(--ink)}
+
+/* LIGHTBOX MODAL */
+.lightbox{
+  position:fixed;inset:0;background:rgba(15,14,23,.85);backdrop-filter:blur(16px);
+  z-index:100;display:grid;place-items:center;padding:24px;opacity:0;visibility:hidden;transition:.25s;
+}
+.lightbox.on{opacity:1;visibility:visible}
+.lbbody{
+  position:relative;max-width:min(96vw,1340px);max-height:92vh;
+  background:rgba(24,24,36,.96);border:1px solid rgba(255,255,255,.12);border-radius:18px;
+  overflow:hidden;display:flex;flex-direction:column;box-shadow:0 25px 60px rgba(0,0,0,.6);
+}
+.lbimgwrap{max-height:calc(92vh - 60px);overflow:auto;background:#0d0e15;display:grid;place-items:center}
+.lbimgwrap img{max-width:100%;max-height:100%;object-fit:contain;display:block}
+.lbcap{display:flex;align-items:center;gap:12px;padding:12px 18px;background:rgba(255,255,255,.05);color:#fff}
+.lbclose{
+  margin-left:auto;width:32px;height:32px;border-radius:50%;
+  background:rgba(255,255,255,.1);color:#fff;border:none;cursor:pointer;display:grid;place-items:center;
+}
+.lbclose:hover{background:rgba(255,255,255,.2)}
+
+
 /* QUIZ STYLES */
 .quizbox{
   background:var(--spec-top),var(--grad-glass);border:1px solid var(--glass-bd);
@@ -779,27 +827,41 @@ pre.codebody{
         <span class="guide-tag check"><i data-lucide="globe"></i> Uji: http://127.0.0.1:5000</span>
       </div>
       <h2>Persiapan Workspace Praktikum P06</h2>
-      <p class="sub">Buka terminal di laptopmu, lalu clone starter kit yang sudah disiapkan untuk pertemuan hari ini.</p>
-      <div class="codebox">
-        <div class="codehead">
-          <div class="codehead-left">
-            <div class="mac-dots"><span class="mac-dot dot-red"></span><span class="mac-dot dot-yellow"></span><span class="mac-dot dot-green"></span></div>
-            <span class="codehead-file"><i data-lucide="terminal" style="width:13px;height:13px"></i>Terminal / Bash</span>
-          </div>
-          <button class="codehead-copy" type="button" onclick="copyCode(this)"><i data-lucide="copy" style="width:11px;height:11px"></i>Salin Perintah</button>
-        </div>
-        <pre class="codebody"><span class="cm"># 1. Clone repositori starter kit pertemuan 06</span>
-git clone https://github.com/Faiz-abdurrachman/pertemuan_06_pemweb.git
+      <p class="sub">Buka terminal di laptopmu, lalu clone starter kit dan periksa struktur folder di VS Code Explorer.</p>
+      <div class="cols c2">
+        <div>
+          <div class="codebox">
+            <div class="codehead">
+              <div class="codehead-left">
+                <div class="mac-dots"><span class="mac-dot dot-red"></span><span class="mac-dot dot-yellow"></span><span class="mac-dot dot-green"></span></div>
+                <span class="codehead-file"><i data-lucide="terminal" style="width:13px;height:13px"></i>Terminal / Bash</span>
+              </div>
+              <button class="codehead-copy" type="button" onclick="copyCode(this)"><i data-lucide="copy" style="width:11px;height:11px"></i>Salin Perintah</button>
+            </div>
+            <pre class="codebody"><span class="cm"># 1. Clone repositori starter kit pertemuan 06</span>
+git clone https://github.com/Faiz-abdurrachman/pertemuan_06_pemweb.git praktikum-p06
 
 <span class="cm"># 2. Masuk ke dalam folder project</span>
-cd pertemuan_06_pemweb
+cd praktikum-p06
 
 <span class="cm"># 3. Jalankan aplikasi Flask</span>
 python app.py</pre>
-      </div>
-      <div class="check-result-box">
-        <i data-lucide="circle-check"></i>
-        <div><strong>Hasil Langkah 0:</strong> Buka browsermu di <code>http://127.0.0.1:5000</code>. Halaman Beranda Kantin Kampus langsung tampil rapi dan bebas eror!</div>
+          </div>
+          <div class="check-result-box">
+            <i data-lucide="circle-check"></i>
+            <div><strong>Hasil Langkah 0:</strong> Buka <code>http://127.0.0.1:5000</code>. Beranda Kantin Kampus langsung jalan bebas eror!</div>
+          </div>
+        </div>
+
+        <div class="shotcard" data-shot="vscode-p06-step-00-explorer.png">
+          <div class="imgwrap">
+            <img src="img/vscode-p06-step-00-explorer.png" alt="VS Code Workspace Starter Kit">
+          </div>
+          <div class="shotcap">
+            <span class="stepchip c-green">VS Code Explorer</span>
+            <span class="shottitle">Struktur folder &amp; posisi app.py (Klik Zoom)</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -810,31 +872,46 @@ python app.py</pre>
       <div class="action-banner banner-edit"><i data-lucide="file" style="width:13px;height:13px"></i> Langkah 1: Edit File &bull; app.py</div>
       <div class="step-guide-bar">
         <span class="guide-tag file"><i data-lucide="file"></i> File: app.py</span>
-        <span class="guide-tag loc"><i data-lucide="sliders"></i> Posisi: Di bawah fungsi home()</span>
+        <span class="guide-tag loc"><i data-lucide="sliders"></i> Posisi: Baris 42 (di bawah home())</span>
         <span class="guide-tag act"><i data-lucide="code"></i> Aksi: Tambah decorator route /register</span>
       </div>
       <h2>Menyiapkan Route Registrasi (/register)</h2>
-      <p class="sub">Buka file <code>app.py</code> dan tambahkan fungsi rute baru dengan parameter <code>methods=['GET', 'POST']</code>.</p>
-      <div class="codebox">
-        <div class="codehead">
-          <div class="codehead-left">
-            <div class="mac-dots"><span class="mac-dot dot-red"></span><span class="mac-dot dot-yellow"></span><span class="mac-dot dot-green"></span></div>
-            <span class="codehead-file"><i data-lucide="file" style="width:13px;height:13px"></i>app.py &bull; def register()</span>
-          </div>
-          <button class="codehead-copy" type="button" onclick="copyCode(this)"><i data-lucide="copy" style="width:11px;height:11px"></i>Salin Kode</button>
-        </div>
-        <pre class="codebody"><span class="cm"># Tambahkan route registrasi di bawah route home</span>
+      <p class="sub">Buka file <code>app.py</code> dan sisipkan rute baru tepat di baris 42 di bawah fungsi <code>home()</code>.</p>
+      <div class="cols c2">
+        <div>
+          <div class="codebox">
+            <div class="codehead">
+              <div class="codehead-left">
+                <div class="mac-dots"><span class="mac-dot dot-red"></span><span class="mac-dot dot-yellow"></span><span class="mac-dot dot-green"></span></div>
+                <span class="codehead-file"><i data-lucide="file" style="width:13px;height:13px"></i>app.py &bull; def register()</span>
+              </div>
+              <button class="codehead-copy" type="button" onclick="copyCode(this)"><i data-lucide="copy" style="width:11px;height:11px"></i>Salin Kode</button>
+            </div>
+            <pre class="codebody"><span class="cm"># Sisipkan di baris 42 (di bawah def home)</span>
 <span class="fn">@app.route</span>(<span class="str">'/register'</span>, methods=[<span class="str">'GET'</span>, <span class="str">'POST'</span>])
 <span class="kw">def</span> <span class="fn">register</span>():
-    <span class="cm"># Jika metode GET: tampilkan form HTML registrasi</span>
+    <span class="cm"># Jika metode GET: tampilkan form HTML</span>
     <span class="kw">return</span> <span class="fn">render_template</span>(<span class="str">'register.html'</span>)</pre>
-      </div>
-      <div class="check-result-box" style="background:#EFF6FF;border-color:#BFDBFE;color:#1E40AF">
-        <i data-lucide="info"></i>
-        <div><strong>Catatan Kunci:</strong> Parameter <code>methods=['GET', 'POST']</code> wajib disertakan agar Flask mengizinkan pengiriman data form dengan metode POST di langkah berikutnya.</div>
+          </div>
+          <div class="check-result-box" style="background:#EFF6FF;border-color:#BFDBFE;color:#1E40AF">
+            <i data-lucide="info"></i>
+            <div><strong>Catatan Kunci:</strong> Parameter <code>methods=['GET', 'POST']</code> wajib disertakan agar server menerima pengiriman POST di langkah berikutnya.</div>
+          </div>
+        </div>
+
+        <div class="shotcard" data-shot="vscode-p06-step-01-route-get.png">
+          <div class="imgwrap">
+            <img src="img/vscode-p06-step-01-route-get.png" alt="VS Code Route GET app.py">
+          </div>
+          <div class="shotcap">
+            <span class="stepchip c-green">Letak di Baris 42</span>
+            <span class="shottitle">Posisi route di bawah home() baris 42 (Klik Zoom)</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
+
 
   <!-- ========================================================
        BABAK 3: LIVE CODING FORM & BACKEND (Slide 9 – 14)
@@ -846,29 +923,28 @@ python app.py</pre>
       <div class="action-banner banner-new"><i data-lucide="file" style="width:13px;height:13px"></i> Langkah 2: Buat File Baru &bull; templates/register.html</div>
       <div class="step-guide-bar">
         <span class="guide-tag file"><i data-lucide="folder"></i> File: templates/register.html</span>
-        <span class="guide-tag act"><i data-lucide="file-plus"></i> Aksi: Buat file baru &amp; tempel form</span>
+        <span class="guide-tag act"><i data-lucide="file-plus"></i> Aksi: Buat file baru di folder templates/</span>
         <span class="guide-tag check"><i data-lucide="globe"></i> Uji: Refresh /register</span>
       </div>
       <h2>Merancang Form HTML Registrasi Member</h2>
-      <p class="sub">Buat file baru di dalam folder <code>templates/</code> dengan 4 input: nama, email, password, dan confirm.</p>
-      <div class="codebox">
-        <div class="codehead">
-          <div class="codehead-left">
-            <div class="mac-dots"><span class="mac-dot dot-red"></span><span class="mac-dot dot-yellow"></span><span class="mac-dot dot-green"></span></div>
-            <span class="codehead-file"><i data-lucide="file" style="width:13px;height:13px"></i>templates/register.html</span>
-          </div>
-          <button class="codehead-copy" type="button" onclick="copyCode(this)"><i data-lucide="copy" style="width:11px;height:11px"></i>Salin Template</button>
-        </div>
-        <pre class="codebody">{% <span class="kw">extends</span> <span class="str">'base.html'</span> %}
+      <p class="sub">Klik kanan folder <code>templates/</code> di VS Code, buat <code>register.html</code>, lalu isi 4 input form pendaftaran.</p>
+      <div class="cols c2">
+        <div>
+          <div class="codebox">
+            <div class="codehead">
+              <div class="codehead-left">
+                <div class="mac-dots"><span class="mac-dot dot-red"></span><span class="mac-dot dot-yellow"></span><span class="mac-dot dot-green"></span></div>
+                <span class="codehead-file"><i data-lucide="file" style="width:13px;height:13px"></i>templates/register.html</span>
+              </div>
+              <button class="codehead-copy" type="button" onclick="copyCode(this)"><i data-lucide="copy" style="width:11px;height:11px"></i>Salin Template</button>
+            </div>
+            <pre class="codebody">{% <span class="kw">extends</span> <span class="str">'base.html'</span> %}
 {% <span class="kw">block</span> title %}Daftar Member Kantin{% <span class="kw">endblock</span> %}
 
 {% <span class="kw">block</span> content %}
 &lt;<span class="fn">div</span> class=<span class="str">"auth-wrapper"</span>&gt;
     &lt;<span class="fn">div</span> class=<span class="str">"auth-card"</span>&gt;
-        &lt;<span class="fn">div</span> class=<span class="str">"auth-header"</span>&gt;
-            &lt;<span class="fn">h2</span>&gt;Daftar Member Kantin&lt;/<span class="fn">h2</span>&gt;
-            &lt;<span class="fn">p</span>&gt;Dapatkan diskon 15% setiap pembelian menu favoritmu!&lt;/<span class="fn">p</span>&gt;
-        &lt;/<span class="fn">div</span>&gt;
+        &lt;<span class="fn">h2</span>&gt;Daftar Member Kantin&lt;/<span class="fn">h2</span>&gt;
         &lt;<span class="fn">form</span> action=<span class="str">"/register"</span> method=<span class="str">"POST"</span>&gt;
             &lt;<span class="fn">div</span> class=<span class="str">"form-group"</span>&gt;
                 &lt;<span class="fn">label</span> for=<span class="str">"nama"</span>&gt;Nama Lengkap&lt;/<span class="fn">label</span>&gt;
@@ -876,25 +952,37 @@ python app.py</pre>
             &lt;/<span class="fn">div</span>&gt;
             &lt;<span class="fn">div</span> class=<span class="str">"form-group"</span>&gt;
                 &lt;<span class="fn">label</span> for=<span class="str">"email"</span>&gt;Alamat Email Kampus&lt;/<span class="fn">label</span>&gt;
-                &lt;<span class="fn">input</span> type=<span class="str">"text"</span> id=<span class="str">"email"</span> name=<span class="str">"email"</span> class=<span class="str">"form-control"</span> placeholder=<span class="str">"Contoh: budi@kampus.ac.id"</span>&gt;
+                &lt;<span class="fn">input</span> type=<span class="str">"text"</span> id=<span class="str">"email"</span> name=<span class="str">"email"</span> class=<span class="str">"form-control"</span> placeholder=<span class="str">"budi@kampus.ac.id"</span>&gt;
             &lt;/<span class="fn">div</span>&gt;
             &lt;<span class="fn">div</span> class=<span class="str">"form-group"</span>&gt;
-                &lt;<span class="fn">label</span> for=<span class="str">"password"</span>&gt;Kata Sandi (Password)&lt;/<span class="fn">label</span>&gt;
-                &lt;<span class="fn">input</span> type=<span class="str">"password"</span> id=<span class="str">"password"</span> name=<span class="str">"password"</span> class=<span class="str">"form-control"</span> placeholder=<span class="str">"Minimal 6 karakter"</span>&gt;
+                &lt;<span class="fn">label</span> for=<span class="str">"password"</span>&gt;Kata Sandi&lt;/<span class="fn">label</span>&gt;
+                &lt;<span class="fn">input</span> type=<span class="str">"password"</span> id=<span class="str">"password"</span> name=<span class="str">"password"</span> class=<span class="str">"form-control"</span>&gt;
             &lt;/<span class="fn">div</span>&gt;
             &lt;<span class="fn">div</span> class=<span class="str">"form-group"</span>&gt;
-                &lt;<span class="fn">label</span> for=<span class="str">"confirm"</span>&gt;Konfirmasi Kata Sandi&lt;/<span class="fn">label</span>&gt;
-                &lt;<span class="fn">input</span> type=<span class="str">"password"</span> id=<span class="str">"confirm"</span> name=<span class="str">"confirm"</span> class=<span class="str">"form-control"</span> placeholder=<span class="str">"Ketik ulang kata sandi"</span>&gt;
+                &lt;<span class="fn">label</span> for=<span class="str">"confirm"</span>&gt;Konfirmasi Sandi&lt;/<span class="fn">label</span>&gt;
+                &lt;<span class="fn">input</span> type=<span class="str">"password"</span> id=<span class="str">"confirm"</span> name=<span class="str">"confirm"</span> class=<span class="str">"form-control"</span>&gt;
             &lt;/<span class="fn">div</span>&gt;
             &lt;<span class="fn">button</span> type=<span class="str">"submit"</span> class=<span class="str">"btn btn-primary btn-block"</span>&gt;Daftar Member Sekarang&lt;/<span class="fn">button</span>&gt;
         &lt;/<span class="fn">form</span>&gt;
     &lt;/<span class="fn">div</span>&gt;
 &lt;/<span class="fn">div</span>&gt;
 {% <span class="kw">endblock</span> %}</pre>
-      </div>
-      <div class="check-result-box">
-        <i data-lucide="circle-check"></i>
-        <div><strong>Hasil Langkah 2:</strong> Buka <code>http://127.0.0.1:5000/register</code> di browsermu. Formulir registrasi 4 kolom sekarang sudah muncul rapi di layar!</div>
+          </div>
+          <div class="check-result-box">
+            <i data-lucide="circle-check"></i>
+            <div><strong>Hasil Langkah 2:</strong> Buka <code>/register</code> di browsermu. Formulir 4 input sudah muncul rapi di layar!</div>
+          </div>
+        </div>
+
+        <div class="shotcard" data-shot="vscode-p06-step-02-new-file.png">
+          <div class="imgwrap">
+            <img src="img/vscode-p06-step-02-new-file.png" alt="VS Code templates/register.html">
+          </div>
+          <div class="shotcap">
+            <span class="stepchip c-blue">File Baru di templates/</span>
+            <span class="shottitle">Letak register.html &amp; form POST (Klik Zoom)</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -905,38 +993,53 @@ python app.py</pre>
       <div class="action-banner banner-edit"><i data-lucide="file" style="width:13px;height:13px"></i> Langkah 3A: Edit File &bull; app.py</div>
       <div class="step-guide-bar">
         <span class="guide-tag file"><i data-lucide="file"></i> File: app.py</span>
-        <span class="guide-tag loc"><i data-lucide="sliders"></i> Posisi: Di dalam fungsi register()</span>
+        <span class="guide-tag loc"><i data-lucide="sliders"></i> Posisi: Baris 46-50 (di dalam def register())</span>
         <span class="guide-tag act"><i data-lucide="code"></i> Aksi: Tangkap POST &amp; potong spasi .strip()</span>
       </div>
       <h2>Menangkap Input &amp; Sanitasi dengan .strip()</h2>
-      <p class="sub">Perbarui fungsi <code>register()</code> di <code>app.py</code> untuk menangkap data kiriman formulir POST.</p>
-      <div class="codebox">
-        <div class="codehead">
-          <div class="codehead-left">
-            <div class="mac-dots"><span class="mac-dot dot-red"></span><span class="mac-dot dot-yellow"></span><span class="mac-dot dot-green"></span></div>
-            <span class="codehead-file"><i data-lucide="file" style="width:13px;height:13px"></i>app.py &bull; def register()</span>
-          </div>
-          <button class="codehead-copy" type="button" onclick="copyCode(this)"><i data-lucide="copy" style="width:11px;height:11px"></i>Salin Kode</button>
-        </div>
-        <pre class="codebody"><span class="fn">@app.route</span>(<span class="str">'/register'</span>, methods=[<span class="str">'GET'</span>, <span class="str">'POST'</span>])
+      <p class="sub">Perbarui fungsi <code>register()</code> di <code>app.py</code> untuk menangkap data kiriman formulir POST dan membuang spasi liar.</p>
+      <div class="cols c2">
+        <div>
+          <div class="codebox">
+            <div class="codehead">
+              <div class="codehead-left">
+                <div class="mac-dots"><span class="mac-dot dot-red"></span><span class="mac-dot dot-yellow"></span><span class="mac-dot dot-green"></span></div>
+                <span class="codehead-file"><i data-lucide="file" style="width:13px;height:13px"></i>app.py &bull; def register()</span>
+              </div>
+              <button class="codehead-copy" type="button" onclick="copyCode(this)"><i data-lucide="copy" style="width:11px;height:11px"></i>Salin Kode</button>
+            </div>
+            <pre class="codebody"><span class="fn">@app.route</span>(<span class="str">'/register'</span>, methods=[<span class="str">'GET'</span>, <span class="str">'POST'</span>])
 <span class="kw">def</span> <span class="fn">register</span>():
     <span class="kw">if</span> request.method == <span class="str">'POST'</span>:
-        <span class="cm"># 1. Menangkap input dan memotong spasi kosong di awal/akhir string</span>
+        <span class="cm"># 1. Menangkap input dan memotong spasi kosong</span>
 <span class="hl-line">        nama = request.form.get(<span class="str">'nama'</span>, <span class="str">''</span>).strip()</span>
 <span class="hl-line">        email = request.form.get(<span class="str">'email'</span>, <span class="str">''</span>).strip()</span>
 <span class="hl-line">        password = request.form.get(<span class="str">'password'</span>, <span class="str">''</span>).strip()</span>
 <span class="hl-line">        confirm = request.form.get(<span class="str">'confirm'</span>, <span class="str">''</span>).strip()</span>
         
-        <span class="cm"># Lanjut ke langkah 3B (evaluasi 4 aturan validasi)</span>
+        <span class="cm"># Lanjut ke langkah 3B (evaluasi 4 aturan)</span>
         
     <span class="kw">return</span> <span class="fn">render_template</span>(<span class="str">'register.html'</span>)</pre>
-      </div>
-      <div class="check-result-box">
-        <i data-lucide="circle-check"></i>
-        <div><strong>Mengapa Wajib .strip()?</strong> Karakter spasi <code>"   "</code> (tiga spasi kosong) memiliki panjang <code>len() == 3</code>. Tanpa <code>.strip()</code>, validasi nama kosong akan tertipu dan meloloskannya! Fungsi <code>.strip()</code> memotong spasi tak terlihat itu.</div>
+          </div>
+          <div class="check-result-box">
+            <i data-lucide="circle-check"></i>
+            <div><strong>Mengapa Wajib .strip()?</strong> Tiga spasi kosong <code>"   "</code> memiliki <code>len() == 3</code>. Tanpa <code>.strip()</code>, validasi nama kosong akan tertipu dan meloloskannya!</div>
+          </div>
+        </div>
+
+        <div class="shotcard" data-shot="vscode-p06-step-03a-sanitasi.png">
+          <div class="imgwrap">
+            <img src="img/vscode-p06-step-03a-sanitasi.png" alt="VS Code Sanitasi strip app.py">
+          </div>
+          <div class="shotcap">
+            <span class="stepchip c-amber">Sanitasi di Baris 47-50</span>
+            <span class="shottitle">Pemotongan spasi liar di dalam if POST (Klik Zoom)</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
+
 
   <!-- SLIDE 11: LANGKAH 3B: 4 ATURAN VALIDASI -->
   <section class="slide" data-sec="Babak 3 · Langkah 3B" id="s11">
@@ -944,20 +1047,22 @@ python app.py</pre>
       <div class="action-banner banner-append"><i data-lucide="file" style="width:13px;height:13px"></i> Langkah 3B: Tempel di Bawah confirm</div>
       <div class="step-guide-bar">
         <span class="guide-tag file"><i data-lucide="file"></i> File: app.py</span>
-        <span class="guide-tag loc"><i data-lucide="sliders"></i> Posisi: Di bawah variabel confirm</span>
+        <span class="guide-tag loc"><i data-lucide="sliders"></i> Posisi: Baris 53-76 (di bawah confirm)</span>
         <span class="guide-tag act"><i data-lucide="list-checks"></i> Aksi: Buat errors = [] &amp; 4 kondisi if-elif</span>
       </div>
       <h2>Menerapkan 4 Aturan Validasi Sisi Server</h2>
       <p class="sub">Gunakan pola <b>Error Collector List</b> <code>errors = []</code> untuk menampung seluruh pelanggaran.</p>
-      <div class="codebox">
-        <div class="codehead">
-          <div class="codehead-left">
-            <div class="mac-dots"><span class="mac-dot dot-red"></span><span class="mac-dot dot-yellow"></span><span class="mac-dot dot-green"></span></div>
-            <span class="codehead-file"><i data-lucide="file" style="width:13px;height:13px"></i>app.py &bull; Logika 4 Aturan Validasi</span>
-          </div>
-          <button class="codehead-copy" type="button" onclick="copyCode(this)"><i data-lucide="copy" style="width:11px;height:11px"></i>Salin Aturan</button>
-        </div>
-        <pre class="codebody">        <span class="cm"># 2. Wadah penampung pesan kesalahan</span>
+      <div class="cols c2">
+        <div>
+          <div class="codebox">
+            <div class="codehead">
+              <div class="codehead-left">
+                <div class="mac-dots"><span class="mac-dot dot-red"></span><span class="mac-dot dot-yellow"></span><span class="mac-dot dot-green"></span></div>
+                <span class="codehead-file"><i data-lucide="file" style="width:13px;height:13px"></i>app.py &bull; Logika 4 Aturan Validasi</span>
+              </div>
+              <button class="codehead-copy" type="button" onclick="copyCode(this)"><i data-lucide="copy" style="width:11px;height:11px"></i>Salin Aturan</button>
+            </div>
+            <pre class="codebody">        <span class="cm"># 2. Wadah penampung pesan kesalahan</span>
         errors = []
 
         <span class="cm"># ATURAN 1: Nama minimal 3 karakter</span>
@@ -981,10 +1086,22 @@ python app.py</pre>
         <span class="cm"># ATURAN 4: Konfirmasi password cocok</span>
         <span class="kw">if</span> password != confirm:
             errors.append(<span class="str">'Konfirmasi kata sandi tidak cocok!'</span>)</pre>
-      </div>
-      <div class="check-result-box">
-        <i data-lucide="circle-check"></i>
-        <div><strong>Keuntungan Pola List errors:</strong> Seluruh kesalahan dikumpulkan ke dalam list. Jika pengguna membuat 3 kesalahan sekaligus, pengguna akan langsung melihat ke-3 error tersebut dalam 1 kali kirim tanpa perlu klik berulang kali!</div>
+          </div>
+          <div class="check-result-box">
+            <i data-lucide="circle-check"></i>
+            <div><strong>Keuntungan Pola errors = []:</strong> Seluruh kesalahan dikumpulkan sekaligus. Pengguna langsung melihat ke-3 error dalam 1 kali kirim tanpa perlu bolak-balik submit!</div>
+          </div>
+        </div>
+
+        <div class="shotcard" data-shot="vscode-p06-step-03b-validasi-aturan.png">
+          <div class="imgwrap">
+            <img src="img/vscode-p06-step-03b-validasi-aturan.png" alt="VS Code 4 Aturan Validasi">
+          </div>
+          <div class="shotcap">
+            <span class="stepchip c-purple">4 Aturan di Baris 54-76</span>
+            <span class="shottitle">Wadah errors = [] &amp; 4 if-elif validasi (Klik Zoom)</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -995,53 +1112,70 @@ python app.py</pre>
       <div class="action-banner banner-append"><i data-lucide="file" style="width:13px;height:13px"></i> Langkah 4: Tempel di Bawah Aturan 4</div>
       <div class="step-guide-bar">
         <span class="guide-tag file"><i data-lucide="file"></i> File: app.py</span>
-        <span class="guide-tag loc"><i data-lucide="sliders"></i> Posisi: Di bawah pengecekan Aturan 4</span>
+        <span class="guide-tag loc"><i data-lucide="sliders"></i> Posisi: Baris 78-87 (di bawah Aturan 4)</span>
         <span class="guide-tag act"><i data-lucide="code"></i> Aksi: Kirim Flash &amp; Redirect PRG</span>
         <span class="guide-tag check"><i data-lucide="globe"></i> Uji: Submit form kosong</span>
       </div>
       <h2>Flash Messages (Danger vs Success) &amp; Pola PRG</h2>
       <p class="sub">Berikan umpan balik visual yang jelas ke pengguna berdasarkan hasil evaluasi validasi.</p>
-      <div class="codebox">
-        <div class="codehead">
-          <div class="codehead-left">
-            <div class="mac-dots"><span class="mac-dot dot-red"></span><span class="mac-dot dot-yellow"></span><span class="mac-dot dot-green"></span></div>
-            <span class="codehead-file"><i data-lucide="file" style="width:13px;height:13px"></i>app.py &bull; Keputusan Validasi</span>
-          </div>
-          <button class="codehead-copy" type="button" onclick="copyCode(this)"><i data-lucide="copy" style="width:11px;height:11px"></i>Salin Keputusan</button>
-        </div>
-        <pre class="codebody">        <span class="cm"># 3. Evaluasi Hasil Validasi</span>
+      <div class="cols c2">
+        <div>
+          <div class="codebox">
+            <div class="codehead">
+              <div class="codehead-left">
+                <div class="mac-dots"><span class="mac-dot dot-red"></span><span class="mac-dot dot-yellow"></span><span class="mac-dot dot-green"></span></div>
+                <span class="codehead-file"><i data-lucide="file" style="width:13px;height:13px"></i>app.py &bull; Keputusan Validasi</span>
+              </div>
+              <button class="codehead-copy" type="button" onclick="copyCode(this)"><i data-lucide="copy" style="width:11px;height:11px"></i>Salin Keputusan</button>
+            </div>
+            <pre class="codebody">        <span class="cm"># 3. Evaluasi Hasil Validasi</span>
         <span class="kw">if</span> errors:
             <span class="cm"># Jika ada error: kirim flash danger lalu render ulang form</span>
             <span class="kw">for</span> err <span class="kw">in</span> errors:
                 <span class="fn">flash</span>(err, <span class="str">'danger'</span>)
             <span class="kw">return</span> <span class="fn">render_template</span>(<span class="str">'register.html'</span>)
 
-        <span class="cm"># Jika LOLOS SEMUA validasi: kirim flash success &amp; redirect ke beranda (PRG)</span>
+        <span class="cm"># Jika LOLOS SEMUA validasi: flash success &amp; redirect (PRG)</span>
         <span class="fn">flash</span>(<span class="str">f'Selamat datang, {nama}! Pendaftaran member kantin berhasil.'</span>, <span class="str">'success'</span>)
         <span class="kw">return</span> <span class="fn">redirect</span>(<span class="fn">url_for</span>(<span class="str">'home'</span>))</pre>
-      </div>
-      <div class="check-result-box">
-        <i data-lucide="circle-check"></i>
-        <div><strong>Uji di Browser:</strong> Buka <code>http://127.0.0.1:5000/register</code> di browsermu. Langsung klik tombol <b>Daftar Member Sekarang</b> tanpa mengisi form &rarr; 3 kotak merah pesan error (alert danger) langsung muncul berurutan di layar!</div>
+          </div>
+          <div class="check-result-box">
+            <i data-lucide="circle-check"></i>
+            <div><strong>Uji di Browser:</strong> Klik tombol <b>Daftar Member Sekarang</b> dengan form kosong &rarr; 3 kotak merah (alert danger) langsung muncul! Jika lolos &rarr; alert hijau &amp; kembali ke beranda.</div>
+          </div>
+        </div>
+
+        <div class="shotcard" data-shot="vscode-p06-step-04-flash-prg.png">
+          <div class="imgwrap">
+            <img src="img/vscode-p06-step-04-flash-prg.png" alt="VS Code Flash & PRG">
+          </div>
+          <div class="shotcap">
+            <span class="stepchip c-green">Flash &amp; PRG di Baris 78-87</span>
+            <span class="shottitle">danger render_template vs success redirect (Klik Zoom)</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
+
 
   <!-- SLIDE 13: KODE UTUH DEF REGISTER() (ANTI-SALAH INDENTASI) -->
   <section class="slide" data-sec="Babak 3 · Kode Utuh" id="s13">
     <div class="content">
       <div class="kick" style="background:#DCFCE7;color:#166534;border-color:#4ADE80"><i data-lucide="check" style="width:13px;height:13px"></i> Anti-Salah Indentasi</div>
       <h2>Kode Utuh Fungsi <code>def register()</code> di app.py</h2>
-      <p class="sub">Jika kamu terkena <code>IndentationError</code> di Python, cocokkan kodinganmu dengan versi utuh 25 baris ini.</p>
-      <div class="codebox">
-        <div class="codehead">
-          <div class="codehead-left">
-            <div class="mac-dots"><span class="mac-dot dot-red"></span><span class="mac-dot dot-yellow"></span><span class="mac-dot dot-green"></span></div>
-            <span class="codehead-file"><i data-lucide="file" style="width:13px;height:13px"></i>app.py &bull; def register() Utuh Tanpa Bingung</span>
-          </div>
-          <button class="codehead-copy" type="button" onclick="copyCode(this)"><i data-lucide="copy" style="width:11px;height:11px"></i>Salin Fungsi Utuh</button>
-        </div>
-        <pre class="codebody"><span class="fn">@app.route</span>(<span class="str">'/register'</span>, methods=[<span class="str">'GET'</span>, <span class="str">'POST'</span>])
+      <p class="sub">Jika kamu terkena <code>IndentationError</code> di Python, cocokkan kodinganmu dengan versi visual 25 baris ini.</p>
+      <div class="cols c2">
+        <div>
+          <div class="codebox">
+            <div class="codehead">
+              <div class="codehead-left">
+                <div class="mac-dots"><span class="mac-dot dot-red"></span><span class="mac-dot dot-yellow"></span><span class="mac-dot dot-green"></span></div>
+                <span class="codehead-file"><i data-lucide="file" style="width:13px;height:13px"></i>app.py &bull; def register() Utuh</span>
+              </div>
+              <button class="codehead-copy" type="button" onclick="copyCode(this)"><i data-lucide="copy" style="width:11px;height:11px"></i>Salin Fungsi Utuh</button>
+            </div>
+            <pre class="codebody"><span class="fn">@app.route</span>(<span class="str">'/register'</span>, methods=[<span class="str">'GET'</span>, <span class="str">'POST'</span>])
 <span class="kw">def</span> <span class="fn">register</span>():
     <span class="kw">if</span> request.method == <span class="str">'POST'</span>:
         <span class="cm"># 1. Tangkap &amp; Sanitasi input</span>
@@ -1056,17 +1190,17 @@ python app.py</pre>
         <span class="kw">if not</span> nama:
             errors.append(<span class="str">'Nama lengkap wajib diisi!'</span>)
         <span class="kw">elif len</span>(nama) &lt; <span class="num">3</span>:
-            errors.append(<span class="str">'Nama lengkap terlalu pendek, minimal 3 karakter!'</span>)
+            errors.append(<span class="str">'Nama minimal 3 huruf!'</span>)
 
         <span class="kw">if not</span> email:
-            errors.append(<span class="str">'Alamat email wajib diisi!'</span>)
+            errors.append(<span class="str">'Email wajib diisi!'</span>)
         <span class="kw">elif</span> <span class="str">'@'</span> <span class="kw">not in</span> email <span class="kw">or</span> <span class="str">'.'</span> <span class="kw">not in</span> email:
-            errors.append(<span class="str">'Format email tidak valid (harus mengandung @ dan domain .com/.ac.id)!'</span>)
+            errors.append(<span class="str">'Format email tidak valid!'</span>)
 
         <span class="kw">if not</span> password:
-            errors.append(<span class="str">'Kata sandi (password) wajib diisi!'</span>)
+            errors.append(<span class="str">'Password wajib diisi!'</span>)
         <span class="kw">elif len</span>(password) &lt; <span class="num">6</span>:
-            errors.append(<span class="str">'Kata sandi terlalu pendek, minimal 6 karakter!'</span>)
+            errors.append(<span class="str">'Password minimal 6 karakter!'</span>)
 
         <span class="kw">if</span> password != confirm:
             errors.append(<span class="str">'Konfirmasi kata sandi tidak cocok!'</span>)
@@ -1077,10 +1211,22 @@ python app.py</pre>
                 <span class="fn">flash</span>(err, <span class="str">'danger'</span>)
             <span class="kw">return</span> <span class="fn">render_template</span>(<span class="str">'register.html'</span>)
 
-        <span class="fn">flash</span>(<span class="str">f'Selamat datang, {nama}! Pendaftaran member kantin berhasil.'</span>, <span class="str">'success'</span>)
+        <span class="fn">flash</span>(<span class="str">f'Selamat datang, {nama}! Pendaftaran berhasil.'</span>, <span class="str">'success'</span>)
         <span class="kw">return</span> <span class="fn">redirect</span>(<span class="fn">url_for</span>(<span class="str">'home'</span>))
 
     <span class="kw">return</span> <span class="fn">render_template</span>(<span class="str">'register.html'</span>)</pre>
+          </div>
+        </div>
+
+        <div class="shotcard" data-shot="vscode-p06-step-indentasi-full.png">
+          <div class="imgwrap">
+            <img src="img/vscode-p06-step-indentasi-full.png" alt="VS Code Indentasi Utuh">
+          </div>
+          <div class="shotcap">
+            <span class="stepchip c-purple">Panduan Indentasi 4 Spasi</span>
+            <span class="shottitle">Hierarki indentasi def &gt; if &gt; errors (Klik Zoom)</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -1091,41 +1237,52 @@ python app.py</pre>
       <div class="action-banner banner-edit"><i data-lucide="file" style="width:13px;height:13px"></i> Langkah 5 (UX Pro): Edit File &bull; templates/register.html</div>
       <div class="step-guide-bar">
         <span class="guide-tag file"><i data-lucide="file"></i> File: templates/register.html</span>
-        <span class="guide-tag loc"><i data-lucide="sliders"></i> Posisi: Di tag &lt;input id="nama"&gt; dan &lt;input id="email"&gt;</span>
+        <span class="guide-tag loc"><i data-lucide="sliders"></i> Posisi: Baris 18 &amp; 28 (tag &lt;input&gt;)</span>
         <span class="guide-tag act"><i data-lucide="code"></i> Aksi: Tambah atribut value="{{ request.form.get(...) }}"</span>
       </div>
       <h2>Sentuhan UX Profesional: Sticky Form</h2>
       <p class="sub">Jangan buat pengguna mengetik ulang nama dan email jika password typo saat mendaftar!</p>
-      <div class="codebox">
-        <div class="codehead">
-          <div class="codehead-left">
-            <div class="mac-dots"><span class="mac-dot dot-red"></span><span class="mac-dot dot-yellow"></span><span class="mac-dot dot-green"></span></div>
-            <span class="codehead-file"><i data-lucide="file" style="width:13px;height:13px"></i>templates/register.html (Tambahkan atribut value)</span>
-          </div>
-          <button class="codehead-copy" type="button" onclick="copyCode(this)"><i data-lucide="copy" style="width:11px;height:11px"></i>Salin Sticky Atribut</button>
-        </div>
-        <pre class="codebody">&lt;<span class="fn">div</span> class=<span class="str">"form-group"</span>&gt;
-    &lt;<span class="fn">label</span> for=<span class="str">"nama"</span>&gt;Nama Lengkap&lt;/<span class="fn">label</span>&gt;
-<span class="hl-line">    &lt;<span class="fn">input</span> type=<span class="str">"text"</span> id=<span class="str">"nama"</span> name=<span class="str">"nama"</span> class=<span class="str">"form-control"</span> </span>
-<span class="hl-line">           value=<span class="str">"{{ request.form.get('nama', '') }}"</span> placeholder=<span class="str">"Contoh: Budi Santoso"</span>&gt;</span>
-&lt;/<span class="fn">div</span>&gt;
+      <div class="cols c2">
+        <div>
+          <div class="codebox">
+            <div class="codehead">
+              <div class="codehead-left">
+                <div class="mac-dots"><span class="mac-dot dot-red"></span><span class="mac-dot dot-yellow"></span><span class="mac-dot dot-green"></span></div>
+                <span class="codehead-file"><i data-lucide="file" style="width:13px;height:13px"></i>templates/register.html (Atribut value)</span>
+              </div>
+              <button class="codehead-copy" type="button" onclick="copyCode(this)"><i data-lucide="copy" style="width:11px;height:11px"></i>Salin Atribut</button>
+            </div>
+            <pre class="codebody"><span class="cm">&lt;!-- Input Nama dengan Sticky Value --&gt;</span>
+&lt;<span class="fn">input</span> type=<span class="str">"text"</span> id=<span class="str">"nama"</span> name=<span class="str">"nama"</span> class=<span class="str">"form-control"</span>
+<span class="hl-line">       value=<span class="str">"&#123;&#123; request.form.get('nama', '') &#125;&#125;"</span></span>
+       placeholder=<span class="str">"Contoh: Budi Santoso"</span>&gt;
 
-&lt;<span class="fn">div</span> class=<span class="str">"form-group"</span>&gt;
-    &lt;<span class="fn">label</span> for=<span class="str">"email"</span>&gt;Alamat Email Kampus&lt;/<span class="fn">label</span>&gt;
-<span class="hl-line">    &lt;<span class="fn">input</span> type=<span class="str">"text"</span> id=<span class="str">"email"</span> name=<span class="str">"email"</span> class=<span class="str">"form-control"</span> </span>
-<span class="hl-line">           value=<span class="str">"{{ request.form.get('email', '') }}"</span> placeholder=<span class="str">"Contoh: budi@kampus.ac.id"</span>&gt;</span>
-&lt;/<span class="fn">div</span>&gt;</pre>
-      </div>
-      <div class="check-result-box">
-        <i data-lucide="circle-check"></i>
-        <div><strong>Uji di Browser:</strong> Isi nama <code>Budi Santoso</code> dan email <code>budi@kampus.ac.id</code>, tapi isi password <code>123</code> (sengaja salah). Klik Daftar &rarr; Pesan error password muncul, tapi teks Nama dan Email <b>tetap tersimpan rapi</b> tanpa perlu diketik ulang!</div>
-      </div>
-      <div class="callout callout-warn">
-        <i data-lucide="lock" style="width:16px;height:16px"></i>
-        <div><b>Catatan Keamanan Asdos:</b> Kolom Password dan Konfirmasi Password sengaja <b>TIDAK</b> dibuat sticky (tetap dikosongkan) demi mencegah kebocoran kredensial jika laptop ditinggalkan pengguna di kantin/lab!</div>
+<span class="cm">&lt;!-- Input Email dengan Sticky Value --&gt;</span>
+&lt;<span class="fn">input</span> type=<span class="str">"text"</span> id=<span class="str">"email"</span> name=<span class="str">"email"</span> class=<span class="str">"form-control"</span>
+<span class="hl-line">       value=<span class="str">"&#123;&#123; request.form.get('email', '') &#125;&#125;"</span></span>
+       placeholder=<span class="str">"Contoh: budi@kampus.ac.id"</span>&gt;
+
+<span class="cm">&lt;!-- Password sengaja TIDAK sticky demi keamanan --&gt;</span></pre>
+          </div>
+          <div class="check-result-box">
+            <i data-lucide="circle-check"></i>
+            <div><strong>Uji Sticky Form:</strong> Isi form dengan password salah &rarr; Nama dan Email <b>tetap menempel di input</b> tanpa terhapus!</div>
+          </div>
+        </div>
+
+        <div class="shotcard" data-shot="vscode-p06-step-05-sticky-form.png">
+          <div class="imgwrap">
+            <img src="img/vscode-p06-step-05-sticky-form.png" alt="VS Code Sticky Form">
+          </div>
+          <div class="shotcap">
+            <span class="stepchip c-amber">Sticky Form di Baris 18 &amp; 28</span>
+            <span class="shottitle">value request.form.get agar data tetap nempel (Klik Zoom)</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
+
 
   <!-- ========================================================
        BABAK 4: EVALUASI & WAWASAN INDUSTRI (Slide 15 – 18)
@@ -1443,7 +1600,19 @@ python app.py</pre>
 
 </main>
 
+<!-- LIGHTBOX MODAL -->
+<div class="lightbox" id="lightbox">
+  <div class="lbbody">
+    <div class="lbimgwrap"><img id="lbimg" src="" alt="Zoom Image"></div>
+    <div class="lbcap">
+      <span class="shottitle" id="lbtitle" style="color:#fff">Judul Gambar</span>
+      <button class="lbclose" id="lbclose" type="button"><i data-lucide="x"></i></button>
+    </div>
+  </div>
+</div>
+
 <script>
+
 const $ = s => document.querySelector(s);
 const $$ = s => document.querySelectorAll(s);
 
@@ -1653,7 +1822,21 @@ function renderQuiz(reset){
   });
 }
 
+/* ===================== LIGHTBOX ZOOM ===================== */
+function openLB(card){
+  const img = card.querySelector('img');
+  const title = card.querySelector('.shottitle');
+  if(img && $('#lbimg')) $('#lbimg').src = img.src;
+  if(title && $('#lbtitle')) $('#lbtitle').textContent = title.textContent;
+  if($('#lightbox')) $('#lightbox').classList.add('on');
+}
+$$('.shotcard').forEach(card => card.onclick = () => openLB(card));
+if($('#lbclose')) $('#lbclose').onclick = () => $('#lightbox').classList.remove('on');
+if($('#lightbox')) $('#lightbox').onclick = e => { if(e.target === $('#lightbox')) $('#lightbox').classList.remove('on'); };
+document.addEventListener('keydown', e => { if(e.key === 'Escape' && $('#lightbox')) $('#lightbox').classList.remove('on'); });
+
 renderQuiz(true);
+
 lucide.createIcons();
 
 // Initialize start slide from hash
