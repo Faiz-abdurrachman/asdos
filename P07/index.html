@@ -1,0 +1,1532 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<title>P07 · Networking &amp; Integrasi API — Deck Praktikum Interaktif</title>
+<meta name="description" content="Deck panduan praktikum Pemrograman Web P07 — REST API Flask, CRUD Data Produk Kantin, Pengujian Postman, Integrasi Open-Meteo Weather requests, dan Frontend Asynchronous fetch().">
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>
+(function(){
+const ICONS={
+  "sparkles":"<path d='m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z'/><path d='M5 3v4'/><path d='M19 17v4'/><path d='M3 5h4'/><path d='M17 19h4'/>",
+  "layers":"<polygon points='12 2 2 7 12 12 22 7 12 2'/><polyline points='2 17 12 22 22 17'/><polyline points='2 12 12 17 22 12'/>",
+  "layout":"<rect width='18' height='18' x='3' y='3' rx='2'/><path d='M3 9h18'/><path d='M9 21V9'/>",
+  "code":"<path d='m16 18 6-6-6-6'/><path d='m8 6-6 6 6 6'/>",
+  "terminal":"<path d='M12 19h8'/><path d='m4 17 6-6-6-6'/>",
+  "copy":"<rect width='14' height='14' x='8' y='8' rx='2' ry='2'/><path d='M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2'/>",
+  "check":"<path d='M20 6 9 17l-5-5'/>",
+  "circle-check":"<circle cx='12' cy='12' r='10'/><path d='m16 9-5.5 5.5L8 12'/>",
+  "chevron-right":"<path d='m9 18 6-6-6-6'/>",
+  "chevron-left":"<path d='m15 18-6-6 6-6'/>",
+  "maximize-2":"<path d='M15 3h6v6'/><path d='m21 3-7 7'/><path d='m3 21 7-7'/><path d='M9 21H3v-6'/>",
+  "minimize-2":"<path d='M4 14h6v6'/><path d='m3 21 7-7'/><path d='M20 10h-6V4'/><path d='m14 10 7-7'/>",
+  "printer":"<path d='M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2'/><path d='M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6'/><rect x='6' y='14' width='12' height='8' rx='1'/>",
+  "shield-check":"<path d='M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z'/><path d='m9 12 2 2 4-4'/>",
+  "shield-alert":"<path d='M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z'/><path d='M12 8v4'/><path d='M12 16h.01'/>",
+  "refresh-cw":"<path d='M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8'/><path d='M21 3v5h-5'/><path d='M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16'/><path d='M8 16H3v5'/>",
+  "flask-conical":"<path d='M14 2v6a2 2 0 0 0 .245.96l5.51 10.08A2 2 0 0 1 18 22H6a2 2 0 0 1-1.755-2.96l5.51-10.08A2 2 0 0 0 10 8V2'/><path d='M6.453 15h11.094'/><path d='M8.5 2h7'/>",
+  "file":"<path d='M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z'/><path d='M14 2v5a1 1 0 0 0 1 1h5'/>",
+  "folder":"<path d='M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z'/>",
+  "zoom-in":"<circle cx='11' cy='11' r='8'/><line x1='21' x2='16.65' y1='21' y2='16.65'/><line x1='11' x2='11' y1='8' y2='14'/><line x1='8' x2='14' y1='11' y2='11'/>",
+  "x":"<path d='M18 6 6 18'/><path d='m6 6 12 12'/>",
+  "package":"<path d='M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z'/><path d='M12 22V12'/><polyline points='3.29 7 12 12 20.71 7'/><path d='m7.5 4.27 9 5.15'/>",
+  "help-circle":"<circle cx='12' cy='12' r='10'/><path d='M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3'/><path d='M12 17h.01'/>",
+  "send":"<line x1='22' y1='2' x2='11' y2='13'/><polygon points='22 2 15 22 11 13 2 9 22 2'/>",
+  "network":"<rect x='16' y='16' width='6' height='6' rx='1'/><rect x='2' y='16' width='6' height='6' rx='1'/><rect x='9' y='2' width='6' height='6' rx='1'/><path d='M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3'/><path d='M12 12V8'/>",
+  "globe":"<circle cx='12' cy='12' r='10'/><line x1='2' y1='12' x2='22' y2='12'/><path d='M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z'/>",
+  "cloud-sun":"<path d='M12 2v2'/><path d='m4.93 4.93 1.41 1.41'/><path d='M20 12h2'/><path d='m19.07 4.93-1.41 1.41'/><path d='M15.947 12.65a4 4 0 0 0-5.925-4.128'/><path d='M13 22H7a5 5 0 1 1 4.9-6H13a3 3 0 0 1 0 6Z'/>",
+  "cpu":"<rect width='16' height='16' x='4' y='4' rx='2'/><rect width='6' height='6' x='9' y='9' rx='1'/><path d='M15 2v2'/><path d='M15 20v2'/><path d='M2 15h2'/><path d='M2 9h2'/><path d='M20 15h2'/><path d='M20 9h2'/><path d='M9 2v2'/><path d='M9 20v2'/>",
+  "play":"<polygon points='5 3 19 12 5 21 5 3'/>",
+  "arrow-right":"<path d='M5 12h14'/><path d='m12 5 7 7-7 7'/>",
+  "clock":"<circle cx='12' cy='12' r='10'/><polyline points='12 6 12 12 16 14'/>",
+  "info":"<circle cx='12' cy='12' r='10'/><path d='M12 16v-4'/><path d='M12 8h.01'/>",
+  "database":"<ellipse cx='12' cy='5' rx='9' ry='3'/><path d='M3 5V19A9 3 0 0 0 21 19V5'/><path d='M3 12A9 3 0 0 0 21 12'/>",
+  "list-checks":"<path d='M13 5h8'/><path d='M13 12h8'/><path d='M13 19h8'/><path d='m3 17 2 2 4-4'/><path d='m3 7 2 2 4-4'/>"
+};
+window.lucide={createIcons:function(){
+document.querySelectorAll('i[data-lucide]').forEach(function(el){
+const name=el.getAttribute('data-lucide'),inner=ICONS[name];
+if(!inner)return;
+const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');
+svg.setAttribute('xmlns','http://www.w3.org/2000/svg');
+svg.setAttribute('width','24');svg.setAttribute('height','24');
+svg.setAttribute('viewBox','0 0 24 24');svg.setAttribute('fill','none');
+svg.setAttribute('stroke','currentColor');svg.setAttribute('stroke-width','2');
+svg.setAttribute('stroke-linecap','round');svg.setAttribute('stroke-linejoin','round');
+Array.prototype.forEach.call(el.attributes,function(a){if(a.name!=='data-lucide')svg.setAttribute(a.name,a.value);});
+svg.innerHTML=inner;
+el.replaceWith(svg);
+});
+}};
+})();
+</script>
+<style>
+/* ========================================================
+   THEME ELECTRIC CYAN & TECH INDIGO — SOP LIGHT BASE P07
+   ======================================================== */
+:root{
+  --disp:'Unbounded',sans-serif;
+  --sans:'IBM Plex Sans',system-ui,sans-serif;
+  --mono:'IBM Plex Mono',monospace;
+  --bg-body:#F0F7FF;
+  --grad-glass:linear-gradient(160deg, rgba(255,255,255,0.94), rgba(255,255,255,0.72));
+  --spec-top:linear-gradient(180deg, rgba(255,255,255,0.7), rgba(255,255,255,0) 36%);
+  --inner-light:inset 0 1px 0 rgba(255,255,255,0.95), inset 0 -1px 0 rgba(255,255,255,0.2);
+  --out-sh:0 16px 40px rgba(14,116,144,0.08);
+  --out-sh-lg:0 24px 50px rgba(14,116,144,0.14);
+  --glass-bd:rgba(255,255,255,0.85);
+  --glass-bd-subtle:rgba(186,230,253,0.6);
+  --ink:#0F172A;
+  --dim:#1E293B;
+  --faint:#64748B;
+  --accent:#0284C7;          /* Electric Sky Cyan */
+  --accent-light:rgba(2,132,199,0.10);
+  --accent-border:rgba(2,132,199,0.30);
+  --blue:#4F46E5;            /* Tech Indigo */
+  --blue-light:rgba(79,70,229,0.10);
+  --green:#16A34A;
+  --green-light:rgba(22,163,74,0.12);
+  --red:#DC2626;
+  --red-light:rgba(220,38,38,0.12);
+  --amber:#D97706;
+  --amber-light:rgba(217,119,6,0.12);
+  --rad:18px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{
+  width:100%;height:100%;overflow:hidden;
+  background:var(--bg-body);color:var(--ink);
+  font-family:var(--sans);font-size:14px;line-height:1.45;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* Ambient Background Glow */
+.glow-bg{
+  position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(circle at 12% 18%, rgba(2,132,199,0.10) 0%, transparent 40%),
+    radial-gradient(circle at 88% 82%, rgba(79,70,229,0.08) 0%, transparent 42%),
+    radial-gradient(circle at 50% 50%, rgba(56,189,248,0.05) 0%, transparent 60%);
+}
+
+/* Deck Root & Slide Container */
+#deck{
+  position:relative;width:100%;height:100%;
+  display:grid;place-items:center;z-index:1;
+}
+
+.slide{
+  position:absolute;inset:0;display:none;opacity:0;
+  transition:opacity 0.25s cubic-bezier(0.16,1,0.3,1);
+  padding:24px 32px 84px 32px;
+  overflow:hidden;
+}
+.slide.on{
+  display:flex;opacity:1;
+  flex-direction:column;justify-content:center;align-items:center;
+}
+
+/* Scaling Canvas: 1920x1080 Aspect Ratio Container */
+.slide-canvas{
+  width:100%;max-width:1240px;height:auto;max-height:86vh;
+  display:flex;flex-direction:column;justify-content:space-between;
+  transform-origin:center center;
+}
+
+/* Glass Card Component */
+.glass{
+  background:var(--grad-glass);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border:1px solid var(--glass-bd);
+  border-radius:var(--rad);
+  box-shadow:var(--out-sh),var(--inner-light);
+  position:relative;overflow:hidden;
+}
+.glass::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:var(--spec-top);border-radius:inherit;
+}
+
+/* Header Slide Section */
+.s-head{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:14px;padding-bottom:10px;
+  border-bottom:1px solid rgba(2,132,199,0.15);
+}
+.s-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:0.04em;
+  text-transform:uppercase;color:var(--accent);
+  background:var(--accent-light);border:1px solid var(--accent-border);
+  padding:4px 10px;border-radius:999px;
+}
+.s-title{
+  font-family:var(--disp);font-size:22px;font-weight:700;
+  color:var(--ink);letter-spacing:-0.02em;margin-top:4px;
+}
+.s-desc{
+  font-size:13px;color:var(--faint);margin-top:2px;
+}
+
+/* Grid Layouts */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+
+/* Codebox Component */
+.codebox{
+  background:#0F172A;color:#E2E8F0;
+  border-radius:14px;overflow:hidden;
+  border:1px solid #1E293B;box-shadow:0 8px 24px rgba(0,0,0,0.16);
+  display:flex;flex-direction:column;
+}
+.codehead{
+  background:#1E293B;padding:7px 14px;
+  display:flex;align-items:center;justify-content:space-between;
+  font-family:var(--mono);font-size:11px;color:#94A3B8;
+  border-bottom:1px solid #334155;
+}
+.codebody{
+  padding:12px 16px;font-family:var(--mono);font-size:12px;
+  line-height:1.55;overflow-x:auto;white-space:pre;color:#F8FAFC;
+}
+.copybtn{
+  background:transparent;border:1px solid #475569;color:#94A3B8;
+  padding:2px 8px;border-radius:6px;cursor:pointer;
+  font-family:var(--mono);font-size:10px;display:flex;align-items:center;gap:4px;
+  transition:all 0.15s;
+}
+.copybtn:hover{background:#334155;color:#FFF}
+
+/* Status Badges */
+.st-200{color:#16A34A;background:rgba(22,163,74,0.12);border:1px solid rgba(22,163,74,0.3)}
+.st-201{color:#0D9488;background:rgba(13,148,136,0.12);border:1px solid rgba(13,148,136,0.3)}
+.st-400{color:#D97706;background:rgba(217,119,6,0.12);border:1px solid rgba(217,119,6,0.3)}
+.st-404{color:#DC2626;background:rgba(220,38,38,0.12);border:1px solid rgba(220,38,38,0.3)}
+.st-500{color:#7C3AED;background:rgba(124,58,237,0.12);border:1px solid rgba(124,58,237,0.3)}
+
+.m-get{color:#0284C7;background:rgba(2,132,199,0.12);border:1px solid rgba(2,132,199,0.3);font-weight:700}
+.m-post{color:#16A34A;background:rgba(22,163,74,0.12);border:1px solid rgba(22,163,74,0.3);font-weight:700}
+.m-put{color:#D97706;background:rgba(217,119,6,0.12);border:1px solid rgba(217,119,6,0.3);font-weight:700}
+.m-del{color:#DC2626;background:rgba(220,38,38,0.12);border:1px solid rgba(220,38,38,0.3);font-weight:700}
+
+/* Canonical Floating Dock */
+#dock{
+  position:fixed;bottom:16px;left:50%;transform:translateX(-50%);
+  display:flex;align-items:center;gap:12px;
+  padding:6px 14px;z-index:99;
+  border-radius:999px;
+}
+.dockbtn{
+  background:rgba(255,255,255,0.85);border:1px solid var(--glass-bd);
+  color:var(--ink);width:34px;height:34px;border-radius:50%;
+  display:grid;place-items:center;cursor:pointer;
+  transition:all 0.15s;box-shadow:0 2px 8px rgba(0,0,0,0.06);
+}
+.dockbtn:hover{background:#FFF;color:var(--accent);transform:scale(1.05)}
+.dock-info{
+  display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;
+  font-weight:600;color:var(--dim);padding:0 6px;
+}
+.dock-sec{
+  font-family:var(--sans);font-size:11px;color:var(--faint);
+  max-width:200px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  border-left:1px solid #CBD5E1;padding-left:10px;
+}
+
+/* Progress Bar */
+#progress{
+  position:fixed;top:0;left:0;height:3px;
+  background:linear-gradient(90deg, #0284C7, #4F46E5);
+  width:0%;z-index:100;transition:width 0.2s;
+}
+
+/* Interactive Simulator in Slide 12 */
+.sim-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:10px}
+.sim-field{display:flex;flex-direction:column;gap:4px}
+.sim-label{font-family:var(--mono);font-size:10.5px;font-weight:700;color:var(--faint);text-transform:uppercase}
+.sim-select, .sim-input{
+  padding:8px 10px;border-radius:10px;border:1px solid #CBD5E1;
+  background:#FFF;font-family:var(--mono);font-size:12px;color:var(--ink);
+}
+.sim-btn{
+  background:var(--accent);color:#FFF;border:none;border-radius:10px;
+  padding:8px 14px;font-weight:600;cursor:pointer;display:flex;align-items:center;
+  justify-content:center;gap:6px;transition:opacity 0.15s;font-size:12px;
+}
+.sim-btn:hover{opacity:0.9}
+.sim-res-box{
+  background:#0F172A;color:#38BDF8;font-family:var(--mono);
+  font-size:11px;padding:10px;border-radius:10px;height:140px;overflow-y:auto;
+}
+
+/* Quiz Styles */
+.qopt{
+  background:rgba(255,255,255,0.7);border:1px solid #CBD5E1;
+  border-radius:12px;padding:9px 12px;text-align:left;cursor:pointer;
+  display:flex;align-items:center;gap:10px;font-size:13px;transition:all 0.15s;
+}
+.qopt:hover{background:#FFF;border-color:var(--accent)}
+.qopt.right{background:#DCFCE7;border-color:#16A34A;color:#166534;font-weight:600}
+.qopt.wrong{background:#FEE2E2;border-color:#DC2626;color:#991B1B}
+.qletter{
+  width:22px;height:22px;border-radius:6px;background:rgba(0,0,0,0.06);
+  display:grid;place-items:center;font-family:var(--mono);font-weight:700;font-size:11px;
+}
+
+/* Tooltip / Fullscreen warning */
+#fstip{
+  position:fixed;top:16px;left:50%;transform:translateX(-50%);
+  background:#1E293B;color:#FFF;padding:8px 16px;border-radius:999px;
+  font-size:12px;opacity:0;pointer-events:none;transition:opacity 0.2s;z-index:999;
+}
+#fstip.on{opacity:1}
+
+/* Faux Fullscreen Mode */
+body.fsmode{padding:0!important;background:#000!important}
+body.fsmode .slide{padding:12px 18px 74px 18px!important}
+</style>
+</head>
+<body>
+
+<div class="glow-bg"></div>
+<div id="progress"></div>
+<div id="fstip"></div>
+
+<main id="deck">
+
+  <!-- ==================== SLIDE 1: COVER ==================== -->
+  <section class="slide on" id="slide-1" data-sec="Pembuka">
+    <div class="slide-canvas">
+      <div class="glass" style="padding:48px 40px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:16px">
+        <div class="s-badge">
+          <i data-lucide="network" style="width:13px;height:13px"></i>
+          Praktikum Pemrograman Web · Pertemuan 07
+        </div>
+        <h1 style="font-family:var(--disp);font-size:36px;font-weight:700;line-height:1.2;color:var(--ink);max-width:850px">
+          Networking &amp; Integrasi API
+        </h1>
+        <p style="font-size:16px;color:var(--dim);max-width:720px;line-height:1.6">
+          Membedah arsitektur modern <b>Headless REST API</b> dengan Flask, pengujian endpoint CRUD via <b>Postman</b>, konsumsi API cuaca eksternal dengan <b>requests</b>, dan rendering dinamis menggunakan JavaScript <b>fetch()</b>.
+        </p>
+        <div style="display:flex;gap:12px;margin-top:12px">
+          <div style="background:#FFF;border:1px solid #BAE6FD;padding:8px 16px;border-radius:12px;font-family:var(--mono);font-size:12px;display:flex;align-items:center;gap:6px;color:#0369A1">
+            <i data-lucide="cpu" style="width:14px;height:14px"></i> Flask Headless Backend
+          </div>
+          <div style="background:#FFF;border:1px solid #C7D2FE;padding:8px 16px;border-radius:12px;font-family:var(--mono);font-size:12px;display:flex;align-items:center;gap:6px;color:#4338CA">
+            <i data-lucide="globe" style="width:14px;height:14px"></i> Open-Meteo Weather API
+          </div>
+          <div style="background:#FFF;border:1px solid #BBF7D0;padding:8px 16px;border-radius:12px;font-family:var(--mono);font-size:12px;display:flex;align-items:center;gap:6px;color:#15803D">
+            <i data-lucide="sparkles" style="width:14px;height:14px"></i> Asynchronous fetch()
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 2: PARADIGM SHIFT ==================== -->
+  <section class="slide" id="slide-2" data-sec="Arsitektur">
+    <div class="slide-canvas">
+      <div class="s-head">
+        <div>
+          <span class="s-badge"><i data-lucide="layers" style="width:12px;height:12px"></i> Konsep Inti</span>
+          <h2 class="s-title">Pergeseran Paradigma: SSR vs Headless REST API</h2>
+          <p class="s-desc">Mengapa web modern memisahkan backend murni penyedia data dari frontend penampil UI?</p>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="glass" style="padding:20px;border-left:4px solid #94A3B8">
+          <div style="font-family:var(--mono);font-weight:700;font-size:12px;color:#64748B;margin-bottom:8px">
+            P01 — P06: SERVER-SIDE RENDERING (SSR)
+          </div>
+          <h3 style="font-size:16px;color:var(--ink);margin-bottom:8px">Monolitik Flask + Jinja2 HTML</h3>
+          <ul style="font-size:13px;color:var(--dim);line-height:1.6;margin-left:18px;space-y:6px">
+            <li>Browser meminta URL ➔ Server Flask merender data ke template HTML.</li>
+            <li>Mengembalikan dokumen HTML utuh seberat puluhan kilobyte.</li>
+            <li><b>Kelemahan:</b> Setiap klik tombol memicu <i>Full Page Reload</i> (kedipan putih layar). Data tidak bisa dipakai langsung oleh aplikasi Android/iOS.</li>
+          </ul>
+        </div>
+
+        <div class="glass" style="padding:20px;border-left:4px solid var(--accent)">
+          <div style="font-family:var(--mono);font-weight:700;font-size:12px;color:var(--accent);margin-bottom:8px">
+            P07: CLIENT-SERVER DECOUPLING (REST API)
+          </div>
+          <h3 style="font-size:16px;color:var(--ink);margin-bottom:8px">Headless Flask + JSON + Vanilla JS</h3>
+          <ul style="font-size:13px;color:var(--dim);line-height:1.6;margin-left:18px;space-y:6px">
+            <li>Backend murni mengembalikan data mentah berformat <b>JSON</b>.</li>
+            <li>Frontend (Browser, Mobile App, Smartwatch) meminta data via <b>fetch()</b> di balik layar.</li>
+            <li><b>Keunggulan:</b> Halaman tidak pernah reload! DOM diperbarui secara instan, hemat kuota bandwidth, dan 1 backend melayani multi-platform.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 3: FORMAT JSON ==================== -->
+  <section class="slide" id="slide-3" data-sec="Standar JSON">
+    <div class="slide-canvas">
+      <div class="s-head">
+        <div>
+          <span class="s-badge"><i data-lucide="code" style="width:12px;height:12px"></i> Bahasa Universal</span>
+          <h2 class="s-title">Mengenal JSON: Standar Pertukaran Data Global</h2>
+          <p class="s-desc">JavaScript Object Notation — format teks ringan yang dapat dibaca manusia dan mesin.</p>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="codebox">
+          <div class="codehead">
+            <span>payload_menu.json</span>
+            <button class="copybtn" onclick="copyCode(this)"><i data-lucide="copy" style="width:11px;height:11px"></i>Salin</button>
+          </div>
+          <pre class="codebody">{
+  "status": "success",
+  "total": 2,
+  "data": [
+    {
+      "id": 1,
+      "nama": "Nasi Goreng Spesial",
+      "harga": 15000,
+      "tersedia": true
+    },
+    {
+      "id": 2,
+      "nama": "Es Teh Manis Jumbo",
+      "harga": 5000,
+      "tersedia": true
+    }
+  ]
+}</pre>
+        </div>
+
+        <div class="glass" style="padding:20px;display:flex;flex-direction:column;justify-content:center;gap:12px">
+          <h3 style="font-size:15px;color:var(--ink)">3 Aturan Emas Penulisan JSON:</h3>
+          <div style="display:flex;align-items:flex-start;gap:10px">
+            <span style="background:#E0F2FE;color:#0284C7;font-weight:700;padding:2px 8px;border-radius:6px;font-family:var(--mono);font-size:11px">1</span>
+            <p style="font-size:13px;color:var(--dim)"><b>Wajib Tanda Petik Ganda ("...")</b>: Kunci (keys) dan nilai string harus diapit double quotes. Petik tunggal ('...') akan menghasilkan syntax error.</p>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:10px">
+            <span style="background:#E0F2FE;color:#0284C7;font-weight:700;padding:2px 8px;border-radius:6px;font-family:var(--mono);font-size:11px">2</span>
+            <p style="font-size:13px;color:var(--dim)"><b>Tipe Data Kaya</b>: Mendukung string, number (tanpa petik), boolean (<code>true</code>/<code>false</code> lowercase), array (<code>[...]</code>), dan nested object (<code>{...}</code>).</p>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:10px">
+            <span style="background:#E0F2FE;color:#0284C7;font-weight:700;padding:2px 8px;border-radius:6px;font-family:var(--mono);font-size:11px">3</span>
+            <p style="font-size:13px;color:var(--dim)"><b>Tanpa Trailing Comma</b>: Jangan beri koma setelah elemen terakhir dalam object atau array.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 4: HTTP VERBS & CODES ==================== -->
+  <section class="slide" id="slide-4" data-sec="Protokol HTTP">
+    <div class="slide-canvas">
+      <div class="s-head">
+        <div>
+          <span class="s-badge"><i data-lucide="network" style="width:12px;height:12px"></i> Semantik HTTP</span>
+          <h2 class="s-title">HTTP Verbs &amp; Kode Status Semantik</h2>
+          <p class="s-desc">Bahasa isyarat standar antara Client dan Server dalam arsitektur RESTful.</p>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="glass" style="padding:18px">
+          <h3 style="font-size:14px;color:var(--ink);margin-bottom:12px">4 Kata Kerja HTTP (CRUD Mapping)</h3>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:#FFF;border-radius:10px;border:1px solid #E2E8F0">
+              <span class="m-get" style="padding:3px 8px;border-radius:6px;font-family:var(--mono);font-size:11px">GET</span>
+              <span style="font-size:12.5px;color:var(--dim)">Membaca / mengambil data (Read)</span>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:#FFF;border-radius:10px;border:1px solid #E2E8F0">
+              <span class="m-post" style="padding:3px 8px;border-radius:6px;font-family:var(--mono);font-size:11px">POST</span>
+              <span style="font-size:12.5px;color:var(--dim)">Membuat / menambah data baru (Create)</span>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:#FFF;border-radius:10px;border:1px solid #E2E8F0">
+              <span class="m-put" style="padding:3px 8px;border-radius:6px;font-family:var(--mono);font-size:11px">PUT</span>
+              <span style="font-size:12.5px;color:var(--dim)">Memperbarui data yang ada (Update)</span>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:#FFF;border-radius:10px;border:1px solid #E2E8F0">
+              <span class="m-del" style="padding:3px 8px;border-radius:6px;font-family:var(--mono);font-size:11px">DELETE</span>
+              <span style="font-size:12.5px;color:var(--dim)">Menghapus data tertentu (Delete)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass" style="padding:18px">
+          <h3 style="font-size:14px;color:var(--ink);margin-bottom:12px">5 Kode Status HTTP Paling Penting</h3>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;align-items:center;gap:10px;padding:6px 10px;background:#FFF;border-radius:8px">
+              <span class="st-200" style="padding:2px 6px;border-radius:6px;font-family:var(--mono);font-size:11px;font-weight:700">200 OK</span>
+              <span style="font-size:12px;color:var(--dim)">Permintaan berhasil diproses.</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;padding:6px 10px;background:#FFF;border-radius:8px">
+              <span class="st-201" style="padding:2px 6px;border-radius:6px;font-family:var(--mono);font-size:11px;font-weight:700">201 Created</span>
+              <span style="font-size:12px;color:var(--dim)">Resource data baru berhasil dibuat.</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;padding:6px 10px;background:#FFF;border-radius:8px">
+              <span class="st-400" style="padding:2px 6px;border-radius:6px;font-family:var(--mono);font-size:11px;font-weight:700">400 Bad Request</span>
+              <span style="font-size:12px;color:var(--dim)">Data input salah format / tidak lengkap.</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;padding:6px 10px;background:#FFF;border-radius:8px">
+              <span class="st-404" style="padding:2px 6px;border-radius:6px;font-family:var(--mono);font-size:11px;font-weight:700">404 Not Found</span>
+              <span style="font-size:12px;color:var(--dim)">Data ID yang dicari tidak ada di server.</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;padding:6px 10px;background:#FFF;border-radius:8px">
+              <span class="st-500" style="padding:2px 6px;border-radius:6px;font-family:var(--mono);font-size:11px;font-weight:700">500 Server Error</span>
+              <span style="font-size:12px;color:var(--dim)">Server mengalami crash/bug di kodingan.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 5: BLUEPRINT PROYEK ==================== -->
+  <section class="slide" id="slide-5" data-sec="Persiapan">
+    <div class="slide-canvas">
+      <div class="s-head">
+        <div>
+          <span class="s-badge"><i data-lucide="folder" style="width:12px;height:12px"></i> Arsitektur File</span>
+          <h2 class="s-title">Blueprint Proyek: Kantin Kampus REST API</h2>
+          <p class="s-desc">Struktur folder bersih dan alur data yang akan kita bangun dari nol.</p>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="codebox">
+          <div class="codehead"><span>Struktur Direktori praktikum-p07/</span></div>
+          <pre class="codebody">praktikum-p07/
+├── app.py              # Server Flask REST API + Open-Meteo
+├── requirements.txt    # Flask>=2.0.0, requests>=2.25.0
+├── templates/
+│   └── dashboard.html  # Antarmuka web interaktif (vanilla fetch)
+└── README.md           # Panduan instalasi & pengujian Postman</pre>
+        </div>
+
+        <div class="glass" style="padding:20px;display:flex;flex-direction:column;justify-content:center;gap:10px">
+          <h3 style="font-size:15px;color:var(--ink)">Entitas Menu Kantin (Model In-Memory)</h3>
+          <div style="background:#FFF;padding:12px;border-radius:10px;border:1px solid #CBD5E1;font-family:var(--mono);font-size:12px;line-height:1.6">
+            • <b>id</b>: Integer unik (auto-increment)<br>
+            • <b>nama</b>: String nama produk menu<br>
+            • <b>harga</b>: Integer nominal Rupiah<br>
+            • <b>kategori</b>: String ("Makanan", "Minuman")<br>
+            • <b>stok</b>: Integer porsi yang tersedia
+          </div>
+          <p style="font-size:12.5px;color:var(--faint)">
+            Model ini konsisten dengan basis data kantin dari P05–P06 dan langsung memenuhi rubrik tugas CRUD produk.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 6: BACKEND SETUP ==================== -->
+  <section class="slide" id="slide-6" data-sec="Live Coding 1">
+    <div class="slide-canvas">
+      <div class="s-head">
+        <div>
+          <span class="s-badge"><i data-lucide="terminal" style="width:12px;height:12px"></i> Langkah 0</span>
+          <h2 class="s-title">Inisialisasi Server &amp; Data In-Memory</h2>
+          <p class="s-desc">Import jsonify &amp; request, serta siapkan database sementara berbentuk List of Dictionaries.</p>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="codebox">
+          <div class="codehead">
+            <span>app.py (Langkah 0)</span>
+            <button class="copybtn" onclick="copyCode(this)"><i data-lucide="copy" style="width:11px;height:11px"></i>Salin</button>
+          </div>
+          <pre class="codebody">from flask import Flask, render_template, request, jsonify
+import requests
+
+app = Flask(__name__)
+
+# Database sementara di memori RAM
+menu_kantin = [
+    {"id": 1, "nama": "Nasi Goreng Spesial", "harga": 15000, "kategori": "Makanan", "stok": 20},
+    {"id": 2, "nama": "Mie Ayam Bakso", "harga": 13000, "kategori": "Makanan", "stok": 15},
+    {"id": 3, "nama": "Es Teh Manis Jumbo", "harga": 5000, "kategori": "Minuman", "stok": 50}
+]
+
+def cari_menu_by_id(item_id):
+    """Mencari dictionary menu berdasarkan ID"""
+    for item in menu_kantin:
+        if item["id"] == item_id:
+            return item
+    return None</pre>
+        </div>
+
+        <div class="glass" style="padding:20px;display:flex;flex-direction:column;justify-content:center;gap:12px">
+          <h3 style="font-size:15px;color:var(--ink)">Mengapa Perlu Helper `cari_menu_by_id`?</h3>
+          <p style="font-size:13px;color:var(--dim);line-height:1.6">
+            Di tahap pemula, kita belum memakai SQL database. Fungsi bantuan ini memudahkan kita mencari elemen di dalam list Python tanpa harus mengulang-ulang perulangan for di setiap rute GET detail, PUT, maupun DELETE.
+          </p>
+          <div style="background:#EFF6FF;border-left:4px solid #0284C7;padding:10px 14px;border-radius:8px;font-size:12.5px;color:#0369A1">
+            <b>Prinsip DRY (Don't Repeat Yourself):</b> Satu fungsi pencarian untuk 3 endpoint yang berbeda.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 7: BACKEND GET ==================== -->
+  <section class="slide" id="slide-7" data-sec="Live Coding 2">
+    <div class="slide-canvas">
+      <div class="s-head">
+        <div>
+          <span class="s-badge"><i data-lucide="code" style="width:12px;height:12px"></i> Endpoint GET</span>
+          <h2 class="s-title">Membaca Data: GET Semua Menu &amp; Detail ID</h2>
+          <p class="s-desc">Mengubah list Python menjadi format JSON menggunakan fungsi <code>jsonify()</code>.</p>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="codebox">
+          <div class="codehead">
+            <span>app.py (GET Routes)</span>
+            <button class="copybtn" onclick="copyCode(this)"><i data-lucide="copy" style="width:11px;height:11px"></i>Salin</button>
+          </div>
+          <pre class="codebody"># 1. Mengambil seluruh menu
+@app.route('/api/menu', methods=['GET'])
+def get_all_menu():
+    return jsonify({
+        "status": "success",
+        "total": len(menu_kantin),
+        "data": menu_kantin
+    }), 200
+
+# 2. Mengambil detail satu menu
+@app.route('/api/menu/<int:item_id>', methods=['GET'])
+def get_menu_by_id(item_id):
+    item = cari_menu_by_id(item_id)
+    if not item:
+        return jsonify({
+            "status": "error",
+            "pesan": f"Menu ID {item_id} tidak ditemukan!"
+        }), 404
+
+    return jsonify({"status": "success", "data": item}), 200</pre>
+        </div>
+
+        <div class="glass" style="padding:20px;display:flex;flex-direction:column;justify-content:center;gap:10px">
+          <h3 style="font-size:15px;color:var(--ink)">Poin Kritis untuk Mahasiswa:</h3>
+          <ul style="font-size:13px;color:var(--dim);line-height:1.6;margin-left:18px;space-y:6px">
+            <li><b>Fungsi <code>jsonify()</code>:</b> Mengubah tipe data Python (dict/list) ke format JSON string dan otomatis menyetel header HTTP <code>Content-Type: application/json</code>.</li>
+            <li><b>Tuple Status Code:</b> <code>return jsonify(...), 200</code> atau <code>404</code> secara eksplisit memberi tahu status ke client.</li>
+            <li><b>Variable Rule:</b> <code>&lt;int:item_id&gt;</code> menjamin bahwa Flask hanya memproses parameter yang bertipe angka integer.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 8: BACKEND POST ==================== -->
+  <section class="slide" id="slide-8" data-sec="Live Coding 3">
+    <div class="slide-canvas">
+      <div class="s-head">
+        <div>
+          <span class="s-badge"><i data-lucide="send" style="width:12px;height:12px"></i> Endpoint POST</span>
+          <h2 class="s-title">Menambah Data: POST Menu Baru &amp; Validasi</h2>
+          <p class="s-desc">Menangkap JSON body dengan <code>request.get_json()</code> dan mengembalikan status 201 Created.</p>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="codebox">
+          <div class="codehead">
+            <span>app.py (POST Route)</span>
+            <button class="copybtn" onclick="copyCode(this)"><i data-lucide="copy" style="width:11px;height:11px"></i>Salin</button>
+          </div>
+          <pre class="codebody">@app.route('/api/menu', methods=['POST'])
+def tambah_menu():
+    data = request.get_json()
+    if not data:
+        return jsonify({"status": "error", "pesan": "Body JSON wajib disertakan!"}), 400
+
+    nama = data.get('nama', '').strip()
+    harga = data.get('harga')
+    kategori = data.get('kategori', 'Makanan').strip()
+    stok = data.get('stok', 0)
+
+    # Validasi input sederhana
+    if not nama or not isinstance(harga, (int, float)) or harga <= 0:
+        return jsonify({"status": "error", "pesan": "Nama wajib diisi dan harga harus angka > 0!"}), 400
+
+    # Auto-generate ID baru
+    new_id = max([i['id'] for i in menu_kantin], default=0) + 1
+    item_baru = {"id": new_id, "nama": nama, "harga": int(harga), "kategori": kategori, "stok": int(stok)}
+    menu_kantin.append(item_baru)
+
+    return jsonify({"status": "success", "pesan": "Menu berhasil ditambahkan!", "data": item_baru}), 201</pre>
+        </div>
+
+        <div class="glass" style="padding:20px;display:flex;flex-direction:column;justify-content:center;gap:10px">
+          <h3 style="font-size:15px;color:var(--ink)">Mengapa Status 201 Bukan 200?</h3>
+          <p style="font-size:13px;color:var(--dim);line-height:1.6">
+            Menurut standar arsitektur REST, pembuatan resource baru harus mengembalikan kode <b>201 Created</b>. Ini membedakan antara sekadar membaca data (200) dengan berhasil melahirkan record data baru di sistem.
+          </p>
+          <div style="background:#FEF2F2;border-left:4px solid #DC2626;padding:10px 14px;border-radius:8px;font-size:12px;color:#991B1B">
+            <b>Freshmen Trap:</b> Jika di Postman lupa memilih format <code>raw -> JSON</code>, maka <code>request.get_json()</code> akan mengembalikan <code>None</code> dan memicu error!
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 9: BACKEND PUT & DELETE ==================== -->
+  <section class="slide" id="slide-9" data-sec="Live Coding 4">
+    <div class="slide-canvas">
+      <div class="s-head">
+        <div>
+          <span class="s-badge"><i data-lucide="refresh-cw" style="width:12px;height:12px"></i> CRUD Sempurna</span>
+          <h2 class="s-title">Melengkapi CRUD: Endpoint PUT &amp; DELETE</h2>
+          <p class="s-desc">Memperbarui atribut menu yang sudah ada dan menghapusnya dari daftar.</p>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="codebox">
+          <div class="codehead">
+            <span>app.py (PUT &amp; DELETE)</span>
+            <button class="copybtn" onclick="copyCode(this)"><i data-lucide="copy" style="width:11px;height:11px"></i>Salin</button>
+          </div>
+          <pre class="codebody"># 3. Update Menu (PUT)
+@app.route('/api/menu/<int:item_id>', methods=['PUT'])
+def update_menu(item_id):
+    item = cari_menu_by_id(item_id)
+    if not item:
+        return jsonify({"status": "error", "pesan": "Menu tidak ditemukan!"}), 404
+
+    data = request.get_json() or {}
+    if 'nama' in data: item['nama'] = data['nama']
+    if 'harga' in data and data['harga'] > 0: item['harga'] = int(data['harga'])
+    if 'stok' in data: item['stok'] = int(data['stok'])
+
+    return jsonify({"status": "success", "pesan": "Menu diperbarui!", "data": item}), 200
+
+# 4. Hapus Menu (DELETE)
+@app.route('/api/menu/<int:item_id>', methods=['DELETE'])
+def hapus_menu(item_id):
+    item = cari_menu_by_id(item_id)
+    if not item:
+        return jsonify({"status": "error", "pesan": "Menu tidak ditemukan!"}), 404
+
+    menu_kantin.remove(item)
+    return jsonify({"status": "success", "pesan": f"Menu '{item['nama']}' dihapus!"}), 200</pre>
+        </div>
+
+        <div class="glass" style="padding:20px;display:flex;flex-direction:column;justify-content:center;gap:12px">
+          <h3 style="font-size:15px;color:var(--ink)">Kini Backend Memiliki 4 Pilar CRUD Utuh!</h3>
+          <p style="font-size:13px;color:var(--dim);line-height:1.6">
+            Banyak tutorial hanya mengajarkan GET dan POST. Dengan menambahkan <b>PUT</b> dan <b>DELETE</b>, kamu telah menyelesaikan arsitektur REST API berstandar industri yang siap diuji dengan klien apa pun!
+          </p>
+          <div style="background:#F0FDF4;border-left:4px solid #16A34A;padding:10px 14px;border-radius:8px;font-size:12px;color:#15803D">
+            <b>Rubrik Tugas:</b> Mahasiswa yang mengimplementasikan 4 metode ini langsung mengamankan 30 poin bobot penilaian.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 10: INTRO POSTMAN ==================== -->
+  <section class="slide" id="slide-10" data-sec="Alat Penguji">
+    <div class="slide-canvas">
+      <div class="s-head">
+        <div>
+          <span class="s-badge"><i data-lucide="layers" style="width:12px;height:12px"></i> Postman</span>
+          <h2 class="s-title">Mengenal Postman: Klien Penguji REST API</h2>
+          <p class="s-desc">Mengapa kita tidak bisa menguji POST, PUT, dan DELETE hanya menggunakan browser biasa?</p>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="glass" style="padding:22px;display:flex;flex-direction:column;justify-content:center;gap:12px">
+          <h3 style="font-size:16px;color:var(--ink)">Batasan Address Bar Browser</h3>
+          <p style="font-size:13px;color:var(--dim);line-height:1.6">
+            Saat kamu mengetik <code>http://127.0.0.1:5000/api/menu</code> di address bar Chrome atau Edge, browser <b>hanya bisa mengirim request HTTP bertipe GET</b>.
+          </p>
+          <p style="font-size:13px;color:var(--dim);line-height:1.6">
+            Browser tidak menyediakan antarmuka untuk menyisipkan header kustom atau request body JSON untuk menguji POST/PUT/DELETE. Di sinilah <b>Postman</b> hadir sebagai simulator klien serbaguna.
+          </p>
+        </div>
+
+        <div class="glass" style="padding:22px;display:flex;flex-direction:column;gap:10px">
+          <h3 style="font-size:15px;color:var(--ink)">4 Bagian Utama Antarmuka Postman:</h3>
+          <div style="background:#FFF;padding:10px 14px;border-radius:8px;border:1px solid #CBD5E1;font-size:12.5px;color:var(--dim)">
+            <b style="color:#0284C7">1. Method Selector &amp; URL:</b> Dropdown GET, POST, PUT, DELETE dan kolom URL target.
+          </div>
+          <div style="background:#FFF;padding:10px 14px;border-radius:8px;border:1px solid #CBD5E1;font-size:12.5px;color:var(--dim)">
+            <b style="color:#16A34A">2. Tab Headers:</b> Menentukan metadata seperti <code>Content-Type: application/json</code>.
+          </div>
+          <div style="background:#FFF;padding:10px 14px;border-radius:8px;border:1px solid #CBD5E1;font-size:12.5px;color:var(--dim)">
+            <b style="color:#D97706">3. Tab Body:</b> Tempat mengetik payload JSON mentah (Pilih opsi <b>raw -> JSON</b>).
+          </div>
+          <div style="background:#FFF;padding:10px 14px;border-radius:8px;border:1px solid #CBD5E1;font-size:12.5px;color:var(--dim)">
+            <b style="color:#7C3AED">4. Response Viewer:</b> Menampilkan status code (200, 201, 404), waktu respon, dan isi JSON balasan.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 11: POSTMAN CHEAT SHEET ==================== -->
+  <section class="slide" id="slide-11" data-sec="Panduan Postman">
+    <div class="slide-canvas">
+      <div class="s-head">
+        <div>
+          <span class="s-badge"><i data-lucide="check-square" style="width:12px;height:12px"></i> Cheat Sheet</span>
+          <h2 class="s-title">Panduan 3 Langkah Menembak API di Postman</h2>
+          <p class="s-desc">Langkah demi langkah menguji endpoint POST untuk menambah menu baru tanpa gagal.</p>
+        </div>
+      </div>
+
+      <div class="grid-3">
+        <div class="glass" style="padding:18px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px">
+          <div style="width:36px;height:36px;border-radius:50%;background:#E0F2FE;color:#0284C7;display:grid;place-items:center;font-weight:700;font-family:var(--mono)">1</div>
+          <h3 style="font-size:14px;color:var(--ink)">Pilih Method &amp; URL</h3>
+          <p style="font-size:12px;color:var(--faint);line-height:1.5">
+            Ubah dropdown dari <b>GET</b> menjadi <b>POST</b>.<br>
+            Ketik URL: <code style="font-family:var(--mono);color:#0369A1">http://127.0.0.1:5000/api/menu</code>
+          </p>
+        </div>
+
+        <div class="glass" style="padding:18px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px">
+          <div style="width:36px;height:36px;border-radius:50%;background:#FEF3C7;color:#D97706;display:grid;place-items:center;font-weight:700;font-family:var(--mono)">2</div>
+          <h3 style="font-size:14px;color:var(--ink)">Set Body raw &rarr; JSON</h3>
+          <p style="font-size:12px;color:var(--faint);line-height:1.5">
+            Klik tab <b>Body</b> &rarr; klik radio button <b>raw</b> &rarr; pilih dropdown kanan dari Text menjadi <b>JSON</b>.
+          </p>
+        </div>
+
+        <div class="glass" style="padding:18px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px">
+          <div style="width:36px;height:36px;border-radius:50%;background:#DCFCE7;color:#16A34A;display:grid;place-items:center;font-weight:700;font-family:var(--mono)">3</div>
+          <h3 style="font-size:14px;color:var(--ink)">Ketik JSON &amp; Klik Send</h3>
+          <p style="font-size:12px;color:var(--faint);line-height:1.5">
+            Tulis payload menu baru, tekan tombol biru <b>Send</b>, lalu amati respon <b>201 Created</b> di panel bawah.
+          </p>
+        </div>
+      </div>
+
+      <div class="codebox" style="margin-top:14px">
+        <div class="codehead"><span>Contoh Payload JSON untuk Di-paste ke Postman Body</span></div>
+        <pre class="codebody">{
+  "nama": "Ayam Geprek Sambal Matah",
+  "harga": 18000,
+  "kategori": "Makanan",
+  "stok": 25
+}</pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 12: REST SIMULATOR ==================== -->
+  <section class="slide" id="slide-12" data-sec="Simulator">
+    <div class="slide-canvas">
+      <div class="s-head">
+        <div>
+          <span class="s-badge"><i data-lucide="play" style="width:12px;height:12px"></i> Live Widget</span>
+          <h2 class="s-title">Simulator Interaktif REST API (Di Dalam Slide)</h2>
+          <p class="s-desc">Coba langsung request ke backend virtual tanpa perlu membuka Postman!</p>
+        </div>
+      </div>
+
+      <div class="glass" style="padding:20px">
+        <div class="sim-grid">
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div style="display:flex;gap:8px">
+              <select id="sim-method" class="sim-select" style="width:110px">
+                <option value="GET">GET</option>
+                <option value="POST">POST</option>
+                <option value="DELETE">DELETE</option>
+              </select>
+              <input type="text" id="sim-url" class="sim-input" style="flex:1" value="/api/menu" readonly>
+            </div>
+
+            <div class="sim-field">
+              <label class="sim-label">Request Body (JSON)</label>
+              <textarea id="sim-body" class="sim-input" style="height:90px;resize:none" placeholder='{"nama": "Soto Kudus", "harga": 14000, "kategori": "Makanan", "stok": 15}'></textarea>
+            </div>
+
+            <button class="sim-btn" onclick="jalankanSimulasiAPI()">
+              <i data-lucide="send" style="width:13px;height:13px"></i> Kirim Request
+            </button>
+          </div>
+
+          <div>
+            <div class="sim-label" style="margin-bottom:4px">Response Balasan Server (JSON)</div>
+            <pre id="sim-response" class="sim-res-box">// Klik 'Kirim Request' untuk melihat respon JSON...</pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 13: REQUESTS LIBRARY ==================== -->
+  <section class="slide" id="slide-13" data-sec="Eksternal API">
+    <div class="slide-canvas">
+      <div class="s-head">
+        <div>
+          <span class="s-badge"><i data-lucide="globe" style="width:12px;height:12px"></i> Server-to-Server</span>
+          <h2 class="s-title">Konsumsi API Eksternal via Library `requests`</h2>
+          <p class="s-desc">Menjadikan server Flask kita sebagai client yang memanggil server pihak ketiga di internet.</p>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="codebox">
+          <div class="codehead">
+            <span>Terminal Instalasi &amp; Contoh Sederhana</span>
+            <button class="copybtn" onclick="copyCode(this)"><i data-lucide="copy" style="width:11px;height:11px"></i>Salin</button>
+          </div>
+          <pre class="codebody"># 1. Install library requests
+pip install requests
+
+# 2. Contoh kode Python menghubungi API luar
+import requests
+
+url = "https://api.open-meteo.com/v1/forecast?latitude=-6.2088&longitude=106.8456&current_weather=true"
+
+response = requests.get(url, timeout=5)
+if response.status_code == 200:
+    data = response.json()
+    suhu = data['current_weather']['temperature']
+    print(f"Suhu kampus saat ini: {suhu}°C")</pre>
+        </div>
+
+        <div class="glass" style="padding:20px;display:flex;flex-direction:column;justify-content:center;gap:12px">
+          <h3 style="font-size:15px;color:var(--ink)">Mengapa Perlu Library `requests`?</h3>
+          <p style="font-size:13px;color:var(--dim);line-height:1.6">
+            Python memiliki modul bawaan <code>urllib</code>, namun kodenya sangat rumit dan kuno. Library <code>requests</code> adalah standar emas industri yang membuat komunikasi HTTP semudah memanggil <code>requests.get()</code> dan <code>response.json()</code>.
+          </p>
+          <div style="background:#F0FDF4;border-left:4px solid #16A34A;padding:10px 14px;border-radius:8px;font-size:12px;color:#15803D">
+            <b>Keunggulan Open-Meteo:</b> Tidak butuh pendaftaran akun, 100% bebas biaya, dan tanpa API Key yang memakan waktu aktivasi!
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 14: OPEN METEO WEATHER ==================== -->
+  <section class="slide" id="slide-14" data-sec="Cuaca Kampus">
+    <div class="slide-canvas">
+      <div class="s-head">
+        <div>
+          <span class="s-badge"><i data-lucide="cloud-sun" style="width:12px;height:12px"></i> Smart Feature</span>
+          <h2 class="s-title">Fitur Rekomendasi Menu Berdasarkan Cuaca</h2>
+          <p class="s-desc">Endpoint <code>/api/cuaca-kampus</code> memetakan suhu cuaca real-time ke rekomendasi hidangan kantin.</p>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="codebox">
+          <div class="codehead">
+            <span>app.py (/api/cuaca-kampus)</span>
+            <button class="copybtn" onclick="copyCode(this)"><i data-lucide="copy" style="width:11px;height:11px"></i>Salin</button>
+          </div>
+          <pre class="codebody">@app.route('/api/cuaca-kampus', methods=['GET'])
+def get_cuaca_kampus():
+    url = "https://api.open-meteo.com/v1/forecast?latitude=-6.2088&longitude=106.8456&current_weather=true"
+    try:
+        res = requests.get(url, timeout=5)
+        res.raise_for_status()
+        current = res.json().get('current_weather', {})
+        suhu = current.get('temperature', 28.0)
+
+        # Logika rekomendasi menu
+        if suhu >= 30.0:
+            saran = "Cuaca terik! Rekomendasi: Es Teh Manis Jumbo!"
+        elif suhu <= 25.0:
+            saran = "Cuaca sejuk/hujan! Rekomendasi: Mie Ayam Bakso Panas!"
+        else:
+            saran = "Cuaca nyaman! Semua menu siap dinikmati."
+
+        return jsonify({"status": "success", "suhu_celcius": suhu, "rekomendasi_menu": saran}), 200
+    except requests.RequestException:
+        # Fallback ramah jika offline
+        return jsonify({"status": "fallback", "suhu_celcius": 28.5, "rekomendasi_menu": "Es Teh Manis Jumbo selalu aman!"}), 200</pre>
+        </div>
+
+        <div class="glass" style="padding:20px;display:flex;flex-direction:column;justify-content:center;gap:12px">
+          <h3 style="font-size:15px;color:var(--ink)">Kecerdasan Kontekstual Aplikasi</h3>
+          <p style="font-size:13px;color:var(--dim);line-height:1.6">
+            Inilah bukti nyata kekuatan API: Aplikasi kantinmu bukan sekadar tabel data statis, melainkan aplikasi pintar yang terhubung dengan dunia luar dan memberikan rekomendasi otomatis kepada mahasiswa!
+          </p>
+          <div style="background:#FFFBEB;border-left:4px solid #D97706;padding:10px 14px;border-radius:8px;font-size:12px;color:#92400E">
+            <b>Fallback Mode:</b> Blok <code>try-except</code> menjamin aplikasi tidak crash meskipun laptop mahasiswa sedang terputus dari internet di dalam lab.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 15: JS FETCH ==================== -->
+  <section class="slide" id="slide-15" data-sec="Frontend Fetch">
+    <div class="slide-canvas">
+      <div class="s-head">
+        <div>
+          <span class="s-badge"><i data-lucide="sparkles" style="width:12px;height:12px"></i> Client-Side AJAX</span>
+          <h2 class="s-title">Frontend Asynchronous: Mengenal JavaScript `fetch()`</h2>
+          <p class="s-desc">Mengirim dan menerima data di balik layar tanpa perlu memicu refresh halaman web.</p>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="codebox">
+          <div class="codehead">
+            <span>script.js (async / await)</span>
+            <button class="copybtn" onclick="copyCode(this)"><i data-lucide="copy" style="width:11px;height:11px"></i>Salin</button>
+          </div>
+          <pre class="codebody">// 1. Memanggil GET dengan fetch
+async function muatMenu() {
+    const res = await fetch('/api/menu');
+    const json = await res.json();
+    console.log("Data menu:", json.data);
+}
+
+// 2. Mengirim POST dengan fetch
+async function kirimMenu(menuBaru) {
+    const res = await fetch('/api/menu', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json' // Wajib!
+        },
+        body: JSON.stringify(menuBaru)
+    });
+    const hasil = await res.json();
+    alert(hasil.pesan);
+}</pre>
+        </div>
+
+        <div class="glass" style="padding:20px;display:flex;flex-direction:column;justify-content:center;gap:12px">
+          <h3 style="font-size:15px;color:var(--ink)">Anatomi Penting Fetch API:</h3>
+          <div style="font-size:13px;color:var(--dim);line-height:1.6">
+            • <b><code>async/await</code>:</b> Menunggu server merespon tanpa membekukan antarmuka pengguna (UI tetap responsif).<br>
+            • <b><code>headers: {'Content-Type': 'application/json'}</code>:</b> Memberi sinyal kepada Flask bahwa data yang dikirim adalah format JSON.<br>
+            • <b><code>JSON.stringify()</code>:</b> Mengubah objek JavaScript menjadi string JSON baku sebelum dikirim ke kabel jaringan.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 16: DASHBOARD DEMO ==================== -->
+  <section class="slide" id="slide-16" data-sec="Live Demo UI">
+    <div class="slide-canvas">
+      <div class="s-head">
+        <div>
+          <span class="s-badge"><i data-lucide="layout" style="width:12px;height:12px"></i> Fullstack Integration</span>
+          <h2 class="s-title">Dashboard Kantin Real-Time (Live Demo)</h2>
+          <p class="s-desc">Hasil penggabungan Backend Flask REST API dengan antarmuka dinamis dashboard.html.</p>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="glass" style="padding:20px;display:flex;flex-direction:column;gap:12px">
+          <h3 style="font-size:15px;color:var(--ink)">Fitur Unggulan Dashboard:</h3>
+          <div style="font-size:13px;color:var(--dim);line-height:1.6;space-y:6px">
+            <p>1. <b>Auto-Load Weather:</b> Begitu halaman dibuka, JavaScript memanggil <code>/api/cuaca-kampus</code> dan menampilkan suhu &amp; rekomendasi.</p>
+            <p>2. <b>Dynamic Table Rendering:</b> Tabel menu di-generate murni lewat perulangan JavaScript <code>data.map(...)</code>.</p>
+            <p>3. <b>Instant Add &amp; Delete:</b> Menambahkan menu atau menekan tombol hapus langsung memperbarui tabel seketika tanpa kedipan refresh!</p>
+            <p>4. <b>Live JSON Inspector:</b> Dropdown untuk melihat respon JSON asli yang diterima browser.</p>
+          </div>
+        </div>
+
+        <div class="glass" style="padding:24px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:#FFF">
+          <div style="width:64px;height:64px;border-radius:18px;background:#E0F2FE;color:#0284C7;display:grid;place-items:center">
+            <i data-lucide="globe" style="width:32px;height:32px"></i>
+          </div>
+          <div>
+            <h4 style="font-size:16px;color:var(--ink)">Coba Buka di Browser Kamu:</h4>
+            <code style="font-family:var(--mono);font-size:15px;color:#0369A1;font-weight:700">http://127.0.0.1:5000/dashboard</code>
+          </div>
+          <p style="font-size:12px;color:var(--faint)">
+            Pastikan server Flask di terminalmu sudah berjalan dengan perintah <code>python app.py</code>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 17: FRESHMEN SHIELD ==================== -->
+  <section class="slide" id="slide-17" data-sec="Freshmen Shield">
+    <div class="slide-canvas">
+      <div class="s-head">
+        <div>
+          <span class="s-badge"><i data-lucide="shield-alert" style="width:12px;height:12px"></i> Freshmen Shield</span>
+          <h2 class="s-title">Antisipasi 4 Eror Populer &amp; Solusi Kilat</h2>
+          <p class="s-desc">Katalog eror yang paling sering dialami mahasiswa semester 3 saat belajar API.</p>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="glass" style="padding:16px;border-left:4px solid #DC2626">
+          <div style="font-family:var(--mono);font-size:11px;font-weight:700;color:#DC2626">EROR 1: request.get_json() return None</div>
+          <p style="font-size:12.5px;color:var(--dim);margin-top:4px">
+            <b>Penyebab:</b> Lupa menyertakan header <code>Content-Type: application/json</code> di Postman atau fetch.<br>
+            <b>Solusi:</b> Di Postman pilih <i>raw &rarr; JSON</i>. Di fetch tambahkan properti <code>headers</code>.
+          </p>
+        </div>
+
+        <div class="glass" style="padding:16px;border-left:4px solid #D97706">
+          <div style="font-family:var(--mono);font-size:11px;font-weight:700;color:#D97706">EROR 2: ModuleNotFoundError: 'requests'</div>
+          <p style="font-size:12.5px;color:var(--dim);margin-top:4px">
+            <b>Penyebab:</b> Menjalankan program di luar virtual environment aktif.<br>
+            <b>Solusi:</b> Pastikan prompt terminal diawali <code>(venv)</code>, lalu ketik <code>pip install requests</code>.
+          </p>
+        </div>
+
+        <div class="glass" style="padding:16px;border-left:4px solid #0284C7">
+          <div style="font-family:var(--mono);font-size:11px;font-weight:700;color:#0284C7">EROR 3: 405 Method Not Allowed</div>
+          <p style="font-size:12.5px;color:var(--dim);margin-top:4px">
+            <b>Penyebab:</b> Rute Flask hanya mengizinkan GET, tetapi ditembak dengan POST.<br>
+            <b>Solusi:</b> Cek decorator rute, pastikan mencantumkan <code>methods=['POST']</code> atau method yang sesuai.
+          </p>
+        </div>
+
+        <div class="glass" style="padding:16px;border-left:4px solid #7C3AED">
+          <div style="font-family:var(--mono);font-size:11px;font-weight:700;color:#7C3AED">EROR 4: JSONDecodeError di Browser / Terminal</div>
+          <p style="font-size:12.5px;color:var(--dim);margin-top:4px">
+            <b>Penyebab:</b> Menuliskan tanda petik satu (<code>'</code>) atau ada koma berlebih di akhir object JSON.<br>
+            <b>Solusi:</b> JSON standar hanya mengenali petik dua (<code>"</code>) dan tidak boleh ada trailing comma.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 18: QUIZ ==================== -->
+  <section class="slide" id="slide-18" data-sec="Kuis">
+    <div class="slide-canvas">
+      <div class="s-head">
+        <div>
+          <span class="s-badge"><i data-lucide="help-circle" style="width:12px;height:12px"></i> Evaluasi Cepat</span>
+          <h2 class="s-title">Kuis Pemahaman Interaktif</h2>
+          <p class="s-desc" id="quiz-progress-text">Uji pemahamanmu sebelum mengerjakan tugas praktikum.</p>
+        </div>
+      </div>
+
+      <div class="glass" style="padding:22px">
+        <div id="quiz-container">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+            <span id="q-no" style="font-family:var(--mono);font-size:12px;font-weight:700;color:var(--accent)">Soal 1 / 5</span>
+            <div id="q-dots" style="display:flex;gap:6px"></div>
+          </div>
+          <h3 id="q-text" style="font-size:15px;color:var(--ink);margin-bottom:14px;line-height:1.5">Pertanyaan...</h3>
+          <div id="q-options" style="display:flex;flex-direction:column;gap:8px"></div>
+          <div id="q-footer" style="margin-top:14px;display:flex;justify-content:flex-end"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 19: TUGAS ==================== -->
+  <section class="slide" id="slide-19" data-sec="Tugas Praktikum">
+    <div class="slide-canvas">
+      <div class="s-head">
+        <div>
+          <span class="s-badge"><i data-lucide="package" style="width:12px;height:12px"></i> Penugasan Mandiri</span>
+          <h2 class="s-title">Tugas Praktikum 07 &amp; Rubrik Penilaian</h2>
+          <p class="s-desc">Kembangkan sistem inventaris kantin dengan REST API dan integrasi cuaca lengkap.</p>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="glass" style="padding:18px">
+          <h3 style="font-size:14px;color:var(--ink);margin-bottom:8px">Instruksi Tugas:</h3>
+          <ul style="font-size:12.5px;color:var(--dim);line-height:1.6;margin-left:18px;space-y:4px">
+            <li>Lengkapi 4 rute CRUD menu kantin (GET all, GET id, POST, PUT, DELETE).</li>
+            <li>Implementasikan integrasi API eksternal Open-Meteo Cuaca di <code>/api/cuaca-kampus</code>.</li>
+            <li>Buat antarmuka frontend dashboard yang memanfaatkan <code>fetch()</code> untuk membaca dan menambah menu secara real-time tanpa reload.</li>
+            <li>Sertakan screenshot pengujian 4 metode CRUD di Postman dalam laporan praktikum.</li>
+          </ul>
+        </div>
+
+        <div class="glass" style="padding:18px">
+          <h3 style="font-size:14px;color:var(--ink);margin-bottom:8px">Rubrik Penilaian (Total 100 Poin):</h3>
+          <div style="display:flex;flex-direction:column;gap:6px;font-size:12px">
+            <div style="display:flex;justify-content:space-between;padding:6px 10px;background:#FFF;border-radius:8px">
+              <span>Endpoint CRUD Lengkap (GET, POST, PUT, DELETE)</span>
+              <b style="color:var(--accent)">30 Poin</b>
+            </div>
+            <div style="display:flex;justify-content:space-between;padding:6px 10px;background:#FFF;border-radius:8px">
+              <span>Integrasi API Eksternal Cuaca via library requests</span>
+              <b style="color:var(--accent)">25 Poin</b>
+            </div>
+            <div style="display:flex;justify-content:space-between;padding:6px 10px;background:#FFF;border-radius:8px">
+              <span>Frontend Fetch Interaktif &amp; DOM Update</span>
+              <b style="color:var(--accent)">25 Poin</b>
+            </div>
+            <div style="display:flex;justify-content:space-between;padding:6px 10px;background:#FFF;border-radius:8px">
+              <span>Dokumentasi Pengujian Postman &amp; Kode Bersih</span>
+              <b style="color:var(--accent)">20 Poin</b>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 20: SUMMARY ==================== -->
+  <section class="slide" id="slide-20" data-sec="Penutup">
+    <div class="slide-canvas">
+      <div class="glass" style="padding:36px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:14px">
+        <div class="s-badge"><i data-lucide="sparkles" style="width:12px;height:12px"></i> Sukses Pertemuan 07</div>
+        <h2 style="font-family:var(--disp);font-size:28px;color:var(--ink)">Selamat! Kamu Telah Menjadi Pengembang API</h2>
+        <p style="font-size:14.5px;color:var(--dim);max-width:680px;line-height:1.6">
+          Kamu kini menguasai arsitektur modern Client-Server decoupled, mampu merancang REST API dengan status codes semantik, menguji dengan Postman, serta menghubungkan aplikasi lokal ke jaringan internet global.
+        </p>
+
+        <div style="background:#FFF;border:1px solid #CBD5E1;padding:12px 20px;border-radius:14px;margin-top:10px;display:flex;align-items:center;gap:10px;text-align:left">
+          <div style="width:36px;height:36px;border-radius:10px;background:#EEF2FF;color:#4F46E5;display:grid;place-items:center">
+            <i data-lucide="database" style="width:20px;height:20px"></i>
+          </div>
+          <div>
+            <b style="font-size:13px;color:var(--ink)">Jembatan ke Pertemuan 08:</b>
+            <p style="font-size:12px;color:var(--faint)">Data in-memory saat ini akan hilang jika server dimatikan. Minggu depan, kita akan menghubungkan REST API ke <b>Database Permanen (SQLAlchemy &amp; SQLite)</b>!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- CANONICAL FLOATING DOCK -->
+<nav id="dock" class="glass" aria-label="Navigasi Slide">
+  <button class="dockbtn" id="prevBtn" title="Slide Sebelumnya (Panah Kiri)"><i data-lucide="chevron-left" style="width:18px;height:18px"></i></button>
+  <div class="dock-info">
+    <span id="curNum" style="color:var(--accent)">01</span> / <span id="totNum">20</span>
+    <span class="dock-sec" id="secLabel">Pembuka</span>
+  </div>
+  <button class="dockbtn" id="nextBtn" title="Slide Berikutnya (Panah Kanan)"><i data-lucide="chevron-right" style="width:18px;height:18px"></i></button>
+  <button class="dockbtn" id="fsBtn" title="Layar Penuh (F)"><i data-lucide="maximize-2" style="width:16px;height:16px"></i></button>
+</nav>
+
+<script>
+/* ========================================================
+   DECK ENGINE: AUTO-SCALING, NAVIGATION & INTERACTION
+   ======================================================== */
+const $ = s => document.querySelector(s);
+const $$ = s => document.querySelectorAll(s);
+
+const slides = Array.from($$('.slide'));
+const totalSlides = slides.length;
+let curSlide = 0;
+let fitTimer = null;
+
+// Dynamic auto-scaling to prevent any horizontal/vertical overflow
+function fitActive(){
+  const s = slides[curSlide];
+  if(!s) return;
+  const c = s.querySelector('.slide-canvas');
+  if(!c) return;
+
+  c.style.zoom = 1;
+  const availH = window.innerHeight - 90; // headroom for dock & padding
+  const availW = window.innerWidth - 48;
+  const r = c.getBoundingClientRect();
+  if(!r.height || !r.width) return;
+
+  const z = Math.min(1, availH / r.height, availW / r.width);
+  if(z < 0.99) {
+    c.style.zoom = Math.max(0.55, Math.round(z * 1000) / 1000);
+  }
+}
+
+window.addEventListener('resize', () => {
+  clearTimeout(fitTimer);
+  fitTimer = setTimeout(fitActive, 60);
+});
+window.addEventListener('orientationchange', () => {
+  clearTimeout(fitTimer);
+  fitTimer = setTimeout(fitActive, 200);
+});
+
+function show(idx){
+  if(idx < 0) idx = 0;
+  if(idx >= totalSlides) idx = totalSlides - 1;
+
+  slides[curSlide].classList.remove('on');
+  curSlide = idx;
+  const curEl = slides[curSlide];
+  curEl.classList.add('on');
+
+  // Update Progress Bar
+  const pct = ((curSlide + 1) / totalSlides) * 100;
+  $('#progress').style.width = pct + '%';
+
+  // Update Dock
+  $('#curNum').textContent = String(curSlide + 1).padStart(2, '0');
+  $('#totNum').textContent = String(totalSlides).padStart(2, '0');
+  $('#secLabel').textContent = curEl.dataset.sec || 'Praktikum';
+
+  window.location.hash = curEl.id;
+  fitActive();
+}
+
+$('#prevBtn').onclick = () => show(curSlide - 1);
+$('#nextBtn').onclick = () => show(curSlide + 1);
+
+document.addEventListener('keydown', e => {
+  if(['INPUT', 'TEXTAREA', 'SELECT'].includes(e.target.tagName)) return;
+  if(e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') {
+    e.preventDefault(); show(curSlide + 1);
+  } else if(e.key === 'ArrowLeft' || e.key === 'PageUp') {
+    e.preventDefault(); show(curSlide - 1);
+  } else if(e.key === 'Home') {
+    e.preventDefault(); show(0);
+  } else if(e.key === 'End') {
+    e.preventDefault(); show(totalSlides - 1);
+  } else if(e.key === 'f' || e.key === 'F') {
+    toggleFullscreen();
+  }
+});
+
+/* FULLSCREEN & FAUX FULLSCREEN (SOP COMPLIANCE) */
+function isFullscreenActive(){
+  return !!(document.fullscreenElement || document.webkitFullscreenElement || document.body.classList.contains('fsmode'));
+}
+
+function updateFsUI(){
+  const isFS = isFullscreenActive();
+  const btn = $('#fsBtn');
+  if(!btn) return;
+  btn.innerHTML = isFS ? '<i data-lucide="minimize-2" style="width:16px;height:16px"></i>' : '<i data-lucide="maximize-2" style="width:16px;height:16px"></i>';
+  lucide.createIcons();
+  fitActive();
+}
+
+function fauxFS(){
+  document.body.classList.toggle('fsmode');
+  updateFsUI();
+  const t = $('#fstip');
+  if(!t) return;
+  t.textContent = 'Mode layar penuh aktif.';
+  t.classList.add('on');
+  setTimeout(() => t.classList.remove('on'), 3000);
+}
+
+function toggleFullscreen(){
+  const el = document.documentElement;
+  if(document.fullscreenElement || document.webkitFullscreenElement){
+    const exit = document.exitFullscreen || document.webkitExitFullscreen;
+    if(exit){ Promise.resolve(exit.call(document)).catch(fauxFS); } else { fauxFS(); }
+    return;
+  }
+  if(document.body.classList.contains('fsmode')){ fauxFS(); return; }
+  const req = el.requestFullscreen || el.webkitRequestFullscreen;
+  if(!req){ fauxFS(); return; }
+  Promise.resolve(req.call(el)).catch(fauxFS);
+}
+
+$('#fsBtn').onclick = toggleFullscreen;
+document.addEventListener('fullscreenchange', updateFsUI);
+document.addEventListener('webkitfullscreenchange', updateFsUI);
+
+/* COPY CODE HELPER */
+function copyCode(btn){
+  const box = btn.closest('.codebox');
+  const code = box.querySelector('.codebody').innerText;
+  navigator.clipboard.writeText(code).then(() => {
+    const orig = btn.innerHTML;
+    btn.innerHTML = '<i data-lucide="check" style="width:11px;height:11px"></i>Tersalin!';
+    lucide.createIcons();
+    setTimeout(() => { btn.innerHTML = orig; lucide.createIcons(); }, 2000);
+  });
+}
+
+/* INTERACTIVE SIMULATOR (SLIDE 12) */
+let simData = [
+  { id: 1, nama: "Nasi Goreng Spesial", harga: 15000, kategori: "Makanan", stok: 20 },
+  { id: 2, nama: "Mie Ayam Bakso", harga: 13000, kategori: "Makanan", stok: 15 },
+  { id: 3, nama: "Es Teh Manis Jumbo", harga: 5000, kategori: "Minuman", stok: 50 }
+];
+
+function jalankanSimulasiAPI(){
+  const method = $('#sim-method').value;
+  const bodyText = $('#sim-body').value.trim();
+  const resBox = $('#sim-response');
+
+  if(method === 'GET'){
+    resBox.textContent = JSON.stringify({
+      status: "success",
+      total: simData.length,
+      data: simData
+    }, null, 2);
+  } else if(method === 'POST'){
+    try {
+      const payload = bodyText ? JSON.parse(bodyText) : null;
+      if(!payload || !payload.nama || !payload.harga){
+        resBox.textContent = JSON.stringify({
+          status: "error",
+          pesan: "HTTP 400 Bad Request: 'nama' dan 'harga' wajib diisi!"
+        }, null, 2);
+        return;
+      }
+      const newId = simData.length ? Math.max(...simData.map(i => i.id)) + 1 : 1;
+      const newItem = {
+        id: newId,
+        nama: payload.nama,
+        harga: Number(payload.harga),
+        kategori: payload.kategori || "Makanan",
+        stok: Number(payload.stok || 10)
+      };
+      simData.push(newItem);
+      resBox.textContent = JSON.stringify({
+        status: "success",
+        code: 201,
+        pesan: "HTTP 201 Created: Menu berhasil ditambahkan!",
+        data: newItem
+      }, null, 2);
+    } catch(e) {
+      resBox.textContent = JSON.stringify({
+        status: "error",
+        pesan: "HTTP 400 Bad Request: Format JSON tidak valid! Periksa petik dua dan koma."
+      }, null, 2);
+    }
+  } else if(method === 'DELETE'){
+    if(simData.length > 0){
+      const del = simData.pop();
+      resBox.textContent = JSON.stringify({
+        status: "success",
+        code: 200,
+        pesan: `HTTP 200 OK: Menu '${del.nama}' (ID: ${del.id}) berhasil dihapus.`
+      }, null, 2);
+    } else {
+      resBox.textContent = JSON.stringify({
+        status: "error",
+        code: 404,
+        pesan: "HTTP 404 Not Found: Daftar menu sudah kosong!"
+      }, null, 2);
+    }
+  }
+}
+
+/* INTERACTIVE QUIZ ENGINE (SLIDE 18) */
+const QUIZ = [
+  {
+    q: "Apa perbedaan paling mendasar antara arsitektur SSR (Jinja2) dan REST API?",
+    o: [
+      "SSR mengembalikan HTML siap tampil, sedangkan REST API mengembalikan data mentah (JSON)",
+      "SSR berjalan di browser, sedangkan REST API berjalan di database",
+      "SSR hanya untuk PHP, sedangkan REST API hanya untuk Python",
+      "SSR tidak membutuhkan server sama sekali"
+    ],
+    a: 0
+  },
+  {
+    q: "Kode status HTTP manakah yang paling tepat dikembalikan server saat client berhasil membuat resource menu baru?",
+    o: ["200 OK", "201 Created", "204 No Content", "302 Found"],
+    a: 1
+  },
+  {
+    q: "Di Postman, pengaturan apa yang wajib dipilih agar Flask request.get_json() dapat membaca data kiriman?",
+    o: [
+      "Tab Params -> Query String",
+      "Tab Body -> form-data",
+      "Tab Body -> raw -> JSON",
+      "Tab Authorization -> No Auth"
+    ],
+    a: 2
+  },
+  {
+    q: "Apa fungsi utama dari properti headers: {'Content-Type': 'application/json'} saat memanggil fetch()?",
+    o: [
+      "Mengompres ukuran gambar otomatis",
+      "Memberi tahu server bahwa payload request yang dikirim berformat JSON",
+      "Menghubungkan browser ke satelit GPS cuaca",
+      "Mencegah laptop terkena virus komputer"
+    ],
+    a: 1
+  },
+  {
+    q: "Mengapa kita memilih Open-Meteo API dibandingkan OpenWeatherMap untuk praktikum pengenalan API?",
+    o: [
+      "Karena Open-Meteo 100% gratis, tanpa API Key, dan langsung bekerja tanpa delay aktivasi",
+      "Karena OpenWeatherMap sudah ditutup secara permanen",
+      "Karena Open-Meteo ditulis menggunakan bahasa Python murni",
+      "Karena Open-Meteo hanya bisa dibuka di VS Code"
+    ],
+    a: 0
+  }
+];
+
+const LETTERS = ['A', 'B', 'C', 'D'];
+let qIdx = 0, qScore = 0, qMarks = [];
+
+function renderQuiz(reset){
+  if(reset){ qIdx = 0; qScore = 0; qMarks = []; }
+  const container = $('#quiz-container');
+
+  if(qIdx >= QUIZ.length){
+    $('#q-no').textContent = 'Hasil Evaluasi Kuis';
+    $('#q-dots').innerHTML = QUIZ.map((_, i) => `<span style="width:8px;height:8px;border-radius:50%;background:${qMarks[i] ? '#16A34A' : '#DC2626'}"></span>`).join('');
+    $('#q-text').innerHTML = `<span style="font-size:24px;font-family:var(--disp);color:#16A34A">Skor Kamu: ${qScore} / ${QUIZ.length}</span>`;
+    $('#q-options').innerHTML = `<p style="font-size:13.5px;color:var(--dim);line-height:1.6">${qScore >= 4 ? 'Luar biasa! Kamu telah menguasai konsep dasar REST API, HTTP methods, Postman, dan integrasi networking.' : 'Bagus! Coba tinjau kembali ringkasan Freshmen Shield di slide 17.'}</p>`;
+    $('#q-footer').innerHTML = '<button class="sim-btn" onclick="renderQuiz(true)" style="background:var(--accent)">Ulangi Kuis</button>';
+    return;
+  }
+
+  const curQ = QUIZ[qIdx];
+  $('#q-no').textContent = `Soal ${qIdx + 1} / ${QUIZ.length}`;
+  $('#q-dots').innerHTML = QUIZ.map((_, i) => `<span style="width:8px;height:8px;border-radius:50%;background:${i < qMarks.length ? (qMarks[i] ? '#16A34A' : '#DC2626') : i === qIdx ? 'var(--accent)' : '#CBD5E1'}"></span>`).join('');
+  $('#q-text').textContent = curQ.q;
+  $('#q-options').innerHTML = curQ.o.map((opt, i) => `
+    <button class="qopt" type="button" data-i="${i}">
+      <span class="qletter">${LETTERS[i]}</span>
+      <span>${opt}</span>
+    </button>
+  `).join('');
+  $('#q-footer').innerHTML = '';
+
+  $$('#q-options .qopt').forEach(btn => {
+    btn.onclick = () => {
+      const selected = Number(btn.dataset.i);
+      const isRight = selected === curQ.a;
+      if(isRight) qScore++;
+      qMarks.push(isRight);
+
+      $$('#q-options .qopt').forEach((b, j) => {
+        b.disabled = true;
+        if(j === curQ.a) b.classList.add('right');
+      });
+      if(!isRight) btn.classList.add('wrong');
+
+      $('#q-footer').innerHTML = `<button class="sim-btn" id="nextQBtn">${qIdx === QUIZ.length - 1 ? 'Lihat Skor Akhir' : 'Lanjut &rarr;'}</button>`;
+      $('#nextQBtn').onclick = () => { qIdx++; renderQuiz(); };
+    };
+  });
+}
+
+// Inisialisasi Kuis
+renderQuiz(true);
+
+// Lucide icon render
+lucide.createIcons();
+
+// Inisialisasi Slide berdasarkan Hash URL
+let startIdx = 0;
+if(window.location.hash){
+  const found = slides.findIndex(s => '#' + s.id === window.location.hash);
+  if(found !== -1) startIdx = found;
+}
+show(startIdx);
+
+window.addEventListener('hashchange', () => {
+  const found = slides.findIndex(s => '#' + s.id === window.location.hash);
+  if(found !== -1 && found !== curSlide) show(found);
+});
+</script>
+
+</body>
+</html>
