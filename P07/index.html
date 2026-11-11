@@ -1086,6 +1086,7 @@ menu_kantin = [
               <select id="sim-method" class="sim-select" style="width:110px">
                 <option value="GET">GET</option>
                 <option value="POST">POST</option>
+                <option value="PUT">PUT</option>
                 <option value="DELETE">DELETE</option>
               </select>
               <input type="text" id="sim-url" class="sim-input" style="flex:1" value="/api/menu" readonly>
@@ -1669,6 +1670,40 @@ function jalankanSimulasiAPI(){
       resBox.textContent = JSON.stringify({
         status: "error",
         pesan: "HTTP 400 Bad Request: Format JSON tidak valid! Periksa petik dua dan koma."
+      }, null, 2);
+    }
+  } else if(method === 'PUT'){
+    try {
+      const payload = bodyText ? JSON.parse(bodyText) : null;
+      if(!payload){
+        resBox.textContent = JSON.stringify({
+          status: "error",
+          pesan: "HTTP 400 Bad Request: Masukkan JSON body yang ingin diperbarui (misal harga atau stok)!"
+        }, null, 2);
+        return;
+      }
+      if(simData.length > 0){
+        const item = simData[0];
+        if(payload.harga) item.harga = Number(payload.harga);
+        if(payload.stok) item.stok = Number(payload.stok);
+        if(payload.nama) item.nama = payload.nama;
+        resBox.textContent = JSON.stringify({
+          status: "success",
+          code: 200,
+          pesan: `HTTP 200 OK: Menu '${item.nama}' (ID: ${item.id}) berhasil diperbarui!`,
+          data: item
+        }, null, 2);
+      } else {
+        resBox.textContent = JSON.stringify({
+          status: "error",
+          code: 404,
+          pesan: "HTTP 404 Not Found: Daftar menu kosong!"
+        }, null, 2);
+      }
+    } catch(e) {
+      resBox.textContent = JSON.stringify({
+        status: "error",
+        pesan: "HTTP 400 Bad Request: Format JSON tidak valid!"
       }, null, 2);
     }
   } else if(method === 'DELETE'){
