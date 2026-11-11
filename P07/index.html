@@ -716,11 +716,12 @@ python app.py</pre>
               <div class="codehead-left">
                 <div class="mac-dots"><span class="mac-dot dot-red"></span><span class="mac-dot dot-yellow"></span><span class="mac-dot dot-green"></span></div>
                 <span class="codehead-file"><i data-lucide="file" style="width:13px;height:13px"></i>app.py</span>
-                <span style="font:700 9.5px/1 var(--mono);background:rgba(56,189,248,0.18);color:#38BDF8;border:1px solid rgba(56,189,248,0.4);padding:2px 7px;border-radius:4px">TINGGAL COPY-PASTE KE BARIS 8 – 24</span>
+                <span style="font:700 9.5px/1 var(--mono);background:rgba(16,185,129,0.18);color:#10B981;border:1px solid rgba(16,185,129,0.4);padding:2px 7px;border-radius:4px">SUDAH TERSEDIA DI STARTER KIT (BARIS 10 – 50)</span>
               </div>
-              <button class="codehead-copy" type="button" onclick="copyCode(this)"><i data-lucide="copy" style="width:11px;height:11px"></i>Salin Kode</button>
+              <button class="codehead-copy" type="button" onclick="copyCode(this)"><i data-lucide="copy" style="width:11px;height:11px"></i>Salin Kode (Opsional)</button>
             </div>
-            <pre class="codebody"><span class="cm"># Sisipkan tepat di bawah app = Flask(__name__)</span>
+            <pre class="codebody"><span class="cm"># ✅ SUDAH TERSEDIA DI STARTER KIT (Baris 10 - 50)</span>
+<span class="cm"># Periksa file app.py kamu untuk memahami struktur data ini:</span>
 menu_kantin = [
     {<span class="str">"id"</span>: <span class="num">1</span>, <span class="str">"nama"</span>: <span class="str">"Nasi Goreng Spesial"</span>, <span class="str">"harga"</span>: <span class="num">15000</span>, <span class="str">"kategori"</span>: <span class="str">"Makanan"</span>, <span class="str">"stok"</span>: <span class="num">20</span>},
     {<span class="str">"id"</span>: <span class="num">2</span>, <span class="str">"nama"</span>: <span class="str">"Mie Ayam Bakso"</span>, <span class="str">"harga"</span>: <span class="num">13000</span>, <span class="str">"kategori"</span>: <span class="str">"Makanan"</span>, <span class="str">"stok"</span>: <span class="num">15</span>},
@@ -728,28 +729,28 @@ menu_kantin = [
 ]
 
 <span class="kw">def</span> <span class="fn">cari_menu_by_id</span>(item_id):
-    <span class="str">"""Mencari dictionary menu berdasarkan ID"""</span>
+    <span class="str">"""Mencari dictionary menu berdasarkan ID (Prinsip DRY)"""</span>
     <span class="kw">for</span> item <span class="kw">in</span> menu_kantin:
         <span class="kw">if</span> item[<span class="str">"id"</span>] == item_id:
             <span class="kw">return</span> item
     <span class="kw">return</span> <span class="kw">None</span></pre>
             <div class="codefoot">
               <i data-lucide="help-circle"></i>
-              <div>Helper function ini akan dipakai berulang kali oleh rute GET id, PUT, dan DELETE (Prinsip DRY).</div>
+              <div><strong>Info Praktikum:</strong> Bagian ini sudah ada di starter kit. Kamu tidak perlu ketik ulang! Cukup pahami strukturnya lalu lanjut ke Langkah 02.</div>
             </div>
           </div>
           <div class="check-result-box">
             <i data-lucide="circle-check"></i>
-            <div><strong>Verifikasi:</strong> Simpan file (<code>Ctrl+S</code>), jalankan <code>python app.py</code> &rarr; Server aktif tanpa syntax error!</div>
+            <div><strong>Verifikasi:</strong> Buka <code>app.py</code> baris 10–50 &rarr; Pastikan data sudah ada &amp; siap live coding rute GET di baris 66!</div>
           </div>
         </div>
 
         <div class="shotcard" data-shot="vscode-p07-step-01-data-model.png">
           <div class="imgwrap">
-            <img src="img/vscode-p07-step-01-data-model.png" alt="Posisi Model Data di app.py Baris 8-24">
+            <img src="img/vscode-p07-step-01-data-model.png" alt="Posisi Model Data di app.py Baris 10-50">
           </div>
           <div class="shotcap">
-            <span class="shottitle"><i data-lucide="code" style="width:13px;height:13px;color:var(--accent)"></i>app.py &bull; Baris 8 – 24 (menu_kantin)</span>
+            <span class="shottitle"><i data-lucide="code" style="width:13px;height:13px;color:var(--accent)"></i>app.py &bull; Baris 10 – 50 (Sudah Tersedia di Template)</span>
             <span class="shotbadge"><i data-lucide="zoom-in" style="width:10px;height:10px"></i>Zoom Layar</span>
           </div>
         </div>
@@ -776,11 +777,11 @@ menu_kantin = [
               <div class="codehead-left">
                 <div class="mac-dots"><span class="mac-dot dot-red"></span><span class="mac-dot dot-yellow"></span><span class="mac-dot dot-green"></span></div>
                 <span class="codehead-file"><i data-lucide="file" style="width:13px;height:13px"></i>app.py</span>
-                <span style="font:700 9.5px/1 var(--mono);background:rgba(56,189,248,0.18);color:#38BDF8;border:1px solid rgba(56,189,248,0.4);padding:2px 7px;border-radius:4px">TINGGAL COPY-PASTE KE BARIS 28 – 51</span>
+                <span style="font:700 9.5px/1 var(--mono);background:rgba(56,189,248,0.18);color:#38BDF8;border:1px solid rgba(56,189,248,0.4);padding:2px 7px;border-radius:4px">PASTE DI BAWAH KOMENTAR LANGKAH 1 (BARIS 66)</span>
               </div>
               <button class="codehead-copy" type="button" onclick="copyCode(this)"><i data-lucide="copy" style="width:11px;height:11px"></i>Salin Kode</button>
             </div>
-            <pre class="codebody"><span class="cm"># 1. Endpoint Ambil Semua Menu</span>
+            <pre class="codebody"><span class="cm"># Sisipkan tepat di bawah: # TULIS KODE LANGKAH 1 (GET) DI SINI</span>
 <span class="hl-line">@app.route(<span class="str">'/api/menu'</span>, methods=[<span class="str">'GET'</span>])</span>
 <span class="kw">def</span> <span class="fn">get_all_menu</span>():
     <span class="kw">return</span> jsonify({
@@ -789,7 +790,7 @@ menu_kantin = [
         <span class="str">"data"</span>: menu_kantin
     }), <span class="num">200</span>
 
-<span class="cm"># 2. Endpoint Ambil Menu Berdasarkan ID</span>
+<span class="cm"># Endpoint Ambil Menu Berdasarkan ID</span>
 <span class="hl-line">@app.route(<span class="str">'/api/menu/&lt;int:item_id&gt;'</span>, methods=[<span class="str">'GET'</span>])</span>
 <span class="kw">def</span> <span class="fn">get_menu_by_id</span>(item_id):
     item = cari_menu_by_id(item_id)
@@ -811,10 +812,10 @@ menu_kantin = [
 
         <div class="shotcard" data-shot="vscode-p07-step-02-get-routes.png">
           <div class="imgwrap">
-            <img src="img/vscode-p07-step-02-get-routes.png" alt="Posisi Rute GET di app.py Baris 28-51">
+            <img src="img/vscode-p07-step-02-get-routes.png" alt="Posisi Rute GET di app.py Slot Langkah 1">
           </div>
           <div class="shotcap">
-            <span class="shottitle"><i data-lucide="network" style="width:13px;height:13px;color:var(--accent)"></i>app.py &bull; Baris 28 – 51 (GET /api/menu)</span>
+            <span class="shottitle"><i data-lucide="network" style="width:13px;height:13px;color:var(--accent)"></i>app.py &bull; Slot Langkah 1 (GET /api/menu)</span>
             <span class="shotbadge"><i data-lucide="zoom-in" style="width:10px;height:10px"></i>Zoom Layar</span>
           </div>
         </div>
@@ -841,10 +842,13 @@ menu_kantin = [
 
         <div class="card" style="border-left:4px solid var(--accent)">
           <div style="font:700 11px/1 var(--mono);color:var(--accent);margin-bottom:6px">SOLUSI STANDAR INDUSTRI</div>
-          <h3>Postman: Klien Penguji API Serbaguna</h3>
-          <p style="margin-bottom:8px">Postman memungkinkan kita menyimulasikan segala jenis skenario komunikasi klien ke server tanpa perlu membuat kodingan frontend terlebih dahulu.</p>
-          <div style="background:#E0F2FE;padding:8px 12px;border-radius:8px;font:500 11.5px/1.4 var(--sans);color:#0369A1">
+          <h3>Postman &amp; Thunder Client: Penguji API</h3>
+          <p style="margin-bottom:6px">Alat penguji API memungkinkan kita menyimulasikan segala skenario komunikasi (POST/PUT/DELETE) sebelum frontend selesai dibuat.</p>
+          <div style="background:#E0F2FE;padding:7px 10px;border-radius:8px;font:500 11px/1.4 var(--sans);color:#0369A1;margin-bottom:6px">
             Bisa memilih method POST/PUT/DELETE, mengatur header <code>Content-Type</code>, mengirim payload raw JSON, dan memeriksa status code balasan server.
+          </div>
+          <div style="background:#F0FDF4;border:1px solid #BBF7D0;padding:6px 10px;border-radius:6px;font:500 11px/1.35 var(--sans);color:#166534">
+            💡 <b>Tips Praktis:</b> Belum punya Postman? Pasang ekstensi <b>Thunder Client</b> di VS Code (1-klik, ringan, dan langsung pakai tanpa bikin akun!).
           </div>
         </div>
       </div>
@@ -919,11 +923,12 @@ menu_kantin = [
               <div class="codehead-left">
                 <div class="mac-dots"><span class="mac-dot dot-red"></span><span class="mac-dot dot-yellow"></span><span class="mac-dot dot-green"></span></div>
                 <span class="codehead-file"><i data-lucide="file" style="width:13px;height:13px"></i>app.py</span>
-                <span style="font:700 9.5px/1 var(--mono);background:rgba(56,189,248,0.18);color:#38BDF8;border:1px solid rgba(56,189,248,0.4);padding:2px 7px;border-radius:4px">TINGGAL COPY-PASTE KE BARIS 54 – 88</span>
+                <span style="font:700 9.5px/1 var(--mono);background:rgba(56,189,248,0.18);color:#38BDF8;border:1px solid rgba(56,189,248,0.4);padding:2px 7px;border-radius:4px">PASTE DI BAWAH KOMENTAR LANGKAH 2 (BARIS 74)</span>
               </div>
               <button class="codehead-copy" type="button" onclick="copyCode(this)"><i data-lucide="copy" style="width:11px;height:11px"></i>Salin Kode</button>
             </div>
-            <pre class="codebody"><span class="hl-line">@app.route(<span class="str">'/api/menu'</span>, methods=[<span class="str">'POST'</span>])</span>
+            <pre class="codebody"><span class="cm"># Sisipkan tepat di bawah: # TULIS KODE LANGKAH 2 (POST MENU) DI SINI</span>
+<span class="hl-line">@app.route(<span class="str">'/api/menu'</span>, methods=[<span class="str">'POST'</span>])</span>
 <span class="kw">def</span> <span class="fn">tambah_menu</span>():
     data = request.get_json()
     <span class="kw">if not</span> data:
@@ -951,16 +956,16 @@ menu_kantin = [
           </div>
           <div class="check-result-box">
             <i data-lucide="circle-check"></i>
-            <div><strong>Verifikasi Postman:</strong> Klik Send POST &rarr; Respon JSON <code>201 Created</code> &amp; ID baru otomatis terbentuk!</div>
+            <div><strong>Verifikasi Postman / Thunder Client:</strong> Kirim POST &rarr; Respon JSON <code>201 Created</code> &amp; ID baru otomatis terbentuk!</div>
           </div>
         </div>
 
         <div class="shotcard" data-shot="vscode-p07-step-04-post-route.png">
           <div class="imgwrap">
-            <img src="img/vscode-p07-step-04-post-route.png" alt="Posisi Rute POST di app.py Baris 54-88">
+            <img src="img/vscode-p07-step-04-post-route.png" alt="Posisi Rute POST di app.py Slot Langkah 2">
           </div>
           <div class="shotcap">
-            <span class="shottitle"><i data-lucide="send" style="width:13px;height:13px;color:var(--accent)"></i>app.py &bull; Baris 54 – 88 (POST /api/menu)</span>
+            <span class="shottitle"><i data-lucide="send" style="width:13px;height:13px;color:var(--accent)"></i>app.py &bull; Slot Langkah 2 (POST /api/menu)</span>
             <span class="shotbadge"><i data-lucide="zoom-in" style="width:10px;height:10px"></i>Zoom Layar</span>
           </div>
         </div>
@@ -987,11 +992,11 @@ menu_kantin = [
               <div class="codehead-left">
                 <div class="mac-dots"><span class="mac-dot dot-red"></span><span class="mac-dot dot-yellow"></span><span class="mac-dot dot-green"></span></div>
                 <span class="codehead-file"><i data-lucide="file" style="width:13px;height:13px"></i>app.py</span>
-                <span style="font:700 9.5px/1 var(--mono);background:rgba(56,189,248,0.18);color:#38BDF8;border:1px solid rgba(56,189,248,0.4);padding:2px 7px;border-radius:4px">TINGGAL COPY-PASTE KE BARIS 91 – 117</span>
+                <span style="font:700 9.5px/1 var(--mono);background:rgba(56,189,248,0.18);color:#38BDF8;border:1px solid rgba(56,189,248,0.4);padding:2px 7px;border-radius:4px">PASTE DI BAWAH KOMENTAR LANGKAH 3 (BARIS 82)</span>
               </div>
               <button class="codehead-copy" type="button" onclick="copyCode(this)"><i data-lucide="copy" style="width:11px;height:11px"></i>Salin Kode</button>
             </div>
-            <pre class="codebody"><span class="cm"># 4. Update Menu (PUT)</span>
+            <pre class="codebody"><span class="cm"># Sisipkan tepat di bawah: # TULIS KODE LANGKAH 3 (PUT &amp; DELETE) DI SINI</span>
 <span class="hl-line">@app.route(<span class="str">'/api/menu/&lt;int:item_id&gt;'</span>, methods=[<span class="str">'PUT'</span>])</span>
 <span class="kw">def</span> <span class="fn">update_menu</span>(item_id):
     item = cari_menu_by_id(item_id)
@@ -1021,16 +1026,16 @@ menu_kantin = [
           </div>
           <div class="check-result-box">
             <i data-lucide="circle-check"></i>
-            <div><strong>Verifikasi:</strong> Di Postman pilih DELETE ke <code>/api/menu/1</code> &rarr; Respon 200 OK &amp; Nasi Goreng terhapus!</div>
+            <div><strong>Verifikasi:</strong> Di Postman / Thunder Client pilih DELETE ke <code>/api/menu/1</code> &rarr; Respon 200 OK &amp; item terhapus!</div>
           </div>
         </div>
 
         <div class="shotcard" data-shot="vscode-p07-step-05-put-delete.png">
           <div class="imgwrap">
-            <img src="img/vscode-p07-step-05-put-delete.png" alt="Posisi Rute PUT dan DELETE di app.py Baris 91-117">
+            <img src="img/vscode-p07-step-05-put-delete.png" alt="Posisi Rute PUT dan DELETE di app.py Slot Langkah 3">
           </div>
           <div class="shotcap">
-            <span class="shottitle"><i data-lucide="refresh-cw" style="width:13px;height:13px;color:var(--accent)"></i>app.py &bull; Baris 91 – 117 (PUT &amp; DELETE)</span>
+            <span class="shottitle"><i data-lucide="refresh-cw" style="width:13px;height:13px;color:var(--accent)"></i>app.py &bull; Slot Langkah 3 (PUT &amp; DELETE)</span>
             <span class="shotbadge"><i data-lucide="zoom-in" style="width:10px;height:10px"></i>Zoom Layar</span>
           </div>
         </div>
@@ -1144,11 +1149,12 @@ print(f<span class="str">"Suhu kampus: {suhu}°C"</span>)</pre>
               <div class="codehead-left">
                 <div class="mac-dots"><span class="mac-dot dot-red"></span><span class="mac-dot dot-yellow"></span><span class="mac-dot dot-green"></span></div>
                 <span class="codehead-file"><i data-lucide="file" style="width:13px;height:13px"></i>app.py</span>
-                <span style="font:700 9.5px/1 var(--mono);background:rgba(56,189,248,0.18);color:#38BDF8;border:1px solid rgba(56,189,248,0.4);padding:2px 7px;border-radius:4px">TINGGAL COPY-PASTE KE BARIS 120 – 146</span>
+                <span style="font:700 9.5px/1 var(--mono);background:rgba(56,189,248,0.18);color:#38BDF8;border:1px solid rgba(56,189,248,0.4);padding:2px 7px;border-radius:4px">PASTE DI BAWAH KOMENTAR LANGKAH 4 (BARIS 90)</span>
               </div>
               <button class="codehead-copy" type="button" onclick="copyCode(this)"><i data-lucide="copy" style="width:11px;height:11px"></i>Salin Kode</button>
             </div>
-            <pre class="codebody"><span class="hl-line">@app.route(<span class="str">'/api/cuaca-kampus'</span>, methods=[<span class="str">'GET'</span>])</span>
+            <pre class="codebody"><span class="cm"># Sisipkan tepat di bawah: # TULIS KODE LANGKAH 4 (EXTERNAL WEATHER API) DI SINI</span>
+<span class="hl-line">@app.route(<span class="str">'/api/cuaca-kampus'</span>, methods=[<span class="str">'GET'</span>])</span>
 <span class="kw">def</span> <span class="fn">get_cuaca_kampus</span>():
     url = <span class="str">"https://api.open-meteo.com/v1/forecast?latitude=-6.2088&amp;longitude=106.8456&amp;current_weather=true"</span>
     <span class="kw">try</span>:
@@ -1182,10 +1188,10 @@ print(f<span class="str">"Suhu kampus: {suhu}°C"</span>)</pre>
 
         <div class="shotcard" data-shot="vscode-p07-step-07-cuaca-requests.png">
           <div class="imgwrap">
-            <img src="img/vscode-p07-step-07-cuaca-requests.png" alt="Posisi Rute Cuaca di app.py Baris 120-146">
+            <img src="img/vscode-p07-step-07-cuaca-requests.png" alt="Posisi Rute Cuaca di app.py Slot Langkah 4">
           </div>
           <div class="shotcap">
-            <span class="shottitle"><i data-lucide="cloud-sun" style="width:13px;height:13px;color:var(--accent)"></i>app.py &bull; Baris 120 – 146 (Cuaca Requests)</span>
+            <span class="shottitle"><i data-lucide="cloud-sun" style="width:13px;height:13px;color:var(--accent)"></i>app.py &bull; Slot Langkah 4 (Cuaca Requests)</span>
             <span class="shotbadge"><i data-lucide="zoom-in" style="width:10px;height:10px"></i>Zoom Layar</span>
           </div>
         </div>
@@ -1212,23 +1218,24 @@ print(f<span class="str">"Suhu kampus: {suhu}°C"</span>)</pre>
               <div class="codehead-left">
                 <div class="mac-dots"><span class="mac-dot dot-red"></span><span class="mac-dot dot-yellow"></span><span class="mac-dot dot-green"></span></div>
                 <span class="codehead-file"><i data-lucide="file-code" style="width:13px;height:13px"></i>templates/dashboard.html</span>
-                <span style="font:700 9.5px/1 var(--mono);background:rgba(56,189,248,0.18);color:#38BDF8;border:1px solid rgba(56,189,248,0.4);padding:2px 7px;border-radius:4px">TINGGAL COPY-PASTE KE BARIS 185 – 214</span>
+                <span style="font:700 9.5px/1 var(--mono);background:rgba(16,185,129,0.18);color:#10B981;border:1px solid rgba(16,185,129,0.4);padding:2px 7px;border-radius:4px">SUDAH AKTIF DI TEMPLATE &bull; BEDAH KODE BARIS 216 – 350</span>
               </div>
-              <button class="codehead-copy" type="button" onclick="copyCode(this)"><i data-lucide="copy" style="width:11px;height:11px"></i>Salin Kode</button>
+              <button class="codehead-copy" type="button" onclick="copyCode(this)"><i data-lucide="copy" style="width:11px;height:11px"></i>Salin Kode (Referensi)</button>
             </div>
-            <pre class="codebody"><span class="cm">// 1. Memanggil GET dengan fetch (Baris 185)</span>
+            <pre class="codebody"><span class="cm">// ✅ SUDAH AKTIF DI TEMPLATE: templates/dashboard.html (Baris 216-350)</span>
+<span class="cm">// 1. Memanggil GET dengan fetch (Asinkron)</span>
 <span class="kw">async function</span> <span class="fn">muatMenu</span>() {
     <span class="kw">const</span> res = <span class="kw">await</span> fetch(<span class="str">'/api/menu'</span>);
     <span class="kw">const</span> json = <span class="kw">await</span> res.json();
-    console.log(json.data); <span class="cm">// Array data menu</span>
+    console.log(json.data); <span class="cm">// Array data menu kantin</span>
 }
 
-<span class="cm">// 2. Mengirim POST dengan fetch (Baris 197)</span>
+<span class="cm">// 2. Mengirim POST dengan fetch (Body JSON)</span>
 <span class="kw">async function</span> <span class="fn">kirimMenu</span>(menuBaru) {
     <span class="kw">const</span> res = <span class="kw">await</span> fetch(<span class="str">'/api/menu'</span>, {
         method: <span class="str">'POST'</span>,
         headers: {
-            <span class="str">'Content-Type'</span>: <span class="str">'application/json'</span> <span class="cm">// Wajib!</span>
+            <span class="str">'Content-Type'</span>: <span class="str">'application/json'</span> <span class="cm">// Wajib untuk JSON!</span>
         },
         body: JSON.stringify(menuBaru)
     });
@@ -1237,21 +1244,21 @@ print(f<span class="str">"Suhu kampus: {suhu}°C"</span>)</pre>
 }</pre>
             <div class="codefoot">
               <i data-lucide="info"></i>
-              <div><code>JSON.stringify()</code> mengubah objek JavaScript menjadi teks baku sebelum dikirim ke Flask.</div>
+              <div><strong>Info Praktikum:</strong> Kode ini sudah terpasang rapi di template dashboard. Buka filenya untuk membedah cara kerjanya!</div>
             </div>
           </div>
           <div class="check-result-box">
             <i data-lucide="circle-check"></i>
-            <div><strong>Verifikasi:</strong> Buka <code>http://127.0.0.1:5000/dashboard</code> &rarr; Data menu dan rekomendasi cuaca langsung tampil tanpa reload!</div>
+            <div><strong>Verifikasi:</strong> Buka <code>templates/dashboard.html</code> baris 216 &rarr; Amati implementasi fungsi <code>muatMenu()</code> dan <code>handleTambahMenu()</code>!</div>
           </div>
         </div>
 
         <div class="shotcard" data-shot="vscode-p07-step-08-dashboard-fetch.png">
           <div class="imgwrap">
-            <img src="img/vscode-p07-step-08-dashboard-fetch.png" alt="Posisi Fetch di templates/dashboard.html Baris 185-214">
+            <img src="img/vscode-p07-step-08-dashboard-fetch.png" alt="Posisi Fetch di templates/dashboard.html Baris 216-350">
           </div>
           <div class="shotcap">
-            <span class="shottitle"><i data-lucide="sparkles" style="width:13px;height:13px;color:var(--accent)"></i>dashboard.html &bull; Baris 185 – 214 (Fetch API)</span>
+            <span class="shottitle"><i data-lucide="sparkles" style="width:13px;height:13px;color:var(--accent)"></i>dashboard.html &bull; Baris 216 – 350 (Fetch API)</span>
             <span class="shotbadge"><i data-lucide="zoom-in" style="width:10px;height:10px"></i>Zoom Layar</span>
           </div>
         </div>
@@ -1283,14 +1290,14 @@ print(f<span class="str">"Suhu kampus: {suhu}°C"</span>)</pre>
         </div>
 
         <div class="card" style="text-align:center;align-items:center;justify-content:center;background:#FFF">
-          <div style="width:56px;height:56px;border-radius:16px;background:#E0F2FE;color:var(--accent);display:grid;place-items:center;margin-bottom:8px">
-            <i data-lucide="globe" style="width:28px;height:28px"></i>
+          <div style="width:52px;height:52px;border-radius:14px;background:#E0F2FE;color:var(--accent);display:grid;place-items:center;margin-bottom:8px">
+            <i data-lucide="globe" style="width:26px;height:26px"></i>
           </div>
-          <h3 style="font-size:16px">Buka di Browser Kamu:</h3>
+          <h3 style="font-size:15px">Buka di Browser Kamu:</h3>
           <code style="font:700 15px/1 var(--mono);color:#0284C7;margin:4px 0 8px">http://127.0.0.1:5000/dashboard</code>
-          <p style="font:400 11.5px/1.4 var(--sans);color:var(--faint)">
-            Pastikan server Flask aktif di terminal dengan perintah <code>python app.py</code>.
-          </p>
+          <div style="background:#FEF3C7;border:1px solid #FDE68A;padding:8px 12px;border-radius:8px;font:500 11px/1.4 var(--sans);color:#92400E;text-align:left">
+            ⚠️ <b>Catatan Mahasiswa Mandiri:</b> Jangan tutup terminal VS Code yang menjalankan <code>python app.py</code>! Server harus terus aktif di terminal agar halaman dashboard dapat diakses.
+          </div>
         </div>
       </div>
     </div>
