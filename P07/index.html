@@ -847,92 +847,11 @@ menu_kantin = [
     </div>
   </section>
 
-  <!-- ==================== SLIDE 8: TESTING BARRIER & POSTMAN ==================== -->
-  <section class="slide" id="s8" data-sec="Babak 3 · Postman">
-    <div class="content">
-      <span class="kick"><i data-lucide="help-circle" style="width:12px;height:12px"></i> The Testing Barrier</span>
-      <h2>Mengapa Kita Butuh Postman untuk Menguji API?</h2>
-      <p class="sub">Keterbatasan address bar browser dan alasan penting penggunaan API Testing Tool di industri.</p>
-
-      <div class="cols c2">
-        <div class="card" style="border-left:4px solid #DC2626">
-          <div style="font:700 11px/1 var(--mono);color:#DC2626;margin-bottom:6px">BATASAN BROWSER BIASA</div>
-          <h3>Address Bar Hanya Bisa Melakukan GET</h3>
-          <p style="margin-bottom:8px">Ketika kamu mengetikkan URL di Chrome atau Edge, browser secara mutlak selalu mengirim request dengan kata kerja <b>GET</b>.</p>
-          <div style="background:#FEE2E2;padding:8px 12px;border-radius:8px;font:500 11.5px/1.4 var(--sans);color:#991B1B">
-            Browser tidak punya tombol untuk memilih method POST, tidak bisa memasukkan header JSON, dan tidak bisa mengetikkan Request Body!
-          </div>
-        </div>
-
-        <div class="card" style="border-left:4px solid var(--accent)">
-          <div style="font:700 11px/1 var(--mono);color:var(--accent);margin-bottom:6px">SOLUSI STANDAR INDUSTRI</div>
-          <h3>Postman &amp; Thunder Client: Penguji API</h3>
-          <p style="margin-bottom:6px">Alat penguji API memungkinkan kita menyimulasikan segala skenario komunikasi (POST/PUT/DELETE) sebelum frontend selesai dibuat.</p>
-          <div style="background:#E0F2FE;padding:7px 10px;border-radius:8px;font:500 11px/1.4 var(--sans);color:#0369A1;margin-bottom:6px">
-            Bisa memilih method POST/PUT/DELETE, mengatur header <code>Content-Type</code>, mengirim payload raw JSON, dan memeriksa status code balasan server.
-          </div>
-          <div style="background:#F0FDF4;border:1px solid #BBF7D0;padding:6px 10px;border-radius:6px;font:500 11px/1.35 var(--sans);color:#166534">
-            💡 <b>Tips Praktis:</b> Belum punya Postman? Pasang ekstensi <b>Thunder Client</b> di VS Code (1-klik, ringan, dan langsung pakai tanpa bikin akun!).
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== SLIDE 9: PANDUAN POSTMAN 3 LANGKAH ==================== -->
-  <section class="slide" id="s9" data-sec="Babak 3 · Langkah 03">
+  <!-- ==================== SLIDE 8: LANGKAH 03 ENDPOINT POST ==================== -->
+  <section class="slide" id="s8" data-sec="Babak 2 · Langkah 03">
     <div class="content">
       <div class="step-nav-bar">
         <span class="step-pill">Langkah 03</span>
-        <span class="step-crumb"><i data-lucide="layers" style="width:12px;height:12px"></i> Postman Guide</span>
-        <span class="step-sep">&bull;</span>
-        <span class="step-action"><i data-lucide="send" style="width:11px;height:11px"></i> Uji Coba Request POST</span>
-      </div>
-      <h2>Panduan 3 Langkah Menembak API di Postman</h2>
-      <p class="sub">Tiga langkah presisi agar pengujian request POST menu baru tidak mengalami galat.</p>
-
-      <div class="cols c3" style="margin-bottom:12px">
-        <div class="card" style="text-align:center;align-items:center">
-          <div style="width:34px;height:34px;border-radius:50%;background:#E0F2FE;color:var(--accent);display:grid;place-items:center;font:700 13px/1 var(--mono);margin-bottom:6px">1</div>
-          <h3 style="font-size:14px">Set Method &amp; URL</h3>
-          <p style="font-size:11.5px">Ubah dropdown ke <b>POST</b>.<br>Ketik URL:<br><code>http://127.0.0.1:5000/api/menu</code></p>
-        </div>
-
-        <div class="card" style="text-align:center;align-items:center">
-          <div style="width:34px;height:34px;border-radius:50%;background:#FEF3C7;color:var(--amber);display:grid;place-items:center;font:700 13px/1 var(--mono);margin-bottom:6px">2</div>
-          <h3 style="font-size:14px">Set Body raw &rarr; JSON</h3>
-          <p style="font-size:11.5px">Buka tab <b>Body</b> &rarr; klik radio <b>raw</b> &rarr; ubah format kanan dari Text menjadi <b>JSON</b>.</p>
-        </div>
-
-        <div class="card" style="text-align:center;align-items:center">
-          <div style="width:34px;height:34px;border-radius:50%;background:#DCFCE7;color:var(--green);display:grid;place-items:center;font:700 13px/1 var(--mono);margin-bottom:6px">3</div>
-          <h3 style="font-size:14px">Ketik JSON &amp; Send</h3>
-          <p style="font-size:11.5px">Ketik payload menu baru, klik tombol biru <b>Send</b>, lalu amati respon <b>201 Created</b>.</p>
-        </div>
-      </div>
-
-      <div class="codebox">
-        <div class="codehead">
-          <div class="codehead-left">
-            <span class="codehead-file">Payload JSON untuk di-paste ke Tab Body Postman</span>
-          </div>
-          <button class="codehead-copy" type="button" onclick="copyCode(this)"><i data-lucide="copy" style="width:11px;height:11px"></i>Salin Payload</button>
-        </div>
-        <pre class="codebody">{
-  <span class="str">"nama"</span>: <span class="str">"Ayam Geprek Sambal Matah"</span>,
-  <span class="str">"harga"</span>: <span class="num">18000</span>,
-  <span class="str">"kategori"</span>: <span class="str">"Makanan"</span>,
-  <span class="str">"stok"</span>: <span class="num">25</span>
-}</pre>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== SLIDE 10: LANGKAH 04 ENDPOINT POST ==================== -->
-  <section class="slide" id="s10" data-sec="Babak 2 · Langkah 04">
-    <div class="content">
-      <div class="step-nav-bar">
-        <span class="step-pill">Langkah 04</span>
         <span class="step-crumb"><i data-lucide="file" style="width:12px;height:12px"></i> app.py</span>
         <span class="step-sep">&bull;</span>
         <span class="step-action"><i data-lucide="code" style="width:11px;height:11px"></i> Endpoint POST Menu Baru</span>
@@ -980,7 +899,7 @@ menu_kantin = [
           </div>
           <div class="check-result-box">
             <i data-lucide="circle-check"></i>
-            <div><strong>Verifikasi Postman / Thunder Client:</strong> Kirim POST &rarr; Respon JSON <code>201 Created</code> &amp; ID baru otomatis terbentuk!</div>
+            <div><strong>Verifikasi:</strong> Simpan file (<code>Ctrl+S</code>). Sekarang server Flask sudah punya pintu POST! Mari kita pelajari cara mengujinya di slide berikutnya.</div>
           </div>
         </div>
 
@@ -993,6 +912,92 @@ menu_kantin = [
             <span class="shotbadge"><i data-lucide="zoom-in" style="width:10px;height:10px"></i>Zoom Layar</span>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 9: TESTING BARRIER & POSTMAN ==================== -->
+  <section class="slide" id="s9" data-sec="Babak 3 · Testing Tool">
+    <div class="content">
+      <span class="kick"><i data-lucide="help-circle" style="width:12px;height:12px"></i> The Testing Barrier</span>
+      <h2>Mengapa Kita Butuh Postman untuk Menguji API?</h2>
+      <p class="sub">Keterbatasan address bar browser dan alasan penting penggunaan API Testing Tool di industri.</p>
+
+      <div class="cols c2">
+        <div class="card" style="border-left:4px solid #DC2626">
+          <div style="font:700 11px/1 var(--mono);color:#DC2626;margin-bottom:6px">BATASAN BROWSER BIASA</div>
+          <h3>Address Bar Hanya Bisa Melakukan GET</h3>
+          <p style="margin-bottom:8px">Ketika kamu mengetikkan URL di Chrome atau Edge, browser secara mutlak selalu mengirim request dengan kata kerja <b>GET</b>.</p>
+          <div style="background:#FEE2E2;padding:8px 12px;border-radius:8px;font:500 11.5px/1.4 var(--sans);color:#991B1B">
+            Browser tidak punya tombol untuk memilih method POST, tidak bisa memasukkan header JSON, dan tidak bisa mengetikkan Request Body!
+          </div>
+        </div>
+
+        <div class="card" style="border-left:4px solid var(--accent)">
+          <div style="font:700 11px/1 var(--mono);color:var(--accent);margin-bottom:6px">SOLUSI STANDAR INDUSTRI</div>
+          <h3>Postman &amp; Thunder Client: Penguji API</h3>
+          <p style="margin-bottom:6px">Alat penguji API memungkinkan kita menyimulasikan segala skenario komunikasi (POST/PUT/DELETE) sebelum frontend selesai dibuat.</p>
+          <div style="background:#E0F2FE;padding:7px 10px;border-radius:8px;font:500 11px/1.4 var(--sans);color:#0369A1;margin-bottom:6px">
+            Bisa memilih method POST/PUT/DELETE, mengatur header <code>Content-Type</code>, mengirim payload raw JSON, dan memeriksa status code balasan server.
+          </div>
+          <div style="background:#F0FDF4;border:1px solid #BBF7D0;padding:6px 10px;border-radius:6px;font:500 11px/1.35 var(--sans);color:#166534">
+            💡 <b>Tips Praktis:</b> Belum punya Postman? Pasang ekstensi <b>Thunder Client</b> di VS Code (1-klik, ringan, dan langsung pakai tanpa bikin akun!).
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLIDE 10: PANDUAN POSTMAN 3 LANGKAH ==================== -->
+  <section class="slide" id="s10" data-sec="Babak 3 · Langkah 04">
+    <div class="content">
+      <div class="step-nav-bar">
+        <span class="step-pill">Langkah 04</span>
+        <span class="step-crumb"><i data-lucide="layers" style="width:12px;height:12px"></i> Postman / Thunder Client</span>
+        <span class="step-sep">&bull;</span>
+        <span class="step-action"><i data-lucide="send" style="width:11px;height:11px"></i> Uji Coba Request POST</span>
+      </div>
+      <h2>Panduan 3 Langkah Menembak API di Postman</h2>
+      <p class="sub">Tiga langkah presisi menguji request POST menu baru yang baru saja kita koding di Langkah 03.</p>
+
+      <div class="cols c3" style="margin-bottom:12px">
+        <div class="card" style="text-align:center;align-items:center">
+          <div style="width:34px;height:34px;border-radius:50%;background:#E0F2FE;color:var(--accent);display:grid;place-items:center;font:700 13px/1 var(--mono);margin-bottom:6px">1</div>
+          <h3 style="font-size:14px">Set Method &amp; URL</h3>
+          <p style="font-size:11.5px">Ubah dropdown ke <b>POST</b>.<br>Ketik URL:<br><code>http://127.0.0.1:5000/api/menu</code></p>
+        </div>
+
+        <div class="card" style="text-align:center;align-items:center">
+          <div style="width:34px;height:34px;border-radius:50%;background:#FEF3C7;color:var(--amber);display:grid;place-items:center;font:700 13px/1 var(--mono);margin-bottom:6px">2</div>
+          <h3 style="font-size:14px">Set Body raw &rarr; JSON</h3>
+          <p style="font-size:11.5px">Buka tab <b>Body</b> &rarr; klik radio <b>raw</b> &rarr; ubah format kanan dari Text menjadi <b>JSON</b>.</p>
+        </div>
+
+        <div class="card" style="text-align:center;align-items:center">
+          <div style="width:34px;height:34px;border-radius:50%;background:#DCFCE7;color:var(--green);display:grid;place-items:center;font:700 13px/1 var(--mono);margin-bottom:6px">3</div>
+          <h3 style="font-size:14px">Ketik JSON &amp; Send</h3>
+          <p style="font-size:11.5px">Ketik payload menu baru, klik tombol biru <b>Send</b>, lalu amati respon <b>201 Created</b>.</p>
+        </div>
+      </div>
+
+      <div class="codebox">
+        <div class="codehead">
+          <div class="codehead-left">
+            <span class="codehead-file">Payload JSON untuk di-paste ke Tab Body Postman / Thunder Client</span>
+          </div>
+          <button class="codehead-copy" type="button" onclick="copyCode(this)"><i data-lucide="copy" style="width:11px;height:11px"></i>Salin Payload</button>
+        </div>
+        <pre class="codebody">{
+  <span class="str">"nama"</span>: <span class="str">"Ayam Geprek Sambal Matah"</span>,
+  <span class="str">"harga"</span>: <span class="num">18000</span>,
+  <span class="str">"kategori"</span>: <span class="str">"Makanan"</span>,
+  <span class="str">"stok"</span>: <span class="num">25</span>
+}</pre>
+      </div>
+
+      <div class="check-result-box" style="margin-top:10px">
+        <i data-lucide="circle-check"></i>
+        <div><strong>Hasil yang Diharapkan:</strong> Status code <code>201 Created</code> muncul seketika dan data menu baru dengan ID 5 tersimpan di server!</div>
       </div>
     </div>
   </section>
