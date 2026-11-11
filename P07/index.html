@@ -1134,7 +1134,7 @@ pip install requests
 <span class="cm"># 2. Contoh memanggil Open-Meteo Weather API</span>
 <span class="kw">import</span> requests
 
-url = <span class="str">"https://api.open-meteo.com/v1/forecast?latitude=-6.2088&amp;longitude=106.8456&amp;current_weather=true"</span>
+url = <span class="str">"https://api.open-meteo.com/v1/forecast?latitude=-7.8014&amp;longitude=110.3647&amp;current_weather=true&amp;timezone=Asia%2FBangkok"</span>
 
 res = requests.get(url, timeout=<span class="num">5</span>)
 data = res.json()
@@ -1185,7 +1185,7 @@ print(f<span class="str">"Suhu kampus: {suhu}°C"</span>)</pre>
             <pre class="codebody"><span class="cm"># Sisipkan tepat di bawah: # TULIS KODE LANGKAH 4 (EXTERNAL WEATHER API) DI SINI</span>
 <span class="hl-line">@app.route(<span class="str">'/api/cuaca-kampus'</span>, methods=[<span class="str">'GET'</span>])</span>
 <span class="kw">def</span> <span class="fn">get_cuaca_kampus</span>():
-    url = <span class="str">"https://api.open-meteo.com/v1/forecast?latitude=-6.2088&amp;longitude=106.8456&amp;current_weather=true"</span>
+    url = <span class="str">"https://api.open-meteo.com/v1/forecast?latitude=-7.8014&amp;longitude=110.3647&amp;current_weather=true&amp;timezone=Asia%2FBangkok"</span>
     <span class="kw">try</span>:
         res = requests.get(url, timeout=<span class="num">5</span>)
         res.raise_for_status()
