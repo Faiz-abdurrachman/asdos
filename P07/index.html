@@ -231,6 +231,7 @@ p.sub{font:400 clamp(13px,1.3vw,14.5px)/1.5 var(--sans);color:var(--dim);margin-
 
 /* LAYOUT COLS */
 .cols{display:grid;gap:16px;align-items:stretch}
+.cols>*{min-width:0;max-width:100%}
 .cols.c2{grid-template-columns:1fr 1fr}
 .cols.c3{grid-template-columns:repeat(3,1fr)}
 .cols.c4{grid-template-columns:repeat(4,1fr)}
@@ -322,19 +323,23 @@ pre.codebody{
 
 /* SIMULATOR INTERAKTIF */
 .sim-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:8px}
+.sim-grid>*{min-width:0;max-width:100%}
 .sim-select, .sim-input{
   padding:7px 10px;border-radius:8px;border:1px solid #CBD5E1;
   background:#FFF;font-family:var(--mono);font-size:12px;color:var(--ink);
+  max-width:100%;box-sizing:border-box;
 }
 .sim-btn{
   background:var(--accent);color:#FFF;border:none;border-radius:8px;
   padding:8px 14px;font-weight:600;cursor:pointer;display:flex;align-items:center;
   justify-content:center;gap:6px;transition:opacity 0.15s;font-size:12px;
+  max-width:100%;box-sizing:border-box;
 }
 .sim-btn:hover{opacity:0.9}
 .sim-res-box{
   background:#0B1120;color:#38BDF8;font-family:var(--mono);
-  font-size:11px;padding:10px;border-radius:10px;height:140px;overflow-y:auto;border:1px solid #1E293B;
+  font-size:11px;padding:10px;border-radius:10px;height:140px;overflow-y:auto;overflow-x:auto;border:1px solid #1E293B;
+  max-width:100%;box-sizing:border-box;white-space:pre-wrap;word-break:break-word;
 }
 
 /* QUIZ */
@@ -371,9 +376,55 @@ pre.codebody{
 }
 #fstip.on{opacity:1}
 
+/* SHOT CARD (VISUAL VS CODE) */
+.shotcard{
+  background:var(--spec-top),var(--grad-glass);
+  backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
+  border:1px solid rgba(14,116,144,0.22);border-radius:14px;
+  padding:8px;box-shadow:0 6px 20px -4px rgba(14,116,144,0.08);
+  cursor:pointer;transition:transform .2s,box-shadow .2s;
+  display:flex;flex-direction:column;min-width:0;
+}
+.shotcard:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(2,132,199,0.15)}
+.shotcard .imgwrap{
+  border-radius:8px;overflow:hidden;background:#060913;
+  border:1px solid rgba(0,0,0,.15);height:clamp(175px, 30vh, 275px);
+  position:relative;
+}
+.shotcard img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+.shotcap{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:6px;padding:2px 4px}
+.shottitle{font:600 11.5px/1.3 var(--sans);color:var(--ink);display:flex;align-items:center;gap:5px}
+.shotbadge{
+  font:600 9.5px/1 var(--mono);color:var(--accent);
+  background:rgba(2,132,199,0.08);border:1px solid rgba(2,132,199,0.25);
+  padding:2px 6px;border-radius:999px;white-space:nowrap;display:inline-flex;align-items:center;gap:4px;
+}
+
+/* LIGHTBOX MODAL */
+.lightbox{
+  position:fixed;inset:0;background:rgba(11,17,32,.88);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  z-index:100;display:grid;place-items:center;padding:24px;opacity:0;visibility:hidden;transition:.25s ease;
+}
+.lightbox.on{opacity:1;visibility:visible}
+.lbbody{
+  position:relative;max-width:min(96vw,1340px);max-height:92vh;
+  background:rgba(15,23,42,.98);border:1px solid rgba(56,189,248,.25);border-radius:18px;
+  overflow:hidden;display:flex;flex-direction:column;box-shadow:0 25px 60px rgba(0,0,0,.7);
+}
+.lbimgwrap{max-height:calc(92vh - 60px);overflow:auto;background:#060913;display:grid;place-items:center}
+.lbimgwrap img{max-width:100%;max-height:100%;object-fit:contain;display:block}
+.lbcap{display:flex;align-items:center;gap:12px;padding:12px 18px;background:rgba(255,255,255,.05);color:#fff}
+.lbclose{
+  margin-left:auto;width:32px;height:32px;border-radius:50%;
+  background:rgba(255,255,255,.1);color:#fff;border:none;cursor:pointer;display:grid;place-items:center;
+  transition:background .15s;
+}
+.lbclose:hover{background:rgba(255,255,255,.25)}
+
 /* RESPONSIVE BREAKPOINTS (STANDAR SOP) */
 @media (max-width:900px){
   .slide{padding:60px 18px 84px;overflow-y:auto;-webkit-overflow-scrolling:touch}
+  .content{zoom:1!important;max-width:100%!important;width:100%!important}
   .cols.c2,.cols.c3,.cols.c4,.sim-grid,.qopts,.shield-grid{grid-template-columns:1fr}
   .shield-card.span-2{grid-column:auto}
   .brand-sub{display:none}
@@ -603,7 +654,8 @@ pre.codebody{
             <div class="codehead">
               <div class="codehead-left">
                 <div class="mac-dots"><span class="mac-dot dot-red"></span><span class="mac-dot dot-yellow"></span><span class="mac-dot dot-green"></span></div>
-                <span class="codehead-file"><i data-lucide="terminal" style="width:13px;height:13px"></i>Terminal / Command Prompt</span>
+                <span class="codehead-file"><i data-lucide="terminal" style="width:13px;height:13px"></i>Terminal / Bash</span>
+                <span style="font:700 9.5px/1 var(--mono);background:rgba(56,189,248,0.18);color:#38BDF8;border:1px solid rgba(56,189,248,0.4);padding:2px 7px;border-radius:4px">LANGKAH PERSIAPAN</span>
               </div>
               <button class="codehead-copy" type="button" onclick="copyCode(this)"><i data-lucide="copy" style="width:11px;height:11px"></i>Salin Perintah</button>
             </div>
@@ -632,19 +684,14 @@ python app.py</pre>
           </div>
         </div>
 
-        <div class="card" style="justify-content:center;gap:10px">
-          <div style="font:700 13px/1 var(--disp);color:var(--ink)">Struktur File Proyek `praktikum-p07/`:</div>
-          <div style="background:#FFF;padding:12px;border-radius:10px;border:1px solid #CBD5E1;font:400 11.5px/1.6 var(--mono);color:#1E293B">
-            praktikum-p07/<br>
-            ├── <span style="color:#0284C7;font-weight:700">app.py</span>            <span class="cm"># Backend REST API</span><br>
-            ├── <span style="color:#16A34A;font-weight:700">requirements.txt</span>  <span class="cm"># flask, requests</span><br>
-            ├── templates/<br>
-            │   └── <span style="color:#D97706;font-weight:700">dashboard.html</span><span class="cm"># Frontend fetch()</span><br>
-            └── README.md         <span class="cm"># Petunjuk tugas</span>
+        <div class="shotcard" data-shot="vscode-p07-step-00-explorer.png">
+          <div class="imgwrap">
+            <img src="img/vscode-p07-step-00-explorer.png" alt="Struktur File VS Code Explorer Praktikum P07">
           </div>
-          <p style="font:400 12px/1.45 var(--sans);color:var(--faint)">
-            Seluruh logika backend akan kita tulis di dalam file <code>app.py</code> bersama-sama secara bertahap.
-          </p>
+          <div class="shotcap">
+            <span class="shottitle"><i data-lucide="folder-tree" style="width:13px;height:13px;color:var(--accent)"></i>Struktur folder &amp; posisi file app.py</span>
+            <span class="shotbadge"><i data-lucide="zoom-in" style="width:10px;height:10px"></i>Zoom Layar</span>
+          </div>
         </div>
       </div>
     </div>
@@ -663,20 +710,17 @@ python app.py</pre>
       <p class="sub">Menyimpan daftar menu awal berbentuk List of Dictionaries dan fungsi pencari ID.</p>
 
       <div class="cols c2">
-        <div class="codebox">
-          <div class="codehead">
-            <div class="codehead-left">
-              <div class="mac-dots"><span class="mac-dot dot-red"></span><span class="mac-dot dot-yellow"></span><span class="mac-dot dot-green"></span></div>
-              <span class="codehead-file">app.py (Awal File)</span>
+        <div>
+          <div class="codebox">
+            <div class="codehead">
+              <div class="codehead-left">
+                <div class="mac-dots"><span class="mac-dot dot-red"></span><span class="mac-dot dot-yellow"></span><span class="mac-dot dot-green"></span></div>
+                <span class="codehead-file"><i data-lucide="file" style="width:13px;height:13px"></i>app.py</span>
+                <span style="font:700 9.5px/1 var(--mono);background:rgba(56,189,248,0.18);color:#38BDF8;border:1px solid rgba(56,189,248,0.4);padding:2px 7px;border-radius:4px">TINGGAL COPY-PASTE KE BARIS 8 – 24</span>
+              </div>
+              <button class="codehead-copy" type="button" onclick="copyCode(this)"><i data-lucide="copy" style="width:11px;height:11px"></i>Salin Kode</button>
             </div>
-            <button class="codehead-copy" type="button" onclick="copyCode(this)"><i data-lucide="copy" style="width:11px;height:11px"></i>Salin Kode</button>
-          </div>
-          <pre class="codebody"><span class="kw">from</span> flask <span class="kw">import</span> Flask, render_template, request, jsonify
-<span class="kw">import</span> requests
-
-app = Flask(__name__)
-
-<span class="cm"># Database sementara di memori RAM</span>
+            <pre class="codebody"><span class="cm"># Sisipkan tepat di bawah app = Flask(__name__)</span>
 menu_kantin = [
     {<span class="str">"id"</span>: <span class="num">1</span>, <span class="str">"nama"</span>: <span class="str">"Nasi Goreng Spesial"</span>, <span class="str">"harga"</span>: <span class="num">15000</span>, <span class="str">"kategori"</span>: <span class="str">"Makanan"</span>, <span class="str">"stok"</span>: <span class="num">20</span>},
     {<span class="str">"id"</span>: <span class="num">2</span>, <span class="str">"nama"</span>: <span class="str">"Mie Ayam Bakso"</span>, <span class="str">"harga"</span>: <span class="num">13000</span>, <span class="str">"kategori"</span>: <span class="str">"Makanan"</span>, <span class="str">"stok"</span>: <span class="num">15</span>},
@@ -689,19 +733,24 @@ menu_kantin = [
         <span class="kw">if</span> item[<span class="str">"id"</span>] == item_id:
             <span class="kw">return</span> item
     <span class="kw">return</span> <span class="kw">None</span></pre>
-          <div class="codefoot">
-            <i data-lucide="help-circle"></i>
-            <div>Helper function ini akan dipakai berulang kali oleh rute GET id, PUT, dan DELETE (Prinsip DRY).</div>
+            <div class="codefoot">
+              <i data-lucide="help-circle"></i>
+              <div>Helper function ini akan dipakai berulang kali oleh rute GET id, PUT, dan DELETE (Prinsip DRY).</div>
+            </div>
+          </div>
+          <div class="check-result-box">
+            <i data-lucide="circle-check"></i>
+            <div><strong>Verifikasi:</strong> Simpan file (<code>Ctrl+S</code>), jalankan <code>python app.py</code> &rarr; Server aktif tanpa syntax error!</div>
           </div>
         </div>
 
-        <div class="card" style="justify-content:center;gap:10px">
-          <div style="font:700 13px/1 var(--disp);color:var(--ink)">Mengapa Data Disimpan di List?</div>
-          <p style="font:400 12.5px/1.55 var(--sans);color:var(--dim)">
-            Di tahap belajar awal, kita menggunakan struktur data in-memory di RAM agar mahasiswa fokus 100% memahami <b>protokol HTTP dan format JSON</b> tanpa terbebani sintaks query SQL database.
-          </p>
-          <div style="background:#EFF6FF;padding:10px 14px;border-radius:8px;border-left:3.5px solid var(--accent);font:500 11.5px/1.45 var(--sans);color:#0369A1">
-            Data in-memory ini akan hilang jika server dimatikan. Di Pertemuan 08 minggu depan, kita akan menghubungkannya ke Database SQLite permanen!
+        <div class="shotcard" data-shot="vscode-p07-step-01-data-model.png">
+          <div class="imgwrap">
+            <img src="img/vscode-p07-step-01-data-model.png" alt="Posisi Model Data di app.py Baris 8-24">
+          </div>
+          <div class="shotcap">
+            <span class="shottitle"><i data-lucide="code" style="width:13px;height:13px;color:var(--accent)"></i>app.py &bull; Baris 8 – 24 (menu_kantin)</span>
+            <span class="shotbadge"><i data-lucide="zoom-in" style="width:10px;height:10px"></i>Zoom Layar</span>
           </div>
         </div>
       </div>
@@ -726,7 +775,8 @@ menu_kantin = [
             <div class="codehead">
               <div class="codehead-left">
                 <div class="mac-dots"><span class="mac-dot dot-red"></span><span class="mac-dot dot-yellow"></span><span class="mac-dot dot-green"></span></div>
-                <span class="codehead-file">app.py (Rute GET)</span>
+                <span class="codehead-file"><i data-lucide="file" style="width:13px;height:13px"></i>app.py</span>
+                <span style="font:700 9.5px/1 var(--mono);background:rgba(56,189,248,0.18);color:#38BDF8;border:1px solid rgba(56,189,248,0.4);padding:2px 7px;border-radius:4px">TINGGAL COPY-PASTE KE BARIS 28 – 51</span>
               </div>
               <button class="codehead-copy" type="button" onclick="copyCode(this)"><i data-lucide="copy" style="width:11px;height:11px"></i>Salin Kode</button>
             </div>
@@ -747,6 +797,10 @@ menu_kantin = [
         <span class="kw">return</span> jsonify({<span class="str">"status"</span>: <span class="str">"error"</span>, <span class="str">"pesan"</span>: <span class="str">"Menu tidak ditemukan!"</span>}), <span class="num">404</span>
 
     <span class="kw">return</span> jsonify({<span class="str">"status"</span>: <span class="str">"success"</span>, <span class="str">"data"</span>: item}), <span class="num">200</span></pre>
+            <div class="codefoot">
+              <i data-lucide="info"></i>
+              <div><code>jsonify()</code> otomatis menyetel header <code>Content-Type: application/json</code>.</div>
+            </div>
           </div>
 
           <div class="check-result-box">
@@ -755,14 +809,13 @@ menu_kantin = [
           </div>
         </div>
 
-        <div class="card" style="justify-content:center;gap:10px">
-          <div style="font:700 13px/1 var(--disp);color:var(--ink)">Aha Moment Mahasiswa:</div>
-          <p style="font:400 12.5px/1.55 var(--sans);color:var(--dim)">
-            Saat mahasiswa membuka link di browser dan melihat teks JSON kurung kurawal, jelaskan bahwa <b>itulah wujud nyata REST API</b>! Backend bukan perancang halaman, melainkan pelayan yang membagikan paket data mentah.
-          </p>
-          <div style="background:#FFF;padding:10px;border-radius:8px;border:1px solid #CBD5E1;font:500 11.5px/1.45 var(--mono);color:#0F172A">
-            Fungsi <code>jsonify()</code> otomatis menyetel header HTTP:<br>
-            <span style="color:var(--accent)">Content-Type: application/json</span>
+        <div class="shotcard" data-shot="vscode-p07-step-02-get-routes.png">
+          <div class="imgwrap">
+            <img src="img/vscode-p07-step-02-get-routes.png" alt="Posisi Rute GET di app.py Baris 28-51">
+          </div>
+          <div class="shotcap">
+            <span class="shottitle"><i data-lucide="network" style="width:13px;height:13px;color:var(--accent)"></i>app.py &bull; Baris 28 – 51 (GET /api/menu)</span>
+            <span class="shotbadge"><i data-lucide="zoom-in" style="width:10px;height:10px"></i>Zoom Layar</span>
           </div>
         </div>
       </div>
@@ -860,15 +913,17 @@ menu_kantin = [
       <p class="sub">Menangkap data dengan <code>request.get_json()</code>, auto-generate ID unik, dan kembalikan status 201 Created.</p>
 
       <div class="cols c2">
-        <div class="codebox">
-          <div class="codehead">
-            <div class="codehead-left">
-              <div class="mac-dots"><span class="mac-dot dot-red"></span><span class="mac-dot dot-yellow"></span><span class="mac-dot dot-green"></span></div>
-              <span class="codehead-file">app.py (Rute POST)</span>
+        <div>
+          <div class="codebox">
+            <div class="codehead">
+              <div class="codehead-left">
+                <div class="mac-dots"><span class="mac-dot dot-red"></span><span class="mac-dot dot-yellow"></span><span class="mac-dot dot-green"></span></div>
+                <span class="codehead-file"><i data-lucide="file" style="width:13px;height:13px"></i>app.py</span>
+                <span style="font:700 9.5px/1 var(--mono);background:rgba(56,189,248,0.18);color:#38BDF8;border:1px solid rgba(56,189,248,0.4);padding:2px 7px;border-radius:4px">TINGGAL COPY-PASTE KE BARIS 54 – 88</span>
+              </div>
+              <button class="codehead-copy" type="button" onclick="copyCode(this)"><i data-lucide="copy" style="width:11px;height:11px"></i>Salin Kode</button>
             </div>
-            <button class="codehead-copy" type="button" onclick="copyCode(this)"><i data-lucide="copy" style="width:11px;height:11px"></i>Salin Kode</button>
-          </div>
-          <pre class="codebody"><span class="hl-line">@app.route(<span class="str">'/api/menu'</span>, methods=[<span class="str">'POST'</span>])</span>
+            <pre class="codebody"><span class="hl-line">@app.route(<span class="str">'/api/menu'</span>, methods=[<span class="str">'POST'</span>])</span>
 <span class="kw">def</span> <span class="fn">tambah_menu</span>():
     data = request.get_json()
     <span class="kw">if not</span> data:
@@ -889,16 +944,24 @@ menu_kantin = [
     menu_kantin.append(menu_baru)
 
     <span class="kw">return</span> jsonify({<span class="str">"status"</span>: <span class="str">"success"</span>, <span class="str">"pesan"</span>: <span class="str">"Menu berhasil ditambahkan!"</span>, <span class="str">"data"</span>: menu_baru}), <span class="num">201</span></pre>
-        </div>
-
-        <div class="card" style="justify-content:center;gap:10px">
-          <div style="font:700 13px/1 var(--disp);color:var(--ink)">Mengapa Status 201 Bukan 200?</div>
-          <p style="font:400 12.5px/1.55 var(--sans);color:var(--dim)">
-            Standar arsitektur REST mewajibkan pembuatan resource baru menghasilkan status <b>201 Created</b>. Ini menandakan bahwa sebuah entitas baru telah sah lahir di database server.
-          </p>
+            <div class="codefoot">
+              <i data-lucide="info"></i>
+              <div>Status <code>201 Created</code> adalah standar REST untuk entitas baru yang berhasil disimpan.</div>
+            </div>
+          </div>
           <div class="check-result-box">
             <i data-lucide="circle-check"></i>
-            <div><strong>Verifikasi:</strong> Begitu tombol Send Postman diklik &rarr; Status <code>201 Created</code> muncul di pojok kanan bawah!</div>
+            <div><strong>Verifikasi Postman:</strong> Klik Send POST &rarr; Respon JSON <code>201 Created</code> &amp; ID baru otomatis terbentuk!</div>
+          </div>
+        </div>
+
+        <div class="shotcard" data-shot="vscode-p07-step-04-post-route.png">
+          <div class="imgwrap">
+            <img src="img/vscode-p07-step-04-post-route.png" alt="Posisi Rute POST di app.py Baris 54-88">
+          </div>
+          <div class="shotcap">
+            <span class="shottitle"><i data-lucide="send" style="width:13px;height:13px;color:var(--accent)"></i>app.py &bull; Baris 54 – 88 (POST /api/menu)</span>
+            <span class="shotbadge"><i data-lucide="zoom-in" style="width:10px;height:10px"></i>Zoom Layar</span>
           </div>
         </div>
       </div>
@@ -918,15 +981,17 @@ menu_kantin = [
       <p class="sub">Memperbarui atribut menu (harga/stok) dan menghapus menu dari sistem kantin.</p>
 
       <div class="cols c2">
-        <div class="codebox">
-          <div class="codehead">
-            <div class="codehead-left">
-              <div class="mac-dots"><span class="mac-dot dot-red"></span><span class="mac-dot dot-yellow"></span><span class="mac-dot dot-green"></span></div>
-              <span class="codehead-file">app.py (Rute PUT &amp; DELETE)</span>
+        <div>
+          <div class="codebox">
+            <div class="codehead">
+              <div class="codehead-left">
+                <div class="mac-dots"><span class="mac-dot dot-red"></span><span class="mac-dot dot-yellow"></span><span class="mac-dot dot-green"></span></div>
+                <span class="codehead-file"><i data-lucide="file" style="width:13px;height:13px"></i>app.py</span>
+                <span style="font:700 9.5px/1 var(--mono);background:rgba(56,189,248,0.18);color:#38BDF8;border:1px solid rgba(56,189,248,0.4);padding:2px 7px;border-radius:4px">TINGGAL COPY-PASTE KE BARIS 91 – 117</span>
+              </div>
+              <button class="codehead-copy" type="button" onclick="copyCode(this)"><i data-lucide="copy" style="width:11px;height:11px"></i>Salin Kode</button>
             </div>
-            <button class="codehead-copy" type="button" onclick="copyCode(this)"><i data-lucide="copy" style="width:11px;height:11px"></i>Salin Kode</button>
-          </div>
-          <pre class="codebody"><span class="cm"># 4. Update Menu (PUT)</span>
+            <pre class="codebody"><span class="cm"># 4. Update Menu (PUT)</span>
 <span class="hl-line">@app.route(<span class="str">'/api/menu/&lt;int:item_id&gt;'</span>, methods=[<span class="str">'PUT'</span>])</span>
 <span class="kw">def</span> <span class="fn">update_menu</span>(item_id):
     item = cari_menu_by_id(item_id)
@@ -949,16 +1014,24 @@ menu_kantin = [
 
     menu_kantin.remove(item)
     <span class="kw">return</span> jsonify({<span class="str">"status"</span>: <span class="str">"success"</span>, <span class="str">"pesan"</span>: f<span class="str">"Menu '{item['nama']}' dihapus!"</span>}), <span class="num">200</span></pre>
-        </div>
-
-        <div class="card" style="justify-content:center;gap:10px">
-          <div style="font:700 13px/1 var(--disp);color:var(--ink)">Rubrik 30 Poin Terpenuhi!</div>
-          <p style="font:400 12.5px/1.55 var(--sans);color:var(--dim)">
-            Modul asal hanya memberikan GET dan POST. Dengan menambahkan <b>PUT</b> dan <b>DELETE</b>, mahasiswa telah menyelesaikan seluruh arsitektur REST API berstandar industri dan mengamankan 30 poin bobot tugas!
-          </p>
+            <div class="codefoot">
+              <i data-lucide="info"></i>
+              <div>Lengkap 4 operasi CRUD: GET (Read), POST (Create), PUT (Update), DELETE (Delete).</div>
+            </div>
+          </div>
           <div class="check-result-box">
             <i data-lucide="circle-check"></i>
-            <div><strong>Uji DELETE:</strong> Di Postman pilih DELETE ke <code>/api/menu/1</code> &rarr; Respon 200 OK &amp; Nasi Goreng terhapus!</div>
+            <div><strong>Verifikasi:</strong> Di Postman pilih DELETE ke <code>/api/menu/1</code> &rarr; Respon 200 OK &amp; Nasi Goreng terhapus!</div>
+          </div>
+        </div>
+
+        <div class="shotcard" data-shot="vscode-p07-step-05-put-delete.png">
+          <div class="imgwrap">
+            <img src="img/vscode-p07-step-05-put-delete.png" alt="Posisi Rute PUT dan DELETE di app.py Baris 91-117">
+          </div>
+          <div class="shotcap">
+            <span class="shottitle"><i data-lucide="refresh-cw" style="width:13px;height:13px;color:var(--accent)"></i>app.py &bull; Baris 91 – 117 (PUT &amp; DELETE)</span>
+            <span class="shotbadge"><i data-lucide="zoom-in" style="width:10px;height:10px"></i>Zoom Layar</span>
           </div>
         </div>
       </div>
@@ -1065,15 +1138,17 @@ print(f<span class="str">"Suhu kampus: {suhu}°C"</span>)</pre>
       <p class="sub">Endpoint <code>/api/cuaca-kampus</code> memetakan suhu cuaca ke rekomendasi hidangan kantin.</p>
 
       <div class="cols c2">
-        <div class="codebox">
-          <div class="codehead">
-            <div class="codehead-left">
-              <div class="mac-dots"><span class="mac-dot dot-red"></span><span class="mac-dot dot-yellow"></span><span class="mac-dot dot-green"></span></div>
-              <span class="codehead-file">app.py (Rute Cuaca Kampus)</span>
+        <div>
+          <div class="codebox">
+            <div class="codehead">
+              <div class="codehead-left">
+                <div class="mac-dots"><span class="mac-dot dot-red"></span><span class="mac-dot dot-yellow"></span><span class="mac-dot dot-green"></span></div>
+                <span class="codehead-file"><i data-lucide="file" style="width:13px;height:13px"></i>app.py</span>
+                <span style="font:700 9.5px/1 var(--mono);background:rgba(56,189,248,0.18);color:#38BDF8;border:1px solid rgba(56,189,248,0.4);padding:2px 7px;border-radius:4px">TINGGAL COPY-PASTE KE BARIS 120 – 146</span>
+              </div>
+              <button class="codehead-copy" type="button" onclick="copyCode(this)"><i data-lucide="copy" style="width:11px;height:11px"></i>Salin Kode</button>
             </div>
-            <button class="codehead-copy" type="button" onclick="copyCode(this)"><i data-lucide="copy" style="width:11px;height:11px"></i>Salin Kode</button>
-          </div>
-          <pre class="codebody"><span class="hl-line">@app.route(<span class="str">'/api/cuaca-kampus'</span>, methods=[<span class="str">'GET'</span>])</span>
+            <pre class="codebody"><span class="hl-line">@app.route(<span class="str">'/api/cuaca-kampus'</span>, methods=[<span class="str">'GET'</span>])</span>
 <span class="kw">def</span> <span class="fn">get_cuaca_kampus</span>():
     url = <span class="str">"https://api.open-meteo.com/v1/forecast?latitude=-6.2088&amp;longitude=106.8456&amp;current_weather=true"</span>
     <span class="kw">try</span>:
@@ -1094,16 +1169,24 @@ print(f<span class="str">"Suhu kampus: {suhu}°C"</span>)</pre>
     <span class="kw">except</span> requests.RequestException:
         <span class="cm"># Graceful fallback jika internet lab offline</span>
         <span class="kw">return</span> jsonify({<span class="str">"status"</span>: <span class="str">"fallback"</span>, <span class="str">"suhu_celcius"</span>: <span class="num">28.5</span>, <span class="str">"rekomendasi_menu"</span>: <span class="str">"Es Teh Manis Jumbo selalu aman!"</span>}), <span class="num">200</span></pre>
-        </div>
-
-        <div class="card" style="justify-content:center;gap:10px">
-          <div style="font:700 13px/1 var(--disp);color:var(--ink)">Ketahanan Sistem (Offline Fallback):</div>
-          <p style="font:400 12.5px/1.55 var(--sans);color:var(--dim)">
-            Blok <code>try-except</code> melindungi server Flask agar <b>tidak crash</b> jika Wi-Fi lab terputus. Sistem tetap mengembalikan respon fallback dengan status 200.
-          </p>
+            <div class="codefoot">
+              <i data-lucide="shield-check"></i>
+              <div>Blok <code>try-except</code> melindungi backend dari kegagalan koneksi jika jaringan lab offline.</div>
+            </div>
+          </div>
           <div class="check-result-box">
             <i data-lucide="circle-check"></i>
-            <div><strong>Uji Coba:</strong> Buka <code>http://127.0.0.1:5000/api/cuaca-kampus</code> &rarr; Suhu real-time &amp; saran menu muncul!</div>
+            <div><strong>Verifikasi:</strong> Buka <code>http://127.0.0.1:5000/api/cuaca-kampus</code> &rarr; Suhu real-time &amp; saran menu muncul!</div>
+          </div>
+        </div>
+
+        <div class="shotcard" data-shot="vscode-p07-step-07-cuaca-requests.png">
+          <div class="imgwrap">
+            <img src="img/vscode-p07-step-07-cuaca-requests.png" alt="Posisi Rute Cuaca di app.py Baris 120-146">
+          </div>
+          <div class="shotcap">
+            <span class="shottitle"><i data-lucide="cloud-sun" style="width:13px;height:13px;color:var(--accent)"></i>app.py &bull; Baris 120 – 146 (Cuaca Requests)</span>
+            <span class="shotbadge"><i data-lucide="zoom-in" style="width:10px;height:10px"></i>Zoom Layar</span>
           </div>
         </div>
       </div>
@@ -1123,22 +1206,24 @@ print(f<span class="str">"Suhu kampus: {suhu}°C"</span>)</pre>
       <p class="sub">Mengambil dan mengirim data di latar belakang tanpa reload halaman menggunakan <code>async / await</code>.</p>
 
       <div class="cols c2">
-        <div class="codebox">
-          <div class="codehead">
-            <div class="codehead-left">
-              <div class="mac-dots"><span class="mac-dot dot-red"></span><span class="mac-dot dot-yellow"></span><span class="mac-dot dot-green"></span></div>
-              <span class="codehead-file">script.js (Konsep Fetch)</span>
+        <div>
+          <div class="codebox">
+            <div class="codehead">
+              <div class="codehead-left">
+                <div class="mac-dots"><span class="mac-dot dot-red"></span><span class="mac-dot dot-yellow"></span><span class="mac-dot dot-green"></span></div>
+                <span class="codehead-file"><i data-lucide="file-code" style="width:13px;height:13px"></i>templates/dashboard.html</span>
+                <span style="font:700 9.5px/1 var(--mono);background:rgba(56,189,248,0.18);color:#38BDF8;border:1px solid rgba(56,189,248,0.4);padding:2px 7px;border-radius:4px">TINGGAL COPY-PASTE KE BARIS 185 – 214</span>
+              </div>
+              <button class="codehead-copy" type="button" onclick="copyCode(this)"><i data-lucide="copy" style="width:11px;height:11px"></i>Salin Kode</button>
             </div>
-            <button class="codehead-copy" type="button" onclick="copyCode(this)"><i data-lucide="copy" style="width:11px;height:11px"></i>Salin Kode</button>
-          </div>
-          <pre class="codebody"><span class="cm">// 1. Memanggil GET dengan fetch</span>
+            <pre class="codebody"><span class="cm">// 1. Memanggil GET dengan fetch (Baris 185)</span>
 <span class="kw">async function</span> <span class="fn">muatMenu</span>() {
     <span class="kw">const</span> res = <span class="kw">await</span> fetch(<span class="str">'/api/menu'</span>);
     <span class="kw">const</span> json = <span class="kw">await</span> res.json();
     console.log(json.data); <span class="cm">// Array data menu</span>
 }
 
-<span class="cm">// 2. Mengirim POST dengan fetch</span>
+<span class="cm">// 2. Mengirim POST dengan fetch (Baris 197)</span>
 <span class="kw">async function</span> <span class="fn">kirimMenu</span>(menuBaru) {
     <span class="kw">const</span> res = <span class="kw">await</span> fetch(<span class="str">'/api/menu'</span>, {
         method: <span class="str">'POST'</span>,
@@ -1150,14 +1235,24 @@ print(f<span class="str">"Suhu kampus: {suhu}°C"</span>)</pre>
     <span class="kw">const</span> hasil = <span class="kw">await</span> res.json();
     alert(hasil.pesan);
 }</pre>
+            <div class="codefoot">
+              <i data-lucide="info"></i>
+              <div><code>JSON.stringify()</code> mengubah objek JavaScript menjadi teks baku sebelum dikirim ke Flask.</div>
+            </div>
+          </div>
+          <div class="check-result-box">
+            <i data-lucide="circle-check"></i>
+            <div><strong>Verifikasi:</strong> Buka <code>http://127.0.0.1:5000/dashboard</code> &rarr; Data menu dan rekomendasi cuaca langsung tampil tanpa reload!</div>
+          </div>
         </div>
 
-        <div class="card" style="justify-content:center;gap:10px">
-          <div style="font:700 13px/1 var(--disp);color:var(--ink)">3 Bagian Kunci Fetch API:</div>
-          <div style="font:400 12px/1.55 var(--sans);color:var(--dim)">
-            &bull; <b><code>async/await</code></b>: Menunggu balasan server tanpa membekukan browser.<br>
-            &bull; <b><code>headers: {'Content-Type': 'application/json'}</code></b>: Memberi tahu Flask bahwa payload adalah JSON.<br>
-            &bull; <b><code>JSON.stringify()</code></b>: Mengubah objek JS menjadi teks string JSON baku.
+        <div class="shotcard" data-shot="vscode-p07-step-08-dashboard-fetch.png">
+          <div class="imgwrap">
+            <img src="img/vscode-p07-step-08-dashboard-fetch.png" alt="Posisi Fetch di templates/dashboard.html Baris 185-214">
+          </div>
+          <div class="shotcap">
+            <span class="shottitle"><i data-lucide="sparkles" style="width:13px;height:13px;color:var(--accent)"></i>dashboard.html &bull; Baris 185 – 214 (Fetch API)</span>
+            <span class="shotbadge"><i data-lucide="zoom-in" style="width:10px;height:10px"></i>Zoom Layar</span>
           </div>
         </div>
       </div>
@@ -1342,6 +1437,20 @@ print(f<span class="str">"Suhu kampus: {suhu}°C"</span>)</pre>
   <button class="dock-btn" id="fsBtn" title="Layar Penuh (F)"><i data-lucide="maximize-2"></i></button>
 </nav>
 
+<!-- LIGHTBOX MODAL (VISUAL VS CODE) -->
+<div class="lightbox" id="lightbox">
+  <div class="lbbody">
+    <div class="lbcap">
+      <i data-lucide="monitor" style="width:16px;height:16px;color:#38BDF8"></i>
+      <strong id="lbtitle" style="font-size:13px;font-family:var(--sans)">Tampilan VS Code</strong>
+      <button class="lbclose" id="lbclose" type="button" aria-label="Tutup"><i data-lucide="x" style="width:18px;height:18px"></i></button>
+    </div>
+    <div class="lbimgwrap">
+      <img id="lbimg" src="" alt="Zoom Tampilan VS Code">
+    </div>
+  </div>
+</div>
+
 <script>
 /* ========================================================
    DECK ENGINE: AUTO-SCALING, NAVIGATION & INTERACTION
@@ -1356,21 +1465,20 @@ let fitTimer = null;
 
 // Dynamic auto-scaling to prevent any horizontal/vertical overflow across all viewports
 function fitActive(){
-  const s = slides[curSlide];
+  const s = document.querySelector('.slide.on');
   if(!s) return;
   const c = s.querySelector('.content');
   if(!c) return;
-
-  c.style.zoom = 1;
-  const availH = window.innerHeight - 84; // headroom for dock & brand
-  const availW = window.innerWidth - 40;
+  c.style.zoom = '';
+  if(window.innerWidth <= 900) return;
+  const cs = getComputedStyle(s);
+  const availH = s.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
+  const availW = s.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
   const r = c.getBoundingClientRect();
   if(!r.height || !r.width) return;
-
-  const z = Math.min(1, availH / r.height, availW / r.width);
-  if(z < 0.999) {
-    c.style.zoom = Math.max(0.55, Math.round(z * 1000) / 1000);
-  }
+  const z = Math.min(1, (availH - 4) / r.height, (availW - 4) / r.width);
+  if(!isFinite(z) || z >= 0.999) return;
+  c.style.zoom = Math.max(0.55, Math.round(z * 1000) / 1000);
 }
 
 window.addEventListener('resize', () => {
@@ -1639,6 +1747,19 @@ function renderQuiz(reset){
     };
   });
 }
+
+/* ===================== LIGHTBOX ZOOM ===================== */
+function openLB(card){
+  const img = card.querySelector('img');
+  const title = card.querySelector('.shottitle');
+  if(img && $('#lbimg')) $('#lbimg').src = img.src;
+  if(title && $('#lbtitle')) $('#lbtitle').textContent = title.textContent;
+  if($('#lightbox')) $('#lightbox').classList.add('on');
+}
+$$('.shotcard').forEach(card => card.onclick = () => openLB(card));
+if($('#lbclose')) $('#lbclose').onclick = () => $('#lightbox').classList.remove('on');
+if($('#lightbox')) $('#lightbox').onclick = e => { if(e.target === $('#lightbox')) $('#lightbox').classList.remove('on'); };
+document.addEventListener('keydown', e => { if(e.key === 'Escape' && $('#lightbox')) $('#lightbox').classList.remove('on'); });
 
 // Inisialisasi Kuis
 renderQuiz(true);
