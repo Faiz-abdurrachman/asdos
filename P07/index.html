@@ -1241,12 +1241,12 @@ print(f<span class="str">"Suhu kampus: {suhu}°C"</span>)</pre>
             <div class="codehead">
               <div class="codehead-left">
                 <div class="mac-dots"><span class="mac-dot dot-red"></span><span class="mac-dot dot-yellow"></span><span class="mac-dot dot-green"></span></div>
-                <span class="codehead-file"><i data-lucide="file-code" style="width:13px;height:13px"></i>templates/dashboard.html</span>
-                <span style="font:700 9.5px/1 var(--mono);background:rgba(16,185,129,0.18);color:#10B981;border:1px solid rgba(16,185,129,0.4);padding:2px 7px;border-radius:4px">SUDAH AKTIF DI TEMPLATE &bull; BEDAH KODE BARIS 216 – 350</span>
+                <span class="codehead-file"><i data-lucide="file-code" style="width:13px;height:13px"></i>templates/index.html</span>
+                <span style="font:700 9.5px/1 var(--mono);background:rgba(16,185,129,0.18);color:#10B981;border:1px solid rgba(16,185,129,0.4);padding:2px 7px;border-radius:4px">SUDAH AKTIF DI TEMPLATE &bull; BEDAH KODE FETCH</span>
               </div>
               <button class="codehead-copy" type="button" onclick="copyCode(this)"><i data-lucide="copy" style="width:11px;height:11px"></i>Salin Kode (Referensi)</button>
             </div>
-            <pre class="codebody"><span class="cm">// ✅ SUDAH AKTIF DI TEMPLATE: templates/dashboard.html (Baris 216-350)</span>
+            <pre class="codebody"><span class="cm">// ✅ SUDAH AKTIF DI TEMPLATE: templates/index.html (Mewarisi base.html)</span>
 <span class="cm">// 1. Memanggil GET dengan fetch (Asinkron)</span>
 <span class="kw">async function</span> <span class="fn">muatMenu</span>() {
     <span class="kw">const</span> res = <span class="kw">await</span> fetch(<span class="str">'/api/menu'</span>);
@@ -1268,21 +1268,21 @@ print(f<span class="str">"Suhu kampus: {suhu}°C"</span>)</pre>
 }</pre>
             <div class="codefoot">
               <i data-lucide="info"></i>
-              <div><strong>Info Praktikum:</strong> Kode ini sudah terpasang rapi di template dashboard. Buka filenya untuk membedah cara kerjanya!</div>
+              <div><strong>Info Praktikum:</strong> Kode ini sudah terpasang rapi di template <code>index.html</code>. Buka filenya untuk membedah cara kerjanya!</div>
             </div>
           </div>
           <div class="check-result-box">
             <i data-lucide="circle-check"></i>
-            <div><strong>Verifikasi:</strong> Buka <code>templates/dashboard.html</code> baris 216 &rarr; Amati implementasi fungsi <code>muatMenu()</code> dan <code>handleTambahMenu()</code>!</div>
+            <div><strong>Verifikasi:</strong> Buka <code>templates/index.html</code> bagian script &rarr; Amati implementasi fungsi <code>muatMenu()</code> dan <code>handleTambahMenu()</code>!</div>
           </div>
         </div>
 
         <div class="shotcard" data-shot="vscode-p07-step-08-dashboard-fetch.png">
           <div class="imgwrap">
-            <img src="img/vscode-p07-step-08-dashboard-fetch.png" alt="Posisi Fetch di templates/dashboard.html Baris 216-350">
+            <img src="img/vscode-p07-step-08-dashboard-fetch.png" alt="Posisi Fetch di templates/index.html">
           </div>
           <div class="shotcap">
-            <span class="shottitle"><i data-lucide="sparkles" style="width:13px;height:13px;color:var(--accent)"></i>dashboard.html &bull; Baris 216 – 350 (Fetch API)</span>
+            <span class="shottitle"><i data-lucide="sparkles" style="width:13px;height:13px;color:var(--accent)"></i>templates/index.html &bull; Fetch API</span>
             <span class="shotbadge"><i data-lucide="zoom-in" style="width:10px;height:10px"></i>Zoom Layar</span>
           </div>
         </div>
@@ -1300,7 +1300,7 @@ print(f<span class="str">"Suhu kampus: {suhu}°C"</span>)</pre>
         <span class="step-action"><i data-lucide="play" style="width:11px;height:11px"></i> Live Demo Dashboard</span>
       </div>
       <h2>Dashboard Kantin Real-Time (Live Demo)</h2>
-      <p class="sub">Penggabungan Backend REST API dengan antarmuka dinamis <code>templates/dashboard.html</code>.</p>
+      <p class="sub">Penggabungan Backend REST API dengan antarmuka <code>templates/index.html</code> (mewarisi <code>base.html</code>).</p>
 
       <div class="cols c2">
         <div class="card">
@@ -1318,7 +1318,7 @@ print(f<span class="str">"Suhu kampus: {suhu}°C"</span>)</pre>
             <i data-lucide="globe" style="width:26px;height:26px"></i>
           </div>
           <h3 style="font-size:15px">Buka di Browser Kamu:</h3>
-          <code style="font:700 15px/1 var(--mono);color:#0284C7;margin:4px 0 8px">http://127.0.0.1:5000/dashboard</code>
+          <code style="font:700 15px/1 var(--mono);color:#0284C7;margin:4px 0 8px">http://127.0.0.1:5000/</code>
           <div style="background:#FEF3C7;border:1px solid #FDE68A;padding:8px 12px;border-radius:8px;font:500 11px/1.4 var(--sans);color:#92400E;text-align:left">
             ⚠️ <b>Catatan Mahasiswa Mandiri:</b> Jangan tutup terminal VS Code yang menjalankan <code>python app.py</code>! Server harus terus aktif di terminal agar halaman dashboard dapat diakses.
           </div>
